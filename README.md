@@ -21,6 +21,8 @@ assets/
   apple-touch-icon.png  180x180
 robots.txt
 sitemap.xml
+tools/make-og.sh        regenerates assets/og.png — run it if the headline, the lead line
+                        or the portrait treatment changes
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 ```
@@ -110,19 +112,22 @@ redirects as explicitly unsupported, so `https://www.guzh.uk/* … 301!` silentl
 
 Free plan: 10 redirect rules per zone.
 
-## Where this differs from the design snapshot
+## Where this differs from the design handoff
 
-The handoff README and the design prototype disagreed in two places. Both were resolved in favour of
-the handoff README, since it is marked final and was written for this rebuild. Each is a one-line
-change if you want the prototype's version back.
+The handoff README and the design prototype disagreed in two places. Both have since been settled by
+Pavel directly, so the live page is now the authority — not either source document. Recorded here
+because both disagreements will otherwise look like mistakes to anyone reading the handoff later.
 
-1. **Portrait treatment.** The README specifies `grayscale(1) contrast(1.04)`; the prototype's default
-   was `warm` (`saturate(1.02) contrast(1.02) brightness(1.03)`), which is what the old snapshot
-   actually renders. This page is **greyscale**. To go back to colour, change `.portrait img`'s
-   `filter` in `index.html` — and regenerate `assets/og.png`, which is greyscale to match.
-2. **One word of copy.** The README's verbatim copy reads "Margin, growth and retention are the
-   **only** scoreboard I care about." The prototype and snapshot both omit "only". This page
-   includes it.
+1. **Portrait treatment — warm, not greyscale.** The handoff README specified
+   `grayscale(1) contrast(1.04)`; the prototype's default was `warm`. The page uses **warm**
+   (`saturate(1.02) contrast(1.02) brightness(1.03)`), and `assets/og.png` is generated in colour to
+   match. If you change the filter, change it in both places — `.portrait img` in `index.html` and
+   the `-modulate` line in `tools/make-og.sh`, which carries the equivalent for each treatment.
+
+2. **The body copy has moved past both sources.** It now reads: "Margin, growth and retention are
+   the only scoreboard I care about. Public value is now on the same line." That keeps the "only"
+   the prototype had dropped, and adds a second beat that sets up the "Now" block rather than
+   diluting the first three into a longer list. Neither source document has this wording.
 
 ## Notes
 
