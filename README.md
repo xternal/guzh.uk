@@ -1,7 +1,7 @@
 # guzh.uk
 
-Personal one-pager for Pavel Guzhikov. Hand-written static HTML + CSS. No build step, no JavaScript,
-no framework. Deploy the repo root as-is on any static host.
+Personal one-pager for Pavel Guzhikov. Hand-written static HTML + CSS. No build step, no framework,
+and one line of JavaScript (the copyright year). Deploy the repo root as-is on any static host.
 
 | | |
 |---|---|
@@ -126,8 +126,14 @@ change if you want the prototype's version back.
 
 ## Notes
 
-- **Copyright year is hardcoded** (`© 2026`) because the page ships no JavaScript. Bump it in
-  `index.html` each January, or drop the year.
+- **Copyright year updates itself.** The markup ships `© <span id="year">2026</span>`, and one line
+  of script below it overwrites the span with the current year. If scripting is off the 2026 in the
+  HTML still renders, so it degrades to exactly what it was before — worth bumping that fallback if
+  you happen to edit the file in a later year.
+
+  A scheduled GitHub Action was the obvious alternative and does not work here: GitHub disables
+  scheduled workflows after 60 days without repository activity in a public repo, so a once-a-year
+  cron on a quiet site repo would be switched off long before it ever fired.
 - **Fonts** load from Google Fonts (Geist 400/500). Self-host the two weights if you want to remove
   the third-party request.
 - **OG image** is generated, not photographed — `assets/og.png`, 1200x630. Re-check link previews
