@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Pavel Guzhikov — I read the code and I read the P&amp;L</title>
+<meta name="description" content="Pavel Guzhikov — builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
+<link rel="canonical" href="https://guzh.uk/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/">
+<meta property="og:site_name" content="Pavel Guzhikov">
+<meta property="og:title" content="Pavel Guzhikov — I read the code and I read the P&amp;L">
+<meta property="og:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
+<meta property="og:image" content="https://guzh.uk/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pavel Guzhikov — I read the code and I read the P&amp;L.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pavel Guzhikov — I read the code and I read the P&amp;L">
+<meta name="twitter:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
+<meta name="twitter:image" content="https://guzh.uk/assets/og.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#F1F0EC">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/pavel-web.webp" type="image/webp">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F1F0EC;
+  --ink:#1A1A18;
+  --ink-2:#57564F;
+  --ink-3:#86857F;
+  --accent:#2743D0;
+  --rule:rgba(26,26,24,.16);
+  --underline:rgba(26,26,24,.2);
+  --underline-accent:rgba(39,67,208,.3);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+}
+::selection{background:var(--ink);color:var(--paper)}
+
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+img{max-width:100%}
+
+.wrap{max-width:1080px;margin:0 auto;padding:32px 56px 0}
+
+/* ---------- header ---------- */
+.masthead{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;padding-bottom:96px;
+}
+.masthead-name{font-size:14px;font-weight:500}
+.masthead-meta{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}
+.masthead-place{font-size:14px;color:var(--ink-3)}
+
+.link-accent{
+  color:var(--accent);font-weight:500;
+  border-bottom:1px solid var(--underline-accent);
+  padding-bottom:1px;
+  transition:border-color 120ms ease;
+}
+.link-accent:hover{border-bottom-color:var(--accent)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1fr 200px;gap:64px;align-items:start}
+.hero-text{display:flex;flex-direction:column;gap:32px}
+.hero h1{
+  margin:0;font-weight:500;
+  font-size:clamp(38px,4.6vw,58px);
+  line-height:1.05;letter-spacing:-.035em;
+  max-width:20ch;text-wrap:balance;
+}
+.lead{margin:0;max-width:52ch;font-size:19px;line-height:1.55;color:var(--ink);text-wrap:pretty}
+.body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.7;color:var(--ink-2);text-wrap:pretty}
+.portrait{margin:0}
+.portrait picture{display:block}
+.portrait img{
+  display:block;width:100%;height:auto;aspect-ratio:1/1;
+  object-fit:cover;object-position:50% 50%;
+  border-radius:2px;
+  filter:grayscale(1) contrast(1.04);
+}
+
+/* ---------- numbers ---------- */
+.numbers{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:32px;row-gap:32px;
+  margin-top:104px;padding-top:28px;
+  border-top:1px solid var(--rule);
+}
+.stat{display:flex;flex-direction:column;gap:8px}
+.stat-figure{font-size:30px;font-weight:500;line-height:1.1;letter-spacing:-.035em;white-space:nowrap}
+.stat-unit{font-size:19px;color:var(--ink-3)}
+.stat-label{font-size:14.5px;line-height:1.5;color:var(--ink-2);max-width:26ch;text-wrap:pretty}
+
+/* ---------- three blocks ---------- */
+.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;margin-top:96px}
+.block{display:flex;flex-direction:column;gap:10px}
+.block h2{margin:0;font-size:15px;font-weight:500;line-height:1.65}
+.block p{margin:0;font-size:15px;line-height:1.65;color:var(--ink-2);text-wrap:pretty}
+
+/* ---------- contact ---------- */
+.contact{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:48px;margin-top:112px;padding:32px 0 56px;
+  border-top:1px solid var(--rule);
+}
+.contact-left{display:flex;flex-direction:column;gap:14px}
+.contact-line{font-size:22px;font-weight:500;letter-spacing:-.02em}
+.contact-email{
+  font-size:22px;font-weight:500;letter-spacing:-.02em;
+  color:var(--accent);width:fit-content;
+  border-bottom:1px solid var(--underline-accent);
+  padding-bottom:2px;
+  transition:border-color 120ms ease;
+}
+.contact-email:hover{border-bottom-color:var(--accent)}
+.contact-right{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.social{display:flex;gap:20px;flex-wrap:wrap}
+.social a{
+  font-size:15px;color:var(--ink);
+  border-bottom:1px solid var(--underline);
+  padding-bottom:2px;
+  transition:color 120ms ease,border-color 120ms ease;
+}
+.social a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.colophon{font-size:13px;color:var(--ink-3)}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .wrap{padding-left:24px;padding-right:24px}
+  .hero{grid-template-columns:1fr;gap:32px}
+  .portrait{max-width:220px}
+  .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .blocks{grid-template-columns:minmax(0,1fr);row-gap:28px}
+  .contact{flex-direction:column;align-items:flex-start;gap:28px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:0.01ms !important}
+}
+@media print{
+  .portrait{display:none}
+  body{background:#fff}
+  .wrap{padding:0}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-name">Pavel Guzhikov</div>
+    <div class="masthead-meta">
+      <span class="masthead-place">London, United Kingdom</span>
+      <a class="link-accent" href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>I read the code and I read the P&amp;L.</h1>
+
+        <p class="lead">Zero to one, four times. Two exits. One unicorn. Still an unfulfilled desire to build things that matter.</p>
+
+        <p class="body-copy">Zero-to-one, then scale. Day-one startups to heritage brands. Margin, growth and retention are the only&nbsp;scoreboard I care about.</p>
+
+        <p class="body-copy">I can hold the product argument, the go-to-market argument and the technical one at the same time — which is what building in a market with no incumbents forces on you. I go to the warehouse and the call centre before I look at the dashboard, because the dashboard is downstream of things nobody wrote down.</p>
+
+        <p class="body-copy">Twenty years of building, and still in the trenches: a mobile messenger in 2005, national payment infrastructure in 2022, and whatever is hard next.</p>
+      </div>
+
+      <figure class="portrait">
+        <picture>
+          <source srcset="assets/pavel-web.webp" type="image/webp">
+          <img src="assets/pavel-web.png" width="560" height="560" alt="Pavel Guzhikov" fetchpriority="high" decoding="async">
+        </picture>
+      </figure>
+    </section>
+
+    <section class="numbers" aria-label="Track record">
+      <div class="stat">
+        <div class="stat-figure">20<span class="stat-unit"> yrs</span></div>
+        <div class="stat-label">building, most of it hands-on inside the thing being built</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure">4</div>
+        <div class="stat-label">companies founded from zero — two of them acquired</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure">1</div>
+        <div class="stat-label">unicorn, built where the infrastructure did not exist yet</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure">Several</div>
+        <div class="stat-label">acquisitions integrated while the group was still being built</div>
+      </div>
+    </section>
+
+    <section class="blocks">
+      <article class="block">
+        <h2>Uzum</h2>
+        <p>Founding team at Uzbekistan’s first unicorn: fintech, lending, marketplace, payments, cards, and the data culture underneath them. Millions of users and 1000+ employees in two years, built from nothing in a market with no digital infrastructure and a regulator in every room.</p>
+      </article>
+      <article class="block">
+        <h2>Before that</h2>
+        <p>Founded and sold Worki, Russia’s fastest-growing jobs marketplace (acquired by Mail.Ru Group, 2019). Co-founded Dengi Vpered, earned-wage access backed by Target Global (sold). Fintech products with 100+ banks. A multi-channel mobile messenger in 2005, three years before the category had a name.</p>
+      </article>
+      <article class="block">
+        <h2>Now</h2>
+        <p>London-based. Most interested in problems where the technology is genuinely hard, the deployment is political and the blast radius is national: sovereign infrastructure, public systems, defence and dual-use, AI in the public interest.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="contact">
+    <div class="contact-left">
+      <div class="contact-line">Open to the right thing. Write to me.</div>
+      <a class="contact-email" href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>
+    </div>
+    <div class="contact-right">
+      <nav class="social" aria-label="Elsewhere">
+        <a href="https://www.linkedin.com/in/pavelguzhikov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://guzhikov.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>
+        <a href="https://www.facebook.com/pavel.guzhikov/" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://instagram.com/xternal" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
+      <div class="colophon">© 2026 Pavel Guzhikov · guzh.uk</div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
