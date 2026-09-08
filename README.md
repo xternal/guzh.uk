@@ -139,10 +139,10 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   A scheduled GitHub Action was the obvious alternative and does not work here: GitHub disables
   scheduled workflows after 60 days without repository activity in a public repo, so a once-a-year
   cron on a quiet site repo would be switched off long before it ever fired.
-- **Fonts** load from Google Fonts: Geist 400/500 for everything set in the interface, and Instrument
-  Serif 400 + italic for the display type (headline, stat figures, block headings, the closing line).
-  Self-host the four faces if you want to remove the third-party request; the serif has a system
-  fallback stack (Iowan Old Style, Palatino, Georgia) so the page still reads as intended without it.
+- **Fonts** load from Google Fonts (Geist 400/500) — one family, everything. A display serif was
+  tried across the headline, stat figures, block headings and the closing line, and taken back out:
+  it read as someone else's page. Geist also renders the OG card, so page and link preview agree.
+  Self-host the two weights if you want to remove the third-party request.
 - **Light and dark** both ship. The palette is one set of custom properties on `:root`, redefined
   under `prefers-color-scheme: dark`; `theme-color` is declared twice with a media attribute to match.
   There is no toggle — the page follows the reader's OS.
