@@ -37,10 +37,29 @@ publicly browsable whether or not it is served.
 ## Local preview
 
 ```bash
-python3 -m http.server 8788
+python3 -m http.server 8788 --bind 127.0.0.1
 ```
 
-Then open <http://127.0.0.1:8788/>.
+Then open <http://127.0.0.1:8788/>. The `--bind` matters: without it the server answers on every
+interface, so an unfinished draft is readable by anything on the same wifi.
+
+### The in-editor preview does not work from here, and cannot be made to
+
+`.claude/launch.json` is correct and works on a normal path. It fails in *this* checkout because the
+repo lives on a Google Drive `CloudStorage` mount, and the sandbox the editor spawns dev servers
+under has no read access to it. The symptom is `PermissionError: [Errno 1] Operation not permitted`
+somewhere that looks unrelated — `os.getcwd()`, or the import machinery scanning `sys.path`.
+
+It is not a configuration problem, and the obvious workarounds make it worse rather than better:
+
+- Passing `--directory "$PWD"` looks right and is dangerous. The launcher does not set `PWD` to the
+  repo, so it expands to `/` and the server cheerfully publishes the whole filesystem on localhost.
+- `python3 -I -c` with an explicit `directory=` gets past the import scan and the server starts, but
+  every request 404s, because `SimpleHTTPRequestHandler` catches the `PermissionError` from reading
+  the directory and reports it as a missing file.
+
+The real fix is to move the repo off Google Drive to an ordinary local path. Until then, use the
+terminal command above — it works, because a normal shell can read the mount.
 
 ## Deploy — GitHub Pages (simplest)
 
