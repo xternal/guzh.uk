@@ -33,19 +33,19 @@ magick assets/pavel-web.png \
 # NB: -gravity set inside a \( \) group leaks out, which silently pushes the
 # composite off-canvas. Hence the separate portrait render above and the
 # explicit -gravity NorthWest below.
-magick -size 1200x630 xc:'#F1F0EC' \
+magick -size 1200x630 xc:'#F1EFE9' \
   "$TMP/portrait.png" -gravity NorthWest -geometry +768+135 -composite \
   -font "$FONT" -gravity NorthWest \
-  -fill '#1A1A18' -stroke '#1A1A18' -strokewidth 0.55 -pointsize 56 \
-  -annotate +72+112 'I read the code' \
-  -annotate +72+178 'and I read the P&L.' \
+  -fill '#171613' -stroke '#171613' -strokewidth 0.55 -pointsize 56 \
+  -annotate +72+112 'I build and run' \
+  -annotate +72+178 'companies.' \
   -stroke none \
-  -gravity None -fill '#2743D0' -draw 'rectangle 72,268 136,271' \
+  -gravity None -fill '#1F3BC4' -draw 'rectangle 72,268 136,271' \
   -gravity NorthWest \
-  -fill '#57564F' -pointsize 21 \
+  -fill '#544F46' -pointsize 21 \
   -annotate +72+310 'Zero to one, four times. Two exits. One unicorn.' \
   -annotate +72+344 'Still an unfulfilled desire to build things that matter.' \
-  -fill '#86857F' -pointsize 19 \
+  -fill '#8B857A' -pointsize 19 \
   -annotate +72+520 'Pavel Guzhikov · London, United Kingdom · guzh.uk' \
   assets/og.png
 

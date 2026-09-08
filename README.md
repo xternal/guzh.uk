@@ -6,7 +6,7 @@ and one line of JavaScript (the copyright year). Deploy the repo root as-is on a
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Page weight | ~11 KB HTML + 24 KB portrait (WebP) + Google Fonts |
+| Page weight | ~15 KB HTML + 24 KB portrait (WebP) + Google Fonts |
 | Build | none |
 
 ## Files
@@ -139,7 +139,17 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   A scheduled GitHub Action was the obvious alternative and does not work here: GitHub disables
   scheduled workflows after 60 days without repository activity in a public repo, so a once-a-year
   cron on a quiet site repo would be switched off long before it ever fired.
-- **Fonts** load from Google Fonts (Geist 400/500). Self-host the two weights if you want to remove
-  the third-party request.
+- **Fonts** load from Google Fonts: Geist 400/500 for everything set in the interface, and Instrument
+  Serif 400 + italic for the display type (headline, stat figures, block headings, the closing line).
+  Self-host the four faces if you want to remove the third-party request; the serif has a system
+  fallback stack (Iowan Old Style, Palatino, Georgia) so the page still reads as intended without it.
+- **Light and dark** both ship. The palette is one set of custom properties on `:root`, redefined
+  under `prefers-color-scheme: dark`; `theme-color` is declared twice with a media attribute to match.
+  There is no toggle — the page follows the reader's OS.
+- **Texture** is two fixed, pointer-events-none layers on `body`: warm radial lifts in the top
+  corners, and a `feTurbulence` grain as an inline SVG data URI (multiply in light, screen in dark).
+  Both are dropped in print.
+- **The entrance animation** is staggered CSS only, wrapped in `prefers-reduced-motion: no-preference`
+  so the default when the query does not match is plain visible content, never a blank page.
 - **OG image** is generated, not photographed — `assets/og.png`, 1200x630. Re-check link previews
   (Slack, WhatsApp, LinkedIn) after the first deploy; scrapers cache aggressively.

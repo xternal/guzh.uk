@@ -4,48 +4,69 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Pavel Guzhikov — I read the code and I read the P&amp;L</title>
+<title>Pavel Guzhikov — I build and run companies</title>
 <meta name="description" content="Pavel Guzhikov — builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <link rel="canonical" href="https://guzh.uk/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guzh.uk/">
 <meta property="og:site_name" content="Pavel Guzhikov">
-<meta property="og:title" content="Pavel Guzhikov — I read the code and I read the P&amp;L">
+<meta property="og:title" content="Pavel Guzhikov — I build and run companies">
 <meta property="og:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <meta property="og:image" content="https://guzh.uk/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Pavel Guzhikov — I read the code and I read the P&amp;L.">
+<meta property="og:image:alt" content="Pavel Guzhikov — I build and run companies.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pavel Guzhikov — I read the code and I read the P&amp;L">
+<meta name="twitter:title" content="Pavel Guzhikov — I build and run companies">
 <meta name="twitter:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <meta name="twitter:image" content="https://guzh.uk/assets/og.png">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<meta name="theme-color" content="#F1F0EC">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/pavel-web.webp" type="image/webp">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --paper:#F1F0EC;
-  --ink:#1A1A18;
-  --ink-2:#57564F;
-  --ink-3:#86857F;
-  --accent:#2743D0;
-  --rule:rgba(26,26,24,.16);
-  --underline:rgba(26,26,24,.2);
-  --underline-accent:rgba(39,67,208,.3);
+  --paper:#F1EFE9;
+  --paper-lift:#FAF8F3;
+  --ink:#171613;
+  --ink-2:#544F46;
+  --ink-3:#8B857A;
+  --accent:#1F3BC4;
+  --rule:rgba(23,22,19,.14);
+  --rule-soft:rgba(23,22,19,.07);
+  --underline:rgba(23,22,19,.22);
+  --underline-accent:rgba(31,59,196,.28);
+  --grain:.05;
+  --serif:"Instrument Serif",Iowan Old Style,"Palatino Linotype",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#141311;
+    --paper-lift:#1D1B18;
+    --ink:#EFECE4;
+    --ink-2:#ABA69B;
+    --ink-3:#78736A;
+    --accent:#94A9FF;
+    --rule:rgba(239,236,228,.15);
+    --rule-soft:rgba(239,236,228,.08);
+    --underline:rgba(239,236,228,.24);
+    --underline-accent:rgba(148,169,255,.32);
+    --grain:.07;
+  }
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{
+  position:relative;
   background:var(--paper);
   color:var(--ink);
   font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
@@ -54,105 +75,176 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
+  overflow-x:hidden;
 }
+/* a warm light falling across the page, and a paper tooth over the top of it */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 8% -8%, var(--paper-lift), transparent 68%),
+    radial-gradient(700px 520px at 96% 4%, var(--paper-lift), transparent 62%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:var(--grain);mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme:dark){body::after{mix-blend-mode:screen}}
+
 ::selection{background:var(--ink);color:var(--paper)}
 
 a{color:inherit;text-decoration:none}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
 img{max-width:100%}
 
-.wrap{max-width:1080px;margin:0 auto;padding:32px 56px 0}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:32px 56px 0}
 
 /* ---------- header ---------- */
 .masthead{
   display:flex;align-items:baseline;justify-content:space-between;
-  gap:20px;flex-wrap:wrap;padding-bottom:96px;
+  gap:20px;flex-wrap:wrap;padding-bottom:112px;
 }
-.masthead-name{font-size:14px;font-weight:500}
+.masthead-name{font-size:14px;font-weight:500;letter-spacing:.01em}
 .masthead-meta{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}
 .masthead-place{font-size:14px;color:var(--ink-3)}
+.masthead-place::before{
+  content:"";display:inline-block;width:5px;height:5px;margin-right:9px;
+  border-radius:50%;background:var(--accent);vertical-align:middle;
+}
 
 .link-accent{
   color:var(--accent);font-weight:500;
   border-bottom:1px solid var(--underline-accent);
   padding-bottom:1px;
-  transition:border-color 120ms ease;
+  transition:border-color 160ms ease;
 }
 .link-accent:hover{border-bottom-color:var(--accent)}
 
 /* ---------- hero ---------- */
-.hero{display:grid;grid-template-columns:1fr 200px;gap:64px;align-items:start}
-.hero-text{display:flex;flex-direction:column;gap:32px}
+.hero{display:grid;grid-template-columns:1fr 208px;gap:64px;align-items:start}
+.hero-text{display:flex;flex-direction:column;gap:30px}
 .hero h1{
-  margin:0;font-weight:500;
-  font-size:clamp(38px,4.6vw,58px);
-  line-height:1.05;letter-spacing:-.035em;
-  max-width:20ch;text-wrap:balance;
+  margin:0;
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(46px,6.6vw,82px);
+  line-height:1.0;letter-spacing:-.018em;
+  max-width:15ch;text-wrap:balance;
 }
-.lead{margin:0;max-width:52ch;font-size:19px;line-height:1.55;color:var(--ink);text-wrap:pretty}
-.body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.7;color:var(--ink-2);text-wrap:pretty}
-.portrait{margin:0}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.lead{
+  margin:0;max-width:50ch;
+  font-size:20px;line-height:1.5;letter-spacing:-.005em;
+  color:var(--ink);text-wrap:pretty;
+}
+.body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
+
+.portrait{margin:0;position:relative}
 .portrait picture{display:block}
 .portrait img{
   display:block;width:100%;height:auto;aspect-ratio:1/1;
   object-fit:cover;object-position:50% 50%;
-  border-radius:2px;
+  border-radius:3px;
   filter:saturate(1.02) contrast(1.02) brightness(1.03);
+  box-shadow:0 1px 2px rgba(23,22,19,.06),0 18px 40px -22px rgba(23,22,19,.42);
+}
+/* a hairline the portrait sits on, echoing the rules further down */
+.portrait::after{
+  content:"";position:absolute;left:0;right:0;bottom:-22px;
+  height:1px;background:var(--rule-soft);
 }
 
 /* ---------- numbers ---------- */
 .numbers{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  column-gap:32px;row-gap:32px;
-  margin-top:104px;padding-top:28px;
+  column-gap:0;row-gap:36px;
+  margin-top:112px;padding-top:30px;
   border-top:1px solid var(--rule);
 }
-.stat{display:flex;flex-direction:column;gap:8px}
-.stat-figure{font-size:30px;font-weight:500;line-height:1.1;letter-spacing:-.035em;white-space:nowrap}
-.stat-unit{font-size:19px;color:var(--ink-3)}
-.stat-label{font-size:14.5px;line-height:1.5;color:var(--ink-2);max-width:26ch;text-wrap:pretty}
+.stat{
+  display:flex;flex-direction:column;gap:9px;
+  padding:0 28px;border-left:1px solid var(--rule-soft);
+}
+.stat:first-child{padding-left:0;border-left:0}
+.stat-figure{
+  font-family:var(--serif);font-weight:400;
+  font-size:44px;line-height:1;letter-spacing:-.01em;white-space:nowrap;
+}
+.stat-unit{font-size:22px;color:var(--ink-3)}
+.stat-label{font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:26ch;text-wrap:pretty}
 
 /* ---------- three blocks ---------- */
-.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;margin-top:96px}
-.block{display:flex;flex-direction:column;gap:10px}
-.block h2{margin:0;font-size:15px;font-weight:500;line-height:1.65}
-.block p{margin:0;font-size:15px;line-height:1.65;color:var(--ink-2);text-wrap:pretty}
+.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;margin-top:104px}
+.block{display:flex;flex-direction:column;gap:11px;padding-top:22px;border-top:1px solid var(--rule)}
+.block-index{
+  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.block h2{margin:0;font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;letter-spacing:-.01em}
+.block p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-2);text-wrap:pretty}
 
 /* ---------- contact ---------- */
 .contact{
   display:flex;align-items:flex-end;justify-content:space-between;
-  gap:48px;margin-top:112px;padding:32px 0 56px;
+  gap:48px;margin-top:120px;padding:36px 0 64px;
   border-top:1px solid var(--rule);
 }
 .contact-left{display:flex;flex-direction:column;gap:14px}
-.contact-line{font-size:22px;font-weight:500;letter-spacing:-.02em}
+.contact-line{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-.012em}
 .contact-email{
-  font-size:22px;font-weight:500;letter-spacing:-.02em;
+  font-size:21px;font-weight:500;letter-spacing:-.015em;
   color:var(--accent);width:fit-content;
   border-bottom:1px solid var(--underline-accent);
   padding-bottom:2px;
-  transition:border-color 120ms ease;
+  transition:border-color 160ms ease;
 }
 .contact-email:hover{border-bottom-color:var(--accent)}
-.contact-right{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.contact-right{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .social{display:flex;gap:20px;flex-wrap:wrap}
 .social a{
   font-size:15px;color:var(--ink);
   border-bottom:1px solid var(--underline);
   padding-bottom:2px;
-  transition:color 120ms ease,border-color 120ms ease;
+  transition:color 160ms ease,border-color 160ms ease;
 }
 .social a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .colophon{font-size:13px;color:var(--ink-3)}
 
+/* ---------- entrance ---------- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .masthead,.hero h1,.lead,.body-copy,.portrait,.numbers,.blocks,.contact{
+    animation:rise 620ms cubic-bezier(.22,.68,.28,1) both;
+  }
+  .masthead{animation-delay:0ms}
+  .hero h1{animation-delay:70ms}
+  .portrait{animation-delay:130ms}
+  .lead{animation-delay:160ms}
+  .hero-text .body-copy:nth-of-type(1){animation-delay:220ms}
+  .hero-text .body-copy:nth-of-type(2){animation-delay:270ms}
+  .hero-text .body-copy:nth-of-type(3){animation-delay:320ms}
+  .numbers{animation-delay:370ms}
+  .blocks{animation-delay:420ms}
+  .contact{animation-delay:470ms}
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:860px){
   .wrap{padding-left:24px;padding-right:24px}
-  .hero{grid-template-columns:1fr;gap:32px}
-  .portrait{max-width:220px}
-  .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .blocks{grid-template-columns:minmax(0,1fr);row-gap:28px}
-  .contact{flex-direction:column;align-items:flex-start;gap:28px}
+  .masthead{padding-bottom:72px}
+  /* one column: headline, then the face, then the argument */
+  .hero{display:flex;flex-direction:column;gap:0}
+  .hero-text{display:contents}
+  .hero h1{order:1;margin-bottom:30px}
+  .portrait{order:2;max-width:190px;margin-bottom:34px}
+  .portrait::after{display:none}
+  .lead{order:3;margin-bottom:28px}
+  .body-copy{order:4;margin-bottom:22px}
+  .body-copy:last-of-type{margin-bottom:0}
+  .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:88px}
+  .stat{padding:0 20px}
+  .stat:nth-child(odd){padding-left:0;border-left:0}
+  .blocks{grid-template-columns:minmax(0,1fr);row-gap:32px;margin-top:80px}
+  .contact{flex-direction:column;align-items:flex-start;gap:32px;margin-top:88px}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:0.01ms !important}
@@ -160,6 +252,7 @@ img{max-width:100%}
 @media print{
   .portrait{display:none}
   body{background:#fff}
+  body::before,body::after{display:none}
   .wrap{padding:0}
 }
 </style>
@@ -179,7 +272,7 @@ img{max-width:100%}
   <main>
     <section class="hero">
       <div class="hero-text">
-        <h1>I read the code and I read the P&amp;L.</h1>
+        <h1>I build and <em>run</em> companies.</h1>
 
         <p class="lead">Zero to one, four times. Two exits. One unicorn. Still an unfulfilled desire to build things that matter.</p>
 
@@ -219,15 +312,18 @@ img{max-width:100%}
 
     <section class="blocks">
       <article class="block">
-        <h2>Uzum</h2>
+        <div class="block-index">01 — Uzum</div>
+        <h2>The unicorn</h2>
         <p>Founding team at Uzbekistan’s first unicorn: fintech, lending, marketplace, payments, cards, and the data culture underneath them. Millions of users and 1000+ employees in two years, built from nothing in a market with no digital infrastructure and a regulator in every room.</p>
       </article>
       <article class="block">
-        <h2>Before that</h2>
+        <div class="block-index">02 — Before that</div>
+        <h2>Four from zero</h2>
         <p>Founded and sold Worki, Russia’s fastest-growing jobs marketplace (acquired by Mail.Ru Group, 2019). Co-founded Dengi Vpered, earned-wage access backed by Target Global (sold). Fintech products with 100+ banks. A multi-channel mobile messenger in 2005, three years before the category had a name.</p>
       </article>
       <article class="block">
-        <h2>Now</h2>
+        <div class="block-index">03 — Now</div>
+        <h2>Hard and consequential</h2>
         <p>London-based. Most interested in problems where the technology is genuinely hard, the deployment is political and the blast radius is national: sovereign infrastructure, public systems, defence and dual-use, AI in the public interest.</p>
       </article>
     </section>
