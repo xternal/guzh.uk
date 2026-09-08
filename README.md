@@ -177,11 +177,23 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   This is the bulk of the page weight — the zone table alone is ~7 KB raw, ~4 KB gzipped. Trimming
   the table to the most-populated zones would roughly halve it, at the cost of everyone else falling
   back to the OS setting.
-- **Dark contrast** was set deliberately, not eyeballed: against `--paper` #141311, body copy
-  (`--ink-2`) is 7.7:1 and the tertiary grey (`--ink-3` #8F8A80) is 5.4:1 — both above AA, body copy
-  above AAA. `--ink-3` was #78736A and measured 3.9:1, which failed AA at the 11.5px eyebrow size.
-  In light mode `--ink-3` is 3.2:1 and still fails AA; that is a known, deliberate hold, not an
-  oversight — fixing it means darkening the tertiary grey and shifting the hierarchy.
+- **Contrast** is set by measurement, not by eye, and every text token clears WCAG AA at the size
+  it is actually used. The tertiary grey was the problem in both palettes and was fixed in both:
+
+  | | light on #F1EFE9 | dark on #141311 |
+  |---|---|---|
+  | `--ink` headline, lead | 15.7:1 AAA | 15.7:1 AAA |
+  | `--ink-2` body copy | 7.1:1 AAA | 7.7:1 AAA |
+  | `--ink-3` place, eyebrows, colophon | 4.9:1 AA | 5.4:1 AA |
+  | `--accent` links | 7.4:1 AAA | 8.3:1 AAA |
+
+  `--ink-3` was #8B857A (3.2:1) in light and #78736A (3.9:1) in dark — both below AA, and both
+  setting the 11.5px block eyebrows, which is where it hurt most. They are now #6C675F and #8F8A80,
+  picked along the original hue line so the warmth survives.
+
+  The tertiary text is necessarily closer to the body copy than it was. The hierarchy now leans on
+  type rather than colour alone — 11.5px, uppercase, letter-spaced — which is the more robust place
+  for it anyway.
 - **Texture** is two fixed, pointer-events-none layers on `body`: warm radial lifts in the top
   corners, and a `feTurbulence` grain as an inline SVG data URI (multiply in light, screen in dark).
   Both are dropped in print.
