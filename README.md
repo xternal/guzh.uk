@@ -30,9 +30,10 @@ _headers                cache + security headers — used by Netlify and Cloudfl
 ```
 
 The original Claude Design handoff — spec, prototype and the old 1 MB React snapshot — is **not** in
-this repo. It lives beside it at `../guzh.uk-handoff/`. It is reference material, it does not belong
-on the website, and on a free GitHub plan Pages requires a public repo, where anything committed is
-publicly browsable whether or not it is served.
+this repo. It stayed in the Google Drive `_git_` folder as `guzh.uk-handoff/`, which this repo used
+to sit beside. It is reference material, it does not belong on the website, and on a free GitHub
+plan Pages requires a public repo, where anything committed is publicly browsable whether or not it
+is served. It is not itself a git repo, so Drive is the only copy — leave it there.
 
 ## Local preview
 
@@ -43,14 +44,14 @@ python3 -m http.server 8788 --bind 127.0.0.1
 Then open <http://127.0.0.1:8788/>. The `--bind` matters: without it the server answers on every
 interface, so an unfinished draft is readable by anything on the same wifi.
 
-### The in-editor preview does not work from here, and cannot be made to
+### Keep this repo off Google Drive
 
-`.claude/launch.json` is correct and works on a normal path. It fails in *this* checkout because the
-repo lives on a Google Drive `CloudStorage` mount, and the sandbox the editor spawns dev servers
-under has no read access to it. The symptom is `PermissionError: [Errno 1] Operation not permitted`
-somewhere that looks unrelated — `os.getcwd()`, or the import machinery scanning `sys.path`.
+It used to live on a Google Drive `CloudStorage` mount, and the in-editor preview could not work
+there: the sandbox the editor spawns dev servers under has no read access to that mount. The symptom
+is `PermissionError: [Errno 1] Operation not permitted` somewhere that looks unrelated —
+`os.getcwd()`, or the import machinery scanning `sys.path`.
 
-It is not a configuration problem, and the obvious workarounds make it worse rather than better:
+It was never a configuration problem, and the obvious workarounds make it worse rather than better:
 
 - Passing `--directory "$PWD"` looks right and is dangerous. The launcher does not set `PWD` to the
   repo, so it expands to `/` and the server cheerfully publishes the whole filesystem on localhost.
@@ -58,8 +59,8 @@ It is not a configuration problem, and the obvious workarounds make it worse rat
   every request 404s, because `SimpleHTTPRequestHandler` catches the `PermissionError` from reading
   the directory and reports it as a missing file.
 
-The real fix is to move the repo off Google Drive to an ordinary local path. Until then, use the
-terminal command above — it works, because a normal shell can read the mount.
+This is why the repo now lives at `~/dev/guzh.uk` rather than in Google Drive, and why the in-editor
+preview works again. If you ever move it back onto a Drive mount, expect all of the above to return.
 
 ## Deploy — GitHub Pages (simplest)
 
