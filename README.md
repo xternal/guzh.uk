@@ -6,7 +6,7 @@ and a little JavaScript (the copyright year, and the light/dark switcher). Deplo
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Page weight | ~31 KB HTML (~12 KB gzipped) + 24 KB portrait (WebP) + Google Fonts |
+| Page weight | ~35 KB HTML (~14 KB gzipped) + 24 KB portrait (WebP) + Google Fonts |
 | Build | none |
 
 ## Files
@@ -187,5 +187,14 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   Both are dropped in print.
 - **The entrance animation** is staggered CSS only, wrapped in `prefers-reduced-motion: no-preference`
   so the default when the query does not match is plain visible content, never a blank page.
+- **The like button** under the portrait is a clicker, not a counter. There is nowhere to put a
+  shared number on a static page, so this one is honestly per-visitor in `localStorage` and the
+  zero state says so. Rather than tick +1 forever it runs the ladder the page is already about:
+  pre-seed, seed, Series A, unicorn, down round, exit. Clicking fast compounds up to ×8, which is
+  the one thing about traction the metaphor gets right; the multiplier decays after 1.1s.
+
+  If a real shared count is ever wanted it needs a backend — a Cloudflare Worker with KV is about
+  twenty-five lines and a free tier, at the cost of a cross-origin call the page does not make
+  today, and rate limiting, because people are people.
 - **OG image** is generated, not photographed — `assets/og.png`, 1200x630. Re-check link previews
   (Slack, WhatsApp, LinkedIn) after the first deploy; scrapers cache aggressively.

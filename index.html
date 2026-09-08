@@ -281,10 +281,36 @@ img{max-width:100%}
   filter:saturate(1.02) contrast(1.02) brightness(1.03);
   box-shadow:var(--portrait-shadow);
 }
-/* a hairline the portrait sits on, echoing the rules further down */
-.portrait::after{
-  content:"";position:absolute;left:0;right:0;bottom:-22px;
-  height:1px;background:var(--rule-soft);
+/* ---------- the like button, which is a company ---------- */
+.like{margin:18px 0 0;display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.like-row{display:flex;align-items:center;gap:9px}
+.like-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 13px;margin:0;
+  border:1px solid var(--rule);border-radius:999px;background:none;
+  color:var(--ink);font:inherit;font-size:13px;font-weight:500;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:border-color 160ms ease,background-color 160ms ease;
+}
+.like-btn:hover{border-color:var(--underline);background:var(--mode-active)}
+.like-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.like-btn svg{display:block;width:13px;height:13px;color:var(--ink-3);transition:color 160ms ease}
+.like-btn[data-on="true"] svg{color:var(--accent);fill:var(--accent)}
+.like-count{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.like-mult{
+  font-size:12px;font-weight:500;color:var(--accent);
+  font-variant-numeric:tabular-nums;
+  opacity:0;transition:opacity 200ms ease;
+}
+.like-mult[data-on="true"]{opacity:1}
+/* two lines held open, so a longer milestone does not shove the page down */
+.like-note{
+  margin:0;font-size:12.5px;line-height:1.45;color:var(--ink-2);
+  max-width:24ch;min-height:2.9em;text-wrap:pretty;
+}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes beat{0%{transform:scale(1)}35%{transform:scale(1.3)}100%{transform:scale(1)}}
+  .like-btn[data-beat="true"] svg{animation:beat 300ms ease}
 }
 
 /* ---------- numbers ---------- */
@@ -370,7 +396,6 @@ img{max-width:100%}
   .hero-text{display:contents}
   .hero h1{order:1;margin-bottom:30px}
   .portrait{order:2;max-width:190px;margin-bottom:34px}
-  .portrait::after{display:none}
   .lead{order:3;margin-bottom:28px}
   .body-copy{order:4;margin-bottom:22px}
   .body-copy:last-of-type{margin-bottom:0}
@@ -444,6 +469,19 @@ img{max-width:100%}
           <source srcset="assets/pavel-web.webp" type="image/webp">
           <img src="assets/pavel-web.png" width="560" height="560" alt="Pavel Guzhikov" fetchpriority="high" decoding="async">
         </picture>
+        <figcaption class="like">
+          <span class="like-row">
+            <button type="button" class="like-btn" id="like" title="Stored in your browser. There is no server.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20.3 4.7 13a4.6 4.6 0 0 1 6.5-6.5l.8.8.8-.8A4.6 4.6 0 0 1 19.3 13z"/>
+              </svg>
+              <span>Like</span>
+              <span class="like-count" id="likeCount">0</span>
+            </button>
+            <span class="like-mult" id="likeMult" aria-hidden="true"></span>
+          </span>
+          <p class="like-note" id="likeNote" aria-live="polite">No server. Just us.</p>
+        </figcaption>
       </figure>
     </section>
 
@@ -555,6 +593,77 @@ document.getElementById("year").textContent=new Date().getFullYear();
       sync();
     });
   });
+
+
+/* ---------------------------------------------------------------------------
+   The like button.
+
+   There is nowhere to put a shared counter on a static page, so this one is
+   honestly local — and rather than tick +1 forever it runs the only clicker
+   loop that belongs on this particular page: you are building a company.
+   Clicking fast compounds, which is the one thing about traction the metaphor
+   gets right.
+   --------------------------------------------------------------------------- */
+(function(){
+  var btn=document.getElementById("like");
+  if(!btn) return;
+  var out=document.getElementById("likeCount"),
+      multEl=document.getElementById("likeMult"),
+      note=document.getElementById("likeNote");
+
+  /* [threshold, what it means]. Kept short: this sits in a 208px column. */
+  var LADDER=[
+    [0,    "No server. Just us."],
+    [1,    "Pre-seed."],
+    [3,    "Traction. Technically."],
+    [7,    "Seed. The deck worked."],
+    [15,   "Series A. Now there's a board."],
+    [30,   "Series B. \u201cCategory leader.\u201d"],
+    [60,   "Product-market fit, allegedly."],
+    [120,  "Unicorn. On paper."],
+    [250,  "Down round. It happens."],
+    [500,  "Profitable. Quietly."],
+    [1000, "Exit. Then the earn-out."],
+    [2000, "Go outside."]
+  ];
+  function rung(n){
+    var line=LADDER[0][1];
+    for(var i=0;i<LADDER.length;i++) if(n>=LADDER[i][0]) line=LADDER[i][1];
+    return line;
+  }
+
+  var n=0;
+  try{ n=Math.max(0, parseInt(localStorage.getItem("likes"),10)||0); }catch(e){}
+
+  var mult=1, last=0, fade=null;
+  function render(){
+    out.textContent=n.toLocaleString();
+    note.textContent=rung(n);
+    btn.setAttribute("data-on", n>0 ? "true" : "false");
+    btn.setAttribute("aria-label","Like — "+n.toLocaleString()+(n===1?" like":" likes"));
+  }
+
+  btn.addEventListener("click",function(){
+    var now=Date.now();
+    /* compounding only while the clicks keep coming */
+    mult = (now-last<900) ? Math.min(mult+1,8) : 1;
+    last=now;
+    n+=mult;
+    try{ localStorage.setItem("likes",String(n)); }catch(e){}
+    render();
+
+    multEl.textContent = mult>1 ? "×"+mult : "";
+    multEl.setAttribute("data-on", mult>1 ? "true" : "false");
+    clearTimeout(fade);
+    fade=setTimeout(function(){ multEl.setAttribute("data-on","false"); mult=1; }, 1100);
+
+    btn.setAttribute("data-beat","false");
+    void btn.offsetWidth;               /* restart the animation on every click */
+    btn.setAttribute("data-beat","true");
+  });
+
+  render();
+})();
 
   /* A timer that fired while the machine was asleep is not to be trusted. */
   document.addEventListener("visibilitychange", function(){ if(!document.hidden) sync(); });
