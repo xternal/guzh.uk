@@ -6,7 +6,7 @@ and a little JavaScript (the copyright year, and the light/dark switcher). Deplo
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Page weight | ~18 KB HTML + 24 KB portrait (WebP) + Google Fonts |
+| Page weight | ~31 KB HTML (~12 KB gzipped) + 24 KB portrait (WebP) + Google Fonts |
 | Build | none |
 
 ## Files
@@ -23,6 +23,8 @@ robots.txt
 sitemap.xml
 tools/make-og.sh        regenerates assets/og.png — run it if the headline, the lead line
                         or the portrait treatment changes
+tools/make-tz.sh        regenerates the packed timezone->coordinates table inside index.html
+                        — run it when tzdb adds or renames zones
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 ```
@@ -143,19 +145,38 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   tried across the headline, stat figures, block headings and the closing line, and taken back out:
   it read as someone else's page. Geist also renders the OG card, so page and link preview agree.
   Self-host the two weights if you want to remove the third-party request.
-- **Light and dark** both ship, with a switcher in the masthead. Three states, not two: with no
-  stored choice the page follows `prefers-color-scheme`, and a click pins `data-theme` on `<html>`,
-  which wins in both directions. So the dark palette is declared twice — once under the media query
-  as `:root:not([data-theme="light"])`, once as `:root[data-theme="dark"]`. **The two blocks must
-  stay identical**; edit one and the switcher and the OS start to disagree.
+- **Light and dark** both ship, with an Auto / Light / Dark switcher in the masthead. The
+  resolution order is: an explicit choice, else the sun where the reader is, else
+  `prefers-color-scheme`. A choice pins `data-theme` on `<html>`; Auto clears it and recomputes.
 
-  The choice lives in `localStorage`, read by a small inline script in `<head>` that runs *before*
-  first paint — without it a reader who chose dark gets a white flash on every load. Every access is
-  wrapped in try/catch, because a private window can throw on the accessor itself. With JavaScript
-  off there is no switcher behaviour and the media query alone governs, which is the old behaviour.
+  The dark palette is therefore declared twice — once under the media query as
+  `:root:not([data-theme="light"])`, once as `:root[data-theme="dark"]`. **The two blocks must stay
+  identical**; edit one and the switcher and the OS start to disagree.
 
-  `theme-color` stays as two media-scoped tags for the no-choice case; once a choice exists the
+  Everything resolves in an inline script in `<head>`, *before* first paint — anything later is a
+  flash of the wrong theme on every load. Every `localStorage` access is wrapped in try/catch,
+  because a private window can throw on the accessor itself. With JavaScript off nothing is pinned
+  and the media query alone governs.
+
+  `theme-color` stays as two media-scoped tags for the unpinned case; once something is pinned the
   script overwrites both with the same value, so whichever one the browser matches is correct.
+- **Following the sun** needs a latitude and longitude. They come from the IANA timezone
+  (`Intl.DateTimeFormat().resolvedOptions().timeZone`) against a packed table built by
+  `tools/make-tz.sh` — *not* from the geolocation API. No permission prompt, no network call,
+  nothing about the reader leaves the page. The price is city-level precision, which is well inside
+  what sunrise timing needs. An unknown zone returns no coordinates and the page falls back to
+  `prefers-color-scheme`, so the feature degrades instead of guessing.
+
+  Sunrise and sunset use the NOAA sunrise equation, good to about a minute. Polar day and polar
+  night are real cases and are handled explicitly: `cos(hour angle)` leaves [-1, 1] and the page
+  returns light or dark outright rather than producing a NaN. After each transition it re-arms a
+  timer for the next one, capped at six hours so a sleeping laptop, a clock change, or a polar
+  stretch with no transition at all still gets picked up; it also re-syncs on `visibilitychange`,
+  since a timer that fired while the machine was asleep cannot be trusted.
+
+  This is the bulk of the page weight — the zone table alone is ~7 KB raw, ~4 KB gzipped. Trimming
+  the table to the most-populated zones would roughly halve it, at the cost of everyone else falling
+  back to the OS setting.
 - **Dark contrast** was set deliberately, not eyeballed: against `--paper` #141311, body copy
   (`--ink-2`) is 7.7:1 and the tertiary grey (`--ink-3` #8F8A80) is 5.4:1 — both above AA, body copy
   above AAA. `--ink-3` was #78736A and measured 3.9:1, which failed AA at the 11.5px eyebrow size.
