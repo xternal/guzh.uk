@@ -6,7 +6,7 @@ and a little JavaScript (the copyright year, and the light/dark switcher). Deplo
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Page weight | ~35 KB HTML (~14 KB gzipped) + 24 KB portrait (WebP) + Google Fonts |
+| Page weight | ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts |
 | Build | none |
 
 ## Files
@@ -190,8 +190,14 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 - **The like button** under the portrait is a clicker, not a counter. There is nowhere to put a
   shared number on a static page, so this one is honestly per-visitor in `localStorage` and the
   zero state says so. Rather than tick +1 forever it runs the ladder the page is already about:
-  pre-seed, seed, Series A, unicorn, down round, exit. Clicking fast compounds up to ×8, which is
-  the one thing about traction the metaphor gets right; the multiplier decays after 1.1s.
+  pre-seed, seed, Series A, unicorn on paper, down round, exit and the earn-out, a second company,
+  a regulator in every room, sovereign infrastructure, and out the other side at ten thousand.
+
+  Clicking fast compounds, and the cap rises with the company — 8 early, 40 once it is large. That
+  ramp is what keeps ten thousand a ninety-second session instead of a three-minute grind; the
+  multiplier decays 1.1s after you stop. Past ten thousand there is nothing left to be promoted to,
+  so every 2,500 draws a line at random from a pool of two dozen. The draw is remembered per step
+  in `localStorage`, so reloading mid-step does not reshuffle the line under the reader.
 
   If a real shared count is ever wanted it needs a backend — a Cloudflare Worker with KV is about
   twenty-five lines and a free tier, at the cost of a cross-origin call the page does not make

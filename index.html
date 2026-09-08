@@ -611,25 +611,88 @@ document.getElementById("year").textContent=new Date().getFullYear();
       multEl=document.getElementById("likeMult"),
       note=document.getElementById("likeNote");
 
-  /* [threshold, what it means]. Kept short: this sits in a 208px column. */
+  /* [threshold, what it means]. Kept under ~34 characters: this sits in a
+     208px column and anything longer takes a third line. */
   var LADDER=[
-    [0,    "No server. Just us."],
-    [1,    "Pre-seed."],
-    [3,    "Traction. Technically."],
-    [7,    "Seed. The deck worked."],
-    [15,   "Series A. Now there's a board."],
-    [30,   "Series B. \u201cCategory leader.\u201d"],
-    [60,   "Product-market fit, allegedly."],
-    [120,  "Unicorn. On paper."],
-    [250,  "Down round. It happens."],
-    [500,  "Profitable. Quietly."],
-    [1000, "Exit. Then the earn-out."],
-    [2000, "Go outside."]
+    [0,     "No server. Just us."],
+    [1,     "Pre-seed."],
+    [3,     "Traction. Technically."],
+    [7,     "Seed. The deck worked."],
+    [15,    "Series A. Now there's a board."],
+    [30,    "Series B. \u201cCategory leader.\u201d"],
+    [60,    "Product-market fit, allegedly."],
+    [120,   "Unicorn. On paper."],
+    [250,   "Down round. It happens."],
+    [500,   "Profitable. Quietly."],
+    [1000,  "Exit. Then the earn-out."],
+    [1750,  "Earn-out served. Free again."],
+    [2500,  "Second company. Faster now."],
+    [4000,  "A regulator in every room."],
+    [6000,  "Category defined. By you."],
+    [8000,  "Sovereign infrastructure."],
+    [10000, "Ten thousand. Go outside."]
   ];
+  var TOP=LADDER[LADDER.length-1][0], STEP=2500;
+
+  /* Past the top of the ladder there is nothing left to be promoted to, so
+     every STEP draws a fresh line at random instead of ending. */
+  var EXTRAS=[
+    "Still here. So am I.",
+    "This is not a KPI.",
+    "The board has questions.",
+    "Somebody call the CFO.",
+    "Due diligence found nothing.",
+    "Dashboard is downstream of this.",
+    "Margin, growth, retention. This.",
+    "Warehouse first. Dashboard later.",
+    "Add it to the data room.",
+    "This will not appear in the P&L.",
+    "Zero to one. Again.",
+    "Series \u221e.",
+    "Cap table: you, entirely.",
+    "No liquidity event for this.",
+    "The deck now has an appendix.",
+    "Someone said \u201cmoat\u201d.",
+    "Ten-year overnight success.",
+    "Runway infinite. Sleep, less so.",
+    "You have out-clicked the ladder.",
+    "This counts for nothing. Onward.",
+    "Escrow released.",
+    "Vesting cliff cleared.",
+    "The auditors are impressed.",
+    "Still not liquid."
+  ];
+
   function rung(n){
     var line=LADDER[0][1];
     for(var i=0;i<LADDER.length;i++) if(n>=LADDER[i][0]) line=LADDER[i][1];
     return line;
+  }
+  /* 0 means still on the named ladder; 1+ is the nth step past it. */
+  function stepOf(n){ return n < TOP+STEP ? 0 : Math.floor((n-TOP)/STEP); }
+
+  var pIdx=NaN, pStep=NaN;
+  try{
+    pStep=parseInt(localStorage.getItem("likeStep"),10);
+    pIdx =parseInt(localStorage.getItem("likePhrase"),10);
+  }catch(e){}
+
+  /* One phrase per step, drawn once and remembered, so a reload mid-step does
+     not reshuffle the line under the reader. */
+  function line(n){
+    var st=stepOf(n);
+    if(st===0) return rung(n);
+    if(st!==pStep || !(pIdx>=0 && pIdx<EXTRAS.length)){
+      var pick;
+      do{ pick=Math.floor(Math.random()*EXTRAS.length); }
+      while(EXTRAS.length>1 && pick===pIdx);
+      pIdx=pick; pStep=st;
+      try{
+        localStorage.setItem("likeStep",String(st));
+        localStorage.setItem("likePhrase",String(pick));
+      }catch(e){}
+    }
+    return EXTRAS[pIdx];
   }
 
   var n=0;
@@ -638,7 +701,7 @@ document.getElementById("year").textContent=new Date().getFullYear();
   var mult=1, last=0, fade=null;
   function render(){
     out.textContent=n.toLocaleString();
-    note.textContent=rung(n);
+    note.textContent=line(n);
     btn.setAttribute("data-on", n>0 ? "true" : "false");
     btn.setAttribute("aria-label","Like — "+n.toLocaleString()+(n===1?" like":" likes"));
   }
@@ -646,7 +709,10 @@ document.getElementById("year").textContent=new Date().getFullYear();
   btn.addEventListener("click",function(){
     var now=Date.now();
     /* compounding only while the clicks keep coming */
-    mult = (now-last<900) ? Math.min(mult+1,8) : 1;
+    /* the cap rises with the company: 8 at the start, 40 once it is large,
+       which is what keeps ten thousand a session rather than an evening */
+    var cap=Math.min(8+Math.floor(n/400),40);
+    mult = (now-last<900) ? Math.min(mult+1,cap) : 1;
     last=now;
     n+=mult;
     try{ localStorage.setItem("likes",String(n)); }catch(e){}
