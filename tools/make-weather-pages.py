@@ -54,8 +54,9 @@ def read_source(path: str) -> str:
 SUBSTITUTIONS = {
     # The date the pages first went live.
     "[date of publication]": "17 September 2026",
-    # The launch weather provider is not chosen yet (SPEC.md §10.2), so the pages describe it
-    # rather than name it. The app names the source it is actually using under the forecast.
+    # The launch provider is MET Norway, but that has not reached the documents on main yet, so
+    # the pages describe the provider rather than name it. Delete these three entries once it has;
+    # the pages then carry the wording the app repo settled on, unchanged.
     "from our weather data provider ([launch provider])":
         "from our weather data provider",
     "From [launch provider], through our own server":

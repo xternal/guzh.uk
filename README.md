@@ -84,16 +84,22 @@ web page, not a PDF, reachable without a login.
   ./tools/make-weather-assets.sh ~/dev/always_weather
   ```
 
-- **The weather provider is not named yet.** Pavel has picked Open-Meteo, but it is still in an
-  open PR in the app repo; until that merges, both pages say "our weather data provider". Once it
-  is on main, re-run the two scripts: the policy and support page will name it, and the store
-  screenshots will carry the credit line its CC BY 4.0 licence requires. Their current credit
-  line is drawn into the images, so the screenshots must be re-rendered in the app repo first.
+- **The weather provider is not named on the pages yet.** The launch provider is **MET Norway**
+  (Open-Meteo was picked first and dropped: its free tier is non-commercial use only, and this is
+  a paid app). Until the app repo's documents say so on main, the generated pages say "our weather
+  data provider" — see `SUBSTITUTIONS`. When they do, re-run `tools/make-weather-pages.py` and add
+  the credit its CC BY 4.0 licence requires: **"Weather data: MET Norway (CC BY 4.0)"** with a
+  link to the licence. Credit them as the source only — no logo, no "Yr" or NRK naming, and
+  nothing phrased so it reads as an endorsement. The screenshots already carry that credit, drawn
+  into the images by the app repo, so they need no re-rendering.
 - **"Auto" means something smaller here.** On the home page Auto follows the sun, which costs a
   7 KB timezone table; the app pages simply follow `prefers-color-scheme`. The `theme` key in
   `localStorage` is shared, so a reader who pins Light or Dark anywhere on guzh.uk keeps it
   everywhere. Both pages still declare the dark palette twice, identically, for the reason the
   Notes below give.
+- The home page reaches these pages from the **"Things you can open"** row above its contact
+  block (Uzum, tCalendar, Always Weather) — the only link into `/weather/` from guzh.uk itself.
+  Move or rename the page and that link needs changing with it.
 - The pages deliberately carry **no store badge**: the app is not on either store yet, and a badge
   that links nowhere is worse than a sentence that says so. Replace the "Coming to Google Play"
   pill with the real listing link at launch.
