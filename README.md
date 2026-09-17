@@ -73,8 +73,9 @@ web page, not a PDF, reachable without a login.
 
   The script refuses to publish anything still `[bracketed]` in the source. Where a bracket is
   waiting on a decision, `SUBSTITUTIONS` at the top of the script says what the page prints
-  instead — today that is the publication date, and a description of the weather provider in
-  place of its name.
+  instead — today only the publication date, and the retarget of the documents' `./privacy` link
+  to `/weather/privacy/`. It reads `origin/main` by default, so fetch that repo first; `--ref=`
+  takes any other branch.
 - **The images are not made here either.** `tools/make-weather-assets.sh` copies the icon and the
   store screenshots out of the app repo and resizes them for the web; those store assets are
   themselves drawn from the real app by `scripts/store-assets.sh` there. Re-run the script when a
@@ -84,14 +85,14 @@ web page, not a PDF, reachable without a login.
   ./tools/make-weather-assets.sh ~/dev/always_weather
   ```
 
-- **The weather provider is not named on the pages yet.** The launch provider is **MET Norway**
-  (Open-Meteo was picked first and dropped: its free tier is non-commercial use only, and this is
-  a paid app). Until the app repo's documents say so on main, the generated pages say "our weather
-  data provider" — see `SUBSTITUTIONS`. When they do, re-run `tools/make-weather-pages.py` and add
-  the credit its CC BY 4.0 licence requires: **"Weather data: MET Norway (CC BY 4.0)"** with a
-  link to the licence. Credit them as the source only — no logo, no "Yr" or NRK naming, and
-  nothing phrased so it reads as an endorsement. The screenshots already carry that credit, drawn
-  into the images by the app repo, so they need no re-rendering.
+- **The weather provider is MET Norway**, named in both generated documents and credited in the
+  landing page's footer as **"Weather data: MET Norway (CC BY 4.0)"** with the licence link, next
+  to the sentence saying the app is independent of them. Keep both if you touch that footer: the
+  licence requires the credit, and their terms require that it read as a source, never an
+  endorsement — so no logo, no "Yr" or NRK naming. The store screenshots carry the same line,
+  drawn into the images by the app repo, so page, pictures and store listing all agree.
+  (Open-Meteo was picked first and dropped: its free tier is non-commercial use only and this is a
+  paid app. It stays the planned upgrade once the app pays for itself.)
 - **"Auto" means something smaller here.** On the home page Auto follows the sun, which costs a
   7 KB timezone table; the app pages simply follow `prefers-color-scheme`. The `theme` key in
   `localStorage` is shared, so a reader who pins Light or Dark anywhere on guzh.uk keeps it

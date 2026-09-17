@@ -291,6 +291,14 @@ img{max-width:100%}
   transition:color 160ms ease,border-color 160ms ease;
 }
 .footer-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+/* the credit MET Norway's CC BY 4.0 licence asks for: the source, and nothing that could
+   read as their endorsement. The app and the store listing say the same words. */
+.credit{margin:0;font-size:13px;line-height:1.6;color:var(--ink-3);max-width:46ch;text-wrap:pretty}
+.credit a{
+  color:var(--ink-3);border-bottom:1px solid var(--rule);padding-bottom:1px;
+  transition:color 160ms ease,border-color 160ms ease;
+}
+.credit a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
 
 /* ---------- entrance ---------- */
@@ -459,6 +467,7 @@ img{max-width:100%}
         <a href="/weather/support/">Help and contact</a>
         <a href="/">Pavel Guzhikov</a>
       </nav>
+      <p class="credit">Weather data: MET Norway (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>). Always Weather is independent and isn’t affiliated with MET Norway or any government.</p>
       <div class="colophon">© <span id="year">2026</span> Empatiq Limited · Always Weather · Made in London</div>
     </div>
   </footer>

@@ -15,7 +15,7 @@ generated region:
 
 Only that region is rewritten, so the pages can be restyled by hand and re-synced at any time:
 
-    ./tools/make-weather-pages.py [path-to-always_weather-repo] [--ref=main]
+    ./tools/make-weather-pages.py [path-to-always_weather-repo] [--ref=origin/main]
 
 The source files carry bracketed items waiting on Pavel. Each one needs an entry in SUBSTITUTIONS
 below or this script refuses to render the file, so nothing bracketed can reach the live site by
@@ -32,10 +32,11 @@ ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
 APP = pathlib.Path(ARGS[0] if ARGS else "~/dev/always_weather").expanduser()
 SITE = pathlib.Path(__file__).resolve().parent.parent
 
-# The documents are read from a committed ref, not from whatever the app repo happens to have
-# checked out — that repo is usually sitting on a feature branch. Pass --ref=<branch> to preview
-# copy that has not merged yet, or --ref=worktree to take the files as they are on disk.
-REF = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--ref=")), "main")
+# The documents are read from what is merged — not from whatever the app repo happens to have
+# checked out (it usually sits on a feature branch), and not from a local main that may be behind.
+# Fetch that repo first. Pass --ref=<branch> to preview copy that has not merged yet, or
+# --ref=worktree to take the files as they are on disk.
+REF = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--ref=")), "origin/main")
 
 
 def read_source(path: str) -> str:
@@ -54,15 +55,6 @@ def read_source(path: str) -> str:
 SUBSTITUTIONS = {
     # The date the pages first went live.
     "[date of publication]": "17 September 2026",
-    # The launch provider is MET Norway, but that has not reached the documents on main yet, so
-    # the pages describe the provider rather than name it. Delete these three entries once it has;
-    # the pages then carry the wording the app repo settled on, unchanged.
-    "from our weather data provider ([launch provider])":
-        "from our weather data provider",
-    "From [launch provider], through our own server":
-        "From our weather data provider, through our own server",
-    "isn't affiliated with [launch provider] or any government":
-        "isn't affiliated with any weather service or government",
     # The documents assume flat files sitting next to each other; the site serves directories.
     "](./privacy)": "](/weather/privacy/)",
 }
