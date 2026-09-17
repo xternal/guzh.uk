@@ -1,30 +1,43 @@
 # guzh.uk
 
-Personal one-pager for Pavel Guzhikov. Hand-written static HTML + CSS. No build step, no framework,
-and a little JavaScript (the copyright year, and the light/dark switcher). Deploy the repo root as-is on any static host.
+Personal one-pager for Pavel Guzhikov, plus the pages for the Always Weather app. Hand-written
+static HTML + CSS. No build step, no framework, and a little JavaScript (the copyright year, and
+the light/dark switcher). Deploy the repo root as-is on any static host.
 
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Page weight | ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts |
+| Pages | `/` · `/weather/` · `/weather/privacy/` |
+| Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images |
 | Build | none |
 
 ## Files
 
 ```
-index.html              the entire page
+index.html              the entire home page
 favicon.svg             dark square, PG wordmark
+weather/
+  index.html            Always Weather — the app's one-scroll page
+  privacy/index.html    the privacy policy both app stores require   } generated bodies,
+  support/index.html    the support page the App Store requires       } see below
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
   og.png                1200x630 link-preview card
   apple-touch-icon.png  180x180
+  weather/              app icon, three screenshots and the OG card for the app pages
 robots.txt
 sitemap.xml
 tools/make-og.sh        regenerates assets/og.png — run it if the headline, the lead line
                         or the portrait treatment changes
 tools/make-tz.sh        regenerates the packed timezone->coordinates table inside index.html
                         — run it when tzdb adds or renames zones
+tools/make-weather-assets.sh
+                        regenerates assets/weather/* from the Always Weather repo's store
+                        assets — run it whenever those change
+tools/make-weather-pages.py
+                        re-renders the policy and support page bodies from the Always Weather
+                        repo's store/*.md — run it whenever that copy changes
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 ```
@@ -34,6 +47,56 @@ this repo. It stayed in the Google Drive `_git_` folder as `guzh.uk-handoff/`, w
 to sit beside. It is reference material, it does not belong on the website, and on a free GitHub
 plan Pages requires a public repo, where anything committed is publicly browsable whether or not it
 is served. It is not itself a git repo, so Drive is the only copy — leave it there.
+
+## The app pages — `/weather/` and `/weather/privacy/`
+
+`/weather/` is the public page for **Always Weather**, the paid Android weather app
+(`~/dev/always_weather`). `/weather/privacy/` is the privacy policy, which is the URL both
+Google Play and App Store Connect require before an app can be submitted — it must be a public
+web page, not a PDF, reachable without a login.
+
+- **The copy is not written here, and the two documents are not even retyped here.** The bodies
+  of `/weather/privacy/` and `/weather/support/` are *generated* from `store/privacy-policy.md`
+  and `store/support-page.md` in the app repo, word for word, into the region marked
+  `<!-- BEGIN generated … -->` in each page. Everything outside that region — head, masthead,
+  styling, footer — is hand-written and safe to edit.
+
+  ```bash
+  ./tools/make-weather-pages.py ~/dev/always_weather          # from main, the default
+  ./tools/make-weather-pages.py ~/dev/always_weather --ref=some-branch
+  ```
+
+  Re-run it whenever that copy changes. Why it matters: the policy has to match the Play **Data
+  safety** form and the **App Privacy** label exactly, so a hand-edit here would silently put the
+  live page out of step with what was declared to the two stores. The landing page's own copy is
+  reused from the approved `store/google-play/metadata/android/en-GB/full_description.txt`.
+
+  The script refuses to publish anything still `[bracketed]` in the source. Where a bracket is
+  waiting on a decision, `SUBSTITUTIONS` at the top of the script says what the page prints
+  instead — today that is the publication date, and a description of the weather provider in
+  place of its name.
+- **The images are not made here either.** `tools/make-weather-assets.sh` copies the icon and the
+  store screenshots out of the app repo and resizes them for the web; those store assets are
+  themselves drawn from the real app by `scripts/store-assets.sh` there. Re-run the script when a
+  screenshot, the icon or the app name changes:
+
+  ```bash
+  ./tools/make-weather-assets.sh ~/dev/always_weather
+  ```
+
+- **The weather provider is not named yet.** Pavel has picked Open-Meteo, but it is still in an
+  open PR in the app repo; until that merges, both pages say "our weather data provider". Once it
+  is on main, re-run the two scripts: the policy and support page will name it, and the store
+  screenshots will carry the credit line its CC BY 4.0 licence requires. Their current credit
+  line is drawn into the images, so the screenshots must be re-rendered in the app repo first.
+- **"Auto" means something smaller here.** On the home page Auto follows the sun, which costs a
+  7 KB timezone table; the app pages simply follow `prefers-color-scheme`. The `theme` key in
+  `localStorage` is shared, so a reader who pins Light or Dark anywhere on guzh.uk keeps it
+  everywhere. Both pages still declare the dark palette twice, identically, for the reason the
+  Notes below give.
+- The pages deliberately carry **no store badge**: the app is not on either store yet, and a badge
+  that links nowhere is worse than a sentence that says so. Replace the "Coming to Google Play"
+  pill with the real listing link at launch.
 
 ## Local preview
 

@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Privacy policy — Always Weather</title>
+<meta name="description" content="What the Always Weather app sends, why, and what never leaves your phone. No ads, no account, no analytics, no tracking.">
+<link rel="canonical" href="https://guzh.uk/weather/privacy/">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://guzh.uk/weather/privacy/">
+<meta property="og:site_name" content="Always Weather">
+<meta property="og:title" content="Privacy policy — Always Weather">
+<meta property="og:description" content="What the app sends, why, and what never leaves your phone.">
+<meta property="og:image" content="https://guzh.uk/assets/weather/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Always Weather — drag through the hours.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy policy — Always Weather">
+<meta name="twitter:description" content="What the app sends, why, and what never leaves your phone.">
+<meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
+
+<link rel="icon" href="/assets/weather/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/weather/icon.png">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<script>
+/* Pin the reader's explicit choice before first paint — see /weather/index.html for why Auto
+   here means prefers-color-scheme rather than the home page's sun. */
+(function(){
+  try {
+    var v = localStorage.getItem("theme");
+    if (v === "light" || v === "dark") document.documentElement.setAttribute("data-theme", v);
+  } catch (e) {}
+})();
+</script>
+
+<style>
+:root{
+  color-scheme:light;
+  --paper:#F1EFE9;
+  --paper-lift:#FAF8F3;
+  --ink:#171613;
+  --ink-2:#544F46;
+  --ink-3:#6C675F;
+  --accent:#1F3BC4;
+  --rule:rgba(23,22,19,.14);
+  --rule-soft:rgba(23,22,19,.07);
+  --underline:rgba(23,22,19,.22);
+  --underline-accent:rgba(31,59,196,.28);
+  --mode-active:rgba(23,22,19,.07);
+  --grain:.05;
+  --grain-blend:multiply;
+}
+
+/* Dark, declared twice on purpose and deliberately kept identical — see /weather/index.html. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#141311;
+    --paper-lift:#1D1B18;
+    --ink:#EFECE4;
+    --ink-2:#ABA69B;
+    --ink-3:#8F8A80;
+    --accent:#94A9FF;
+    --rule:rgba(239,236,228,.15);
+    --rule-soft:rgba(239,236,228,.10);
+    --underline:rgba(239,236,228,.24);
+    --underline-accent:rgba(148,169,255,.32);
+    --mode-active:rgba(239,236,228,.10);
+    --grain:.07;
+    --grain-blend:screen;
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#141311;
+    --paper-lift:#1D1B18;
+    --ink:#EFECE4;
+    --ink-2:#ABA69B;
+    --ink-3:#8F8A80;
+    --accent:#94A9FF;
+    --rule:rgba(239,236,228,.15);
+    --rule-soft:rgba(239,236,228,.10);
+    --underline:rgba(239,236,228,.24);
+    --underline-accent:rgba(148,169,255,.32);
+    --mode-active:rgba(239,236,228,.10);
+    --grain:.07;
+    --grain-blend:screen;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  position:relative;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 8% -8%, var(--paper-lift), transparent 68%),
+    radial-gradient(700px 520px at 96% 4%, var(--paper-lift), transparent 62%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:var(--grain);mix-blend-mode:var(--grain-blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection{background:var(--ink);color:var(--paper)}
+
+.visually-hidden{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--underline-accent);padding-bottom:1px;transition:border-color 160ms ease}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:32px 56px 0}
+
+/* ---------- header ---------- */
+.masthead{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;padding-bottom:80px;
+}
+.masthead-name{
+  font-size:14px;font-weight:500;letter-spacing:.01em;
+  color:var(--ink);border-bottom:1px solid transparent;padding-bottom:1px;
+}
+.masthead-name:hover{border-bottom-color:var(--underline)}
+.masthead-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
+.mode{
+  display:inline-flex;align-items:center;gap:2px;
+  padding:2px;border:1px solid var(--rule);border-radius:999px;
+}
+.mode-btn{
+  display:grid;place-items:center;
+  width:26px;height:26px;padding:0;margin:0;
+  border:0;border-radius:999px;background:none;
+  color:var(--ink-3);cursor:pointer;
+  font:inherit;-webkit-tap-highlight-color:transparent;
+  transition:color 160ms ease,background-color 160ms ease;
+}
+.mode-btn:hover{color:var(--ink)}
+.mode-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mode-btn[aria-pressed="true"]{background:var(--mode-active);color:var(--ink)}
+.mode-btn svg{display:block;width:14px;height:14px}
+
+/* ---------- the policy itself ---------- */
+.policy{max-width:66ch}
+.policy h1{
+  margin:0 0 14px;
+  font-weight:500;font-size:clamp(32px,3.6vw,44px);
+  line-height:1.08;letter-spacing:-.03em;text-wrap:balance;
+}
+.updated{margin:0 0 40px;font-size:14px;color:var(--ink-3)}
+.policy h2{
+  margin:52px 0 0;padding-top:22px;
+  border-top:1px solid var(--rule);
+  font-weight:500;font-size:20px;line-height:1.35;letter-spacing:-.02em;
+}
+.policy h3{margin:32px 0 0;font-weight:500;font-size:16.5px;line-height:1.45;letter-spacing:-.01em}
+.policy p{margin:14px 0 0;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
+.policy ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.policy li{
+  font-size:16.5px;line-height:1.65;color:var(--ink-2);
+  padding-left:20px;position:relative;text-wrap:pretty;
+}
+.policy li::before{
+  content:"";position:absolute;left:0;top:.72em;
+  width:7px;height:1px;background:var(--ink-3);
+}
+.policy strong{color:var(--ink);font-weight:500}
+/* the legal basis under each thing the app sends */
+.basis{font-size:14.5px;color:var(--ink-3);margin-top:10px}
+
+/* ---------- footer ---------- */
+.foot{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;margin-top:96px;padding:28px 0 64px;
+  border-top:1px solid var(--rule);flex-wrap:wrap;
+}
+.foot-nav{display:flex;gap:20px;flex-wrap:wrap}
+.foot-nav a{
+  font-size:15px;color:var(--ink);
+  border-bottom:1px solid var(--underline);padding-bottom:2px;
+  transition:color 160ms ease,border-color 160ms ease;
+}
+.foot-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
+
+@media (max-width:860px){
+  .wrap{padding-left:24px;padding-right:24px}
+  .masthead{padding-bottom:56px}
+  .foot{flex-direction:column;align-items:flex-start;gap:24px;margin-top:72px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:0.01ms !important}
+}
+@media print{
+  .mode{display:none}
+  body{background:#fff}
+  body::before,body::after{display:none}
+  .wrap{padding:0}
+  a{color:inherit;border-bottom:0}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <a class="masthead-name" href="/weather/">Always Weather</a>
+    <div class="masthead-meta">
+      <div class="mode" role="group" aria-label="Colour mode">
+        <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto — follow your system">
+          <span class="visually-hidden">Auto — follow your system</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="light" aria-pressed="false" title="Light">
+          <span class="visually-hidden">Light</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.4"></circle>
+            <path d="M12 3v1.6M12 19.4V21M5.2 5.2l1.1 1.1M17.7 17.7l1.1 1.1M3 12h1.6M19.4 12H21M5.2 18.8l1.1-1.1M17.7 6.3l1.1-1.1"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="dark" aria-pressed="false" title="Dark">
+          <span class="visually-hidden">Dark</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4 8.2 8.2 0 1 0 20 14.2Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="policy">
+    <!-- BEGIN generated from store/privacy-policy.md — edit that file, then re-run tools/make-weather-pages.py -->
+    <h1>Privacy policy — Always Weather</h1>
+    <p class="updated">Last updated: 17 September 2026</p>
+    <p>Always Weather is made by Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”). We are the controller of the little personal data the app handles. Contact: apps@guzh.uk or +44 7776 912598.</p>
+    <h2>The short version</h2>
+    <ul>
+      <li>No ads, no account, no analytics, no tracking. We never sell or share your data for advertising.</li>
+      <li>The app sends your <strong>approximate</strong> location, rounded to about a kilometre, to our own server to get the forecast and the name of the place you’re in. We don’t store it against you.</li>
+      <li>If the app crashes, it sends an anonymous crash report so we can fix the bug. You can turn this off in Settings.</li>
+      <li>Your saved places and settings stay on your phone, and in your phone’s own backup if you use it.</li>
+    </ul>
+    <h2>What the app sends, and why</h2>
+    <h3>Forecasts</h3>
+    <p>To show a forecast, the app sends our server the latitude and longitude of the place you’re looking at, rounded to two decimal places (roughly a 1 km square), together with the app version. This is either a place you saved or searched for, or your current location if you allowed it.</p>
+    <p>Our server runs on Cloudflare. It fetches the forecast for that rounded point from our weather data provider and keeps a copy of the forecast for that point for a few hours so the next person nearby gets it quickly. That copy isn’t linked to you or your device. Our server doesn’t record coordinates or IP addresses in its logs. To stop abuse, it counts requests per IP address for one minute; nothing is kept after that. Cloudflare processes IP addresses to deliver and protect the service, as our hosting provider.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing you the forecast you asked for.</p>
+    <h3>The name of your current location</h3>
+    <p>When you use your current location, the app sends the same rounded point to our server to find the nearest town or district, so it can show “Hammersmith” instead of “Current location”. Our server looks it up in its own copy of the GeoNames place list, so the point isn’t passed to anyone else, and it isn’t stored or written to our logs. The app keeps the name on your phone for that roughly 1 km square, so it asks only once per square. It keeps the names of the last 50 squares you used and forgets older ones.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing where the forecast is for.</p>
+    <h3>Place search</h3>
+    <p>When you search for a place, the text you type is sent to our server to find matching places. It isn’t stored.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests — answering your search.</p>
+    <h3>Crash reports</h3>
+    <p>If the app crashes, it sends a report to Sentry (Functional Software, Inc.), which stores it in its EU data region. A report contains what went wrong in the code, the app version, your phone model and its operating system version. It contains no location, no name, no email address and no identifier for you or your device, and we ask Sentry not to store IP addresses. Reports are deleted automatically after 90 days. To stop sending crash reports, turn off Settings → Crash reports; the app then sends none.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests — finding and fixing faults.</p>
+    <h3>Feedback emails</h3>
+    <p>“Send feedback” opens your own email app with a message to apps@guzh.uk that already contains the app version, your operating system version and phone model; you can see and change all of it before sending. If you send it, we receive your email address and whatever you write. We use it only to reply and to improve the app, and delete it within 12 months or sooner if you ask.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests — answering you.</p>
+    <h2>What stays on your phone</h2>
+    <p>Saved places, your settings (Look, units, time format, theme), the last forecasts and the names of the places where you’ve used your current location are stored only on your device. If you use your phone’s own backup (Google or iCloud), your settings and saved places are included in it, under your account, which we can’t access, so they come back on a new phone. Your current location, those names and the forecasts are never included in a backup or copied to a new phone. When you save your current location as a place, the app keeps only the point rounded to about a kilometre and its name. Uninstalling the app deletes all of this from the phone (on Android, so does clearing the app’s storage); a backup is kept by Google or Apple under their own rules.</p>
+    <h2>Location permission</h2>
+    <p>The app asks only for approximate location, and only while you use it. It’s optional: without it, search for a place instead. You can change this at any time in your phone’s settings.</p>
+    <h2>Purchases</h2>
+    <p>Google Play or the App Store handles the purchase. We don’t receive your payment details.</p>
+    <h2>Where data is processed</h2>
+    <p>Cloudflare runs our server in data centres around the world, usually the one nearest to you. Sentry stores crash reports in the EU. Where data leaves the UK, our providers protect it with the UK’s approved safeguards (the UK Extension to the EU–US Data Privacy Framework or standard contractual clauses).</p>
+    <h2>Your rights</h2>
+    <p>Under UK GDPR (and the EU GDPR where it applies) you can ask us for access to, correction or deletion of your personal data, or object to how we use it. Because we don’t keep data that identifies you, a request usually concerns feedback emails; write to apps@guzh.uk. You can also complain to the Information Commissioner’s Office (ico.org.uk) or your local data protection authority.</p>
+    <h2>Children</h2>
+    <p>The app isn’t directed at children under 13 and we don’t knowingly collect their data.</p>
+    <h2>Changes</h2>
+    <p>If this policy changes, we’ll update it here and change the date above. If a change affects what the app sends, we’ll say so in the app’s release notes.</p>
+    <!-- END generated -->
+  </main>
+
+  <footer class="foot">
+    <nav class="foot-nav" aria-label="Always Weather">
+      <a href="/weather/">Always Weather</a>
+      <a href="/weather/support/">Help and contact</a>
+      <a href="/">Pavel Guzhikov</a>
+    </nav>
+    <div class="colophon">© <span id="year">2026</span> Empatiq Limited · Always Weather</div>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Auto / Light / Dark — the same switcher as /weather/, sharing the "theme" key. */
+(function(){
+  var root = document.documentElement,
+      btns = [].slice.call(document.querySelectorAll(".mode-btn")),
+      mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function stored(){
+    try { var v = localStorage.getItem("theme"); return v === "light" || v === "dark" ? v : null; }
+    catch (e) { return null; }
+  }
+
+  function sync(){
+    var choice = stored(), mode = choice || "auto";
+    if (choice) root.setAttribute("data-theme", choice);
+    else root.removeAttribute("data-theme");
+
+    btns.forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode));
+    });
+
+    if (choice) {
+      var col = choice === "dark" ? "#141311" : "#F1EFE9";
+      [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
+        m.setAttribute("content", col);
+      });
+    }
+  }
+
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){
+      var m = b.getAttribute("data-mode");
+      try { m === "auto" ? localStorage.removeItem("theme") : localStorage.setItem("theme", m); }
+      catch (e) {}
+      sync();
+    });
+  });
+
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  sync();
+})();
+</script>
+
+</body>
+</html>

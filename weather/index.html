@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Always Weather — drag through the hours</title>
+<meta name="description" content="Always Weather is a calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.">
+<link rel="canonical" href="https://guzh.uk/weather/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/weather/">
+<meta property="og:site_name" content="Always Weather">
+<meta property="og:title" content="Always Weather — drag through the hours">
+<meta property="og:description" content="A calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.">
+<meta property="og:image" content="https://guzh.uk/assets/weather/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Always Weather — drag through the hours.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Always Weather — drag through the hours">
+<meta name="twitter:description" content="A calm, paid weather app. No ads, no account, no tracking.">
+<meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
+
+<link rel="icon" href="/assets/weather/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/weather/icon.png">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<script>
+/* Pin the reader's explicit choice before first paint — anything later is a flash of the wrong
+   theme. Unlike the home page, Auto here is simply prefers-color-scheme: the sun table is 7 KB
+   and belongs to that page. A pinned choice is shared (same origin, same "theme" key), so
+   Light or Dark chosen anywhere on guzh.uk follows the reader here. */
+(function(){
+  try {
+    var v = localStorage.getItem("theme");
+    if (v === "light" || v === "dark") document.documentElement.setAttribute("data-theme", v);
+  } catch (e) {}
+})();
+</script>
+
+<style>
+:root{
+  color-scheme:light;
+  --paper:#F1EFE9;
+  --paper-lift:#FAF8F3;
+  --ink:#171613;
+  --ink-2:#544F46;
+  --ink-3:#6C675F;
+  --accent:#1F3BC4;
+  --rule:rgba(23,22,19,.14);
+  --rule-soft:rgba(23,22,19,.07);
+  --underline:rgba(23,22,19,.22);
+  --underline-accent:rgba(31,59,196,.28);
+  --mode-active:rgba(23,22,19,.07);
+  --shot-shadow:0 1px 2px rgba(23,22,19,.06),0 18px 40px -22px rgba(23,22,19,.42);
+  --grain:.05;
+  --grain-blend:multiply;
+}
+
+/* Dark, declared twice on purpose and deliberately kept identical — the same rule the home page
+   follows: once for a reader whose OS asks for dark and who has not overridden it, once for an
+   explicit choice from the switcher. Edit both or the switcher and the OS start to disagree. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#141311;
+    --paper-lift:#1D1B18;
+    --ink:#EFECE4;
+    --ink-2:#ABA69B;
+    --ink-3:#8F8A80;
+    --accent:#94A9FF;
+    --rule:rgba(239,236,228,.15);
+    --rule-soft:rgba(239,236,228,.10);
+    --underline:rgba(239,236,228,.24);
+    --underline-accent:rgba(148,169,255,.32);
+    --mode-active:rgba(239,236,228,.10);
+    --shot-shadow:0 0 0 1px rgba(239,236,228,.08),0 20px 44px -24px rgba(0,0,0,.85);
+    --grain:.07;
+    --grain-blend:screen;
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#141311;
+    --paper-lift:#1D1B18;
+    --ink:#EFECE4;
+    --ink-2:#ABA69B;
+    --ink-3:#8F8A80;
+    --accent:#94A9FF;
+    --rule:rgba(239,236,228,.15);
+    --rule-soft:rgba(239,236,228,.10);
+    --underline:rgba(239,236,228,.24);
+    --underline-accent:rgba(148,169,255,.32);
+    --mode-active:rgba(239,236,228,.10);
+    --shot-shadow:0 0 0 1px rgba(239,236,228,.08),0 20px 44px -24px rgba(0,0,0,.85);
+    --grain:.07;
+    --grain-blend:screen;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  position:relative;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+/* a warm light falling across the page, and a paper tooth over the top of it */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 8% -8%, var(--paper-lift), transparent 68%),
+    radial-gradient(700px 520px at 96% 4%, var(--paper-lift), transparent 62%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:var(--grain);mix-blend-mode:var(--grain-blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection{background:var(--ink);color:var(--paper)}
+
+.visually-hidden{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+img{max-width:100%}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:32px 56px 0}
+
+/* ---------- header ---------- */
+.masthead{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;padding-bottom:96px;
+}
+.masthead-name{
+  font-size:14px;font-weight:500;letter-spacing:.01em;
+  border-bottom:1px solid transparent;padding-bottom:1px;
+  transition:border-color 160ms ease;
+}
+.masthead-name:hover{border-bottom-color:var(--underline)}
+.masthead-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
+/* ---------- light / dark switcher ---------- */
+.mode{
+  display:inline-flex;align-items:center;gap:2px;
+  padding:2px;border:1px solid var(--rule);border-radius:999px;
+}
+.mode-btn{
+  display:grid;place-items:center;
+  width:26px;height:26px;padding:0;margin:0;
+  border:0;border-radius:999px;background:none;
+  color:var(--ink-3);cursor:pointer;
+  font:inherit;-webkit-tap-highlight-color:transparent;
+  transition:color 160ms ease,background-color 160ms ease;
+}
+.mode-btn:hover{color:var(--ink)}
+.mode-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mode-btn[aria-pressed="true"]{background:var(--mode-active);color:var(--ink)}
+.mode-btn svg{display:block;width:14px;height:14px}
+
+.link-accent{
+  color:var(--accent);font-weight:500;
+  border-bottom:1px solid var(--underline-accent);
+  padding-bottom:1px;
+  transition:border-color 160ms ease;
+}
+.link-accent:hover{border-bottom-color:var(--accent)}
+
+/* ---------- hero ---------- */
+.hero{display:flex;flex-direction:column;align-items:flex-start;gap:28px}
+.app-icon{
+  display:block;width:72px;height:72px;border-radius:16px;
+  box-shadow:var(--shot-shadow);
+}
+.eyebrow{
+  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.hero h1{
+  margin:0;
+  font-weight:500;
+  font-size:clamp(38px,4.6vw,58px);
+  line-height:1.05;letter-spacing:-.035em;
+  max-width:16ch;text-wrap:balance;
+}
+.lead{
+  margin:0;max-width:50ch;
+  font-size:20px;line-height:1.5;letter-spacing:-.005em;
+  color:var(--ink);text-wrap:pretty;
+}
+.body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
+
+/* where to get it — a plain statement, not a store badge we do not have yet */
+.availability{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:9px 15px;
+  border:1px solid var(--rule);border-radius:999px;
+  font-size:13.5px;font-weight:500;color:var(--ink);
+}
+.pill::before{
+  content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--accent);flex:none;
+}
+.availability-note{font-size:13.5px;color:var(--ink-3)}
+
+/* ---------- screenshots ---------- */
+.shots{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:28px;margin-top:96px;
+}
+.shot{margin:0}
+.shot img{
+  display:block;width:100%;height:auto;aspect-ratio:9/16;
+  border-radius:8px;box-shadow:var(--shot-shadow);
+}
+
+/* ---------- numbers ---------- */
+.numbers{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:0;row-gap:36px;
+  margin-top:104px;padding-top:30px;
+  border-top:1px solid var(--rule);
+}
+.stat{
+  display:flex;flex-direction:column;gap:9px;
+  padding:0 28px;border-left:1px solid var(--rule-soft);
+}
+.stat:first-child{padding-left:0;border-left:0}
+.stat-figure{
+  font-weight:500;
+  font-size:32px;line-height:1.1;letter-spacing:-.035em;white-space:nowrap;
+}
+.stat-unit{font-size:19px;color:var(--ink-3)}
+.stat-label{font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:26ch;text-wrap:pretty}
+
+/* ---------- three blocks ---------- */
+.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;margin-top:104px}
+.block{display:flex;flex-direction:column;gap:11px;padding-top:22px;border-top:1px solid var(--rule)}
+.block-index{
+  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.block h2{margin:0;font-weight:500;font-size:17px;line-height:1.45;letter-spacing:-.015em}
+.block p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-2);text-wrap:pretty}
+.block ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.block li{font-size:15px;line-height:1.55;color:var(--ink-2);padding-left:16px;position:relative}
+.block li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:5px;height:1px;background:var(--ink-3);
+}
+
+/* ---------- contact ---------- */
+.contact{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:48px;margin-top:120px;padding:36px 0 64px;
+  border-top:1px solid var(--rule);
+}
+.contact-left{display:flex;flex-direction:column;gap:14px}
+.contact-line{font-size:22px;font-weight:500;line-height:1.3;letter-spacing:-.02em}
+.contact-email{
+  font-size:21px;font-weight:500;letter-spacing:-.015em;
+  color:var(--accent);width:fit-content;
+  border-bottom:1px solid var(--underline-accent);
+  padding-bottom:2px;
+  transition:border-color 160ms ease;
+}
+.contact-email:hover{border-bottom-color:var(--accent)}
+.contact-right{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.footer-nav{display:flex;gap:20px;flex-wrap:wrap}
+.footer-nav a{
+  font-size:15px;color:var(--ink);
+  border-bottom:1px solid var(--underline);
+  padding-bottom:2px;
+  transition:color 160ms ease,border-color 160ms ease;
+}
+.footer-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
+
+/* ---------- entrance ---------- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .masthead,.hero>*,.shots,.numbers,.blocks,.contact{
+    animation:rise 620ms cubic-bezier(.22,.68,.28,1) both;
+  }
+  .masthead{animation-delay:0ms}
+  .hero .app-icon{animation-delay:60ms}
+  .hero .eyebrow{animation-delay:90ms}
+  .hero h1{animation-delay:120ms}
+  .hero .lead{animation-delay:170ms}
+  .hero .body-copy{animation-delay:220ms}
+  .hero .availability{animation-delay:270ms}
+  .shots{animation-delay:320ms}
+  .numbers{animation-delay:370ms}
+  .blocks{animation-delay:420ms}
+  .contact{animation-delay:470ms}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .wrap{padding-left:24px;padding-right:24px}
+  .masthead{padding-bottom:64px}
+  /* one thumb again: the shots become a snapping strip that bleeds to both edges,
+     rather than three full-width images to scroll past */
+  .shots{
+    display:flex;gap:16px;margin-top:72px;
+    overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    margin-left:-24px;margin-right:-24px;padding:4px 24px 10px;
+  }
+  .shot{flex:0 0 72%;scroll-snap-align:center}
+  .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:88px}
+  .stat{padding:0 20px}
+  .stat:nth-child(odd){padding-left:0;border-left:0}
+  .blocks{grid-template-columns:minmax(0,1fr);row-gap:32px;margin-top:80px}
+  .contact{flex-direction:column;align-items:flex-start;gap:32px;margin-top:88px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:0.01ms !important}
+}
+@media print{
+  .mode,.shots{display:none}
+  body{background:#fff}
+  body::before,body::after{display:none}
+  .wrap{padding:0}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <a class="masthead-name" href="/">Pavel Guzhikov</a>
+    <div class="masthead-meta">
+      <div class="mode" role="group" aria-label="Colour mode">
+        <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto — follow your system">
+          <span class="visually-hidden">Auto — follow your system</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="light" aria-pressed="false" title="Light">
+          <span class="visually-hidden">Light</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.4"></circle>
+            <path d="M12 3v1.6M12 19.4V21M5.2 5.2l1.1 1.1M17.7 17.7l1.1 1.1M3 12h1.6M19.4 12H21M5.2 18.8l1.1-1.1M17.7 6.3l1.1-1.1"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="dark" aria-pressed="false" title="Dark">
+          <span class="visually-hidden">Dark</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4 8.2 8.2 0 1 0 20 14.2Z"></path>
+          </svg>
+        </button>
+      </div>
+      <a class="link-accent" href="mailto:apps@guzh.uk">apps@guzh.uk</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img class="app-icon" src="/assets/weather/icon.png" width="72" height="72"
+           alt="Always Weather app icon: a white letter A and a warm yellow degree sign on a dark blue square.">
+      <div class="eyebrow">Always Weather</div>
+      <h1>The whole day, under your thumb.</h1>
+      <p class="lead">Open it, drag your thumb through the hours, and you know. The time, the temperature, what it feels like, the wind and the rain all follow your thumb, and each hour settles into place with a light tick.</p>
+      <p class="body-copy">One plain sentence sums the day up — “Rain from 13:00, clearing by 16:00.” or “Dry all day.” — which is what you opened a weather app to find out. Today hour by hour, up to ten days ahead, your current location and up to ten saved places, and a small home-screen widget with the next few hours. It opens straight to your last forecast, even without a signal.</p>
+      <div class="availability">
+        <span class="pill">Coming to Google Play</span>
+        <span class="availability-note">£2.99, once. An iPhone version follows.</span>
+      </div>
+    </section>
+
+    <section class="shots" aria-label="Screenshots">
+      <figure class="shot">
+        <img src="/assets/weather/shot-hours.webp" width="600" height="1067" loading="lazy" decoding="async"
+             alt="London at 14:00: 16 degrees and rain, above a strip of hourly bars with the 14:00 bar selected.">
+      </figure>
+      <figure class="shot">
+        <img src="/assets/weather/shot-sentence.webp" width="600" height="1067" loading="lazy" decoding="async"
+             alt="London on Saturday at 11:00: cloudy, 14 degrees. The summary reads “Rain from 16:00, clearing by 21:00.”">
+      </figure>
+      <figure class="shot">
+        <img src="/assets/weather/shot-night.webp" width="600" height="1067" loading="lazy" decoding="async"
+             alt="Brighton at 22:00: clear night, 14 degrees, on a dark night-blue screen. The summary reads “Dry tonight.”">
+      </figure>
+    </section>
+
+    <section class="numbers" aria-label="What you get">
+      <div class="stat">
+        <div class="stat-figure">10<span class="stat-unit"> days</span></div>
+        <div class="stat-label">ahead, and today hour by hour with feels-like, wind and rain</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure">10<span class="stat-unit"> places</span></div>
+        <div class="stat-label">saved, plus wherever you happen to be standing</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure">£2.99</div>
+        <div class="stat-label">once — no subscription and no in-app purchases</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure">Zero</div>
+        <div class="stat-label">ads, accounts and trackers, by design rather than by promise</div>
+      </div>
+    </section>
+
+    <section class="blocks">
+      <article class="block">
+        <div class="block-index">01 — Two looks</div>
+        <h2>The same forecast, shown your way</h2>
+        <p>Sky takes the colour of the weather at the hour you choose, so the screen itself tells you what the day is doing. Paper is warm and typographic: just the words and the numbers. Pick one when you first open the app, switch any time in Settings.</p>
+      </article>
+      <article class="block">
+        <div class="block-index">02 — Made for everyone</div>
+        <h2>One thumb, or none at all</h2>
+        <p>Works with TalkBack: swipe up or down to move through the hours, and each hour is read out in full. Text stays high in contrast, and the layout holds together at twice the normal font size.</p>
+      </article>
+      <article class="block">
+        <div class="block-index">03 — Private by design</div>
+        <h2>It knows the weather, not you</h2>
+        <ul>
+          <li>Approximate location only, rounded to about a kilometre before it leaves your phone</li>
+          <li>No account, no ads, no analytics and nothing to sign up for</li>
+          <li>Saved places and settings stay on your phone</li>
+          <li>Anonymous crash reports, which you can turn off in Settings</li>
+        </ul>
+        <p><a class="link-accent" href="/weather/privacy/">Read the privacy policy</a></p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="contact">
+    <div class="contact-left">
+      <div class="contact-line">Questions or ideas? We read everything.</div>
+      <a class="contact-email" href="mailto:apps@guzh.uk">apps@guzh.uk</a>
+    </div>
+    <div class="contact-right">
+      <nav class="footer-nav" aria-label="Always Weather">
+        <a href="/weather/privacy/">Privacy policy</a>
+        <a href="/weather/support/">Help and contact</a>
+        <a href="/">Pavel Guzhikov</a>
+      </nav>
+      <div class="colophon">© <span id="year">2026</span> Empatiq Limited · Always Weather · Made in London</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Auto / Light / Dark. Auto means the reader's system here; the key is the same one the home
+   page uses, so a pinned choice carries across guzh.uk. Every localStorage access is wrapped:
+   a private window can throw on the accessor itself. */
+(function(){
+  var root = document.documentElement,
+      btns = [].slice.call(document.querySelectorAll(".mode-btn")),
+      mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function stored(){
+    try { var v = localStorage.getItem("theme"); return v === "light" || v === "dark" ? v : null; }
+    catch (e) { return null; }
+  }
+
+  function sync(){
+    var choice = stored(), mode = choice || "auto";
+    if (choice) root.setAttribute("data-theme", choice);
+    else root.removeAttribute("data-theme");
+
+    btns.forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode));
+    });
+
+    /* theme-color only needs overriding once something is pinned; unpinned, the two
+       media-scoped tags in the head are already right. */
+    if (choice) {
+      var col = choice === "dark" ? "#141311" : "#F1EFE9";
+      [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
+        m.setAttribute("content", col);
+      });
+    }
+  }
+
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){
+      var m = b.getAttribute("data-mode");
+      try { m === "auto" ? localStorage.removeItem("theme") : localStorage.setItem("theme", m); }
+      catch (e) {}
+      sync();
+    });
+  });
+
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  sync();
+})();
+</script>
+
+</body>
+</html>
