@@ -28,7 +28,7 @@ cp "$ICON" assets/weather/icon.png
 shot() { magick "$SHOTS/$1.png" -resize 600x1067 -quality 82 "assets/weather/$2.webp"; }
 shot 01_sky-hours    shot-hours
 shot 02_sky-sentence shot-sentence
-shot 04_sky-night    shot-night
+shot 06_sky-night    shot-night
 
 # ---- the 1200x630 link-preview card -----------------------------------------------------------
 FONT_DIR="${TMPDIR:-/tmp}/guzh-og-fonts"
