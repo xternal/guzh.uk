@@ -1,0 +1,24 @@
+# Pavel Guzhikov
+
+> Pavel Guzhikov builds and runs companies. London-based. Zero to one, four times. Two exits. One unicorn: founding team at Uzum, Uzbekistan's first unicorn. guzh.uk is Pavel Guzhikov's personal site, and also carries the pages for Always Weather, a paid weather app.
+
+Twenty years of building, from a multi-channel mobile messenger in 2005 to national payment infrastructure in 2022.
+
+- Uzum: founding team. Fintech, lending, marketplace, payments, cards, and the data culture underneath them. Millions of users and 1000+ employees in two years, in a market with no digital infrastructure.
+- Before that: founded and sold Worki, Russia's fastest-growing jobs marketplace (acquired by Mail.Ru Group, 2019). Co-founded Dengi Vpered, earned-wage access backed by Target Global (sold). Fintech products with 100+ banks.
+- Now: most interested in problems where the technology is genuinely hard, the deployment is political and the blast radius is national: sovereign infrastructure, public systems, defence and dual-use, AI in the public interest.
+
+Contact: pavel@guzh.uk
+
+## Pages
+
+- [Pavel Guzhikov](https://guzh.uk/): the home page. Background, track record, current focus and contact details.
+- [Always Weather](https://guzh.uk/weather/): a calm, paid weather app for iPhone and Mac (App Store) and Android (Google Play). Drag your thumb through the hours to see exactly when the rain starts and stops. Ten days ahead, up to ten saved places. One payment, no subscription, no ads, no account, no tracking.
+- [Always Weather privacy policy](https://guzh.uk/weather/privacy/): the app's privacy policy. Approximate location only, rounded to about a kilometre before it leaves the phone; saved places and settings stay on the phone.
+- [Always Weather help and contact](https://guzh.uk/weather/support/): help with the app. Email apps@guzh.uk.
+
+## Elsewhere
+
+- [LinkedIn](https://www.linkedin.com/in/pavelguzhikov/)
+- [GitHub](https://github.com/xternal)
+- [Substack](https://guzhikov.substack.com/)

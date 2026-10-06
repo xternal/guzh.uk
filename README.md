@@ -7,7 +7,7 @@ the light/dark switcher). Deploy the repo root as-is on any static host.
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/` · `/weather/` · `/weather/privacy/` |
+| Pages | `/` · `/weather/` · `/weather/privacy/` · `/weather/support/` |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images |
 | Build | none |
 
@@ -28,6 +28,9 @@ assets/
   weather/              app icon, three screenshots and the OG card for the app pages
 robots.txt
 sitemap.xml
+llms.txt                plain-text summary of who Pavel is and what each page is, for AI
+                        search tools (llmstxt.org) — hand-written from the copy on / and
+                        /weather/, so update it when that copy changes
 tools/make-og.sh        regenerates assets/og.png — run it if the headline, the lead line
                         or the portrait treatment changes
 tools/make-tz.sh        regenerates the packed timezone->coordinates table inside index.html
