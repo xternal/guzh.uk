@@ -22,6 +22,33 @@
 <meta name="twitter:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <meta name="twitter:image" content="https://guzh.uk/assets/og.png">
 
+<!-- sameAs is the machine-readable twin of the "Elsewhere" links in the footer:
+     it is how search engines and AI answers tie those profiles to this page.
+     Add or remove a profile in both places. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": "https://guzh.uk/",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Pavel Guzhikov",
+    "url": "https://guzh.uk/",
+    "image": "https://guzh.uk/assets/pavel-web.png",
+    "email": "mailto:pavel@guzh.uk",
+    "description": "Builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum.",
+    "homeLocation": {"@type": "Place", "name": "London, United Kingdom"},
+    "sameAs": [
+      "https://www.linkedin.com/in/pavelguzhikov/",
+      "https://github.com/xternal",
+      "https://guzhikov.substack.com/",
+      "https://www.facebook.com/pavel.guzhikov/",
+      "https://instagram.com/xternal"
+    ]
+  }
+}
+</script>
+
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
@@ -428,6 +455,11 @@ img{max-width:100%}
   .project-list{grid-template-columns:minmax(0,1fr);row-gap:22px}
   .contact{flex-direction:column;align-items:flex-start;gap:32px;margin-top:88px}
 }
+/* five links need ~390px in a row; below that, wrap them three and two
+   rather than leave the last one alone on its own line */
+@media (max-width:440px){
+  .social{display:grid;grid-template-columns:repeat(3,max-content);justify-items:start;gap:14px 20px}
+}
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:0.01ms !important}
 }
@@ -572,6 +604,7 @@ img{max-width:100%}
     <div class="contact-right">
       <nav class="social" aria-label="Elsewhere">
         <a href="https://www.linkedin.com/in/pavelguzhikov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/xternal" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://guzhikov.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>
         <a href="https://www.facebook.com/pavel.guzhikov/" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://instagram.com/xternal" target="_blank" rel="noopener noreferrer">Instagram</a>
