@@ -46,7 +46,7 @@ magick -size 1200x630 xc:'#F1EFE9' \
   -annotate +72+310 'Zero to one, four times. Two exits. One unicorn.' \
   -annotate +72+344 'Still an unfulfilled desire to build things that matter.' \
   -fill '#8B857A' -pointsize 19 \
-  -annotate +72+520 'Pavel Guzhikov · London, United Kingdom · guzh.uk' \
+  -annotate +72+520 'Pavel Guzhikov, London, guzh.uk' \
   assets/og.png
 
 echo "wrote assets/og.png ($(magick identify -format '%wx%h' assets/og.png))"
