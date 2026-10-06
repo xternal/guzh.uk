@@ -22,6 +22,42 @@
 <meta name="twitter:description" content="A calm, paid weather app. No ads, no account, no tracking.">
 <meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
 
+<!-- The machine-readable twin of the two store pills and the line under them: the same
+     platforms, the same stores, the same UK prices. The "Once" figure further down repeats the
+     prices too, so change a price or a store in all three places. SoftwareApplication rather
+     than MobileApplication, because one of the platforms is the Mac. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Always Weather",
+  "url": "https://guzh.uk/weather/",
+  "image": "https://guzh.uk/assets/weather/icon.png",
+  "description": "A calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.",
+  "operatingSystem": "iOS, macOS, Android",
+  "applicationCategory": "WeatherApplication",
+  "author": {"@type": "Organization", "name": "Empatiq Limited"},
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "App Store, for iPhone and Mac",
+      "url": "https://apps.apple.com/gb/app/always-weather/id6817032365",
+      "price": "3.99",
+      "priceCurrency": "GBP",
+      "eligibleRegion": "GB"
+    },
+    {
+      "@type": "Offer",
+      "name": "Google Play, for Android",
+      "url": "https://play.google.com/store/apps/details?id=com.empatiq.weather",
+      "price": "3.59",
+      "priceCurrency": "GBP",
+      "eligibleRegion": "GB"
+    }
+  ]
+}
+</script>
+
 <link rel="icon" href="/assets/weather/icon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/weather/icon.png">
 <meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
