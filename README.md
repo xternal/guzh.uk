@@ -51,12 +51,13 @@ to sit beside. It is reference material, it does not belong on the website, and 
 plan Pages requires a public repo, where anything committed is publicly browsable whether or not it
 is served. It is not itself a git repo, so Drive is the only copy — leave it there.
 
-## The app pages — `/weather/` and `/weather/privacy/`
+## The app pages — `/weather/`, `/weather/privacy/` and `/weather/support/`
 
-`/weather/` is the public page for **Always Weather**, the paid Android weather app
-(`~/dev/always_weather`). `/weather/privacy/` is the privacy policy, which is the URL both
+`/weather/` is the public page for **Always Weather**, the paid weather app for iPhone, Mac and
+Android (`~/dev/always_weather`). `/weather/privacy/` is the privacy policy, which is the URL both
 Google Play and App Store Connect require before an app can be submitted — it must be a public
-web page, not a PDF, reachable without a login.
+web page, not a PDF, reachable without a login. `/weather/support/` is the help and contact page,
+the support URL the App Store requires.
 
 - **The copy is not written here, and the two documents are not even retyped here.** The bodies
   of `/weather/privacy/` and `/weather/support/` are *generated* from `store/privacy-policy.md`
@@ -103,10 +104,20 @@ web page, not a PDF, reachable without a login.
   Notes below give.
 - The home page reaches these pages from the **"Things you can open"** row above its contact
   block (Uzum, tCalendar, Always Weather) — the only link into `/weather/` from guzh.uk itself.
-  Move or rename the page and that link needs changing with it.
-- The pages deliberately carry **no store badge**: the app is not on either store yet, and a badge
-  that links nowhere is worse than a sentence that says so. Replace the "Coming to Google Play"
-  pill with the real listing link at launch.
+  Move or rename the page and that link needs changing with it. Its one-line description names
+  the same platforms as `/weather/`, so add or drop a platform there too.
+- **The store links are two pills** in the `/weather/` hero: "On the App Store for iPhone and
+  Mac" and "On Google Play for Android", each linking to its store listing. The line under them
+  gives each store's UK price — £3.99 once on the App Store, for iPhone and Mac together, and
+  £3.59 on Google Play — and says each store shows your local price. They are text links, not the
+  stores' badge artwork.
+- **Each page carries JSON-LD in its `<head>`**, which is outside the generated region, so
+  `make-weather-pages.py` never touches it. `/weather/` describes the app as a
+  `SoftwareApplication` (not `MobileApplication`, because one platform is the Mac) with one
+  `Offer` per store. The privacy and support pages are plain `WebPage`s that are `isPartOf`
+  `/weather/`, and say only what their `<head>` already says, so regenerating a body can't leave
+  them out of date. **A price lives in three places on `/weather/`** — the line under the pills,
+  the "Once" figure and the JSON-LD `offers` — so change all three together.
 
 ## Local preview
 
