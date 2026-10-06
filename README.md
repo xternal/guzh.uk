@@ -1,14 +1,14 @@
 # guzh.uk
 
 Personal one-pager for Pavel Guzhikov, plus the pages for the Always Weather app. Hand-written
-static HTML + CSS. No build step, no framework, and a little JavaScript (the copyright year, and
-the light/dark switcher). Deploy the repo root as-is on any static host.
+static HTML + CSS. No build step, no framework, and a little JavaScript (the copyright year, the
+light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-is on any static host.
 
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
 | Pages | `/`, `/weather/`, `/weather/privacy/`, `/weather/support/` |
-| Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images |
+| Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
 ## Files
@@ -251,6 +251,26 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   tried across the headline, stat figures, block headings and the closing line, and taken back out:
   it read as someone else's page. Geist also renders the OG card, so page and link preview agree.
   Self-host the two weights if you want to remove the third-party request.
+- **Visitor numbers** come from Cloudflare Web Analytics (dashboard: Analytics & Logs → Web
+  Analytics → guzh.uk): visits and page views per page, referrers, countries, devices and page
+  speed. It sets no cookies and stores nothing on the reader's device, so UK law needs no consent
+  banner for it. Google Analytics was considered and turned down for three reasons. It needs an
+  opt-in banner in the UK: the statistics exemption that started on 5 February 2026 only covers a
+  provider that works purely for you, and Google also uses the data for its own purposes. It is
+  ~155 KB gzipped, ten times the home page's own HTML. And it would sit badly next to the "Zero ads,
+  accounts and trackers" line on `/weather/`.
+
+  The beacon is a small inline script just before `</body>` on all four pages, holding the same
+  token (not a secret; it is in the page source by design). It only loads when the hostname is
+  `guzh.uk`, so a local preview never adds visits. A new page needs the same script copied in.
+  Each footer says, in one line, that visits are counted this way. Keep that line: it is what keeps
+  the counter honest next to the app's no-trackers promise, and the privacy policy itself is
+  generated from the app repo and covers only the app.
+
+  The Google Play pill carries `utm_source=guzh.uk&utm_campaign=weather_page`, which Play Console
+  reports as a tracked channel. App Store Connect needs nothing: it lists guzh.uk under its web
+  referrers on its own. Search Console has `guzh.uk` as a domain property, verified by a
+  `google-site-verification` TXT record at GoDaddy; deleting that record un-verifies it.
 - **Light and dark** both ship, with an Auto / Light / Dark switcher in the masthead. The
   resolution order is: an explicit choice, else the sun where the reader is, else
   `prefers-color-scheme`. A choice pins `data-theme` on `<html>`; Auto clears it and recomputes.
