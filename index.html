@@ -609,7 +609,7 @@ img{max-width:100%}
         <a href="https://www.facebook.com/pavel.guzhikov/" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://instagram.com/xternal" target="_blank" rel="noopener noreferrer">Instagram</a>
       </nav>
-      <div class="colophon">© <span id="year">2026</span> Pavel Guzhikov, guzh.uk</div>
+      <div class="colophon">© <span id="year">2026</span> Pavel Guzhikov, guzh.uk<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
       <script>
 document.getElementById("year").textContent=new Date().getFullYear();
 
@@ -817,5 +817,18 @@ document.getElementById("year").textContent=new Date().getFullYear();
   </footer>
 
 </div>
+
+<script>
+/* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
+   the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
+   The same token is on all four pages; see "Visitor numbers" in the README. */
+if (location.hostname === "guzh.uk") (function(){
+  var s = document.createElement("script");
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
+  document.body.appendChild(s);
+})();
+</script>
+
 </body>
 </html>
