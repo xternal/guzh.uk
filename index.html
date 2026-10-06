@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Pavel Guzhikov — I build and run companies</title>
-<meta name="description" content="Pavel Guzhikov — builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
+<title>Pavel Guzhikov: I build and run companies</title>
+<meta name="description" content="Pavel Guzhikov, builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <link rel="canonical" href="https://guzh.uk/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guzh.uk/">
 <meta property="og:site_name" content="Pavel Guzhikov">
-<meta property="og:title" content="Pavel Guzhikov — I build and run companies">
+<meta property="og:title" content="Pavel Guzhikov: I build and run companies">
 <meta property="og:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <meta property="og:image" content="https://guzh.uk/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Pavel Guzhikov — I build and run companies.">
+<meta property="og:image:alt" content="Pavel Guzhikov: I build and run companies.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pavel Guzhikov — I build and run companies">
+<meta name="twitter:title" content="Pavel Guzhikov: I build and run companies">
 <meta name="twitter:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <meta name="twitter:image" content="https://guzh.uk/assets/og.png">
 
@@ -480,7 +480,7 @@ img{max-width:100%}
     <div class="masthead-meta">
       <div class="mode" role="group" aria-label="Colour mode">
         <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto">
-          <span class="visually-hidden">Auto — follow the sun</span>
+          <span class="visually-hidden">Auto: follow the sun</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
             <circle cx="12" cy="12" r="8.6"/>
             <path d="M12 3.4a8.6 8.6 0 0 1 0 17.2z" fill="currentColor" stroke="none"/>
@@ -514,7 +514,7 @@ img{max-width:100%}
 
         <p class="body-copy">Zero-to-one, then scale. Day-one startups to heritage brands. Margin, growth and retention are the only&nbsp;scoreboard I care about. Public value is now on the same line.</p>
 
-        <p class="body-copy">I can hold the product argument, the go-to-market argument and the technical one at the same time — which is what building in a market with no incumbents forces on you. I go to the warehouse and the call centre before I look at the dashboard, because the dashboard is downstream of things nobody wrote down.</p>
+        <p class="body-copy">I can hold the product argument, the go-to-market argument and the technical one at the same time, which is what building in a market with no incumbents forces on you. I go to the warehouse and the call centre before I look at the dashboard, because the dashboard is downstream of things nobody wrote down.</p>
 
         <p class="body-copy">Twenty years of building, and still in the trenches: a mobile messenger in 2005, national payment infrastructure in 2022, and whatever is hard next.</p>
       </div>
@@ -547,7 +547,7 @@ img{max-width:100%}
       </div>
       <div class="stat">
         <div class="stat-figure">4</div>
-        <div class="stat-label">companies founded from zero — two of them acquired</div>
+        <div class="stat-label">companies founded from zero, two of them acquired</div>
       </div>
       <div class="stat">
         <div class="stat-figure">1</div>
@@ -561,17 +561,17 @@ img{max-width:100%}
 
     <section class="blocks">
       <article class="block">
-        <div class="block-index">01 — Uzum</div>
+        <div class="block-index">01 Uzum</div>
         <h2>The unicorn</h2>
         <p>Founding team at Uzbekistan’s first unicorn: fintech, lending, marketplace, payments, cards, and the data culture underneath them. Millions of users and 1000+ employees in two years, built from nothing in a market with no digital infrastructure and a regulator in every room.</p>
       </article>
       <article class="block">
-        <div class="block-index">02 — Before that</div>
+        <div class="block-index">02 Before that</div>
         <h2>Four from zero</h2>
         <p>Founded and sold Worki, Russia’s fastest-growing jobs marketplace (acquired by Mail.Ru Group, 2019). Co-founded Dengi Vpered, earned-wage access backed by Target Global (sold). Fintech products with 100+ banks. A multi-channel mobile messenger in 2005, three years before the category had a name.</p>
       </article>
       <article class="block">
-        <div class="block-index">03 — Now</div>
+        <div class="block-index">03 Now</div>
         <h2>Hard and consequential</h2>
         <p>London-based. Most interested in problems where the technology is genuinely hard, the deployment is political and the blast radius is national: sovereign infrastructure, public systems, defence and dual-use, AI in the public interest.</p>
       </article>
@@ -634,11 +634,11 @@ document.getElementById("year").textContent=new Date().getFullYear();
 
     var auto = document.querySelector('.mode-btn[data-mode="auto"]'), label = "Auto";
     if (r.mode === "auto") {
-      if (!r.sun) label = "Auto — following your system";
-      else if (r.sun.polar) label = "Auto — " + (r.sun.polar === "night" ? "polar night" : "midnight sun");
+      if (!r.sun) label = "Auto: following your system";
+      else if (r.sun.polar) label = "Auto: " + (r.sun.polar === "night" ? "polar night" : "midnight sun");
       else label = r.theme === "light"
-        ? "Auto — light until sunset " + clock(r.sun.sunset)
-        : "Auto — dark until sunrise " + clock(r.sun.sunrise);
+        ? "Auto: light until sunset " + clock(r.sun.sunset)
+        : "Auto: dark until sunrise " + clock(r.sun.sunrise);
     }
     auto.setAttribute("title", label);
     auto.querySelector(".visually-hidden").textContent = label;
@@ -777,7 +777,7 @@ document.getElementById("year").textContent=new Date().getFullYear();
     out.textContent=n.toLocaleString();
     note.textContent=line(n);
     btn.setAttribute("data-on", n>0 ? "true" : "false");
-    btn.setAttribute("aria-label","Like — "+n.toLocaleString()+(n===1?" like":" likes"));
+    btn.setAttribute("aria-label","Like, "+n.toLocaleString()+(n===1?" like":" likes"));
   }
 
   btn.addEventListener("click",function(){
