@@ -27,7 +27,9 @@ assets/
   apple-touch-icon.png  180x180
   weather/              app icon, three screenshots and the OG card for the app pages
 robots.txt
-sitemap.xml
+sitemap.xml             the four pages, each with a <lastmod> date — when a page's copy
+                        changes, set its date to that day. Google ignores changefreq and
+                        priority, and stops trusting lastmod once the dates go stale
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
                         search tools (llmstxt.org) — hand-written from the copy on / and
                         /weather/, so update it when that copy changes
