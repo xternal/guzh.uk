@@ -7,7 +7,7 @@ the light/dark switcher). Deploy the repo root as-is on any static host.
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/` · `/weather/` · `/weather/privacy/` |
+| Pages | `/`, `/weather/`, `/weather/privacy/`, `/weather/support/` |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images |
 | Build | none |
 
