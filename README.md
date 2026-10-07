@@ -269,8 +269,15 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 
   The Google Play pill carries `utm_source=guzh.uk&utm_campaign=weather_page`, which Play Console
   reports as a tracked channel. App Store Connect needs nothing: it lists guzh.uk under its web
-  referrers on its own. Search Console has `guzh.uk` as a domain property, verified by a
-  `google-site-verification` TXT record at GoDaddy; deleting that record un-verifies it.
+  referrers on its own.
+
+  Search Console has `guzh.uk` as a domain property, owned by xternal.p@gmail.com and verified on
+  17 Sept 2026 through a DNS record at GoDaddy. Google re-checks that record, so it has to stay.
+  The two `google-site-verification` TXT records there are *not* it: they belong to hi@guzh.uk
+  and empatiqlimited@gmail.com, which are no longer Search Console owners, and Search Console
+  lists them as unused tokens. Leave them anyway. Google shares tokens between its services, and
+  the Empatiq one may still verify the domain for the Play Console. `url4855.guzh.uk` is a
+  SendGrid link-tracking subdomain, so the 404 Search Console reports for it is expected.
 - **Light and dark** both ship, with an Auto / Light / Dark switcher in the masthead. The
   resolution order is: an explicit choice, else the sun where the reader is, else
   `prefers-color-scheme`. A choice pins `data-theme` on `<html>`; Auto clears it and recomputes.
