@@ -26,6 +26,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: PROBE (temporary)
+        continue-on-error: true
+        run: |
+          F=https://guzhikov.substack.com/feed
+          A=https://guzhikov.substack.com/api/v1/archive?sort=new\&limit=5
+          B="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+          try() { echo "== $1"; curl -s -o /tmp/b -D /tmp/h -w "%{http_code}\n" "${@:2}"; grep -iE "^(server|cf-mitigated|content-type):" /tmp/h; head -c 160 /tmp/b | tr '\n' ' '; echo; }
+          try "feed, own UA"      -A "guzh.uk writing list (+https://guzh.uk/)" "$F"
+          try "feed, curl UA"     "$F"
+          try "feed, browser UA"  -A "$B" -H "Accept: application/rss+xml,application/xml;q=0.9,*/*;q=0.8" -H "Accept-Language: en-GB,en;q=0.9" "$F"
+          try "archive, own UA"   -A "guzh.uk writing list (+https://guzh.uk/)" "$A"
+          try "archive, browser"  -A "$B" -H "Accept: application/json" "$A"
+          try "substack.com feed" -A "$B" "https://substack.com/@guzhikov/feed"
+          curl -s https://ipinfo.io/org; echo
+
       - name: Copy the newest posts from Substack
         run: python3 tools/make-writing.py
 
