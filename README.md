@@ -105,7 +105,9 @@ the support URL the App Store requires.
   everywhere. Both pages still declare the dark palette twice, identically, for the reason the
   Notes below give.
 - The home page reaches these pages from the **"Things you can open"** row above its contact
-  block (Uzum, tCalendar, Always Weather) — the only link into `/weather/` from guzh.uk itself.
+  block (Uzum, Agent Hands, tCalendar, Always Weather) — the only link into `/weather/` from
+  guzh.uk itself. Agent Hands links to its investor pitch at `agenthands.cc/pitch/`, which is
+  noindex there; `llms.txt` points crawlers at the public `agenthands.cc` instead.
   Move or rename the page and that link needs changing with it. Its one-line description names
   the same platforms as `/weather/`, so add or drop a platform there too.
 - **The store links are two pills** in the `/weather/` hero: "On the App Store for iPhone and
