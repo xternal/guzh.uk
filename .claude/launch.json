@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "guzh.uk",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8788", "--bind", "127.0.0.1"],
-      "port": 8788
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "exec python3 -m http.server \"${PORT:-8788}\" --bind 127.0.0.1"],
+      "port": 8788,
+      "autoPort": true
     }
   ]
 }

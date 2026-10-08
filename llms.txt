@@ -8,6 +8,7 @@ Twenty years of building, from a multi-channel mobile messenger in 2005 to natio
 - Before that: founded and sold Worki, Russia's fastest-growing jobs marketplace (acquired by Mail.Ru Group, 2019). Co-founded Dengi Vpered, earned-wage access backed by Target Global (sold). Fintech products with 100+ banks.
 - Now: most interested in problems where the technology is genuinely hard, the deployment is political and the blast radius is national: sovereign infrastructure, public systems, defence and dual-use, AI in the public interest.
 - Building now: [Agent Hands](https://agenthands.cc/), which lets any AI hire a person nearby for a real-world task. The money is locked before anyone sees the task and paid in USDC once the proof is accepted.
+- Also building, as a citizen: [Public Ledger](https://ledgergov.uk/), an open P&L of the UK state that shows where public money comes from, where it goes and what every political promise would cost, with each number linked to its official source. And [Borough Book](https://boroughbook.uk/), the same idea for one London borough: where your council tax goes in Hammersmith & Fulham, the council's budget, both parties' pledges and every payment over £500. Both are independent public alphas.
 
 Contact: pavel@guzh.uk
 
