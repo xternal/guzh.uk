@@ -380,14 +380,17 @@ img{max-width:100%}
   margin:0;padding:0;list-style:none;
 }
 .project{display:flex;flex-direction:column;gap:7px}
-.project a{
+.project > a{
   width:fit-content;
   font-size:17px;font-weight:500;letter-spacing:-.015em;
   border-bottom:1px solid var(--underline);padding-bottom:2px;
   transition:color 160ms ease,border-color 160ms ease;
 }
-.project a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.project > a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .project p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-2);max-width:30ch;text-wrap:pretty}
+/* a link inside a description, like Agent Hands' "pitch" */
+.project p a{border-bottom:1px solid var(--underline);transition:color 160ms ease,border-color 160ms ease}
+.project p a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 
 /* ---------- contact ---------- */
 .contact{
@@ -585,8 +588,8 @@ img{max-width:100%}
           <p>Marketplace, fintech and payments, built from zero in a market that had none.</p>
         </li>
         <li class="project">
-          <a href="https://agenthands.cc/pitch/" target="_blank" rel="noopener noreferrer">Agent Hands</a>
-          <p>The pitch: any AI can hire a person nearby for a real-world task, paid in USDC once the proof is accepted.</p>
+          <a href="https://agenthands.cc/" target="_blank" rel="noopener noreferrer">Agent Hands</a>
+          <p>Any AI can hire a person nearby for a real-world task, paid in USDC once the proof is accepted. Read the <a href="https://agenthands.cc/pitch/" target="_blank" rel="noopener noreferrer">pitch</a>.</p>
         </li>
         <li class="project">
           <a href="https://t.me/tcalendar_bot/app" target="_blank" rel="noopener noreferrer">tCalendar</a>
