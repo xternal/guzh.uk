@@ -43,6 +43,10 @@ tools/make-weather-assets.sh
 tools/make-weather-pages.py
                         re-renders the policy and support page bodies from the Always Weather
                         repo's store/*.md — run it whenever that copy changes
+tools/make-writing.py   copies the three newest Substack posts into the "Writing" block on /
+                        — run daily by .github/workflows/writing.yml, see below
+.github/workflows/writing.yml
+                        runs make-writing.py every morning and commits the result if it changed
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 ```
@@ -52,6 +56,38 @@ this repo. It stayed in the Google Drive `_git_` folder as `guzh.uk-handoff/`, w
 to sit beside. It is reference material, it does not belong on the website, and on a free GitHub
 plan Pages requires a public repo, where anything committed is publicly browsable whether or not it
 is served. It is not itself a git repo, so Drive is the only copy — leave it there.
+
+## Writing — the Substack posts on `/`
+
+The home page's **"Writing"** block shows the three newest posts from
+`guzhikov.substack.com`, as plain HTML in the page's own type. Substack's own embed was ruled out:
+it is an iframe in Substack's styling that can't follow the page's fonts or dark mode, and it sets
+year-long cookies and loads Sentry and a dozen Substack scripts, which would break the footer's
+"without cookies or tracking you".
+
+- `tools/make-writing.py` reads `https://guzhikov.substack.com/feed` and rewrites only the region
+  between `<!-- BEGIN generated from the Substack feed … -->` and `<!-- END generated -->`. The
+  section around it, the "All posts on Substack" and "New posts by email" links, and the CSS are
+  hand-written. When the posts change it also sets the home page's `<lastmod>` in `sitemap.xml`
+  to that day. Run it by hand with `./tools/make-writing.py`, or `--feed=file.xml` for a saved copy.
+- **Substack's Cloudflare turns GitHub's machines away** (a "Just a moment..." challenge and a 403,
+  whatever the user agent; tested 8 Oct 2026). So when the feed refuses, the script reads it
+  through [rss2json](https://rss2json.com), a feed reader Substack does serve, which returns the
+  same items as JSON (no key needed at one request a day). From a home connection the feed answers
+  directly and rss2json is never asked; `--relay` forces the rss2json path to try it. If rss2json
+  ever goes, the workflow fails and the page keeps the last posts it had.
+- `.github/workflows/writing.yml` runs it at 06:17 UTC every day (07:17 BST, 06:17 GMT in winter)
+  and commits to `main` only when something changed, then asks GitHub Pages for a build. After a
+  new post, **Actions → Writing → Run workflow** puts it up straight away. A pull request that
+  touches the script gets a dry run against the live feed.
+- **Hiding a post:** add the slug at the end of its URL to `SKIP` in the script. It stays on
+  Substack, it just never appears here. One is there already: "They Washed the Pavement by
+  Morning", whose subtitle is "A bit with 18+ photo".
+- Links are only ever written to `https://guzhikov.substack.com/p/…`, whatever the feed holds,
+  and every title and subtitle is HTML-escaped. Long subtitles are cut at 240 characters and the
+  CSS shows three lines at most.
+- GitHub turns scheduled workflows off after 60 days without a commit in the repo. A quiet spell
+  of that length means re-enabling it on the Actions tab.
 
 ## The app pages — `/weather/`, `/weather/privacy/` and `/weather/support/`
 

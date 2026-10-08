@@ -1,0 +1,52 @@
+# Copies the newest Substack posts onto the home page every morning (tools/make-writing.py) and
+# commits the change if there is one. On a pull request that touches the script it only does a
+# dry run, so a change to it is tried against the live feed from GitHub's machines before merging.
+name: Writing
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # 06:17 UTC: 07:17 BST in summer, 06:17 GMT in winter
+  workflow_dispatch:        # Actions tab, "Run workflow": after a new post, to skip the wait
+  pull_request:
+    paths:
+      - tools/make-writing.py
+      - .github/workflows/writing.yml
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: writing
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Substack's Cloudflare refuses GitHub's machines, so this goes through rss2json; the script
+      # says so in the log when it does.
+      - name: Copy the newest posts from Substack
+        run: python3 tools/make-writing.py
+
+      - name: Show what changed
+        run: git diff --stat
+
+      - name: Commit and publish
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            echo "No new posts."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Writing: newest Substack posts on the home page"
+          git push
+          # A push made with this workflow's token may not start a Pages build by itself, so ask
+          # for one.
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent
