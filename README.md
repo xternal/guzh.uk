@@ -70,6 +70,12 @@ year-long cookies and loads Sentry and a dozen Substack scripts, which would bre
   section around it, the "All posts on Substack" and "New posts by email" links, and the CSS are
   hand-written. When the posts change it also sets the home page's `<lastmod>` in `sitemap.xml`
   to that day. Run it by hand with `./tools/make-writing.py`, or `--feed=file.xml` for a saved copy.
+- **Substack's Cloudflare turns GitHub's machines away** (a "Just a moment..." challenge and a 403,
+  whatever the user agent; tested 8 Oct 2026). So when the feed refuses, the script reads it
+  through [rss2json](https://rss2json.com), a feed reader Substack does serve, which returns the
+  same items as JSON (no key needed at one request a day). From a home connection the feed answers
+  directly and rss2json is never asked; `--relay` forces the rss2json path to try it. If rss2json
+  ever goes, the workflow fails and the page keeps the last posts it had.
 - `.github/workflows/writing.yml` runs it at 06:17 UTC every day (07:17 BST, 06:17 GMT in winter)
   and commits to `main` only when something changed, then asks GitHub Pages for a build. After a
   new post, **Actions → Writing → Run workflow** puts it up straight away. A pull request that
