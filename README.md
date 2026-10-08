@@ -105,8 +105,10 @@ the support URL the App Store requires.
   everywhere. Both pages still declare the dark palette twice, identically, for the reason the
   Notes below give.
 - The home page reaches these pages from the **"Things you can open"** row above its contact
-  block (Uzum, Agent Hands, tCalendar, Always Weather) — the only link into `/weather/` from
-  guzh.uk itself. Agent Hands' name links to `agenthands.cc` and the word "pitch" in its
+  block (Uzum, Agent Hands, Public Ledger, Borough Book, tCalendar, Always Weather: six, so two
+  full rows of three on desktop) — the only link into `/weather/` from guzh.uk itself. Public
+  Ledger links to `ledgergov.uk` and Borough Book to `boroughbook.uk`, side by side because
+  Borough Book is the local version of the same idea; `llms.txt` names both. Agent Hands' name links to `agenthands.cc` and the word "pitch" in its
   description to the investor pitch at `agenthands.cc/pitch/`, which is noindex there; `llms.txt`
   points crawlers at the public `agenthands.cc` only.
   Move or rename the page and that link needs changing with it. Its one-line description names
