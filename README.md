@@ -46,7 +46,9 @@ tools/make-weather-pages.py
 tools/make-writing.py   copies the three newest Substack posts into the "Writing" block on /
                         — run daily by .github/workflows/writing.yml, see below
 .github/workflows/writing.yml
-                        runs make-writing.py every morning and commits the result if it changed
+                        runs make-writing.py twice a day and commits the result if it changed
+tools/publish-writing.sh
+                        the same from a Mac, for when the workflow can't reach Substack
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 ```
@@ -74,12 +76,20 @@ year-long cookies and loads Sentry and a dozen Substack scripts, which would bre
   whatever the user agent; tested 8 Oct 2026). So when the feed refuses, the script reads it
   through [rss2json](https://rss2json.com), a feed reader Substack does serve, which returns the
   same items as JSON (no key needed at one request a day). From a home connection the feed answers
-  directly and rss2json is never asked; `--relay` forces the rss2json path to try it. If rss2json
-  ever goes, the workflow fails and the page keeps the last posts it had.
-- `.github/workflows/writing.yml` runs it at 06:17 UTC every day (07:17 BST, 06:17 GMT in winter)
-  and commits to `main` only when something changed, then asks GitHub Pages for a build. After a
-  new post, **Actions → Writing → Run workflow** puts it up straight away. A pull request that
-  touches the script gets a dry run against the live feed.
+  directly and rss2json is never asked; `--relay` forces the rss2json path to try it.
+- **rss2json is not always able to read the feed.** On the morning of 9 Oct 2026 it answered
+  "Internal error" and "This feed is being processed, please wait" (both a 500) for Substack's
+  feed for several minutes while reading other feeds fine, then recovered. So the script gives it
+  five tries over about eight minutes. If all five fail the run goes red, the page keeps the posts
+  it has, and the log says to run **`./tools/publish-writing.sh`** on a Mac: it reads the feed
+  directly, works on `origin/main` in a throwaway worktree (so it never touches the branch checked
+  out here) and pushes only if the posts changed.
+- `.github/workflows/writing.yml` runs it at 06:17 and 16:17 UTC every day (07:17 and 17:17 BST,
+  an hour earlier in GMT) and commits to `main` only when something changed, then asks GitHub
+  Pages for a build. GitHub runs schedules on a best-effort basis and skipped the very first one
+  (9 Oct 2026), hence the afternoon run. After a new post, **Actions → Writing → Run workflow**
+  puts it up straight away. A pull request that touches the script gets a dry run against the
+  live feed.
 - **Hiding a post:** add the slug at the end of its URL to `SKIP` in the script. It stays on
   Substack, it just never appears here. One is there already: "They Washed the Pavement by
   Morning", whose subtitle is "A bit with 18+ photo".
