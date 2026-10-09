@@ -1,11 +1,14 @@
-# Copies the newest Substack posts onto the home page every morning (tools/make-writing.py) and
+# Copies the newest Substack posts onto the home page twice a day (tools/make-writing.py) and
 # commits the change if there is one. On a pull request that touches the script it only does a
 # dry run, so a change to it is tried against the live feed from GitHub's machines before merging.
 name: Writing
 
 on:
   schedule:
+    # GitHub runs schedules on a best-effort basis and sometimes skips one (it skipped the very
+    # first, on 9 Oct 2026), so there is an afternoon run to catch a missed morning.
     - cron: "17 6 * * *"   # 06:17 UTC: 07:17 BST in summer, 06:17 GMT in winter
+    - cron: "17 16 * * *"  # 16:17 UTC: 17:17 BST in summer, 16:17 GMT in winter
   workflow_dispatch:        # Actions tab, "Run workflow": after a new post, to skip the wait
   pull_request:
     paths:

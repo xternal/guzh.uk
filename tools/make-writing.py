@@ -33,6 +33,7 @@ import json
 import pathlib
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -41,6 +42,10 @@ import zoneinfo
 
 FEED = "https://guzhikov.substack.com/feed"
 RELAY = "https://api.rss2json.com/v1/api.json?rss_url=" + urllib.parse.quote(FEED, safe="")
+# rss2json answers "Internal error" or "This feed is being processed, please wait" (both a 500)
+# while it re-reads a feed, and Substack sometimes turns it away too. So it gets five tries over
+# about eight minutes before the run gives up.
+RELAY_WAITS = (30, 60, 120, 240)
 POSTS = "https://guzhikov.substack.com/p/"
 COUNT = 3
 SITE = pathlib.Path(__file__).resolve().parent.parent
@@ -77,12 +82,32 @@ def items():
                 yield (item.findtext("link"), item.findtext("title"), item.findtext("description"),
                        email.utils.parsedate_to_datetime(item.findtext("pubDate")))
             return
-    data = json.loads(fetch(RELAY))
-    if data.get("status") != "ok":
-        raise SystemExit(f"rss2json could not read the feed: {data.get('message') or data}")
-    for item in data["items"]:
+    for item in relay()["items"]:
         published = datetime.datetime.fromisoformat(item["pubDate"]).replace(tzinfo=datetime.timezone.utc)
         yield item.get("link"), item.get("title"), item.get("description"), published
+
+
+def relay() -> dict:
+    """The feed as rss2json has it, trying again while it is busy or failing."""
+    for attempt, wait in enumerate((*RELAY_WAITS, None), start=1):
+        try:
+            data = json.loads(fetch(RELAY))
+            if data.get("status") == "ok":
+                return data
+            problem = data.get("message") or data
+        except urllib.error.HTTPError as e:
+            try:
+                problem = f"{e.code}: {json.loads(e.read()).get('message')}"
+            except ValueError:
+                problem = str(e.code)
+        except (urllib.error.URLError, TimeoutError, ValueError) as e:
+            problem = str(e)
+        if wait is None:
+            break
+        print(f"rss2json, try {attempt}: {problem}; trying again in {wait} s", file=sys.stderr)
+        time.sleep(wait)
+    raise SystemExit(f"rss2json could not read the feed after {attempt} tries ({problem}). The page "
+                     "keeps the posts it has. To publish from a Mac instead: ./tools/publish-writing.sh")
 
 
 def clean(text: str | None) -> str:
