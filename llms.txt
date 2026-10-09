@@ -15,7 +15,7 @@ Contact: pavel@guzh.uk
 ## Pages
 
 - [Pavel Guzhikov](https://guzh.uk/): the home page. Background, track record, current focus and contact details.
-- [Always Weather](https://guzh.uk/weather/): a calm, paid weather app for iPhone and Mac (App Store) and Android (Google Play). Drag your thumb through the hours to see exactly when the rain starts and stops. Ten days ahead, up to ten saved places. One payment, no subscription, no ads, no account, no tracking.
+- [Always Weather](https://guzh.uk/weather/): a calm, paid weather app for iPhone and Mac (App Store) and Android phones and Googlebooks (Google Play). Drag your thumb through the hours to see exactly when the rain starts and stops. Ten days ahead, up to ten saved places. One payment, no subscription, no ads, no account, no tracking.
 - [Always Weather privacy policy](https://guzh.uk/weather/privacy/): the app's privacy policy. Approximate location only, rounded to about a kilometre before it leaves the phone; saved places and settings stay on the phone.
 - [Always Weather help and contact](https://guzh.uk/weather/support/): help with the app. Email apps@guzh.uk.
 
