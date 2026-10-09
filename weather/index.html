@@ -37,6 +37,12 @@
   "operatingSystem": "iOS, macOS, Android",
   "applicationCategory": "WeatherApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
+  "screenshot": [
+    "https://guzh.uk/assets/weather/platform-mac.webp",
+    "https://guzh.uk/assets/weather/platform-iphone.webp",
+    "https://guzh.uk/assets/weather/platform-googlebook.webp",
+    "https://guzh.uk/assets/weather/platform-android.webp"
+  ],
   "offers": [
     {
       "@type": "Offer",
@@ -270,6 +276,24 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   border-radius:8px;box-shadow:var(--shot-shadow);
 }
 
+/* ---------- platforms: each store's laptop beside its phone ---------- */
+.platforms{margin-top:112px;display:flex;flex-direction:column;gap:20px}
+.platforms h2{margin:0;font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.2;color:var(--ink)}
+.platform-row{
+  display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);
+  gap:28px;align-items:end;margin-top:36px;
+}
+.platform-store{grid-column:1/-1;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.device{margin:0;display:flex;flex-direction:column;gap:12px}
+.device img{
+  display:block;width:100%;height:auto;
+  border-radius:10px;border:1px solid var(--rule);box-shadow:var(--shot-shadow);
+}
+.device-laptop img{aspect-ratio:var(--ratio)}
+.device-phone img{aspect-ratio:9/19.5;border-radius:18px}
+.device figcaption{font-size:13.5px;color:var(--ink-3);line-height:1.5}
+.device figcaption strong{color:var(--ink);font-weight:500}
+
 /* ---------- numbers ---------- */
 .numbers{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
@@ -361,6 +385,8 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* ---------- responsive ---------- */
 @media (max-width:860px){
+  .platform-row{grid-template-columns:minmax(0,1fr);gap:24px}
+  .device-phone{max-width:240px}
   .wrap{padding-left:24px;padding-right:24px}
   .masthead{padding-bottom:64px}
   /* one thumb again: the shots become a snapping strip that bleeds to both edges,
@@ -450,6 +476,45 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
         <img src="/assets/weather/shot-night.webp" width="600" height="1067" loading="lazy" decoding="async"
              alt="Brighton at 22:00: clear night, 14 degrees, on a dark night-blue screen. The summary reads “Dry tonight.” Below it sit the hourly bars and a “Sunrise and sunset” heading.">
       </figure>
+    </section>
+
+    <section class="platforms" aria-labelledby="platforms-heading">
+      <h2 id="platforms-heading">One forecast, on every screen you have</h2>
+      <p class="body-copy">The same forecast, the same words and the same one-thumb sweep through the hours, wherever you open it. On a wide screen the hour you're looking at sits beside sunrise, what to wear and the days ahead.</p>
+
+      <div class="platform-row">
+        <div class="platform-store">
+          <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">App Store</a>
+          <span class="availability-note">iPhone and Mac, one purchase</span>
+        </div>
+        <figure class="device device-laptop" style="--ratio:4/3">
+          <img src="/assets/weather/platform-mac.webp" width="1400" height="1050" loading="lazy" decoding="async"
+               alt="The Mac app in Sky at night: London at 20:00, 16 degrees and clear, the hourly bars on the left, and What to wear, sunrise and sunset and the nine-day forecast on the right.">
+          <figcaption><strong>Mac</strong> · Sky, after dark</figcaption>
+        </figure>
+        <figure class="device device-phone">
+          <img src="/assets/weather/platform-iphone.webp" width="520" height="1127" loading="lazy" decoding="async"
+               alt="The iPhone app in Paper: London, &ldquo;Rain from 13:00, clearing by 16:00&rdquo;, 16 degrees, a dotted temperature line over the day with rain bars at lunchtime.">
+          <figcaption><strong>iPhone</strong> · Paper</figcaption>
+        </figure>
+      </div>
+
+      <div class="platform-row">
+        <div class="platform-store">
+          <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather">Google Play</a>
+          <span class="availability-note">Android phones and Googlebooks</span>
+        </div>
+        <figure class="device device-laptop" style="--ratio:16/10">
+          <img src="/assets/weather/platform-googlebook.webp" width="1400" height="875" loading="lazy" decoding="async"
+               alt="The app on a Googlebook in Paper: the day's sentence, the hours and the days on the left, and What to wear and sunrise and sunset on the right.">
+          <figcaption><strong>Googlebook</strong> · Paper</figcaption>
+        </figure>
+        <figure class="device device-phone">
+          <img src="/assets/weather/platform-android.webp" width="520" height="1125" loading="lazy" decoding="async"
+               alt="The Android app in Sky: London at 14:00, 16 degrees and rain, on a grey-blue screen with clouds, above the hourly bars.">
+          <figcaption><strong>Android phone</strong> · Sky</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="numbers" aria-label="What you get">
