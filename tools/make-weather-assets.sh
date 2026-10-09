@@ -30,6 +30,17 @@ shot 01_sky-hours    shot-hours
 shot 02_sky-sentence shot-sentence
 shot 06_sky-night    shot-night
 
+# The platforms section: each platform's own screen as the app draws it, no store caption, from the
+# app's render tests (iPhone and Mac: apple/Tests/Baselines*; Android: the Looks' Roborazzi shots).
+# Sky and Paper, day and night, so the section also shows the two Looks.
+plat() { magick "$APP/$1" "${@:3}" -quality 82 "assets/weather/$2.webp"; }
+# The phones: the top of the page, the first screen, at the iPhone's 9:19.5.
+plat apple/Tests/Baselines-iOS/ios-paper-now.png                          platform-iphone  -gravity North -crop 804x1742+0+0 +repage -resize 520x
+plat android/look/sky/src/test/screenshots/sky_ukShowersLunch_light.png   platform-android -gravity North -crop 780x1688+0+0 +repage -resize 520x
+# The laptops: the whole window, the Mac at its 4:3 and the Googlebook's laptop window at 16:10.
+plat apple/Tests/Baselines/wide-sky-evening.png                           platform-mac        -resize 1400x
+plat android/look/paper/src/test/screenshots/paper_wide_laptop.png        platform-googlebook -resize 1400x
+
 # ---- the 1200x630 link-preview card -----------------------------------------------------------
 FONT_DIR="${TMPDIR:-/tmp}/guzh-og-fonts"
 FONT="$FONT_DIR/Geist-var.ttf"
