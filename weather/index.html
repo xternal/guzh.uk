@@ -37,6 +37,12 @@
   "operatingSystem": "iOS, macOS, Android",
   "applicationCategory": "WeatherApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
+  "screenshot": [
+    "https://guzh.uk/assets/weather/platform-mac.webp",
+    "https://guzh.uk/assets/weather/platform-iphone.webp",
+    "https://guzh.uk/assets/weather/platform-googlebook.webp",
+    "https://guzh.uk/assets/weather/platform-android.webp"
+  ],
   "offers": [
     {
       "@type": "Offer",
@@ -95,6 +101,8 @@
   --underline-accent:rgba(31,59,196,.28);
   --mode-active:rgba(23,22,19,.07);
   --shot-shadow:0 1px 2px rgba(23,22,19,.06),0 18px 40px -22px rgba(23,22,19,.42);
+  /* the drawn device frames in the platforms section */
+  --bezel:#1E1D1A;--bezel-edge:transparent;--bezel-base:#D3CEC4;--bezel-notch:#B8B2A6;--bezel-dot:#3A3833;--bezel-hole:#0B0A09;
   --grain:.05;
   --grain-blend:multiply;
 }
@@ -117,6 +125,7 @@
     --underline-accent:rgba(148,169,255,.32);
     --mode-active:rgba(239,236,228,.10);
     --shot-shadow:0 0 0 1px rgba(239,236,228,.08),0 20px 44px -24px rgba(0,0,0,.85);
+    --bezel:#0B0A09;--bezel-edge:rgba(239,236,228,.14);--bezel-base:#2A2825;--bezel-notch:#1D1B18;--bezel-dot:#2A2825;--bezel-hole:#000;
     --grain:.07;
     --grain-blend:screen;
   }
@@ -135,6 +144,7 @@
     --underline-accent:rgba(148,169,255,.32);
     --mode-active:rgba(239,236,228,.10);
     --shot-shadow:0 0 0 1px rgba(239,236,228,.08),0 20px 44px -24px rgba(0,0,0,.85);
+    --bezel:#0B0A09;--bezel-edge:rgba(239,236,228,.14);--bezel-base:#2A2825;--bezel-notch:#1D1B18;--bezel-dot:#2A2825;--bezel-hole:#000;
     --grain:.07;
     --grain-blend:screen;
 }
@@ -270,6 +280,41 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   border-radius:8px;box-shadow:var(--shot-shadow);
 }
 
+/* ---------- platforms: each store's laptop with its phone in front ---------- */
+/* Drawn frames, not the makers' device photos: flat bezels in the page's own tokens. Every size is a
+   percentage of the stage, so the pair scales as one picture down to a phone's width. */
+.platforms{margin-top:112px;display:flex;flex-direction:column;gap:20px}
+.platforms h2{margin:0;font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.2;color:var(--ink)}
+.platform-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,11fr);gap:56px;align-items:center;margin-top:48px}
+.platform-row.mirror{grid-template-columns:minmax(0,11fr) minmax(0,5fr)}
+.platform-row.mirror .platform-text{order:2}
+.platform-text{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.platform-text .platform-store{margin:0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.platform-text h3{margin:0;font-size:24px;font-weight:500;letter-spacing:-.01em;line-height:1.25;color:var(--ink)}
+.platform-text p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
+.platform-text .pill{margin-top:8px}
+.stage{position:relative;aspect-ratio:836/480}
+.stage img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.laptop{position:absolute;left:0;top:3.75%;width:76.6%}
+.mirror .laptop{left:auto;right:3.6%}
+.lid{position:relative;box-sizing:border-box;padding:1.9% 1.9% 2.2%;border-radius:20px 20px 8px 8px;
+  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
+.lid::before{content:"";position:absolute;top:.9%;left:50%;width:.8%;aspect-ratio:1;transform:translateX(-50%);
+  border-radius:50%;background:var(--bezel-dot)}
+.laptop .screen{aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#000}
+.base{position:relative;width:109.4%;margin-left:-4.7%;aspect-ratio:700/16;border-radius:0 0 14px 14px;
+  background:var(--bezel-base);box-shadow:var(--shot-shadow)}
+.base::before{content:"";position:absolute;top:0;left:50%;width:17%;height:38%;transform:translateX(-50%);
+  border-radius:0 0 8px 8px;background:var(--bezel-notch)}
+.phone{position:absolute;right:2.4%;bottom:0;width:23.4%;z-index:1}
+.mirror .phone{right:auto;left:2.4%}
+.phone .body{position:relative;box-sizing:border-box;padding:3.6%;border-radius:17%/8.2%;
+  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
+.phone .screen{aspect-ratio:9/19.5;border-radius:15%/7%;overflow:hidden;background:#000}
+.phone .body::before{content:"";position:absolute;top:3.9%;left:50%;transform:translateX(-50%);z-index:1;background:var(--bezel-hole)}
+.phone-iphone .body::before{width:27.5%;height:3.9%;border-radius:999px}
+.phone-android .body::before{width:5.1%;aspect-ratio:1;border-radius:50%}
+
 /* ---------- numbers ---------- */
 .numbers{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
@@ -361,6 +406,8 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* ---------- responsive ---------- */
 @media (max-width:860px){
+  .platform-row,.platform-row.mirror{grid-template-columns:minmax(0,1fr);gap:28px}
+  .platform-row.mirror .platform-text{order:0}
   .wrap{padding-left:24px;padding-right:24px}
   .masthead{padding-bottom:64px}
   /* one thumb again: the shots become a snapping strip that bleeds to both edges,
@@ -440,16 +487,69 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     <section class="shots" aria-label="Screenshots">
       <figure class="shot">
         <img src="/assets/weather/shot-hours.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="London at 14:00: 16 degrees and rain, above a strip of hourly bars with the 14:00 bar selected, then a “Sunrise and sunset” heading.">
+             alt="Drag through the hours: London at 14:00, 16 degrees and rain, “Rain from 13:00, clearing by 16:00.”, the hourly bars with rain under them, and What to wear below.">
       </figure>
       <figure class="shot">
-        <img src="/assets/weather/shot-sentence.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="London on Saturday at 11:00: cloudy, 14 degrees. The summary reads “Rain from 16:00, clearing by 21:00.” Below it sit the hourly bars and a “Sunrise and sunset” heading.">
+        <img src="/assets/weather/shot-next-hour.webp" width="600" height="1067" loading="lazy" decoding="async"
+             alt="Rain in the next few hours: London at 12:00, cloudy and 17 degrees, “4° warmer than yesterday.” and, from the Met Office's radar-based forecast, “Rain likely between 13:00 and 15:00.”">
       </figure>
       <figure class="shot">
         <img src="/assets/weather/shot-night.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="Brighton at 22:00: clear night, 14 degrees, on a dark night-blue screen. The summary reads “Dry tonight.” Below it sit the hourly bars and a “Sunrise and sunset” heading.">
+             alt="Calm after dark: Brighton at 22:00, a clear night at 14 degrees on a night-blue screen, “Dry tonight.”, the hourly bars, and What to wear tonight.">
       </figure>
+    </section>
+
+    <section class="platforms" aria-labelledby="platforms-heading">
+      <h2 id="platforms-heading">One forecast, on every screen you have</h2>
+      <p class="body-copy">The same forecast, the same words and the same one-thumb sweep through the hours, wherever you open it. On a wide screen the hour you're looking at sits beside sunrise, what to wear and the days ahead.</p>
+
+      <div class="platform-row">
+        <div class="platform-text">
+          <p class="platform-store">App Store</p>
+          <h3>Mac and iPhone</h3>
+          <p>One purchase covers both. Sky after dark on the Mac, Paper in your pocket: the same forecast, the same hours under your thumb.</p>
+          <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">App Store</a>
+        </div>
+        <div class="stage">
+          <div class="laptop">
+            <div class="lid"><div class="screen">
+              <img src="/assets/weather/platform-mac.webp" width="1400" height="1050" loading="lazy" decoding="async"
+                   alt="Always Weather on a Mac in Sky after dark: London at 20:00, 16 degrees on a clear night, the hourly bars on the left, and What to wear with its pictures on the right.">
+            </div></div>
+            <div class="base" aria-hidden="true"></div>
+          </div>
+          <div class="phone phone-iphone">
+            <div class="body"><div class="screen">
+              <img src="/assets/weather/platform-iphone.webp" width="520" height="1131" loading="lazy" decoding="async"
+                   alt="Always Weather on an iPhone in Paper: the row of days, then What to wear for a walk with pictures of a T-shirt, a light layer and sun cream, and sunrise and sunset.">
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="platform-row mirror">
+        <div class="platform-text">
+          <p class="platform-store">Google Play</p>
+          <h3>Android phone and Googlebook</h3>
+          <p>On a Googlebook the hours sit on the left and the days on the right. On the phone, one thumb drags you through the day.</p>
+          <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather">Google Play</a>
+        </div>
+        <div class="stage">
+          <div class="laptop">
+            <div class="lid"><div class="screen">
+              <img src="/assets/weather/platform-googlebook.webp" width="1400" height="875" loading="lazy" decoding="async"
+                   alt="Always Weather on a Googlebook in Paper: the day's sentence and the hours on the left, and What to wear with its pictures, sunrise and sunset and the days ahead on the right.">
+            </div></div>
+            <div class="base" aria-hidden="true"></div>
+          </div>
+          <div class="phone phone-android">
+            <div class="body"><div class="screen">
+              <img src="/assets/weather/platform-android.webp" width="520" height="1125" loading="lazy" decoding="async"
+                   alt="Always Weather on an Android phone in Sky: London at 14:00, 16 degrees and rain, with the hourly bars and the rain under them.">
+            </div></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="numbers" aria-label="What you get">
