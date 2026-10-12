@@ -1,0 +1,24 @@
+# Checks the colours on every pull request that touches a page or the favicon
+# (tools/check-colours.py): every text colour passes WCAG AA on each background in light and dark,
+# dark mode stays dark brown, and the two dark blocks in each page still match.
+name: Colours
+
+on:
+  pull_request:
+    paths:
+      - "**.html"
+      - favicon.svg
+      - tools/check-colours.py
+      - .github/workflows/colours.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check contrast and the dark palette
+        run: python3 tools/check-colours.py
