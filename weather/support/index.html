@@ -39,7 +39,7 @@
 <link rel="icon" href="/assets/weather/icon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/weather/icon.png">
 <meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#241F1A" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,34 +78,34 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --paper:#141311;
-    --paper-lift:#1D1B18;
-    --ink:#EFECE4;
-    --ink-2:#ABA69B;
-    --ink-3:#8F8A80;
-    --accent:#94A9FF;
-    --rule:rgba(239,236,228,.15);
-    --rule-soft:rgba(239,236,228,.10);
-    --underline:rgba(239,236,228,.24);
-    --underline-accent:rgba(148,169,255,.32);
-    --mode-active:rgba(239,236,228,.10);
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
     --grain:.07;
     --grain-blend:screen;
   }
 }
 :root[data-theme="dark"]{
     color-scheme:dark;
-    --paper:#141311;
-    --paper-lift:#1D1B18;
-    --ink:#EFECE4;
-    --ink-2:#ABA69B;
-    --ink-3:#8F8A80;
-    --accent:#94A9FF;
-    --rule:rgba(239,236,228,.15);
-    --rule-soft:rgba(239,236,228,.10);
-    --underline:rgba(239,236,228,.24);
-    --underline-accent:rgba(148,169,255,.32);
-    --mode-active:rgba(239,236,228,.10);
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
     --grain:.07;
     --grain-blend:screen;
 }
@@ -335,12 +335,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
       b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode));
     });
 
-    if (choice) {
-      var col = choice === "dark" ? "#141311" : "#F1EFE9";
-      [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
-        m.setAttribute("content", col);
-      });
-    }
+    /* see /weather/index.html: pinned, both tags take the choice; unpinned, each its own */
+    [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
+      var dark = choice ? choice === "dark" : /dark/.test(m.getAttribute("media"));
+      m.setAttribute("content", dark ? "#241F1A" : "#F1EFE9");
+    });
   }
 
   btns.forEach(function(b){

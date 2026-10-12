@@ -15,7 +15,7 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 
 ```
 index.html              the entire home page
-favicon.svg             dark square, PG wordmark
+favicon.svg             dark brown square, PG wordmark
 weather/
   index.html            Always Weather — the app's one-scroll page
   privacy/index.html    the privacy policy both app stores require   } generated bodies,
@@ -24,7 +24,8 @@ assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
   og.png                1200x630 link-preview card
-  apple-touch-icon.png  180x180
+  apple-touch-icon.png  180x180, favicon.svg drawn by `rsvg-convert -w 180 -h 180` (redraw it
+                        whenever the favicon changes)
   weather/              app icon, three screenshots and the OG card for the app pages
 robots.txt
 sitemap.xml             the four pages, each with a <lastmod> date — when a page's copy
@@ -49,6 +50,9 @@ tools/make-writing.py   copies the three newest Substack posts into the "Writing
                         runs make-writing.py twice a day and commits the result if it changed
 tools/publish-writing.sh
                         the same from a Mac, for when the workflow can't reach Substack
+tools/check-colours.py  checks contrast and the dark palette on all four pages, see Notes;
+                        run by .github/workflows/colours.yml on every pull request that
+                        touches a page
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 ```
@@ -349,6 +353,18 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 
   `theme-color` stays as two media-scoped tags for the unpinned case; once something is pinned the
   script overwrites both with the same value, so whichever one the browser matches is correct.
+  Back on Auto with nothing pinned, each tag gets its own colour again.
+- **Dark is dark brown**, Pavel's dark palette for every project since 12 Oct 2026 (chosen on
+  Ruminator.xyz): background #241F1A, the raised lift in the top corners #2E2822, text #EFE7DA,
+  body copy #C0B5A4, tertiary #A59A88, an amber accent #E2B26F, and lines in the text colour at
+  .16 and .10. The drawn laptop on `/weather/` takes #39322B for its base so it still stands off
+  the page; the bezels stay black, because the devices are. It replaced the warm charcoal #141311,
+  which read as black and put near-white text at 15.7:1, enough to glare and tire the eyes. Body
+  text is now 13.3:1: keep it about 13 and never above 14. The accent went from blue to amber so
+  nothing in the chrome has a blue cast. The browser bar (`theme-color`, in the tags and in each
+  page's switcher script), the favicon and the home-screen icon use the same #241F1A; the light
+  palette did not change. `tools/check-colours.py` fails if any of that drifts, so run it after
+  touching a colour.
 - **Following the sun** needs a latitude and longitude. They come from the IANA timezone
   (`Intl.DateTimeFormat().resolvedOptions().timeZone`) against a packed table built by
   `tools/make-tz.sh` — *not* from the geolocation API. No permission prompt, no network call,
@@ -369,16 +385,19 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 - **Contrast** is set by measurement, not by eye, and every text token clears WCAG AA at the size
   it is actually used. The tertiary grey was the problem in both palettes and was fixed in both:
 
-  | | light on #F1EFE9 | dark on #141311 |
+  | | light on #F1EFE9 | dark on #241F1A |
   |---|---|---|
-  | `--ink` headline, lead | 15.7:1 AAA | 15.7:1 AAA |
-  | `--ink-2` body copy | 7.1:1 AAA | 7.7:1 AAA |
-  | `--ink-3` place, eyebrows, colophon | 4.9:1 AA | 5.4:1 AA |
-  | `--accent` links | 7.4:1 AAA | 8.3:1 AAA |
+  | `--ink` headline, lead | 15.7:1 AAA | 13.3:1 AAA |
+  | `--ink-2` body copy | 7.1:1 AAA | 8.1:1 AAA |
+  | `--ink-3` place, eyebrows, colophon | 4.9:1 AA | 5.9:1 AA |
+  | `--accent` links | 7.4:1 AAA | 8.4:1 AAA |
+
+  On the lighter `--paper-lift` in the top corners the weakest pair is dark `--ink-3`, at 5.3:1.
 
   `--ink-3` was #8B857A (3.2:1) in light and #78736A (3.9:1) in dark — both below AA, and both
-  setting the 11.5px block eyebrows, which is where it hurt most. They are now #6C675F and #8F8A80,
-  picked along the original hue line so the warmth survives.
+  setting the 11.5px block eyebrows, which is where it hurt most. They became #6C675F and #8F8A80,
+  picked along the original hue line so the warmth survives; with the dark brown, the dark one is
+  now #A59A88.
 
   The tertiary text is necessarily closer to the body copy than it was. The hierarchy now leans on
   type rather than colour alone — 11.5px, uppercase, letter-spaced — which is the more robust place

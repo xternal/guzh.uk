@@ -52,7 +52,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#241F1A" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,40 +165,42 @@ window.Sun.apply();
 /* Dark, declared twice on purpose and deliberately kept identical:
    once for a reader whose OS asks for dark and who has not overridden it,
    once for an explicit choice from the switcher, which wins either way.
-   Edit both or the switcher and the OS will start to disagree. */
+   Edit both or the switcher and the OS will start to disagree.
+   Dark is dark brown, lifted off black so the text (13:1) does not glare;
+   tools/check-colours.py checks the contrast and that the two blocks match. */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --paper:#141311;
-    --paper-lift:#1D1B18;
-    --ink:#EFECE4;
-    --ink-2:#ABA69B;
-    --ink-3:#8F8A80;
-    --accent:#94A9FF;
-    --rule:rgba(239,236,228,.15);
-    --rule-soft:rgba(239,236,228,.10);
-    --underline:rgba(239,236,228,.24);
-    --underline-accent:rgba(148,169,255,.32);
-    --mode-active:rgba(239,236,228,.10);
-    --portrait-shadow:0 0 0 1px rgba(239,236,228,.08),0 20px 44px -24px rgba(0,0,0,.85);
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
+    --portrait-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
     --grain:.07;
     --grain-blend:screen;
   }
 }
 :root[data-theme="dark"]{
     color-scheme:dark;
-    --paper:#141311;
-    --paper-lift:#1D1B18;
-    --ink:#EFECE4;
-    --ink-2:#ABA69B;
-    --ink-3:#8F8A80;
-    --accent:#94A9FF;
-    --rule:rgba(239,236,228,.15);
-    --rule-soft:rgba(239,236,228,.10);
-    --underline:rgba(239,236,228,.24);
-    --underline-accent:rgba(148,169,255,.32);
-    --mode-active:rgba(239,236,228,.10);
-    --portrait-shadow:0 0 0 1px rgba(239,236,228,.08),0 20px 44px -24px rgba(0,0,0,.85);
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
+    --portrait-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
     --grain:.07;
     --grain-blend:screen;
 }
@@ -681,8 +683,7 @@ img{max-width:100%}
 document.getElementById("year").textContent=new Date().getFullYear();
 
 (function(){
-  var root=document.documentElement,
-      btns=[].slice.call(document.querySelectorAll(".mode-btn")),
+  var btns=[].slice.call(document.querySelectorAll(".mode-btn")),
       mq=window.matchMedia("(prefers-color-scheme: dark)"),
       timer=null;
 
@@ -710,13 +711,12 @@ document.getElementById("year").textContent=new Date().getFullYear();
     auto.setAttribute("title", label);
     auto.querySelector(".visually-hidden").textContent = label;
 
-    /* theme-color only needs overriding once something is pinned */
-    if (root.getAttribute("data-theme")) {
-      var col = r.theme === "dark" ? "#141311" : "#F1EFE9";
-      [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
-        m.setAttribute("content", col);
-      });
-    }
+    /* theme-color: pinned (by a choice or by the sun), both tags take that background;
+       unpinned, each goes back to its own, so the browser follows the OS again. */
+    [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
+      var dark = r.theme ? r.theme === "dark" : /dark/.test(m.getAttribute("media"));
+      m.setAttribute("content", dark ? "#241F1A" : "#F1EFE9");
+    });
 
     clearTimeout(timer);
     if (r.mode === "auto" && r.sun && r.sun.next) {
