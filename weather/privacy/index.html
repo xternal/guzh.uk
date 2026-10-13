@@ -273,14 +273,15 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   <main class="policy">
     <!-- BEGIN generated from store/privacy-policy.md — edit that file, then re-run tools/make-weather-pages.py -->
     <h1>Privacy policy — Always Weather</h1>
-    <p class="updated">Last updated: 12 October 2026</p>
+    <p class="updated">Last updated: 13 October 2026</p>
     <p>Always Weather is made by Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”). We are the controller of the little personal data the app handles. Contact: apps@guzh.uk or +44 7776 912598.</p>
     <h2>The short version</h2>
     <ul>
       <li>No ads, no account, no analytics, no tracking. We never sell or share your data for advertising.</li>
       <li>The app sends your <strong>approximate</strong> location, rounded to about a kilometre, to our own server to get the forecast and the name of the place you’re in. We don’t store it against you.</li>
-      <li>If the app crashes, it sends an anonymous crash report so we can fix the bug. You can turn this off in Settings. The Mac and iPhone apps send none.</li>
+      <li>If the app crashes, it sends an anonymous crash report so we can fix the bug. You can turn this off in Settings. The Mac, iPhone and Windows apps send none.</li>
       <li>Your saved places and settings stay on your phone, and in your phone’s own backup if you use it.</li>
+      <li>Rain and warning alerts are off unless you turn them on. Your phone checks the forecast for itself; there is no push service and no list of devices.</li>
     </ul>
     <h2>What the app sends, and why</h2>
     <h3>Forecasts</h3>
@@ -290,6 +291,9 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     <h3>Weather warnings</h3>
     <p>To show official weather warnings, the app sends our server the same rounded point. For a place in the US, our server asks the NWS for the warnings at that rounded point, from our server and with nothing that identifies you. For the UK, Ireland, Germany and Norway it downloads each service’s whole list of warnings and finds the ones for the point itself, so the point isn’t sent to the Met Office, Met Éireann, DWD or MET Norway. Our server fetches the Met Office’s list every minute on its own schedule, so looking at a UK place doesn’t make it contact the Met Office. Warnings are kept in the app’s memory only, never stored on your device or in a backup.</p>
     <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing you warnings for the place you’re looking at.</p>
+    <h3>Rain, snow and warning alerts (Android)</h3>
+    <p>Alerts are off unless you turn them on in Settings → Alerts; on Android 13 and later the app then asks for permission to send notifications. While alerts are on, the app checks the forecast, and the warnings if you chose them, for the one place you picked: a saved place, or where the app last found you while it was open. It never asks for your location in the background. The checks run in the background, every 15 minutes to every hour, and send our server the same requests, with the same rounded point, as described under Forecasts and Weather warnings above; each one is listed in Settings → What left this phone. Your phone decides from that forecast whether to tell you: there is no push service, and our server keeps no list of devices and isn’t told whether alerts are on. Your alert settings, and a note of what has already been announced (times, kinds and levels, never a place), are stored only on your phone and never included in a backup, so a new phone asks again. Turning alerts off stops the checks.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests — the alerts you asked for.</p>
     <h3>The name of your current location</h3>
     <p>When you use your current location, the app sends the same rounded point to our server to find the nearest town or district, so it can show “Hammersmith” instead of “Current location”. Our server looks it up in its own copy of the GeoNames place list, so the point isn’t passed to anyone else, and it isn’t stored or written to our logs. The app keeps the name on your phone for that roughly 1 km square, so it asks only once per square. It keeps the names of the last 50 squares you used and forgets older ones.</p>
     <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing where the forecast is for.</p>
@@ -308,10 +312,13 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     <h2>The Mac and iPhone apps</h2>
     <p>Everything above applies to Always Weather for Mac and for iPhone too, with one difference: neither has crash reporting, so neither ever sends a crash report. On the Mac, saved places, settings, last forecasts and place names are stored only on your Mac, and in your Mac’s own backups (such as Time Machine) if you make them; they aren’t synced through iCloud. And there, “Send feedback” includes your Mac’s model and macOS version instead of a phone’s.</p>
     <p>From version 1.0.1, Settings → What left this Mac (or iPhone) lists every request the app made in the last 7 days, exactly as it was sent, so you can check everything above for yourself. The list is kept only on that device, is never included in a backup, drops each entry after 7 days, and you can clear it at any time. It never records the app’s own access key.</p>
+    <h2>The Windows app</h2>
+    <p>Everything above applies to Always Weather for Windows too, with these differences. It has no crash reporting, so it never sends a crash report. It asks Windows’ own location service for your position only when you choose “Use my location”, asks for an approximate position, and rounds it to about a kilometre before it leaves your PC, as on a phone; without it, you search for a place. Saved places, settings, last forecasts and place names are stored only on your PC, in the app’s own folder, which Windows removes when you uninstall the app; they aren’t synced anywhere. And there, “Send feedback” includes your Windows version instead of a phone’s model.</p>
+    <p>Settings → What left this PC lists every request the app made in the last 7 days, exactly as it was sent, so you can check everything above for yourself. The list is kept only on your PC, drops each entry after 7 days, and you can clear it at any time. It never records the app’s own access key.</p>
     <h2>Location permission</h2>
-    <p>The app asks only for approximate location, and only while you use it. It’s optional: without it, search for a place instead. You can change this at any time in your phone’s settings.</p>
+    <p>The app asks only for approximate location, and only while you use it. It’s optional: without it, search for a place instead. You can change this at any time in your phone’s settings (on Windows: Settings → Privacy &amp; security → Location).</p>
     <h2>Purchases</h2>
-    <p>Google Play or the App Store handles the purchase. We don’t receive your payment details.</p>
+    <p>Google Play, the App Store or the Microsoft Store handles the purchase. We don’t receive your payment details.</p>
     <h2>Where data is processed</h2>
     <p>Cloudflare runs our server in data centres around the world, usually the one nearest to you. Sentry stores crash reports in the EU. Where data leaves the UK, our providers protect it with the UK’s approved safeguards (the UK Extension to the EU–US Data Privacy Framework or standard contractual clauses).</p>
     <h2>Your rights</h2>
