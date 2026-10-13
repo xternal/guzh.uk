@@ -103,6 +103,8 @@
   --shot-shadow:0 1px 2px rgba(23,22,19,.06),0 18px 40px -22px rgba(23,22,19,.42);
   /* the drawn device frames in the platforms section */
   --bezel:#1E1D1A;--bezel-edge:transparent;--bezel-base:#D3CEC4;--bezel-notch:#B8B2A6;--bezel-dot:#3A3833;--bezel-hole:#0B0A09;
+  /* the drawn Windows desktop on the monitor: its wallpaper and its taskbar */
+  --desk:#E4E6EC;--desk-glow:rgba(31,59,196,.30);--desk-warm:rgba(224,122,69,.16);--taskbar:rgba(250,248,243,.84);--taskbar-ink:#171613;--taskbar-tile:rgba(23,22,19,.13);
   --grain:.05;
   --grain-blend:multiply;
 }
@@ -127,6 +129,7 @@
     --mode-active:rgba(239,231,218,.10);
     --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
     --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
+    --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
   }
@@ -146,6 +149,7 @@
     --mode-active:rgba(239,231,218,.10);
     --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
     --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
+    --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
 }
@@ -269,6 +273,9 @@ img{max-width:100%}
 a.pill{text-decoration:none;transition:border-color .15s}
 a.pill:hover{border-color:var(--ink)}
 a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+/* a store that isn't live yet: plain text, the dot drawn as a ring */
+.pill-soon{color:var(--ink-2)}
+.pill-soon::before{background:none;box-shadow:inset 0 0 0 1px var(--accent)}
 
 /* ---------- screenshots ---------- */
 .shots{
@@ -315,6 +322,41 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .phone .body::before{content:"";position:absolute;top:3.9%;left:50%;transform:translateX(-50%);z-index:1;background:var(--bezel-hole)}
 .phone-iphone .body::before{width:27.5%;height:3.9%;border-radius:999px}
 .phone-android .body::before{width:5.1%;aspect-ratio:1;border-radius:50%}
+/* Windows: a monitor on its stand, and on it a Windows 11 desktop drawn in the page's tokens: the app's
+   window with its title bar in the colour of the sky under it (the app sets it so), and the taskbar
+   with the app running. The window is the only screenshot; inside the display every size is in cqw,
+   a share of the display's width, so the desktop scales as one picture. */
+.stage-pc{aspect-ratio:836/512}
+.monitor{position:absolute;left:10%;top:0;width:80%}
+.panel{box-sizing:border-box;padding:1.1% 1.1% 1.7%;border-radius:12px;
+  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
+.display{position:relative;aspect-ratio:16/10;border-radius:4px;overflow:hidden;container-type:inline-size;
+  background:
+    radial-gradient(66% 84% at 50% 50%,var(--desk-glow) 38%,transparent 100%),
+    radial-gradient(42% 64% at 4% 104%,var(--desk-warm),transparent 72%),
+    radial-gradient(40% 56% at 98% -6%,var(--desk-warm),transparent 72%),
+    var(--desk)}
+.neck{width:13%;aspect-ratio:87/64;margin:0 auto;background:var(--bezel-base);
+  clip-path:polygon(22% 0,78% 0,90% 100%,10% 100%)}
+.foot{width:36%;aspect-ratio:240/13;margin:0 auto;border-radius:7px 7px 3px 3px;
+  background:var(--bezel-base);box-shadow:var(--shot-shadow)}
+.window{position:absolute;left:10cqw;top:4cqw;width:80cqw;border-radius:.7cqw;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(0,0,0,.10),0 .5cqw 1.2cqw rgba(0,0,0,.16),0 2cqw 5cqw rgba(0,0,0,.30)}
+.stage .window>img{height:auto;aspect-ratio:16/10}
+.titlebar{display:flex;align-items:center;gap:.55cqw;height:1.8cqw;padding-left:.7cqw;
+  background:#C8D5DF;color:#171613;font-size:.68cqw;line-height:1;white-space:nowrap}
+.stage .titlebar img{width:.9cqw;height:.9cqw;border-radius:.15cqw}
+.titlebar svg{display:block;margin-left:auto;width:7.7cqw;height:1.8cqw}
+.taskbar{position:absolute;left:0;right:0;bottom:0;height:2.7cqw;display:flex;align-items:center;justify-content:center;gap:.5cqw;
+  background:var(--taskbar);border-top:1px solid var(--rule-soft);color:var(--taskbar-ink)}
+.taskbar .search{width:7.5cqw;height:1.5cqw;border-radius:999px;background:var(--taskbar-tile);margin-right:.3cqw}
+.taskbar .tile{width:1.35cqw;height:1.35cqw;border-radius:.3cqw;background:var(--taskbar-tile)}
+.taskbar .running{position:relative;display:grid;place-items:center;width:2.2cqw;height:2.2cqw;border-radius:.35cqw;background:var(--taskbar-tile)}
+.stage .taskbar .running img{width:1.35cqw;height:1.35cqw;border-radius:.3cqw}
+.taskbar .running::after{content:"";position:absolute;bottom:.1cqw;left:50%;width:.7cqw;height:.18cqw;transform:translateX(-50%);
+  border-radius:999px;background:var(--accent)}
+.taskbar .clock{position:absolute;right:1cqw;top:50%;transform:translateY(-50%);
+  font-size:.62cqw;line-height:1.35;text-align:right;white-space:nowrap}
 
 /* ---------- numbers ---------- */
 .numbers{
@@ -409,6 +451,8 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 @media (max-width:860px){
   .platform-row,.platform-row.mirror{grid-template-columns:minmax(0,1fr);gap:28px}
   .platform-row.mirror .platform-text{order:0}
+  .stage-pc{aspect-ratio:836/634}
+  .monitor{left:0;width:100%}
   .wrap{padding-left:24px;padding-right:24px}
   .masthead{padding-bottom:64px}
   /* one thumb again: the shots become a snapping strip that bleeds to both edges,
@@ -481,6 +525,7 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
       <div class="availability">
         <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">On the App Store for iPhone and Mac</a>
         <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather&amp;utm_source=guzh.uk&amp;utm_campaign=weather_page">On Google Play for Android and Googlebooks</a>
+        <span class="pill pill-soon">Soon on the Microsoft Store for Windows</span>
         <span class="availability-note">In the UK, £3.99 once on the App Store, for iPhone and Mac together, and £3.59 on Google Play. Each store shows your local price.</span>
       </div>
     </section>
@@ -548,6 +593,45 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
               <img src="/assets/weather/platform-android.webp" width="520" height="1125" loading="lazy" decoding="async"
                    alt="Always Weather on an Android phone in Sky: London at 14:00, 16 degrees and rain, with the hourly bars and the rain under them.">
             </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Not in the store yet: the pills are plain text until the Microsoft Store link is live (see the README). -->
+      <div class="platform-row">
+        <div class="platform-text">
+          <p class="platform-store">Microsoft Store</p>
+          <h3>Windows PC</h3>
+          <p>A window made for a PC: drag along the hours, scroll sideways on a touchpad or press the arrow keys. In Sky even the title bar takes the colour of the sky. For Windows 11 on Intel, AMD and Snapdragon PCs.</p>
+          <span class="pill pill-soon">Coming soon</span>
+        </div>
+        <div class="stage stage-pc">
+          <div class="monitor">
+            <div class="panel"><div class="display">
+              <div class="window">
+                <div class="titlebar" aria-hidden="true">
+                  <img src="/assets/weather/icon.png" width="16" height="16" alt="">
+                  <span>Always Weather</span>
+                  <svg viewBox="0 0 138 32" fill="none" stroke="currentColor" stroke-width="1">
+                    <path d="M18 16.5h10"></path>
+                    <rect x="64.5" y="11.5" width="9" height="9" rx="1.5"></rect>
+                    <path d="M110 11l10 10M120 11l-10 10"></path>
+                  </svg>
+                </div>
+                <img src="/assets/weather/platform-windows.webp" width="1400" height="875" loading="lazy" decoding="async"
+                     alt="Always Weather on a Windows PC in Sky: a window on the desktop showing London at 14:00, 16 degrees and rain, “Rain from 13:00, clearing by 16:00.” and the hourly bars on the left, and What to wear, sunrise and sunset and the 10-day forecast on the right.">
+              </div>
+              <div class="taskbar" aria-hidden="true">
+                <span class="search"></span>
+                <span class="tile"></span>
+                <span class="tile"></span>
+                <span class="tile"></span>
+                <span class="running"><img src="/assets/weather/icon.png" width="24" height="24" alt=""></span>
+                <span class="clock">14:00<br>17/09/2026</span>
+              </div>
+            </div></div>
+            <div class="neck" aria-hidden="true"></div>
+            <div class="foot" aria-hidden="true"></div>
           </div>
         </div>
       </div>
