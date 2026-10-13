@@ -13,7 +13,9 @@ Reads the palette straight out of each page's <style> and fails if:
   agree, see the README);
 - the browser bar colour (the theme-color tags and the switcher script that rewrites them) is not
   the page's own background;
-- a page's palette has drifted from the home page's, or the favicon's square is not the dark brown.
+- a page's palette has drifted from the home page's;
+- the favicon's square is not the dark brown, or its mark is drawn in anything but the dark --ink
+  and --accent (which are checked against that same brown above, so the mark passes too).
 
 Standard library only, so it runs anywhere python3 does, and on every pull request that touches a
 page (.github/workflows/colours.yml).
@@ -117,11 +119,16 @@ def main():
 
     favicon = (SITE / "favicon.svg").read_text(encoding="utf-8")
     square = re.search(r'<rect[^>]*fill="(#[0-9A-Fa-f]{6})"', favicon)
+    mark = {c.upper() for c in re.findall(r'(?:fill|stroke)="(#[0-9A-Fa-f]{6})"', favicon)} - {DARK_BROWN}
+    errors = []
     if not square or square.group(1).upper() != DARK_BROWN:
-        print(f"favicon.svg: FAILED (square is {square and square.group(1)}, not {DARK_BROWN})")
-        failed = True
-    else:
-        print("favicon.svg: ok")
+        errors.append(f"square is {square and square.group(1)}, not {DARK_BROWN}")
+    for c in sorted(mark - {home[1]["ink"], home[1]["accent"]}):
+        errors.append(f"the mark uses {c}, not the dark --ink {home[1]['ink']} or --accent {home[1]['accent']}")
+    print(f"favicon.svg: {'ok' if not errors else 'FAILED'}")
+    for e in errors:
+        print(f"  {e}")
+    failed |= bool(errors)
     sys.exit(1 if failed else 0)
 
 
