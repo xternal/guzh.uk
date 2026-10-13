@@ -106,7 +106,7 @@ year-long cookies and loads Sentry and a dozen Substack scripts, which would bre
 ## The app pages — `/weather/`, `/weather/privacy/` and `/weather/support/`
 
 `/weather/` is the public page for **Always Weather**, the paid weather app for iPhone, Mac and
-Android (`~/dev/always_weather`). `/weather/privacy/` is the privacy policy, which is the URL both
+Android, and soon Windows (`~/dev/always_weather`). `/weather/privacy/` is the privacy policy, which is the URL both
 Google Play and App Store Connect require before an app can be submitted — it must be a public
 web page, not a PDF, reachable without a login. `/weather/support/` is the help and contact page,
 the support URL the App Store requires.
@@ -172,6 +172,18 @@ the support URL the App Store requires.
   gives each store's UK price — £3.99 once on the App Store, for iPhone and Mac together, and
   £3.59 on Google Play — and says each store shows your local price. They are text links, not the
   stores' badge artwork.
+- **Windows is on the page before it is in the store** (Pavel, 13 Oct 2026): a third hero pill,
+  "Soon on the Microsoft Store for Windows", and a third row in the platforms section, both plain
+  text with the pill's dot drawn as a ring (`.pill-soon`). The row's picture is a drawn monitor
+  with a Windows 11 desktop: the app's window, its title bar in the sky's colour as the app sets it
+  (#C8D5DF, sampled from the top of the screenshot), and the taskbar with the app running. Only
+  the window's contents are a screenshot (`platform-windows.webp`, the Microsoft Store's first);
+  the wallpaper and taskbar are the `--desk` and `--taskbar` tokens, light and dark. **When the
+  Store link arrives**, in one change: make both pills links to `https://apps.microsoft.com/detail/<Store ID>`
+  ("On the Microsoft Store for Windows" in the hero, "Microsoft Store" in the row) and drop
+  `.pill-soon`; add the UK price (£3.59) to the line under the pills, the "Once" figure and a
+  third JSON-LD `Offer`; add Windows to the JSON-LD `operatingSystem` and `screenshot`; name
+  Windows in the home page's one-line description and in `llms.txt`.
 - **Each page carries JSON-LD in its `<head>`**, which is outside the generated region, so
   `make-weather-pages.py` never touches it. `/weather/` describes the app as a
   `SoftwareApplication` (not `MobileApplication`, because one platform is the Mac) with one
@@ -362,7 +374,7 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   Ruminator.xyz): background #241F1A, the raised lift in the top corners #2E2822, text #EFE7DA,
   body copy #C0B5A4, tertiary #A59A88, an amber accent #E2B26F, and lines in the text colour at
   .16 and .10. The drawn laptop on `/weather/` takes #39322B for its base so it still stands off
-  the page; the bezels stay black, because the devices are. It replaced the warm charcoal #141311,
+  the page, and so does the monitor's stand; the bezels stay black, because the devices are. It replaced the warm charcoal #141311,
   which read as black and put near-white text at 15.7:1, enough to glare and tire the eyes. Body
   text is now 13.3:1: keep it about 13 and never above 14. The accent went from blue to amber so
   nothing in the chrome has a blue cast. The browser bar (`theme-color`, in the tags and in each

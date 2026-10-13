@@ -41,6 +41,9 @@ plat android/look/sky/src/test/screenshots/sky_ukShowersLunch_light.png   platfo
 # The laptops: the whole window, the Mac at its 4:3 and the Googlebook's laptop window at 16:10.
 plat apple/Tests/Baselines/wide-sky-evening-dark.png                      platform-mac        -resize 1400x
 plat android/look/paper/src/test/screenshots/paper_wide_laptop.png        platform-googlebook -resize 1400x
+# Windows: the window's own client area at 16:10, the Microsoft Store's first screenshot (the Store
+# set carries no caption). The page draws the title bar, the desktop and the monitor around it.
+plat store/microsoft-store/screenshots/en-GB/01_sky-hours.png             platform-windows    -resize 1400x
 
 # ---- the 1200x630 link-preview card -----------------------------------------------------------
 FONT_DIR="${TMPDIR:-/tmp}/guzh-og-fonts"
