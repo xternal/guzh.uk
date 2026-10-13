@@ -15,7 +15,7 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 
 ```
 index.html              the entire home page
-favicon.svg             dark brown square, PG wordmark
+favicon.svg             the mark, on a dark brown square: a line that steps up once, zero to one
 weather/
   index.html            Always Weather — the app's one-scroll page
   privacy/index.html    the privacy policy both app stores require   } generated bodies,
@@ -23,7 +23,7 @@ weather/
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
-  og.png                1200x630 link-preview card
+  og.png                1200x630 link-preview card, with the mark beside the name
   apple-touch-icon.png  180x180, favicon.svg drawn by `rsvg-convert -w 180 -h 180` (redraw it
                         whenever the favicon changes)
   weather/              app icon, three screenshots and the OG card for the app pages
@@ -34,8 +34,8 @@ sitemap.xml             the four pages, each with a <lastmod> date — when a pa
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
                         search tools (llmstxt.org) — hand-written from the copy on / and
                         /weather/, so update it when that copy changes
-tools/make-og.sh        regenerates assets/og.png — run it if the headline, the lead line
-                        or the portrait treatment changes
+tools/make-og.sh        regenerates assets/og.png: run it if the headline, the lead line, the
+                        portrait treatment or favicon.svg changes
 tools/make-tz.sh        regenerates the packed timezone->coordinates table inside index.html
                         — run it when tzdb adds or renames zones
 tools/make-weather-assets.sh
@@ -424,3 +424,13 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   today, and rate limiting, because people are people.
 - **OG image** is generated, not photographed — `assets/og.png`, 1200x630. Re-check link previews
   (Slack, WhatsApp, LinkedIn) after the first deploy; scrapers cache aggressively.
+- **The mark** is a single line that runs flat, steps up once and holds: zero to one, which the
+  page's lead line says has been done four times. It replaced a "PG" wordmark on 13 Oct 2026, under
+  Pavel's rule that a logo is drawn from what the project is about, never letters in a box. It is
+  drawn on a 32 grid with a 3-unit line on half-units, so it lands on whole pixels at 32 px (a 16 pt
+  tab icon on a Retina screen) and stays legible at 16. `favicon.svg` is the only copy:
+  `tools/make-og.sh` takes it, drops the square and recolours it to the card's ink and blue, and
+  `assets/apple-touch-icon.png` is it at 180 px. So after changing it, redraw both
+  (`rsvg-convert -w 180 -h 180 favicon.svg -o assets/apple-touch-icon.png`, then
+  `./tools/make-og.sh`). The square stays #241F1A and the line takes the dark text and amber
+  (#EFE7DA, #E2B26F); `tools/check-colours.py` fails if either drifts from the page's palette.
