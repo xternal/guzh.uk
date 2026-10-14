@@ -167,12 +167,13 @@ the support URL the App Store requires.
   points crawlers at the public `agenthands.cc` only.
   Move or rename the page and that link needs changing with it. Its one-line description names
   the same platforms as `/weather/`, so add or drop a platform there too.
-- **The store links are two pills** in the `/weather/` hero: "On the App Store for iPhone and
-  Mac" and "On Google Play for Android", each linking to its store listing. The line under them
-  gives each store's UK price — £3.99 once on the App Store, for iPhone and Mac together, and
-  £3.59 on Google Play — and says each store shows your local price. They are text links, not the
-  stores' badge artwork.
-- **Windows is on the page before it is in the store** (Pavel, 13 Oct 2026): a third hero pill,
+- **The store links are three pills** in the `/weather/` hero: "On the App Store for iPhone and
+  Mac", "On Google Play for Android" and "On the Microsoft Store for Windows", each linking to its
+  store listing. The line under them gives each store's UK price — £3.99 once on the App Store,
+  for iPhone and Mac together, and £3.59 on Google Play and the Microsoft Store — and says each
+  store shows your local price. They are text links, not the stores' badge artwork.
+- **Windows went live on the Microsoft Store on 14 Oct 2026** (Store ID 9MSZVHC5NFX7), and the
+  switch below was made that day. Before that (Pavel, 13 Oct 2026) it was on the page as a third hero pill,
   "Soon on the Microsoft Store for Windows", and a third row in the platforms section, both plain
   text with the pill's dot drawn as a ring (`.pill-soon`). The row's picture is a drawn monitor
   with a Windows 11 desktop: the app's window, its title bar in the sky's colour as the app sets it
