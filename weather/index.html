@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="A calm, paid weather app. No ads, no account, no tracking.">
 <meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
 
-<!-- The machine-readable twin of the two store pills and the line under them: the same
+<!-- The machine-readable twin of the three store pills and the line under them: the same
      platforms, the same stores, the same UK prices. The "Once" figure further down repeats the
      prices too, so change a price or a store in all three places. SoftwareApplication rather
      than MobileApplication, because one of the platforms is the Mac. -->
@@ -34,14 +34,15 @@
   "url": "https://guzh.uk/weather/",
   "image": "https://guzh.uk/assets/weather/icon.png",
   "description": "A calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.",
-  "operatingSystem": "iOS, macOS, Android",
+  "operatingSystem": "iOS, macOS, Android, Windows",
   "applicationCategory": "WeatherApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
   "screenshot": [
     "https://guzh.uk/assets/weather/platform-mac.webp",
     "https://guzh.uk/assets/weather/platform-iphone.webp",
     "https://guzh.uk/assets/weather/platform-googlebook.webp",
-    "https://guzh.uk/assets/weather/platform-android.webp"
+    "https://guzh.uk/assets/weather/platform-android.webp",
+    "https://guzh.uk/assets/weather/platform-windows.webp"
   ],
   "offers": [
     {
@@ -56,6 +57,14 @@
       "@type": "Offer",
       "name": "Google Play, for Android and Googlebooks",
       "url": "https://play.google.com/store/apps/details?id=com.empatiq.weather",
+      "price": "3.59",
+      "priceCurrency": "GBP",
+      "eligibleRegion": "GB"
+    },
+    {
+      "@type": "Offer",
+      "name": "Microsoft Store, for Windows",
+      "url": "https://apps.microsoft.com/detail/9MSZVHC5NFX7",
       "price": "3.59",
       "priceCurrency": "GBP",
       "eligibleRegion": "GB"
@@ -525,8 +534,8 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
       <div class="availability">
         <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">On the App Store for iPhone and Mac</a>
         <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather&amp;utm_source=guzh.uk&amp;utm_campaign=weather_page">On Google Play for Android and Googlebooks</a>
-        <span class="pill pill-soon">Soon on the Microsoft Store for Windows</span>
-        <span class="availability-note">In the UK, £3.99 once on the App Store, for iPhone and Mac together, and £3.59 on Google Play. Each store shows your local price.</span>
+        <a class="pill" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7">On the Microsoft Store for Windows</a>
+        <span class="availability-note">In the UK, £3.99 once on the App Store, for iPhone and Mac together, and £3.59 on Google Play and the Microsoft Store. Each store shows your local price.</span>
       </div>
     </section>
 
@@ -597,13 +606,12 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
         </div>
       </div>
 
-      <!-- Not in the store yet: the pills are plain text until the Microsoft Store link is live (see the README). -->
       <div class="platform-row">
         <div class="platform-text">
           <p class="platform-store">Microsoft Store</p>
           <h3>Windows PC</h3>
           <p>A window made for a PC: drag along the hours, scroll sideways on a touchpad or press the arrow keys. In Sky even the title bar takes the colour of the sky. For Windows 11 on Intel, AMD and Snapdragon PCs.</p>
-          <span class="pill pill-soon">Coming soon</span>
+          <a class="pill" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7">Microsoft Store</a>
         </div>
         <div class="stage stage-pc">
           <div class="monitor">
@@ -648,7 +656,7 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
       </div>
       <div class="stat">
         <div class="stat-figure">Once</div>
-        <div class="stat-label">£3.99 on the App Store, £3.59 on Google Play in the UK, with no subscription and no in-app purchases</div>
+        <div class="stat-label">£3.99 on the App Store, £3.59 on Google Play and the Microsoft Store in the UK, with no subscription and no in-app purchases</div>
       </div>
       <div class="stat">
         <div class="stat-figure">Zero</div>
