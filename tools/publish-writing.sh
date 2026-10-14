@@ -1,7 +1,7 @@
 #!/bin/sh
 # Publish the newest Substack posts from this Mac, for when the Writing workflow on GitHub can't
-# reach the feed (Substack turns GitHub's machines away, and rss2json, the stand-in, sometimes
-# fails too). From a home connection the feed answers directly.
+# reach the feed (Substack turns GitHub's machines away, and rss2json and feed2json, the
+# stand-ins, sometimes fail too). From a home connection the feed answers directly.
 #
 #     ./tools/publish-writing.sh
 #

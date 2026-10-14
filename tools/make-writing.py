@@ -13,15 +13,17 @@ with the newest COUNT posts, leaving out any listed in SKIP. Everything around i
 its heading, the two links under it, the CSS) is hand-written. When the posts change it also moves
 the home page's <lastmod> in sitemap.xml to today.
 
-    ./tools/make-writing.py                  # from the live feed
-    ./tools/make-writing.py --relay          # through rss2json, as GitHub's machines do
-    ./tools/make-writing.py --feed=feed.xml  # from a saved copy
+    ./tools/make-writing.py                   # from the live feed
+    ./tools/make-writing.py --relay           # through the relays, as GitHub's machines do
+    ./tools/make-writing.py --relay=feed2json # through that one relay only
+    ./tools/make-writing.py --feed=feed.xml   # from a saved copy
 
 .github/workflows/writing.yml runs it every morning and commits the result when it changed.
 Substack's Cloudflare turns GitHub's machines away (a "Just a moment..." challenge, 403, whatever
-the request looks like), so when the feed refuses, the script reads it through rss2json instead:
-a feed reader Substack does serve, which hands back the same items as JSON. From a home connection
-the feed answers directly and rss2json is never asked.
+the request looks like), so when the feed refuses, the script reads it through a relay instead:
+rss2json, and feed2json when rss2json can't. Both are feed readers Substack does serve, and both
+hand back the same items as JSON. From a home connection the feed answers directly and neither is
+asked.
 """
 
 from __future__ import annotations
@@ -41,10 +43,15 @@ import xml.etree.ElementTree as ET
 import zoneinfo
 
 FEED = "https://guzhikov.substack.com/feed"
-RELAY = "https://api.rss2json.com/v1/api.json?rss_url=" + urllib.parse.quote(FEED, safe="")
-# rss2json answers "Internal error" or "This feed is being processed, please wait" (both a 500)
-# while it re-reads a feed, and Substack sometimes turns it away too. So it gets five tries over
-# about eight minutes before the run gives up.
+# Two feed readers on different machines, asked in this order. rss2json answers "Internal error"
+# or "This feed is being processed, please wait" (both a 500) while it re-reads a feed, and on
+# 12 and 14 Oct 2026 it could not download Substack's feed for longer than all its tries (on the
+# 14th feed2json read it fine at the same time). Each round asks both; five rounds over about
+# eight minutes before the run gives up.
+RELAYS = {
+    "rss2json": "https://api.rss2json.com/v1/api.json?rss_url=" + urllib.parse.quote(FEED, safe=""),
+    "feed2json": "https://feed2json.org/convert?url=" + urllib.parse.quote(FEED, safe=""),
+}
 RELAY_WAITS = (30, 60, 120, 240)
 POSTS = "https://guzhikov.substack.com/p/"
 COUNT = 3
@@ -69,44 +76,74 @@ def fetch(url: str) -> bytes:
         return r.read()
 
 
+def option(name: str) -> str | None:
+    """The value of --name=value, "" for a bare --name, None when it isn't given."""
+    for a in sys.argv[1:]:
+        if a == f"--{name}" or a.startswith(f"--{name}="):
+            return a.partition("=")[2]
+    return None
+
+
 def items():
     """(link, title, subtitle, published) for every post in the feed, as the feed has them."""
-    path = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--feed=")), None)
-    if path or "--relay" not in sys.argv:
+    path, only = option("feed"), option("relay")
+    if path or only is None:
         try:
             raw = pathlib.Path(path).read_bytes() if path else fetch(FEED)
         except urllib.error.HTTPError as e:
-            print(f"the feed answered {e.code}; reading it through rss2json", file=sys.stderr)
+            print(f"the feed answered {e.code}; reading it through a relay", file=sys.stderr)
         else:
             for item in ET.fromstring(raw).iterfind("./channel/item"):
                 yield (item.findtext("link"), item.findtext("title"), item.findtext("description"),
                        email.utils.parsedate_to_datetime(item.findtext("pubDate")))
             return
-    for item in relay()["items"]:
-        published = datetime.datetime.fromisoformat(item["pubDate"]).replace(tzinfo=datetime.timezone.utc)
-        yield item.get("link"), item.get("title"), item.get("description"), published
+    yield from relay(only)
 
 
-def relay() -> dict:
-    """The feed as rss2json has it, trying again while it is busy or failing."""
+def unpack(name: str, data: dict) -> list:
+    """The items a relay sent, in the feed's terms. A relay that fails says why in place of the
+    items, rss2json in "message" and feed2json in "err" (and still with a 200)."""
+    if "items" not in data or name == "rss2json" and data.get("status") != "ok":
+        raise ValueError(data.get("message") or data.get("err") or "no items")
+    if name == "rss2json":  # "pubDate": "2026-10-12 06:15:54", in UTC
+        return [(i.get("link"), i.get("title"), i.get("description"),
+                 datetime.datetime.fromisoformat(i["pubDate"]).replace(tzinfo=datetime.timezone.utc))
+                for i in data["items"]]
+    # feed2json, a JSON Feed: "date_published": "2026-10-12T06:15:54.000Z"
+    return [(i.get("url"), i.get("title"), i.get("summary"),
+             datetime.datetime.fromisoformat(i["date_published"].replace("Z", "+00:00")))
+            for i in data["items"]]
+
+
+def relay(only: str = "") -> list:
+    """The feed as the first relay that can read it has it, trying again while all are failing."""
+    names = [only] if only else list(RELAYS)
+    if not set(names) <= set(RELAYS):
+        raise SystemExit(f"--relay is one of: {', '.join(RELAYS)}")
     for attempt, wait in enumerate((*RELAY_WAITS, None), start=1):
-        try:
-            data = json.loads(fetch(RELAY))
-            if data.get("status") == "ok":
-                return data
-            problem = data.get("message") or data
-        except urllib.error.HTTPError as e:
+        problems = []
+        for name in names:
             try:
-                problem = f"{e.code}: {json.loads(e.read()).get('message')}"
-            except ValueError:
-                problem = str(e.code)
-        except (urllib.error.URLError, TimeoutError, ValueError) as e:
-            problem = str(e)
+                found = unpack(name, json.loads(fetch(RELAYS[name])))
+                if found:
+                    after = f" ({'; '.join(problems)})" if problems else ""
+                    print(f"read the feed through {name}{after}", file=sys.stderr)
+                    return found
+                problem = "no posts"
+            except urllib.error.HTTPError as e:
+                try:
+                    problem = f"{e.code}: {json.loads(e.read()).get('message')}"
+                except ValueError:
+                    problem = str(e.code)
+            except (urllib.error.URLError, TimeoutError, ValueError, KeyError, TypeError, AttributeError) as e:
+                problem = str(e)
+            problems.append(f"{name} {problem}")
+        problem = "; ".join(problems)
         if wait is None:
             break
-        print(f"rss2json, try {attempt}: {problem}; trying again in {wait} s", file=sys.stderr)
+        print(f"try {attempt}: {problem}; trying again in {wait} s", file=sys.stderr)
         time.sleep(wait)
-    raise SystemExit(f"rss2json could not read the feed after {attempt} tries ({problem}). The page "
+    raise SystemExit(f"no relay could read the feed after {attempt} tries ({problem}). The page "
                      "keeps the posts it has. To publish from a Mac instead: ./tools/publish-writing.sh")
 
 
