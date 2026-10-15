@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Always Weather: suggest an idea</title>
+<meta name="description" content="Suggest an idea for Always Weather, the calm, paid weather app. It goes straight to the person who makes it. No account, nothing tracked.">
+<link rel="canonical" href="https://guzh.uk/weather/ideas/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/weather/ideas/">
+<meta property="og:site_name" content="Always Weather">
+<meta property="og:title" content="Always Weather: suggest an idea">
+<meta property="og:description" content="Your idea goes straight to the person who makes Always Weather. No account, nothing tracked.">
+<meta property="og:image" content="https://guzh.uk/assets/weather/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Always Weather: drag through the hours. A calm, paid weather app. No ads, no account, no tracking.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Always Weather: suggest an idea">
+<meta name="twitter:description" content="Your idea goes straight to the person who makes Always Weather. No account, nothing tracked.">
+<meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
+<meta name="twitter:image:alt" content="Always Weather: drag through the hours. A calm, paid weather app. No ads, no account, no tracking.">
+
+<!-- A WebPage that is part of /weather/ and about the app described there (the
+     SoftwareApplication with the same @id in /weather/index.html). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Always Weather: suggest an idea",
+  "url": "https://guzh.uk/weather/ideas/",
+  "description": "Suggest an idea for Always Weather, the calm, paid weather app. It goes straight to the person who makes it. No account, nothing tracked.",
+  "isPartOf": {"@type": "WebPage", "name": "Always Weather", "url": "https://guzh.uk/weather/"},
+  "about": {"@id": "https://guzh.uk/weather/#app"}
+}
+</script>
+
+<link rel="icon" href="/assets/weather/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/weather/icon.png">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#241F1A" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<script>
+/* Pin the reader's explicit choice before first paint — see /weather/index.html for why Auto
+   here means prefers-color-scheme rather than the home page's sun. */
+(function(){
+  try {
+    var v = localStorage.getItem("theme");
+    if (v === "light" || v === "dark") document.documentElement.setAttribute("data-theme", v);
+  } catch (e) {}
+})();
+</script>
+
+<style>
+:root{
+  color-scheme:light;
+  --paper:#F1EFE9;
+  --paper-lift:#FAF8F3;
+  --ink:#171613;
+  --ink-2:#544F46;
+  --ink-3:#6C675F;
+  --accent:#1F3BC4;
+  --rule:rgba(23,22,19,.14);
+  --rule-soft:rgba(23,22,19,.07);
+  --underline:rgba(23,22,19,.22);
+  --underline-accent:rgba(31,59,196,.28);
+  --mode-active:rgba(23,22,19,.07);
+  --grain:.05;
+  --grain-blend:multiply;
+}
+
+/* Dark, declared twice on purpose and deliberately kept identical — see /weather/index.html. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
+    --grain:.07;
+    --grain-blend:screen;
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
+    --grain:.07;
+    --grain-blend:screen;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  position:relative;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 8% -8%, var(--paper-lift), transparent 68%),
+    radial-gradient(700px 520px at 96% 4%, var(--paper-lift), transparent 62%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:var(--grain);mix-blend-mode:var(--grain-blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection{background:var(--ink);color:var(--paper)}
+/* the form and the counts are hidden with the attribute; keep it stronger than their display */
+[hidden]{display:none !important}
+
+.visually-hidden{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--underline-accent);padding-bottom:1px;transition:border-color 160ms ease}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:32px 56px 0}
+
+/* ---------- header ---------- */
+.masthead{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;padding-bottom:80px;
+}
+.masthead-name{
+  font-size:14px;font-weight:500;letter-spacing:.01em;
+  color:var(--ink);border-bottom:1px solid transparent;padding-bottom:1px;
+}
+.masthead-name:hover{border-bottom-color:var(--underline)}
+.masthead-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
+.mode{
+  display:inline-flex;align-items:center;gap:2px;
+  padding:2px;border:1px solid var(--rule);border-radius:999px;
+}
+.mode-btn{
+  display:grid;place-items:center;
+  width:26px;height:26px;padding:0;margin:0;
+  border:0;border-radius:999px;background:none;
+  color:var(--ink-3);cursor:pointer;
+  font:inherit;-webkit-tap-highlight-color:transparent;
+  transition:color 160ms ease,background-color 160ms ease;
+}
+.mode-btn:hover{color:var(--ink)}
+.mode-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mode-btn[aria-pressed="true"]{background:var(--mode-active);color:var(--ink)}
+.mode-btn svg{display:block;width:14px;height:14px}
+
+/* ---------- the idea form ---------- */
+/* Errors use the accent and say what is wrong in words, so colour is never the only sign; the
+   fields' edges are --ink-3, which keeps 3:1 or more against the page in both modes. */
+.ideas{max-width:640px}
+.ideas h1{
+  margin:0 0 14px;
+  font-weight:500;font-size:clamp(32px,3.6vw,44px);
+  line-height:1.08;letter-spacing:-.03em;text-wrap:balance;
+}
+.lead{margin:0;max-width:52ch;font-size:18px;line-height:1.6;color:var(--ink-2);text-wrap:pretty}
+.note{margin:32px 0 0;max-width:56ch;font-size:16.5px;line-height:1.72;color:var(--ink-2)}
+
+.form{margin-top:44px;display:flex;flex-direction:column;gap:30px}
+.field label{display:block;font-size:16.5px;font-weight:500;line-height:1.4;color:var(--ink)}
+.hint{margin:4px 0 0;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.control{
+  display:block;width:100%;margin:10px 0 0;padding:12px 14px;
+  font:inherit;font-size:16.5px;line-height:1.6;color:var(--ink);
+  background:var(--paper-lift);
+  border:1px solid var(--ink-3);border-radius:10px;
+  -webkit-appearance:none;appearance:none;
+  transition:border-color 160ms ease,box-shadow 160ms ease;
+}
+textarea.control{min-height:188px;resize:vertical}
+input.control{min-height:48px}
+.control:hover{border-color:var(--ink-2)}
+.control:focus{outline:none}
+.control:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.control[aria-invalid="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.count{margin:8px 0 0;font-size:14.5px;line-height:1.5;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.count.over{color:var(--accent);font-weight:500}
+.field-error{margin:8px 0 0;font-size:15px;line-height:1.5;font-weight:500;color:var(--accent)}
+
+/* the honeypot: off-screen rather than display:none, which some bots know to skip */
+.hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+
+.small{margin:0;max-width:56ch;font-size:14.5px;line-height:1.6;color:var(--ink-2);text-wrap:pretty}
+
+.actions{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+/* Pavel's pressed-button rule: while it sends, a small spinner beside the label, aria-busy and
+   disabled, so nobody sends twice; slower when the reader asks for less motion. */
+.send{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;min-width:120px;padding:0 28px;margin:0;
+  border:0;border-radius:999px;
+  background:var(--accent);color:var(--paper);
+  font:inherit;font-size:16px;font-weight:500;letter-spacing:-.005em;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:background-color 160ms ease;
+}
+.send:hover{background:var(--ink)}
+.send:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.send:disabled{cursor:progress}
+.send:disabled:hover{background:var(--accent)}
+.spinner{
+  display:none;flex:none;width:15px;height:15px;
+  border:2px solid currentColor;border-right-color:transparent;border-radius:50%;
+  animation:spin 800ms linear infinite;
+}
+.send[aria-busy="true"] .spinner{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){
+  .spinner{animation-duration:2400ms}
+}
+/* always rendered, even empty: a live region that only appears with its message may go unheard */
+.send-error{margin:0;max-width:56ch;font-size:15px;line-height:1.55;font-weight:500;color:var(--accent)}
+
+/* the thank-you that takes the form's place */
+.thanks h2{
+  margin:44px 0 0;
+  font-weight:500;font-size:26px;line-height:1.25;letter-spacing:-.02em;
+}
+.thanks h2:focus{outline:none}
+.thanks p{margin:12px 0 0;max-width:52ch;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;
+  min-height:44px;padding:0 18px;margin-top:28px;
+  border:1px solid var(--rule);border-radius:999px;
+  font-size:15px;font-weight:500;color:var(--ink);
+  transition:border-color 160ms ease;
+}
+.pill::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none}
+.pill:hover{border-color:var(--ink)}
+
+/* ---------- footer ---------- */
+.foot{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;margin-top:96px;padding:28px 0 64px;
+  border-top:1px solid var(--rule);flex-wrap:wrap;
+}
+.foot-nav{display:flex;gap:20px;flex-wrap:wrap}
+.foot-nav a{
+  font-size:15px;color:var(--ink);
+  border-bottom:1px solid var(--underline);padding-bottom:2px;
+  transition:color 160ms ease,border-color 160ms ease;
+}
+.foot-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.foot-nav a[aria-current="page"]{font-weight:500;border-bottom-color:var(--ink)}
+.colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
+
+@media (max-width:860px){
+  .wrap{padding-left:24px;padding-right:24px}
+  .masthead{padding-bottom:56px}
+  .foot{flex-direction:column;align-items:flex-start;gap:24px;margin-top:72px}
+}
+@media (max-width:480px){
+  .send{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:0.01ms !important}
+}
+@media print{
+  .mode{display:none}
+  body{background:#fff}
+  body::before,body::after{display:none}
+  .wrap{padding:0}
+  a{color:inherit;border-bottom:0}
+}
+</style>
+
+<!-- Without JavaScript the form can't send JSON, and a plain submit would post to GitHub Pages
+     (or, as a GET, put the idea in the address). So it isn't shown: the note below it is. -->
+<noscript><style>#idea-form{display:none}</style></noscript>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <a class="masthead-name" href="/weather/">Always Weather</a>
+    <div class="masthead-meta">
+      <div class="mode" role="group" aria-label="Colour mode">
+        <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto: follow your system">
+          <span class="visually-hidden">Auto: follow your system</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.6"></circle>
+            <path d="M12 3.4a8.6 8.6 0 0 1 0 17.2z" fill="currentColor" stroke="none"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="light" aria-pressed="false" title="Light">
+          <span class="visually-hidden">Light</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.4"></circle>
+            <path d="M12 3v1.6M12 19.4V21M5.2 5.2l1.1 1.1M17.7 17.7l1.1 1.1M3 12h1.6M19.4 12H21M5.2 18.8l1.1-1.1M17.7 6.3l1.1-1.1"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="dark" aria-pressed="false" title="Dark">
+          <span class="visually-hidden">Dark</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4 8.2 8.2 0 1 0 20 14.2Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="ideas">
+    <h1>Suggest an idea</h1>
+    <p class="lead">Your idea goes straight to the person who makes Always Weather. No account, nothing tracked.</p>
+
+    <noscript>
+      <p class="note">Sending from this page needs JavaScript, which is off. Email your idea to <a href="mailto:apps@guzh.uk">apps@guzh.uk</a> instead.</p>
+    </noscript>
+
+    <!-- Posts JSON to the app's own server (proxy/ in the Always Weather repo), which passes the
+         idea on and answers 202. method="post" so nothing typed can ever end up in an address. -->
+    <form class="form" id="idea-form" method="post" novalidate>
+      <div class="field">
+        <label for="idea">Your idea</label>
+        <p class="hint" id="idea-hint">Up to 2,000 characters.</p>
+        <textarea class="control" id="idea" name="idea" rows="7" required aria-describedby="idea-hint"></textarea>
+        <p class="count" id="idea-count" aria-hidden="true" hidden></p>
+        <p class="visually-hidden" id="idea-count-live" aria-live="polite"></p>
+        <p class="field-error" id="idea-error" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="email">Your email, if you’d like an answer</label>
+        <input class="control" type="email" id="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false">
+        <p class="field-error" id="email-error" hidden></p>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="website">Leave this empty</label>
+        <input type="text" id="website" name="website" autocomplete="off" tabindex="-1">
+      </div>
+
+      <p class="small">That’s all that’s sent: your idea, and your email if you add one. <a href="/weather/privacy/">Privacy policy</a></p>
+
+      <div class="actions">
+        <button type="submit" class="send" id="send">
+          <span class="spinner" aria-hidden="true"></span>
+          <span>Send</span>
+        </button>
+        <p class="send-error" id="send-error" role="alert"></p>
+      </div>
+    </form>
+
+    <!-- Filled in when the server takes the idea: a live region, so it is announced as well as shown. -->
+    <div class="thanks" id="thanks" role="status"></div>
+    <template id="thanks-template">
+      <h2 tabindex="-1">Thank you</h2>
+      <p>Your idea is on its way to the person who makes Always Weather.</p>
+      <p data-if-email>If there’s something to answer, the reply will come to the email you gave.</p>
+      <a class="pill" href="/weather/">Back to Always Weather</a>
+    </template>
+  </main>
+
+  <footer class="foot">
+    <nav class="foot-nav" aria-label="Always Weather">
+      <a href="/weather/">Always Weather</a>
+      <a href="/weather/privacy/">Privacy policy</a>
+      <a href="/weather/support/">Help and contact</a>
+      <a href="/weather/ideas/" aria-current="page">Suggest an idea</a>
+      <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
+      <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+    </nav>
+    <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Weather<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Auto / Light / Dark — the same switcher as /weather/, sharing the "theme" key. */
+(function(){
+  var root = document.documentElement,
+      btns = [].slice.call(document.querySelectorAll(".mode-btn")),
+      mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function stored(){
+    try { var v = localStorage.getItem("theme"); return v === "light" || v === "dark" ? v : null; }
+    catch (e) { return null; }
+  }
+
+  function sync(){
+    var choice = stored(), mode = choice || "auto";
+    if (choice) root.setAttribute("data-theme", choice);
+    else root.removeAttribute("data-theme");
+
+    btns.forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode));
+    });
+
+    /* see /weather/index.html: pinned, both tags take the choice; unpinned, each its own */
+    [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
+      var dark = choice ? choice === "dark" : /dark/.test(m.getAttribute("media"));
+      m.setAttribute("content", dark ? "#241F1A" : "#F1EFE9");
+    });
+  }
+
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){
+      var m = b.getAttribute("data-mode");
+      try { m === "auto" ? localStorage.removeItem("theme") : localStorage.setItem("theme", m); }
+      catch (e) {}
+      sync();
+    });
+  });
+
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  sync();
+})();
+</script>
+
+<script>
+/* The idea form. The server's contract (POST /v1/ideas on the app's proxy): idea 3–2,000
+   characters, optional email up to 254, from "web", and the honeypot "website". It answers 202
+   when it has the idea; 400 {"error":"invalid","field":…} for a field to fix; 413 when it is too
+   big; 429 when too many arrive at once; 403 or 503 when it can't take ideas. Whatever goes
+   wrong, the text stays in the form, so nothing typed is lost. */
+(function(){
+  var ENDPOINT = "https://api.alwaysweather.uk/v1/ideas",
+      MIN = 3, MAX = 2000, NEAR = 200, EMAIL_MAX = 254, TIMEOUT = 20000;
+
+  var form = document.getElementById("idea-form"),
+      idea = document.getElementById("idea"),
+      email = document.getElementById("email"),
+      website = document.getElementById("website"),
+      send = document.getElementById("send"),
+      sendError = document.getElementById("send-error"),
+      count = document.getElementById("idea-count"),
+      countLive = document.getElementById("idea-count-live"),
+      thanks = document.getElementById("thanks"),
+      template = document.getElementById("thanks-template"),
+      sending = false, liveTimer = null;
+
+  var MESSAGES = {
+    ideaEmpty: "Please write your idea first.",
+    ideaShort: "Please write a little more: at least 3 characters.",
+    ideaCheck: "Please check your idea and try again.",
+    ideaTooBig: "That’s too long to send. Please shorten it a little.",
+    email: "That doesn’t look like an email address. Check it, or leave it empty.",
+    busy: "Too many ideas at once. Please try again in a minute."
+  };
+
+  function num(n){ return n.toLocaleString("en-GB"); }
+  function chars(n){ return num(n) + (n === 1 ? " character" : " characters"); }
+
+  /* ---------- the count, shown only near the limit ---------- */
+  function countText(len){
+    var left = MAX - len;
+    if (left > NEAR) return "";
+    if (left === 0) return "No characters left";
+    return left > 0 ? chars(left) + " left" : chars(-left) + " too many";
+  }
+
+  function updateCount(){
+    var len = idea.value.trim().length, text = countText(len);
+    count.textContent = text;
+    count.hidden = !text;
+    count.classList.toggle("over", len > MAX);
+    /* the visible count is aria-hidden; a screen reader hears it once typing pauses */
+    clearTimeout(liveTimer);
+    liveTimer = setTimeout(function(){
+      if (countLive.textContent !== text) countLive.textContent = text;
+    }, 1000);
+  }
+
+  /* ---------- checks, the same limits as the server ---------- */
+  function ideaProblem(){
+    var len = idea.value.trim().length;
+    if (!len) return MESSAGES.ideaEmpty;
+    if (len < MIN) return MESSAGES.ideaShort;
+    if (len > MAX) return "Please keep it to 2,000 characters. It’s " + chars(len - MAX) + " over.";
+    return "";
+  }
+
+  function emailProblem(){
+    var v = email.value.trim();
+    if (!v) return "";
+    if (v.length > EMAIL_MAX || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return MESSAGES.email;
+    return "";
+  }
+
+  /* An error sits under its field, tied to it with aria-describedby, and marks it aria-invalid. */
+  function setError(field, message){
+    var error = document.getElementById(field.id + "-error"),
+        ids = field === idea ? ["idea-hint"] : [];
+    error.textContent = message || "";
+    error.hidden = !message;
+    if (message) {
+      field.setAttribute("aria-invalid", "true");
+      ids.push(error.id);
+    } else {
+      field.removeAttribute("aria-invalid");
+    }
+    if (ids.length) field.setAttribute("aria-describedby", ids.join(" "));
+    else field.removeAttribute("aria-describedby");
+  }
+
+  /* ---------- the Send button ---------- */
+  function hold(on){
+    sending = on;
+    send.disabled = on;
+    send.setAttribute("aria-busy", on ? "true" : "false");
+  }
+
+  function showSendError(status){
+    sendError.textContent = "";
+    if (status === 429) {
+      sendError.textContent = MESSAGES.busy;
+    } else {
+      var mail = document.createElement("a");
+      mail.href = "mailto:apps@guzh.uk";
+      mail.textContent = "apps@guzh.uk";
+      sendError.appendChild(document.createTextNode("Couldn’t send just now. Please try again, or email "));
+      sendError.appendChild(mail);
+      sendError.appendChild(document.createTextNode("."));
+    }
+  }
+
+  function failed(status, data){
+    hold(false);
+    var field = data && data.field;
+    if (status === 400 && (field === "idea" || field === "email")) {
+      if (field === "idea") setError(idea, ideaProblem() || MESSAGES.ideaCheck);
+      else setError(email, MESSAGES.email);
+      (field === "idea" ? idea : email).focus();
+      return;
+    }
+    if (status === 413) {
+      setError(idea, ideaProblem() || MESSAGES.ideaTooBig);
+      idea.focus();
+      return;
+    }
+    showSendError(status);
+    /* disabling the button dropped focus to the page; give it back */
+    if (!document.activeElement || document.activeElement === document.body) send.focus();
+  }
+
+  function sent(withEmail){
+    hold(false);
+    var content = template.content.cloneNode(true);
+    if (!withEmail) {
+      var line = content.querySelector("[data-if-email]");
+      line.parentNode.removeChild(line);
+    }
+    form.hidden = true;
+    thanks.appendChild(content);
+    thanks.querySelector("h2").focus();
+  }
+
+  /* ---------- wiring ---------- */
+  idea.addEventListener("input", function(){
+    updateCount();
+    if (idea.getAttribute("aria-invalid") === "true" && !ideaProblem()) setError(idea, "");
+  });
+  email.addEventListener("input", function(){
+    if (email.getAttribute("aria-invalid") === "true" && !emailProblem()) setError(email, "");
+  });
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (sending) return;
+    sendError.textContent = "";
+
+    var ideaError = ideaProblem(), emailError = emailProblem();
+    setError(idea, ideaError);
+    setError(email, emailError);
+    if (ideaError || emailError) {
+      (ideaError ? idea : email).focus();
+      return;
+    }
+
+    var address = email.value.trim(),
+        controller = window.AbortController ? new AbortController() : null,
+        timer = controller && setTimeout(function(){ controller.abort(); }, TIMEOUT);
+    hold(true);
+
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        idea: idea.value.trim(),
+        email: address || undefined,        // left out when empty
+        from: "web",
+        website: website.value
+      }),
+      signal: controller ? controller.signal : undefined
+    }).then(function(res){
+      if (res.status === 202) return sent(!!address);
+      return res.json().catch(function(){ return {}; }).then(function(data){ failed(res.status, data); });
+    }, function(){
+      failed(0, null);                       // offline, blocked, timed out
+    }).then(function(){
+      clearTimeout(timer);
+    });
+  });
+
+  /* A page the browser brings back with Back never keeps a spinning button. */
+  window.addEventListener("pageshow", function(e){
+    if (e.persisted) hold(false);
+  });
+
+  updateCount();
+})();
+</script>
+
+<script>
+/* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
+   the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
+   The same token is on all five pages; see "Visitor numbers" in the README. */
+if (location.hostname === "guzh.uk") (function(){
+  var s = document.createElement("script");
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
+  document.body.appendChild(s);
+})();
+</script>
+
+</body>
+</html>

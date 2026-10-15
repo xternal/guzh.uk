@@ -7,7 +7,7 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/`, `/weather/privacy/`, `/weather/support/` |
+| Pages | `/`, `/weather/`, `/weather/privacy/`, `/weather/support/`, `/weather/ideas/` |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
@@ -20,6 +20,7 @@ weather/
   index.html            Always Weather — the app's one-scroll page
   privacy/index.html    the privacy policy both app stores require   } generated bodies,
   support/index.html    the support page the App Store requires       } see below
+  ideas/index.html      "Suggest an idea": a form that sends an idea to the app's own server
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
@@ -28,7 +29,7 @@ assets/
                         whenever the favicon changes)
   weather/              app icon, three screenshots and the OG card for the app pages
 robots.txt
-sitemap.xml             the four pages, each with a <lastmod> date — when a page's copy
+sitemap.xml             the five pages, each with a <lastmod> date — when a page's copy
                         changes, set its date to that day. Google ignores changefreq and
                         priority, and stops trusting lastmod once the dates go stale
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
@@ -50,7 +51,7 @@ tools/make-writing.py   copies the three newest Substack posts into the "Writing
                         runs make-writing.py once a day and commits the result if it changed
 tools/publish-writing.sh
                         the same from a Mac, for when the workflow can't reach Substack
-tools/check-colours.py  checks contrast and the dark palette on all four pages, see Notes;
+tools/check-colours.py  checks contrast and the dark palette on every page, see Notes;
                         run by .github/workflows/colours.yml on every pull request that
                         touches a page
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
@@ -198,6 +199,34 @@ the support URL the App Store requires.
   them out of date. **A price lives in three places on `/weather/`** — the line under the pills,
   the "Once" figure and the JSON-LD `offers` — so change all three together.
 
+## Suggest an idea — `/weather/ideas/`
+
+A hand-written page (nothing on it is generated) with one form: the idea (3 to 2,000 characters,
+with a count once 200 are left), an optional email "if you'd like an answer", and a hidden
+honeypot named `website` that people never see and bots fill in. It posts JSON to the app's own
+server, `https://api.alwaysweather.uk/v1/ideas` (the Worker in `proxy/` of the Always Weather
+repo), with `from: "web"`; that server only lets `https://guzh.uk` and `https://www.guzh.uk` call
+it, so a local preview can't send anything.
+
+- **What each answer does.** 202: the form gives way to a thank-you and a link back to
+  `/weather/`. 400 names the field to fix, and the page says so under that field. 413 (too big)
+  goes under the idea too. 429: "Too many ideas at once. Please try again in a minute." Anything
+  else, a timeout (20 s) or no connection: "Couldn't send just now. Please try again, or email
+  apps@guzh.uk." The text stays in the form whatever happens, so nothing typed is lost.
+- **The Send button** follows Pavel's rule for every pressed button: while it sends it shows a
+  small spinner beside its label, is `aria-busy` and disabled, so nobody sends twice; it comes back
+  with a plain message if sending fails; a page brought back with Back (`pageshow`, `persisted`)
+  never keeps a spinning button; and the spinner turns three times slower for readers who ask for
+  less motion.
+- **Without JavaScript** the form is hidden (a plain submit would go to GitHub Pages and fail), and
+  a note gives the email address instead.
+- **Every Always Weather page** carries the same menu in its footer (Always Weather, Privacy
+  policy, Help and contact, Suggest an idea), with the page you're on marked `aria-current` and
+  set in medium weight with a full underline.
+- **Testing it locally**: serve the folder (below) and, in the browser console, replace `fetch`
+  before pressing Send, e.g. `window.fetch = () => Promise.resolve(new Response("{}", {status:
+  429}))`. Never send a test idea to the live server.
+
 ## Local preview
 
 ```bash
@@ -337,7 +366,7 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   ~155 KB gzipped, ten times the home page's own HTML. And it would sit badly next to the "Zero ads,
   accounts and trackers" line on `/weather/`.
 
-  The beacon is a small inline script just before `</body>` on all four pages, holding the same
+  The beacon is a small inline script just before `</body>` on all five pages, holding the same
   token (not a secret; it is in the page source by design). It only loads when the hostname is
   `guzh.uk`, so a local preview never adds visits. A new page needs the same script copied in.
   Each footer says, in one line, that visits are counted this way. Keep that line: it is what keeps

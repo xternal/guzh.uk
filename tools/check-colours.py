@@ -26,7 +26,8 @@ import re
 import sys
 
 SITE = pathlib.Path(__file__).resolve().parent.parent
-PAGES = ["index.html", "weather/index.html", "weather/privacy/index.html", "weather/support/index.html"]
+PAGES = ["index.html", "weather/index.html", "weather/privacy/index.html", "weather/support/index.html",
+         "weather/ideas/index.html"]
 DARK_BROWN = "#241F1A"
 TEXT = ["ink", "ink-2", "ink-3", "accent"]
 BACKGROUNDS = ["paper", "paper-lift"]

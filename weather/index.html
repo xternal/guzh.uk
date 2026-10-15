@@ -30,6 +30,7 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
+  "@id": "https://guzh.uk/weather/#app",
   "name": "Always Weather",
   "url": "https://guzh.uk/weather/",
   "image": "https://guzh.uk/assets/weather/icon.png",
@@ -427,6 +428,8 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   transition:color 160ms ease,border-color 160ms ease;
 }
 .footer-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+/* the same menu on every Always Weather page, the page you're on marked */
+.footer-nav a[aria-current="page"]{font-weight:500;border-bottom-color:var(--ink)}
 /* the credit the data's licences ask for: each source, and nothing that could read as their
    endorsement. The app and the store listing say the same words. */
 .credit{margin:0;font-size:13px;line-height:1.6;color:var(--ink-3);max-width:46ch;text-wrap:pretty}
@@ -696,12 +699,14 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     </div>
     <div class="contact-right">
       <nav class="footer-nav" aria-label="Always Weather">
+        <a href="/weather/" aria-current="page">Always Weather</a>
         <a href="/weather/privacy/">Privacy policy</a>
         <a href="/weather/support/">Help and contact</a>
+        <a href="/weather/ideas/">Suggest an idea</a>
         <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
         <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
       </nav>
-      <p class="credit">Forecast data: MET Norway (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>), the Met Office (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>), Deutscher Wetterdienst (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>) and the US National Weather Service. Rain radar: EUMETNET OPERA (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>). Always Weather is independent and isn’t affiliated with any weather service or government.</p>
+      <p class="credit">Forecast data: MET Norway (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>), the Met Office (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>), Deutscher Wetterdienst (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>) and the US National Weather Service. Rain radar: EUMETNET OPERA (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>), and NOAA with Environment and Climate Change Canada. Always Weather is independent and isn’t affiliated with any weather service or government.</p>
       <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Weather, made in London<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
     </div>
   </footer>
@@ -758,7 +763,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 <script>
 /* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
    the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
-   The same token is on all four pages; see "Visitor numbers" in the README. */
+   The same token is on all five pages; see "Visitor numbers" in the README. */
 if (location.hostname === "guzh.uk") (function(){
   var s = document.createElement("script");
   s.src = "https://static.cloudflareinsights.com/beacon.min.js";

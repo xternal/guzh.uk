@@ -219,6 +219,8 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   transition:color 160ms ease,border-color 160ms ease;
 }
 .foot-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+/* the same menu on every Always Weather page, the page you're on marked */
+.foot-nav a[aria-current="page"]{font-weight:500;border-bottom-color:var(--ink)}
 .colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
 
 @media (max-width:860px){
@@ -275,6 +277,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     <h1>Always Weather — help and contact</h1>
     <h2>Get in touch</h2>
     <p>Email <strong>apps@guzh.uk</strong>. The quickest way is Settings → Send feedback in the app: it opens your email app with the app version and phone model already filled in, so we can help faster. You can see and change everything before you send it.</p>
+    <p>Have an idea for the app? <a href="https://guzh.uk/weather/ideas/" rel="noopener">Suggest an idea</a>: it goes straight to the person who makes Always Weather.</p>
     <p>Empatiq Limited<br>
       66 Paul Street, London EC2A 4NA, United Kingdom<br>
       +44 7776 912598<br>
@@ -303,6 +306,8 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     <nav class="foot-nav" aria-label="Always Weather">
       <a href="/weather/">Always Weather</a>
       <a href="/weather/privacy/">Privacy policy</a>
+      <a href="/weather/support/" aria-current="page">Help and contact</a>
+      <a href="/weather/ideas/">Suggest an idea</a>
       <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
       <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
     </nav>
@@ -358,7 +363,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 <script>
 /* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
    the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
-   The same token is on all four pages; see "Visitor numbers" in the README. */
+   The same token is on all five pages; see "Visitor numbers" in the README. */
 if (location.hostname === "guzh.uk") (function(){
   var s = document.createElement("script");
   s.src = "https://static.cloudflareinsights.com/beacon.min.js";
