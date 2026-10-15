@@ -449,11 +449,19 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 <script>
 /* The idea form. The server's contract (POST /v1/ideas on the app's proxy): idea 3–2,000
-   characters, optional email up to 254, from "web", and the honeypot "website". It answers 202
+   characters, optional email up to 254, where it came from, and the honeypot "website". It answers 202
    when it has the idea; 400 {"error":"invalid","field":…} for a field to fix; 413 when it is too
    big; 429 when too many arrive at once; 403 or 503 when it can't take ideas. Whatever goes
    wrong, the text stays in the form, so nothing typed is lost. */
 (function(){
+  /* Where the page was opened from: the apps' Settings → Suggest an idea adds ?from=android&v=1.0.4
+     (which app and version, nothing about the person), so the email says which app it came from.
+     Anything else, or no query, is the web. */
+  var query = new URLSearchParams(location.search),
+      SOURCES = ["android", "ios", "mac", "windows", "watch"],
+      SOURCE = SOURCES.indexOf(query.get("from")) >= 0 ? query.get("from") : "web",
+      VERSION = (query.get("v") || "").replace(/[^0-9A-Za-z.()-]/g, "").slice(0, 32) || undefined;
+
   var ENDPOINT = "https://api.alwaysweather.uk/v1/ideas",
       MIN = 3, MAX = 2000, NEAR = 200, EMAIL_MAX = 254, TIMEOUT = 20000;
 
@@ -618,7 +626,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
       body: JSON.stringify({
         idea: idea.value.trim(),
         email: address || undefined,        // left out when empty
-        from: "web",
+        from: SOURCE,
+        version: VERSION,                   // left out when not opened from an app
         website: website.value
       }),
       signal: controller ? controller.signal : undefined
