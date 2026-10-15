@@ -44,6 +44,11 @@ plat android/look/paper/src/test/screenshots/paper_wide_laptop.png        platfo
 # Windows: the window's own client area at 16:10, the Microsoft Store's first screenshot (the Store
 # set carries no caption). The page draws the title bar, the desktop and the monitor around it.
 plat store/microsoft-store/screenshots/en-GB/01_sky-hours.png             platform-windows    -resize 1400x
+# The watches: the watch apps' own store screenshots (the stores give them no caption). Apple Watch at
+# its 46 mm screen; the Pixel Watch's round screen, its corners already black. The page draws the cases,
+# the crowns and the straps around them.
+plat store/app-store/screenshots-watch/en-GB/01_now.png                    platform-apple-watch -resize 416x
+plat store/google-play/metadata/android/en-GB/images/wearScreenshots/02_wet.png platform-pixel-watch -resize 454x
 
 # ---- the 1200x630 link-preview card -----------------------------------------------------------
 FONT_DIR="${TMPDIR:-/tmp}/guzh-og-fonts"

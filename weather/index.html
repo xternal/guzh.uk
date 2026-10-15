@@ -35,7 +35,7 @@
   "url": "https://guzh.uk/weather/",
   "image": "https://guzh.uk/assets/weather/icon.png",
   "description": "A calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.",
-  "operatingSystem": "iOS, macOS, Android, Windows",
+  "operatingSystem": "iOS, watchOS, macOS, Android, Wear OS, Windows",
   "applicationCategory": "WeatherApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
   "screenshot": [
@@ -43,12 +43,14 @@
     "https://guzh.uk/assets/weather/platform-iphone.webp",
     "https://guzh.uk/assets/weather/platform-googlebook.webp",
     "https://guzh.uk/assets/weather/platform-android.webp",
-    "https://guzh.uk/assets/weather/platform-windows.webp"
+    "https://guzh.uk/assets/weather/platform-windows.webp",
+    "https://guzh.uk/assets/weather/platform-apple-watch.webp",
+    "https://guzh.uk/assets/weather/platform-pixel-watch.webp"
   ],
   "offers": [
     {
       "@type": "Offer",
-      "name": "App Store, for iPhone and Mac",
+      "name": "App Store, for iPhone, Apple Watch and Mac",
       "url": "https://apps.apple.com/gb/app/always-weather/id6817032365",
       "price": "3.99",
       "priceCurrency": "GBP",
@@ -56,7 +58,7 @@
     },
     {
       "@type": "Offer",
-      "name": "Google Play, for Android and Googlebooks",
+      "name": "Google Play, for Android, Pixel Watch and Googlebooks",
       "url": "https://play.google.com/store/apps/details?id=com.empatiq.weather",
       "price": "3.59",
       "priceCurrency": "GBP",
@@ -113,6 +115,8 @@
   --shot-shadow:0 1px 2px rgba(23,22,19,.06),0 18px 40px -22px rgba(23,22,19,.42);
   /* the drawn device frames in the platforms section */
   --bezel:#1E1D1A;--bezel-edge:transparent;--bezel-base:#D3CEC4;--bezel-notch:#B8B2A6;--bezel-dot:#3A3833;--bezel-hole:#0B0A09;
+  /* the watches' straps: a sport band and a woven band, in the page's warm greys */
+  --strap-apple:#CFC8BC;--strap-pixel:#BDB5A8;
   /* the drawn Windows desktop on the monitor: its wallpaper and its taskbar */
   --desk:#E4E6EC;--desk-glow:rgba(31,59,196,.30);--desk-warm:rgba(224,122,69,.16);--taskbar:rgba(250,248,243,.84);--taskbar-ink:#171613;--taskbar-tile:rgba(23,22,19,.13);
   --grain:.05;
@@ -139,6 +143,7 @@
     --mode-active:rgba(239,231,218,.10);
     --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
     --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
+    --strap-apple:#3A332C;--strap-pixel:#463E35;
     --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
@@ -159,6 +164,7 @@
     --mode-active:rgba(239,231,218,.10);
     --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
     --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
+    --strap-apple:#3A332C;--strap-pixel:#463E35;
     --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
@@ -367,6 +373,33 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   border-radius:999px;background:var(--accent)}
 .taskbar .clock{position:absolute;right:1cqw;top:50%;transform:translateY(-50%);
   font-size:.62cqw;line-height:1.35;text-align:right;white-space:nowrap}
+/* The watches: an Apple Watch and a Pixel Watch standing side by side, their straps fading away above
+   and below. The cases are the page's bezel, the crowns and buttons its darker tone; the screens are the
+   watch apps' own store screenshots (Sky). Sizes are shares of the stage, as for the phones. */
+.stage-watch{aspect-ratio:836/480}
+.watch{position:absolute;top:50%;z-index:1}
+.watch .strap{position:absolute;left:50%;top:-38%;bottom:-38%;transform:translateX(-50%);z-index:0;border-radius:999px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 24%,#000 76%,transparent);
+          mask-image:linear-gradient(to bottom,transparent,#000 24%,#000 76%,transparent)}
+.watch .case{position:relative;z-index:1;box-sizing:border-box;background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
+.watch .case::before,.watch .case::after{content:"";position:absolute;background:var(--bezel-dot)}
+.watch .screen{overflow:hidden;background:#000}
+.watch-apple{left:9%;width:30%;transform:translateY(-54%)}
+.watch-apple .strap{width:78%;background:var(--strap-apple)}
+.watch-apple .case{padding:7.5% 7%;border-radius:25%/21%}
+.watch-apple .screen{aspect-ratio:416/496;border-radius:19%/16%}
+/* the Digital Crown, then the side button below it */
+.watch-apple .case::after{right:-5.5%;top:21%;width:6%;height:15%;border-radius:3px 6px 6px 3px}
+.watch-apple .case::before{right:-3%;top:44%;width:3%;height:22%;border-radius:2px 4px 4px 2px}
+.watch-pixel{right:9%;width:33.5%;transform:translateY(-46%)}
+.watch-pixel .strap{width:58%;background:var(--strap-pixel)}
+.watch-pixel .case{aspect-ratio:1;padding:6.5%;border-radius:50%}
+.watch-pixel .screen{aspect-ratio:1;border-radius:50%}
+/* the crown, one on the side of the dome */
+.watch-pixel .case::after{right:-4.5%;top:40%;width:5.5%;height:20%;border-radius:3px 7px 7px 3px}
+.watch-pixel .case::before{display:none}
+.platform-text .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.platform-text .pills .pill{margin-top:0}
 
 /* ---------- numbers ---------- */
 .numbers{
@@ -535,10 +568,10 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
       <p class="lead">Open it, drag your thumb through the hours, and you know. The time, the temperature, what it feels like, the wind and the rain all follow your thumb, and each hour settles into place with a light tick.</p>
       <p class="body-copy">One plain sentence sums the day up: “Rain from 13:00, clearing by 16:00.” or “Dry all day.” Exactly what you opened a weather app to find out. Today hour by hour, up to ten days ahead, your current location and up to ten saved places, and a small home-screen widget with the next few hours. It opens straight to your last forecast, even without a signal.</p>
       <div class="availability">
-        <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">On the App Store for iPhone and Mac</a>
-        <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather&amp;utm_source=guzh.uk&amp;utm_campaign=weather_page">On Google Play for Android and Googlebooks</a>
+        <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">On the App Store for iPhone, Apple Watch and Mac</a>
+        <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather&amp;utm_source=guzh.uk&amp;utm_campaign=weather_page">On Google Play for Android, Pixel Watch and Googlebooks</a>
         <a class="pill" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7">On the Microsoft Store for Windows</a>
-        <span class="availability-note">In the UK, £3.99 once on the App Store, for iPhone and Mac together, and £3.59 on Google Play and the Microsoft Store. Each store shows your local price.</span>
+        <span class="availability-note">In the UK, £3.99 once on the App Store, for iPhone, Apple Watch and Mac together, and £3.59 on Google Play and the Microsoft Store. Each store shows your local price.</span>
       </div>
     </section>
 
@@ -643,6 +676,35 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
             </div></div>
             <div class="neck" aria-hidden="true"></div>
             <div class="foot" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="platform-row mirror">
+        <div class="platform-text">
+          <p class="platform-store">App Store · Google Play</p>
+          <h3>Apple Watch and Pixel Watch</h3>
+          <p>The next twelve hours on your wrist, in the colour of the sky. Turn the crown and the hours follow, with the same light tick as under your thumb. The watch takes your place from your phone and fetches its own forecast, so it stays right when the phone is out of reach.</p>
+          <p>Put the temperature and the next rain on your Apple Watch face, or today's high and low and a tile of the next four hours on your Pixel Watch. It comes with the iPhone and Android apps, at no extra cost.</p>
+          <div class="pills">
+            <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">App Store</a>
+            <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather">Google Play</a>
+          </div>
+        </div>
+        <div class="stage stage-watch">
+          <div class="watch watch-apple">
+            <div class="strap" aria-hidden="true"></div>
+            <div class="case"><div class="screen">
+              <img src="/assets/weather/platform-apple-watch.webp" width="416" height="496" loading="lazy" decoding="async"
+                   alt="Always Weather on an Apple Watch: London now, 15 degrees and partly cloudy, “Rain from 13:00, clearing by 16:00.”, and the next twelve hours' bars with the rain under them.">
+            </div></div>
+          </div>
+          <div class="watch watch-pixel">
+            <div class="strap" aria-hidden="true"></div>
+            <div class="case"><div class="screen">
+              <img src="/assets/weather/platform-pixel-watch.webp" width="454" height="454" loading="lazy" decoding="async"
+                   alt="Always Weather on a Pixel Watch: London at 13:00, 17 degrees and rain, 0.2 mm and wind 13 mph, on a grey rainy sky, with the hourly bars.">
+            </div></div>
           </div>
         </div>
       </div>
