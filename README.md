@@ -178,6 +178,10 @@ the support URL the App Store requires.
   store listing. The line under them gives each store's UK price — £3.99 once on the App Store,
   for iPhone and Mac together, and £3.59 on Google Play and the Microsoft Store — and says each
   store shows your local price. They are text links, not the stores' badge artwork.
+- **No ornamental dots.** A pill is its text inside a hairline border, nothing in front of it.
+  The small accent dot that used to lead each store pill, the ideas page's "Back to Always
+  Weather" pill and the home masthead's "London, United Kingdom" came off on 16 Oct 2026
+  (Pavel: "too LLM-ish"); don't bring it back or swap in another leading glyph.
 - **Windows went live on the Microsoft Store on 14 Oct 2026** (Store ID 9MSZVHC5NFX7), and the
   switch below was made that day. Before that (Pavel, 13 Oct 2026) it was on the page as a third hero pill,
   "Soon on the Microsoft Store for Windows", and a third row in the platforms section, both plain

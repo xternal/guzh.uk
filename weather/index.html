@@ -276,22 +276,15 @@ img{max-width:100%}
 /* where to get it — plain pills; a live store is a link, not Apple's or Google's badge artwork */
 .availability{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .pill{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:9px 15px;
+  display:inline-flex;align-items:center;
+  padding:9px 16px;
   border:1px solid var(--rule);border-radius:999px;
   font-size:13.5px;font-weight:500;color:var(--ink);
-}
-.pill::before{
-  content:"";width:5px;height:5px;border-radius:50%;
-  background:var(--accent);flex:none;
 }
 .availability-note{font-size:13.5px;color:var(--ink-3)}
 a.pill{text-decoration:none;transition:border-color .15s}
 a.pill:hover{border-color:var(--ink)}
 a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-/* a store that isn't live yet: plain text, the dot drawn as a ring */
-.pill-soon{color:var(--ink-2)}
-.pill-soon::before{background:none;box-shadow:inset 0 0 0 1px var(--accent)}
 
 /* ---------- screenshots ---------- */
 .shots{
