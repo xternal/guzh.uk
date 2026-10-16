@@ -22,9 +22,9 @@
 <meta name="twitter:description" content="A calm, paid weather app. No ads, no account, no tracking.">
 <meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
 
-<!-- The machine-readable twin of the three store pills and the line under them: the same
-     platforms, the same stores, the same UK prices. The "Once" figure further down repeats the
-     prices too, so change a price or a store in all three places. SoftwareApplication rather
+<!-- The machine-readable twin of the store ledger in the hero: the same platforms, the same
+     stores, the same UK prices. The platform rows and the "Once" figure further down repeat the
+     prices too, so change a price or a store in every place. SoftwareApplication rather
      than MobileApplication, because one of the platforms is the Mac. -->
 <script type="application/ld+json">
 {
@@ -273,18 +273,22 @@ img{max-width:100%}
 }
 .body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
 
-/* where to get it — plain pills; a live store is a link, not Apple's or Google's badge artwork */
-.availability{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pill{
-  display:inline-flex;align-items:center;
-  padding:9px 16px;
-  border:1px solid var(--rule);border-radius:999px;
-  font-size:13.5px;font-weight:500;color:var(--ink);
+/* where to get it — a ledger: one ruled row per store, the whole row its link, with what it runs
+   on and the UK price. Words, not Apple's or Google's badge artwork, and nothing in front of them */
+.availability{width:100%;max-width:760px}
+.stores{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
+.store{
+  display:grid;grid-template-columns:190px minmax(0,1fr) auto;align-items:baseline;column-gap:24px;
+  padding:15px 8px;border-top:1px solid var(--rule);
+  color:var(--ink);text-decoration:none;transition:background-color .15s;
 }
-.availability-note{font-size:13.5px;color:var(--ink-3)}
-a.pill{text-decoration:none;transition:border-color .15s}
-a.pill:hover{border-color:var(--ink)}
-a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.store:hover{background:var(--rule-soft)}
+.store:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.store-name{justify-self:start;font-size:17px;font-weight:500;border-bottom:1px solid var(--underline);transition:border-color .15s}
+.store:hover .store-name{border-bottom-color:var(--ink)}
+.store-for{font-size:15px;line-height:1.5;color:var(--ink-2)}
+.store-price{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
+.availability-note{margin:12px 0 0;padding:0 8px;font-size:13.5px;line-height:1.55;color:var(--ink-3)}
 
 /* ---------- screenshots ---------- */
 .shots{
@@ -309,7 +313,10 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .platform-text .platform-store{margin:0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
 .platform-text h3{margin:0;font-size:24px;font-weight:500;letter-spacing:-.01em;line-height:1.25;color:var(--ink)}
 .platform-text p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
-.platform-text .pill{margin-top:8px}
+/* each row ends in the same ledger, store and price, one row per store it names */
+.platform-text .stores{align-self:stretch;margin-top:8px}
+.platform-text .store{grid-template-columns:minmax(0,1fr) auto;padding:12px 6px}
+.platform-text .store-name{font-size:15px}
 .stage{position:relative;aspect-ratio:836/480}
 .stage img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
 .laptop{position:absolute;left:0;top:3.75%;width:76.6%}
@@ -391,8 +398,6 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 /* the crown, one on the side of the dome */
 .watch-pixel .case::after{right:-4.5%;top:40%;width:5.5%;height:20%;border-radius:3px 7px 7px 3px}
 .watch-pixel .case::before{display:none}
-.platform-text .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.platform-text .pills .pill{margin-top:0}
 
 /* ---------- numbers ---------- */
 .numbers{
@@ -489,6 +494,10 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 @media (max-width:860px){
   .platform-row,.platform-row.mirror{grid-template-columns:minmax(0,1fr);gap:28px}
   .platform-row.mirror .platform-text{order:0}
+  /* the ledger's middle column drops under the store and its price */
+  .availability .store{grid-template-columns:minmax(0,1fr) auto;row-gap:3px;padding:14px 4px}
+  .availability .store-for{grid-column:1 / -1;grid-row:2}
+  .availability-note{padding:0 4px}
   .stage-pc{aspect-ratio:836/634}
   .monitor{left:0;width:100%}
   .wrap{padding-left:24px;padding-right:24px}
@@ -561,10 +570,12 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
       <p class="lead">Open it, drag your thumb through the hours, and you know. The time, the temperature, what it feels like, the wind and the rain all follow your thumb, and each hour settles into place with a light tick.</p>
       <p class="body-copy">One plain sentence sums the day up: “Rain from 13:00, clearing by 16:00.” or “Dry all day.” Exactly what you opened a weather app to find out. Today hour by hour, up to ten days ahead, your current location and up to ten saved places, and a small home-screen widget with the next few hours. It opens straight to your last forecast, even without a signal.</p>
       <div class="availability">
-        <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">On the App Store for iPhone, Apple Watch and Mac</a>
-        <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather&amp;utm_source=guzh.uk&amp;utm_campaign=weather_page">On Google Play for Android, Pixel Watch and Googlebooks</a>
-        <a class="pill" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7">On the Microsoft Store for Windows</a>
-        <span class="availability-note">In the UK, £3.99 once on the App Store, for iPhone, Apple Watch and Mac together, and £3.59 on Google Play and the Microsoft Store. Each store shows your local price.</span>
+        <ul class="stores">
+          <li><a class="store" href="https://apps.apple.com/gb/app/always-weather/id6817032365"><span class="store-name">App Store</span> <span class="store-for">iPhone, Apple Watch and Mac, in one purchase</span> <span class="store-price">£3.99</span></a></li>
+          <li><a class="store" href="https://play.google.com/store/apps/details?id=com.empatiq.weather&amp;utm_source=guzh.uk&amp;utm_campaign=weather_page"><span class="store-name">Google Play</span> <span class="store-for">Android, Pixel Watch and Googlebooks</span> <span class="store-price">£3.59</span></a></li>
+          <li><a class="store" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7"><span class="store-name">Microsoft Store</span> <span class="store-for">Windows</span> <span class="store-price">£3.59</span></a></li>
+        </ul>
+        <p class="availability-note">UK prices, paid once. Each store shows your local price.</p>
       </div>
     </section>
 
@@ -592,7 +603,9 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
           <p class="platform-store">App Store</p>
           <h3>Mac and iPhone</h3>
           <p>One purchase covers both. Sky after dark on the Mac, Paper in your pocket: the same forecast, the same hours under your thumb.</p>
-          <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">App Store</a>
+          <ul class="stores">
+            <li><a class="store" href="https://apps.apple.com/gb/app/always-weather/id6817032365"><span class="store-name">App Store</span> <span class="store-price">£3.99</span></a></li>
+          </ul>
         </div>
         <div class="stage">
           <div class="laptop">
@@ -616,7 +629,9 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
           <p class="platform-store">Google Play</p>
           <h3>Android phone and Googlebook</h3>
           <p>On a Googlebook the hours sit on the left and the days on the right. On the phone, one thumb drags you through the day.</p>
-          <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather">Google Play</a>
+          <ul class="stores">
+            <li><a class="store" href="https://play.google.com/store/apps/details?id=com.empatiq.weather"><span class="store-name">Google Play</span> <span class="store-price">£3.59</span></a></li>
+          </ul>
         </div>
         <div class="stage">
           <div class="laptop">
@@ -640,7 +655,9 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
           <p class="platform-store">Microsoft Store</p>
           <h3>Windows PC</h3>
           <p>A window made for a PC: drag along the hours, scroll sideways on a touchpad or press the arrow keys. In Sky even the title bar takes the colour of the sky. For Windows 11 on Intel, AMD and Snapdragon PCs.</p>
-          <a class="pill" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7">Microsoft Store</a>
+          <ul class="stores">
+            <li><a class="store" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7"><span class="store-name">Microsoft Store</span> <span class="store-price">£3.59</span></a></li>
+          </ul>
         </div>
         <div class="stage stage-pc">
           <div class="monitor">
@@ -675,14 +692,14 @@ a.pill:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
       <div class="platform-row mirror">
         <div class="platform-text">
-          <p class="platform-store">App Store · Google Play</p>
+          <p class="platform-store">App Store and Google Play</p>
           <h3>Apple Watch and Pixel Watch</h3>
           <p>The next twelve hours on your wrist, in the colour of the sky. Turn the crown and the hours follow, with the same light tick as under your thumb. The watch takes your place from your phone and fetches its own forecast, so it stays right when the phone is out of reach.</p>
           <p>Put the temperature and the next rain on your Apple Watch face, or today's high and low and a tile of the next four hours on your Pixel Watch. It comes with the iPhone and Android apps, at no extra cost.</p>
-          <div class="pills">
-            <a class="pill" href="https://apps.apple.com/gb/app/always-weather/id6817032365">App Store</a>
-            <a class="pill" href="https://play.google.com/store/apps/details?id=com.empatiq.weather">Google Play</a>
-          </div>
+          <ul class="stores">
+            <li><a class="store" href="https://apps.apple.com/gb/app/always-weather/id6817032365"><span class="store-name">App Store</span> <span class="store-price">£3.99</span></a></li>
+            <li><a class="store" href="https://play.google.com/store/apps/details?id=com.empatiq.weather"><span class="store-name">Google Play</span> <span class="store-price">£3.59</span></a></li>
+          </ul>
         </div>
         <div class="stage stage-watch">
           <div class="watch watch-apple">

@@ -173,15 +173,19 @@ the support URL the App Store requires.
   points crawlers at the public `agenthands.cc` only.
   Move or rename the page and that link needs changing with it. Its one-line description names
   the same platforms as `/weather/`, so add or drop a platform there too.
-- **The store links are three pills** in the `/weather/` hero: "On the App Store for iPhone and
-  Mac", "On Google Play for Android" and "On the Microsoft Store for Windows", each linking to its
-  store listing. The line under them gives each store's UK price — £3.99 once on the App Store,
-  for iPhone and Mac together, and £3.59 on Google Play and the Microsoft Store — and says each
-  store shows your local price. They are text links, not the stores' badge artwork.
-- **No ornamental dots.** A pill is its text inside a hairline border, nothing in front of it.
-  The small accent dot that used to lead each store pill, the ideas page's "Back to Always
-  Weather" pill and the home masthead's "London, United Kingdom" came off on 16 Oct 2026
-  (Pavel: "too LLM-ish"); don't bring it back or swap in another leading glyph.
+- **The store links are a ledger** in the `/weather/` hero: one ruled row per store, the whole
+  row a link to its listing, giving the store, what it runs on and the UK price — App Store,
+  iPhone, Apple Watch and Mac in one purchase, £3.99; Google Play, Android, Pixel Watch and
+  Googlebooks, £3.59; Microsoft Store, Windows, £3.59. The line under it says the prices are UK
+  ones, paid once, and that each store shows your local price. Each platform row further down
+  ends in the same ledger, store and price, one row per store it names. Below 860px the hero's
+  middle column drops under the store and its price. They are words, not the stores' badge
+  artwork. The ledger replaced three pills on 16 Oct 2026 (Pavel chose it from four
+  alternatives: the store names inside a sentence, one button for your device, device icons).
+- **No ornamental dots.** The small accent dot that used to lead each store pill, the ideas
+  page's "Back to Always Weather" pill and the home masthead's "London, United Kingdom" came off
+  on 16 Oct 2026 (Pavel: "too LLM-ish"), and so did the middle dot in the watch row's "App Store
+  and Google Play"; don't bring them back or swap in another leading glyph or icon.
 - **Windows went live on the Microsoft Store on 14 Oct 2026** (Store ID 9MSZVHC5NFX7), and the
   switch below was made that day. Before that (Pavel, 13 Oct 2026) it was on the page as a third hero pill,
   "Soon on the Microsoft Store for Windows", and a third row in the platforms section, both plain
@@ -200,8 +204,8 @@ the support URL the App Store requires.
   `SoftwareApplication` (not `MobileApplication`, because one platform is the Mac) with one
   `Offer` per store. The privacy and support pages are plain `WebPage`s that are `isPartOf`
   `/weather/`, and say only what their `<head>` already says, so regenerating a body can't leave
-  them out of date. **A price lives in three places on `/weather/`** — the line under the pills,
-  the "Once" figure and the JSON-LD `offers` — so change all three together.
+  them out of date. **A price lives in four places on `/weather/`** — the hero's ledger, the
+  platform rows' ledgers, the "Once" figure and the JSON-LD `offers` — so change them together.
 
 ## Suggest an idea — `/weather/ideas/`
 
@@ -377,7 +381,7 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   the counter honest next to the app's no-trackers promise, and the privacy policy itself is
   generated from the app repo and covers only the app.
 
-  The Google Play pill carries `utm_source=guzh.uk&utm_campaign=weather_page`, which Play Console
+  The Google Play row in the hero's ledger carries `utm_source=guzh.uk&utm_campaign=weather_page`, which Play Console
   reports as a tracked channel. App Store Connect needs nothing: it lists guzh.uk under its web
   referrers on its own.
 
