@@ -275,13 +275,13 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   <main class="policy">
     <!-- BEGIN generated from store/privacy-policy.md — edit that file, then re-run tools/make-weather-pages.py -->
     <h1>Privacy policy — Always Weather</h1>
-    <p class="updated">Last updated: 15 October 2026</p>
+    <p class="updated">Last updated: 17 October 2026</p>
     <p>Always Weather is made by Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”). We are the controller of the little personal data the app handles. Contact: apps@guzh.uk or +44 7776 912598.</p>
     <h2>The short version</h2>
     <ul>
       <li>No ads, no account, no analytics, no tracking. We never sell or share your data for advertising.</li>
       <li>The app sends your <strong>approximate</strong> location, rounded to about a kilometre, to our own server to get the forecast and the name of the place you’re in. We don’t store it against you.</li>
-      <li>If the app crashes, it sends an anonymous crash report so we can fix the bug. You can turn this off in Settings. The Mac, iPhone and Windows apps send none.</li>
+      <li>If the app crashes, it sends an anonymous crash report so we can fix the bug. You can turn this off in Settings. The Mac, iPhone, Windows and Linux apps send none.</li>
       <li>Your saved places and settings stay on your phone, and in your phone’s own backup if you use it.</li>
       <li>Rain and warning alerts are off unless you turn them on. Your phone (or Mac, or PC) checks the forecast for itself; there is no push service and no list of devices.</li>
     </ul>
@@ -328,6 +328,17 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
       never sends a crash report. It asks Windows’ own location service for your position only when you choose “Use my location”, from Wi-Fi or the network rather than GPS, and rounds it to about a kilometre before it leaves your PC, as on a phone; without it, you search for a place. Saved places, settings, last forecasts and place names are stored only on your PC, in the app’s own folder, which Windows removes when you uninstall the app; they aren’t synced anywhere. And there, “Send feedback” includes your Windows version instead of a phone’s model.</p>
     <p>Settings → What left this PC lists every request the app made in the last 7 days (the latest 500 at most), exactly as it was<br>
       sent, so you can check everything above for yourself. The list is kept only on your PC, drops each entry after 7 days, and you can clear it at any time. It never records the app’s own access key.</p>
+    <h2>The Linux app</h2>
+    <p>Always Weather for Linux, made for Omarchy and other Arch systems, is free. Everything above applies to it too, with these differences.</p>
+    <ul>
+      <li><strong>Your location.</strong> Linux gives apps no location service, so “Use my location” (off until you choose it) uses one of two things. First, the place Omarchy’s weather is set to, which the app reads from Omarchy’s own settings on your computer; if Omarchy has only a place’s name, the app finds it with a place search (above) and remembers the answer on your computer, so it searches once per name. Otherwise, or if you choose “Where this computer is” in Settings → Places → Your location, a rough place from your internet connection: the app asks our server for the place it’s in, sending no location at all, and our server answers with the place nearest Cloudflare’s estimate of where the connection comes from, which Cloudflare makes from your IP address and is usually the town. That estimate and the answer are never stored, logged or cached, and your IP address is used, as for every request, only to limit how often one address can call us. It can be wrong, for example behind a VPN; then search for a place instead. The app looks only when it opens on your current location, never in the background, and a point is rounded to about a kilometre before it leaves your computer, as on a phone.</li>
+      <li><strong>Omarchy’s bar.</strong> If you add Always Weather to Omarchy’s bar, it shows the hour’s weather for the place the app opens with. When that forecast is out of date, the bar asks our server for it with the same request as the app (see Forecasts above). It never looks for your location itself.</li>
+      <li>It has no crash reporting, and for now no alerts.</li>
+      <li>Saved places, settings, last forecasts and place names are stored only on your computer, in `~/.local/share/always-weather`; deleting that folder removes them. They aren’t synced anywhere.</li>
+      <li>“Send feedback” includes your Linux distribution and kernel version instead of a phone’s model.</li>
+      <li>Settings → What left this computer lists every request the app and the bar made in the last 7 days, as on Windows.</li>
+      <li>You download the app from GitHub, which, like any download site, sees your IP address when you do; GitHub’s own privacy statement covers that.</li>
+    </ul>
     <h2>The watch apps</h2>
     <p>From version 1.0.3, Always Weather has an app for Apple Watch and one for Wear OS watches, such as the Pixel Watch. A watch app shows the place your phone’s app is showing. The phone tells the watch that place, and your units, clock and forecast source. It sends nothing else: never a forecast.</p>
     <ul>
@@ -336,9 +347,9 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     </ul>
     <p>The watch then asks our server for the forecast itself, with the same request and the same rounded point as the phone (see Forecasts above), so it stays right when the phone is out of reach. It keeps the place and the last forecast on the watch. The Wear OS app never includes them in a backup. Neither watch app has crash reporting.</p>
     <h2>Location permission</h2>
-    <p>The app asks for your location only while you use it, and looks again each time you come back to it, so the forecast is for where you are. On Android and an iPhone you choose precise or approximate location when the system asks, and the app works with either; precise makes the forecast more exact, and either way the point is rounded to about a kilometre before it leaves your device. On an iPhone or a Mac the app tells Location Services it needs a position only to within about a kilometre, so even with Precise on it never asks for more. It’s optional: without it, search for a place instead. You can change this at any time in your phone’s settings (on Windows: Settings → Privacy &amp; security → Location).</p>
+    <p>The app asks for your location only while you use it, and looks again each time you come back to it, so the forecast is for where you are. On Android and an iPhone you choose precise or approximate location when the system asks, and the app works with either; precise makes the forecast more exact, and either way the point is rounded to about a kilometre before it leaves your device. On an iPhone or a Mac the app tells Location Services it needs a position only to within about a kilometre, so even with Precise on it never asks for more. It’s optional: without it, search for a place instead. You can change this at any time in your phone’s settings (on Windows: Settings → Privacy &amp; security → Location). On Linux, where there is no location service, see The Linux app above.</p>
     <h2>Purchases</h2>
-    <p>Google Play, the App Store or the Microsoft Store handles the purchase. We don’t receive your payment details.</p>
+    <p>Google Play, the App Store or the Microsoft Store handles the purchase. We don’t receive your payment details. The Linux app is free; if you give through the website’s “Buy me a coffee” link, Ko-fi handles the payment.</p>
     <h2>Where data is processed</h2>
     <p>Cloudflare runs our server in data centres around the world, usually the one nearest to you. Sentry stores crash reports in the EU. Where data leaves the UK, our providers protect it with the UK’s approved safeguards (the UK Extension to the EU–US Data Privacy Framework or standard contractual clauses).</p>
     <h2>Your rights</h2>
