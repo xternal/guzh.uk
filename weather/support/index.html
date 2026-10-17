@@ -238,6 +238,11 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   .wrap{padding:0}
   a{color:inherit;border-bottom:0}
 }
+/* Paths and commands from the app's documents, kept exactly as written. */
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em}
+code{background:var(--paper-lift);border:1px solid var(--rule-soft);border-radius:4px;padding:1px 5px;overflow-wrap:anywhere}
+pre{background:var(--paper-lift);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;margin:12px 0 18px;overflow-x:auto;line-height:1.55}
+pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:normal}
 </style>
 </head>
 
@@ -297,6 +302,23 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
       Settings → Crash reports. Reports are anonymous; see the <a href="/weather/privacy/">privacy policy</a>.</p>
     <p><strong>I bought it on another phone.</strong><br>
       Purchases belong to your Google or Apple account. Install it from the same account on the new phone and you won’t pay again. Your settings and saved places return through your phone’s own backup when you restore it on the new phone.</p>
+    <h2>On Linux (Omarchy)</h2>
+    <p><strong>How do I install it?</strong><br>
+      Run the command on <a href="https://guzh.uk/weather/#linux" rel="noopener">the Always Weather page</a> in a terminal: it installs the app with pacman, which adds Java 21 if it isn’t there. Then open Always Weather from Omarchy’s launcher. For a new version, run the page’s command again. It’s free on Linux.</p>
+    <p><strong>Where does it get my location?</strong><br>
+      Linux gives apps no location of its own. “Use my location” takes the place set in Omarchy’s weather or, if there isn’t one, a rough place from your internet connection, usually your town. With a place set in Omarchy, choose between the two in Settings → Places → Your location.</p>
+    <p><strong>It shows the wrong town.</strong><br>
+      The place from your internet connection is a guess, and it can be out, especially behind a VPN. Set your place in Omarchy’s weather, for example with <code>omarchy-weather-location --set Hammersmith</code> in a terminal, or search for a place in the app and save it.</p>
+    <p><strong>How do I put it in Omarchy’s bar?</strong><br>
+      Add this to the list in <code>bar.layout</code> in <code>~/.config/omarchy/shell.json</code>:</p>
+    <pre><code>{ "id": "always-weather", "type": "command", "exec": "always-weather --bar",
+  "interval": 300, "onClick": "omarchy-launch-or-focus always-weather always-weather" }</code></pre>
+    <p>The bar then shows the hour’s temperature and weather for the place the app opens with, and a click opens the app. It stays empty until you’ve chosen a place in the app.</p>
+    <p><strong>Does it have alerts?</strong><br>
+      Not yet on Linux. Everything else works as on the other platforms.</p>
+    <p><strong>How do I remove it?</strong></p>
+    <pre><code>sudo pacman -R always-weather-bin</code></pre>
+    <p>Your saved places and settings stay in <code>~/.local/share/always-weather</code>; delete that folder to remove them too.</p>
     <h2>Privacy</h2>
     <p>Read the <a href="/weather/privacy/">privacy policy</a>.</p>
     <!-- END generated -->

@@ -72,7 +72,17 @@ def smarten(text: str) -> str:
 
 
 def inline(text: str) -> str:
-    """The inline markdown the two documents actually use: **bold** and [links](url)."""
+    """The inline markdown the two documents use: **bold**, [links](url) and `code`. Code is kept
+    exactly as written (no typographic quotes), so a path or a command copies as it is."""
+    parts = re.split(r"(`[^`]+`)", text)
+    return "".join(
+        f"<code>{html.escape(part[1:-1], quote=False)}</code>" if part.startswith("`") and part.endswith("`")
+        else links(part)
+        for part in parts
+    )
+
+
+def links(text: str) -> str:
     out, last = [], 0
     for m in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", text):
         out.append(escape_and_emphasise(text[last:m.start()]))
@@ -98,7 +108,7 @@ def strip_notes(markdown: str) -> str:
 
 
 def render(markdown: str) -> str:
-    """The small subset of markdown these two documents use."""
+    """The small subset of markdown these two documents use, fenced code blocks included."""
     lines, blocks, buf, mode = markdown.splitlines(), [], [], None
 
     def flush():
@@ -127,6 +137,19 @@ def render(markdown: str) -> str:
 
     for line in lines:
         stripped = line.strip()
+        # A fenced block (```): a command to copy, kept exactly as written.
+        if mode == "pre":
+            if stripped.startswith("```"):
+                code = html.escape("\n".join(buf), quote=False)
+                blocks.append(f"    <pre><code>{code}</code></pre>")
+                buf, mode = [], None
+            else:
+                buf.append(line)
+            continue
+        if stripped.startswith("```"):
+            flush()
+            mode = "pre"
+            continue
         if not stripped:
             flush()
         elif stripped.startswith("### "):
