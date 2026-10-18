@@ -4,85 +4,36 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Always Weather: drag through the hours</title>
-<meta name="description" content="Always Weather is a calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.">
-<link rel="canonical" href="https://guzh.uk/weather/">
+<!-- Always Weather's page moved to its own domain on 18 Oct 2026: https://alwaysweather.uk/ (the
+     site/ folder of the Always Weather repo). This page only sends readers and search engines
+     there. GitHub Pages can't answer with a 301, so the canonical link and a zero-second refresh
+     do that job, and Google reads the pair as a permanent move. The refresh drops the part after
+     #, so the script carries it across: the apps' help links to /weather/#linux, and
+     alwaysweather.uk/#linux is the same section. The privacy, support and ideas pages stay here:
+     the app stores and the apps link to them. -->
+<link rel="canonical" href="https://alwaysweather.uk/">
+<meta http-equiv="refresh" content="0; url=https://alwaysweather.uk/">
+<script>location.replace("https://alwaysweather.uk/" + location.hash);</script>
 
+<title>Always Weather is now at alwaysweather.uk</title>
+<meta name="description" content="Always Weather, the calm weather app you drag through the hours, has its own home now: alwaysweather.uk. Its privacy policy, help and ideas pages stay on guzh.uk.">
+
+<!-- A link to this old address shared anywhere shows the new page's card: the same picture,
+     and og:url naming the new address. -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://guzh.uk/weather/">
+<meta property="og:url" content="https://alwaysweather.uk/">
 <meta property="og:site_name" content="Always Weather">
 <meta property="og:title" content="Always Weather: drag through the hours">
-<meta property="og:description" content="A calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.">
-<meta property="og:image" content="https://guzh.uk/assets/weather/og.png">
+<meta property="og:description" content="A calm weather app for your phone, watch, Mac, PC and Linux. Its home is now alwaysweather.uk.">
+<meta property="og:image" content="https://alwaysweather.uk/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Always Weather: drag through the hours.">
+<meta property="og:image:alt" content="Always Weather: drag through the hours. Beside the name, the app on a phone: London at 14:00, 16 degrees and rain, with the hourly bars.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Always Weather: drag through the hours">
-<meta name="twitter:description" content="A calm, paid weather app. No ads, no account, no tracking.">
-<meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
-
-<!-- The machine-readable twin of the store ledger in the hero: the same platforms, the same
-     stores, the same UK prices. The platform rows and the "Once" figure further down repeat the
-     prices too, so change a price or a store in every place. SoftwareApplication rather
-     than MobileApplication, because one of the platforms is the Mac. -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "@id": "https://guzh.uk/weather/#app",
-  "name": "Always Weather",
-  "url": "https://guzh.uk/weather/",
-  "image": "https://guzh.uk/assets/weather/icon.png",
-  "description": "A calm, paid weather app. Drag your thumb through the hours and see exactly when the rain starts and stops. No ads, no account, no tracking.",
-  "operatingSystem": "iOS, watchOS, macOS, Android, Wear OS, Windows, Linux",
-  "applicationCategory": "WeatherApplication",
-  "author": {"@type": "Organization", "name": "Empatiq Limited"},
-  "screenshot": [
-    "https://guzh.uk/assets/weather/platform-mac.webp",
-    "https://guzh.uk/assets/weather/platform-iphone.webp",
-    "https://guzh.uk/assets/weather/platform-googlebook.webp",
-    "https://guzh.uk/assets/weather/platform-android.webp",
-    "https://guzh.uk/assets/weather/platform-windows.webp",
-    "https://guzh.uk/assets/weather/platform-linux.webp",
-    "https://guzh.uk/assets/weather/platform-apple-watch.webp",
-    "https://guzh.uk/assets/weather/platform-pixel-watch.webp"
-  ],
-  "offers": [
-    {
-      "@type": "Offer",
-      "name": "App Store, for iPhone, Apple Watch and Mac",
-      "url": "https://apps.apple.com/gb/app/always-weather/id6817032365",
-      "price": "3.99",
-      "priceCurrency": "GBP",
-      "eligibleRegion": "GB"
-    },
-    {
-      "@type": "Offer",
-      "name": "Google Play, for Android, Pixel Watch and Googlebooks",
-      "url": "https://play.google.com/store/apps/details?id=com.empatiq.weather",
-      "price": "3.59",
-      "priceCurrency": "GBP",
-      "eligibleRegion": "GB"
-    },
-    {
-      "@type": "Offer",
-      "name": "Microsoft Store, for Windows",
-      "url": "https://apps.microsoft.com/detail/9MSZVHC5NFX7",
-      "price": "3.59",
-      "priceCurrency": "GBP",
-      "eligibleRegion": "GB"
-    },
-    {
-      "@type": "Offer",
-      "name": "Linux, for Omarchy and other Arch systems",
-      "url": "https://guzh.uk/weather/#linux",
-      "price": "0",
-      "priceCurrency": "GBP"
-    }
-  ]
-}
-</script>
+<meta name="twitter:description" content="A calm weather app for your phone, watch, Mac, PC and Linux. Its home is now alwaysweather.uk.">
+<meta name="twitter:image" content="https://alwaysweather.uk/assets/og.png">
+<meta name="twitter:image:alt" content="Always Weather: drag through the hours. Beside the name, the app on a phone: London at 14:00, 16 degrees and rain, with the hourly bars.">
 
 <link rel="icon" href="/assets/weather/icon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/weather/icon.png">
@@ -95,9 +46,9 @@
 
 <script>
 /* Pin the reader's explicit choice before first paint — anything later is a flash of the wrong
-   theme. Unlike the home page, Auto here is simply prefers-color-scheme: the sun table is 7 KB
-   and belongs to that page. A pinned choice is shared (same origin, same "theme" key), so
-   Light or Dark chosen anywhere on guzh.uk follows the reader here. */
+   theme. Unlike the home page, Auto on the Always Weather pages is simply prefers-color-scheme:
+   the sun table is 7 KB and belongs to that page. A pinned choice is shared (same origin, same
+   "theme" key), so Light or Dark chosen anywhere on guzh.uk follows the reader here. */
 (function(){
   try {
     var v = localStorage.getItem("theme");
@@ -120,13 +71,6 @@
   --underline:rgba(23,22,19,.22);
   --underline-accent:rgba(31,59,196,.28);
   --mode-active:rgba(23,22,19,.07);
-  --shot-shadow:0 1px 2px rgba(23,22,19,.06),0 18px 40px -22px rgba(23,22,19,.42);
-  /* the drawn device frames in the platforms section */
-  --bezel:#1E1D1A;--bezel-edge:transparent;--bezel-base:#D3CEC4;--bezel-notch:#B8B2A6;--bezel-dot:#3A3833;--bezel-hole:#0B0A09;
-  /* the watches' straps: a sport band and a woven band, in the page's warm greys */
-  --strap-apple:#CFC8BC;--strap-pixel:#BDB5A8;
-  /* the drawn Windows desktop on the monitor: its wallpaper and its taskbar */
-  --desk:#E4E6EC;--desk-glow:rgba(31,59,196,.30);--desk-warm:rgba(224,122,69,.16);--taskbar:rgba(250,248,243,.84);--taskbar-ink:#171613;--taskbar-tile:rgba(23,22,19,.13);
   --grain:.05;
   --grain-blend:multiply;
 }
@@ -149,10 +93,6 @@
     --underline:rgba(239,231,218,.24);
     --underline-accent:rgba(226,178,111,.32);
     --mode-active:rgba(239,231,218,.10);
-    --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
-    --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
-    --strap-apple:#3A332C;--strap-pixel:#463E35;
-    --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
   }
@@ -170,10 +110,6 @@
     --underline:rgba(239,231,218,.24);
     --underline-accent:rgba(226,178,111,.32);
     --mode-active:rgba(239,231,218,.10);
-    --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
-    --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
-    --strap-apple:#3A332C;--strap-pixel:#463E35;
-    --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
 }
@@ -192,7 +128,6 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
-/* a warm light falling across the page, and a paper tooth over the top of it */
 body::before{
   content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
@@ -212,26 +147,24 @@ body::after{
   overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
 }
 
-a{color:inherit;text-decoration:none}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--underline-accent);padding-bottom:1px;transition:border-color 160ms ease}
+a:hover{border-bottom-color:var(--accent)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
-img{max-width:100%}
 
 .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:32px 56px 0}
 
 /* ---------- header ---------- */
 .masthead{
   display:flex;align-items:center;justify-content:space-between;
-  gap:20px;flex-wrap:wrap;padding-bottom:96px;
+  gap:20px;flex-wrap:wrap;padding-bottom:80px;
 }
 .masthead-name{
   font-size:14px;font-weight:500;letter-spacing:.01em;
-  border-bottom:1px solid transparent;padding-bottom:1px;
-  transition:border-color 160ms ease;
+  color:var(--ink);border-bottom:1px solid transparent;padding-bottom:1px;
 }
 .masthead-name:hover{border-bottom-color:var(--underline)}
 .masthead-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 
-/* ---------- light / dark switcher ---------- */
 .mode{
   display:inline-flex;align-items:center;gap:2px;
   padding:2px;border:1px solid var(--rule);border-radius:999px;
@@ -249,305 +182,46 @@ img{max-width:100%}
 .mode-btn[aria-pressed="true"]{background:var(--mode-active);color:var(--ink)}
 .mode-btn svg{display:block;width:14px;height:14px}
 
-.link-accent{
-  color:var(--accent);font-weight:500;
-  border-bottom:1px solid var(--underline-accent);
-  padding-bottom:1px;
-  transition:border-color 160ms ease;
+/* ---------- the move ---------- */
+.moved{max-width:58ch}
+.moved h1{
+  margin:0 0 20px;
+  font-weight:500;font-size:clamp(32px,3.6vw,44px);
+  line-height:1.08;letter-spacing:-.03em;text-wrap:balance;
 }
-.link-accent:hover{border-bottom-color:var(--accent)}
+.moved p{margin:14px 0 0;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
+.moved .go{margin-top:28px;font-size:20px;line-height:1.5}
+.moved .go a{font-weight:500}
 
-/* ---------- hero ---------- */
-.hero{display:flex;flex-direction:column;align-items:flex-start;gap:28px}
-.app-icon{
-  display:block;width:72px;height:72px;border-radius:16px;
-  box-shadow:var(--shot-shadow);
-}
-.eyebrow{
-  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);
-}
-.hero h1{
-  margin:0;
-  font-weight:500;
-  font-size:clamp(38px,4.6vw,58px);
-  line-height:1.05;letter-spacing:-.035em;
-  max-width:16ch;text-wrap:balance;
-}
-.lead{
-  margin:0;max-width:50ch;
-  font-size:20px;line-height:1.5;letter-spacing:-.005em;
-  color:var(--ink);text-wrap:pretty;
-}
-.body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
-
-/* where to get it — a ledger: one ruled row per store, the whole row its link, with what it runs
-   on and the UK price. Words, not Apple's or Google's badge artwork, and nothing in front of them */
-.availability{width:100%;max-width:760px}
-.stores{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
-.store{
-  display:grid;grid-template-columns:190px minmax(0,1fr) auto;align-items:baseline;column-gap:24px;
-  padding:15px 8px;border-top:1px solid var(--rule);
-  color:var(--ink);text-decoration:none;transition:background-color .15s;
-}
-.store:hover{background:var(--rule-soft)}
-.store:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.store-name{justify-self:start;font-size:17px;font-weight:500;border-bottom:1px solid var(--underline);transition:border-color .15s}
-.store:hover .store-name{border-bottom-color:var(--ink)}
-.store-for{font-size:15px;line-height:1.5;color:var(--ink-2)}
-.store-price{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
-.availability-note{margin:12px 0 0;padding:0 8px;font-size:13.5px;line-height:1.55;color:var(--ink-3)}
-
-/* ---------- screenshots ---------- */
-.shots{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:28px;margin-top:96px;
-}
-.shot{margin:0}
-.shot img{
-  display:block;width:100%;height:auto;aspect-ratio:9/16;
-  border-radius:8px;box-shadow:var(--shot-shadow);
-}
-
-/* ---------- platforms: each store's laptop with its phone in front ---------- */
-/* Drawn frames, not the makers' device photos: flat bezels in the page's own tokens. Every size is a
-   percentage of the stage, so the pair scales as one picture down to a phone's width. */
-.platforms{margin-top:112px;display:flex;flex-direction:column;gap:20px}
-.platforms h2{margin:0;font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.2;color:var(--ink)}
-.platform-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,11fr);gap:56px;align-items:center;margin-top:48px}
-.platform-row.mirror{grid-template-columns:minmax(0,11fr) minmax(0,5fr)}
-.platform-row.mirror .platform-text{order:2}
-.platform-text{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-.platform-text .platform-store{margin:0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
-.platform-text h3{margin:0;font-size:24px;font-weight:500;letter-spacing:-.01em;line-height:1.25;color:var(--ink)}
-.platform-text p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
-/* each row ends in the same ledger, store and price, one row per store it names */
-.platform-text .stores{align-self:stretch;margin-top:8px}
-.platform-text .store{grid-template-columns:minmax(0,1fr) auto;padding:12px 6px}
-.platform-text .store-name{font-size:15px}
-.stage{position:relative;aspect-ratio:836/480}
-.stage img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
-.laptop{position:absolute;left:0;top:3.75%;width:76.6%}
-.mirror .laptop{left:auto;right:3.6%}
-.lid{position:relative;box-sizing:border-box;padding:1.9% 1.9% 2.2%;border-radius:20px 20px 8px 8px;
-  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
-.lid::before{content:"";position:absolute;top:.9%;left:50%;width:.8%;aspect-ratio:1;transform:translateX(-50%);
-  border-radius:50%;background:var(--bezel-dot)}
-.laptop .screen{aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#000}
-.base{position:relative;width:109.4%;margin-left:-4.7%;aspect-ratio:700/16;border-radius:0 0 14px 14px;
-  background:var(--bezel-base);box-shadow:var(--shot-shadow)}
-.base::before{content:"";position:absolute;top:0;left:50%;width:17%;height:38%;transform:translateX(-50%);
-  border-radius:0 0 8px 8px;background:var(--bezel-notch)}
-.phone{position:absolute;right:2.4%;bottom:0;width:23.4%;z-index:1}
-.mirror .phone{right:auto;left:2.4%}
-.phone .body{position:relative;box-sizing:border-box;padding:3.6%;border-radius:17%/8.2%;
-  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
-.phone .screen{aspect-ratio:9/19.5;border-radius:15%/7%;overflow:hidden;background:#000}
-.phone .body::before{content:"";position:absolute;top:3.9%;left:50%;transform:translateX(-50%);z-index:1;background:var(--bezel-hole)}
-.phone-iphone .body::before{width:27.5%;height:3.9%;border-radius:999px}
-.phone-android .body::before{width:5.1%;aspect-ratio:1;border-radius:50%}
-/* Windows: a monitor on its stand, and on it a Windows 11 desktop drawn in the page's tokens: the app's
-   window with its title bar in the colour of the sky under it (the app sets it so), and the taskbar
-   with the app running. The window is the only screenshot; inside the display every size is in cqw,
-   a share of the display's width, so the desktop scales as one picture. */
-.stage-pc{aspect-ratio:836/512}
-.monitor{position:absolute;left:10%;top:0;width:80%}
-.panel{box-sizing:border-box;padding:1.1% 1.1% 1.7%;border-radius:12px;
-  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
-.display{position:relative;aspect-ratio:16/10;border-radius:4px;overflow:hidden;container-type:inline-size;
-  background:
-    radial-gradient(66% 84% at 50% 50%,var(--desk-glow) 38%,transparent 100%),
-    radial-gradient(42% 64% at 4% 104%,var(--desk-warm),transparent 72%),
-    radial-gradient(40% 56% at 98% -6%,var(--desk-warm),transparent 72%),
-    var(--desk)}
-.neck{width:13%;aspect-ratio:87/64;margin:0 auto;background:var(--bezel-base);
-  clip-path:polygon(22% 0,78% 0,90% 100%,10% 100%)}
-.foot{width:36%;aspect-ratio:240/13;margin:0 auto;border-radius:7px 7px 3px 3px;
-  background:var(--bezel-base);box-shadow:var(--shot-shadow)}
-.window{position:absolute;left:10cqw;top:4cqw;width:80cqw;border-radius:.7cqw;overflow:hidden;
-  box-shadow:0 0 0 1px rgba(0,0,0,.10),0 .5cqw 1.2cqw rgba(0,0,0,.16),0 2cqw 5cqw rgba(0,0,0,.30)}
-.stage .window>img{height:auto;aspect-ratio:16/10}
-.titlebar{display:flex;align-items:center;gap:.55cqw;height:1.8cqw;padding-left:.7cqw;
-  background:#C8D5DF;color:#171613;font-size:.68cqw;line-height:1;white-space:nowrap}
-.stage .titlebar img{width:.9cqw;height:.9cqw;border-radius:.15cqw}
-.titlebar svg{display:block;margin-left:auto;width:7.7cqw;height:1.8cqw}
-.taskbar{position:absolute;left:0;right:0;bottom:0;height:2.7cqw;display:flex;align-items:center;justify-content:center;gap:.5cqw;
-  background:var(--taskbar);border-top:1px solid var(--rule-soft);color:var(--taskbar-ink)}
-.taskbar .search{width:7.5cqw;height:1.5cqw;border-radius:999px;background:var(--taskbar-tile);margin-right:.3cqw}
-.taskbar .tile{width:1.35cqw;height:1.35cqw;border-radius:.3cqw;background:var(--taskbar-tile)}
-.taskbar .running{position:relative;display:grid;place-items:center;width:2.2cqw;height:2.2cqw;border-radius:.35cqw;background:var(--taskbar-tile)}
-.stage .taskbar .running img{width:1.35cqw;height:1.35cqw;border-radius:.3cqw}
-.taskbar .running::after{content:"";position:absolute;bottom:.1cqw;left:50%;width:.7cqw;height:.18cqw;transform:translateX(-50%);
-  border-radius:999px;background:var(--accent)}
-.taskbar .clock{position:absolute;right:1cqw;top:50%;transform:translateY(-50%);
-  font-size:.62cqw;line-height:1.35;text-align:right;white-space:nowrap}
-/* The watches: an Apple Watch and a Pixel Watch standing side by side, their straps fading away above
-   and below. The cases are the page's bezel, the crowns and buttons its darker tone; the screens are the
-   watch apps' own store screenshots (Sky). Sizes are shares of the stage, as for the phones. */
-.stage-watch{aspect-ratio:836/480}
-.watch{position:absolute;top:50%;z-index:1}
-.watch .strap{position:absolute;left:50%;top:-38%;bottom:-38%;transform:translateX(-50%);z-index:0;border-radius:999px;
-  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 24%,#000 76%,transparent);
-          mask-image:linear-gradient(to bottom,transparent,#000 24%,#000 76%,transparent)}
-.watch .case{position:relative;z-index:1;box-sizing:border-box;background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
-.watch .case::before,.watch .case::after{content:"";position:absolute;background:var(--bezel-dot)}
-.watch .screen{overflow:hidden;background:#000}
-.watch-apple{left:9%;width:30%;transform:translateY(-54%)}
-.watch-apple .strap{width:78%;background:var(--strap-apple)}
-.watch-apple .case{padding:7.5% 7%;border-radius:25%/21%}
-.watch-apple .screen{aspect-ratio:416/496;border-radius:19%/16%}
-/* the Digital Crown, then the side button below it */
-.watch-apple .case::after{right:-5.5%;top:21%;width:6%;height:15%;border-radius:3px 6px 6px 3px}
-.watch-apple .case::before{right:-3%;top:44%;width:3%;height:22%;border-radius:2px 4px 4px 2px}
-.watch-pixel{right:9%;width:33.5%;transform:translateY(-46%)}
-.watch-pixel .strap{width:58%;background:var(--strap-pixel)}
-.watch-pixel .case{aspect-ratio:1;padding:6.5%;border-radius:50%}
-.watch-pixel .screen{aspect-ratio:1;border-radius:50%}
-/* the crown, one on the side of the dome */
-.watch-pixel .case::after{right:-4.5%;top:40%;width:5.5%;height:20%;border-radius:3px 7px 7px 3px}
-.watch-pixel .case::before{display:none}
-
-/* ---------- numbers ---------- */
-.numbers{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  column-gap:0;row-gap:36px;
-  margin-top:104px;padding-top:30px;
-  border-top:1px solid var(--rule);
-}
-.stat{
-  display:flex;flex-direction:column;gap:9px;
-  padding:0 28px;border-left:1px solid var(--rule-soft);
-}
-.stat:first-child{padding-left:0;border-left:0}
-.stat-figure{
-  font-weight:500;
-  font-size:32px;line-height:1.1;letter-spacing:-.035em;white-space:nowrap;
-}
-.stat-unit{font-size:19px;color:var(--ink-3)}
-.stat-label{font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:26ch;text-wrap:pretty}
-
-/* ---------- three blocks ---------- */
-.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;margin-top:104px}
-.block{display:flex;flex-direction:column;gap:11px;padding-top:22px;border-top:1px solid var(--rule)}
-.block-index{
-  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);
-}
-.block h2{margin:0;font-weight:500;font-size:17px;line-height:1.45;letter-spacing:-.015em}
-.block p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-2);text-wrap:pretty}
-.block ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
-.block li{font-size:15px;line-height:1.55;color:var(--ink-2);padding-left:16px;position:relative}
-.block li::before{
-  content:"";position:absolute;left:0;top:.62em;
-  width:5px;height:1px;background:var(--ink-3);
-}
-
-/* ---------- contact ---------- */
-.contact{
+/* ---------- footer ---------- */
+.foot{
   display:flex;align-items:flex-end;justify-content:space-between;
-  gap:48px;margin-top:120px;padding:36px 0 64px;
-  border-top:1px solid var(--rule);
+  gap:40px;margin-top:96px;padding:28px 0 64px;
+  border-top:1px solid var(--rule);flex-wrap:wrap;
 }
-.contact-left{display:flex;flex-direction:column;gap:14px}
-.contact-line{font-size:22px;font-weight:500;line-height:1.3;letter-spacing:-.02em}
-.contact-email{
-  font-size:21px;font-weight:500;letter-spacing:-.015em;
-  color:var(--accent);width:fit-content;
-  border-bottom:1px solid var(--underline-accent);
-  padding-bottom:2px;
-  transition:border-color 160ms ease;
-}
-.contact-email:hover{border-bottom-color:var(--accent)}
-.contact-right{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-.footer-nav{display:flex;gap:20px;flex-wrap:wrap}
-.footer-nav a{
+.foot-nav{display:flex;gap:20px;flex-wrap:wrap}
+.foot-nav a{
   font-size:15px;color:var(--ink);
-  border-bottom:1px solid var(--underline);
-  padding-bottom:2px;
+  border-bottom:1px solid var(--underline);padding-bottom:2px;
   transition:color 160ms ease,border-color 160ms ease;
 }
-.footer-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-/* the same menu on every Always Weather page, the page you're on marked */
-.footer-nav a[aria-current="page"]{font-weight:500;border-bottom-color:var(--ink)}
-/* the credit the data's licences ask for: each source, and nothing that could read as their
-   endorsement. The app and the store listing say the same words. */
-.credit{margin:0;font-size:13px;line-height:1.6;color:var(--ink-3);max-width:46ch;text-wrap:pretty}
-.credit a{
-  color:var(--ink-3);border-bottom:1px solid var(--rule);padding-bottom:1px;
-  transition:color 160ms ease,border-color 160ms ease;
-}
-.credit a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.foot-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
 
-/* ---------- entrance ---------- */
-@media (prefers-reduced-motion:no-preference){
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  .masthead,.hero>*,.shots,.numbers,.blocks,.contact{
-    animation:rise 620ms cubic-bezier(.22,.68,.28,1) both;
-  }
-  .masthead{animation-delay:0ms}
-  .hero .app-icon{animation-delay:60ms}
-  .hero .eyebrow{animation-delay:90ms}
-  .hero h1{animation-delay:120ms}
-  .hero .lead{animation-delay:170ms}
-  .hero .body-copy{animation-delay:220ms}
-  .hero .availability{animation-delay:270ms}
-  .shots{animation-delay:320ms}
-  .numbers{animation-delay:370ms}
-  .blocks{animation-delay:420ms}
-  .contact{animation-delay:470ms}
-}
-
-/* ---------- responsive ---------- */
 @media (max-width:860px){
-  .platform-row,.platform-row.mirror{grid-template-columns:minmax(0,1fr);gap:28px}
-  .platform-row.mirror .platform-text{order:0}
-  /* the ledger's middle column drops under the store and its price */
-  .availability .store{grid-template-columns:minmax(0,1fr) auto;row-gap:3px;padding:14px 4px}
-  .availability .store-for{grid-column:1 / -1;grid-row:2}
-  .availability-note{padding:0 4px}
-  .stage-pc{aspect-ratio:836/634}
-  .monitor{left:0;width:100%}
   .wrap{padding-left:24px;padding-right:24px}
-  .masthead{padding-bottom:64px}
-  /* one thumb again: the shots become a snapping strip that bleeds to both edges,
-     rather than three full-width images to scroll past */
-  .shots{
-    display:flex;gap:16px;margin-top:72px;
-    overflow-x:auto;overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-    margin-left:-24px;margin-right:-24px;padding:4px 24px 10px;
-  }
-  .shot{flex:0 0 72%;scroll-snap-align:center}
-  .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:88px}
-  .stat{padding:0 20px}
-  .stat:nth-child(odd){padding-left:0;border-left:0}
-  .blocks{grid-template-columns:minmax(0,1fr);row-gap:32px;margin-top:80px}
-  .contact{flex-direction:column;align-items:flex-start;gap:32px;margin-top:88px}
+  .masthead{padding-bottom:56px}
+  .foot{flex-direction:column;align-items:flex-start;gap:24px;margin-top:72px}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:0.01ms !important}
 }
 @media print{
-  .mode,.shots{display:none}
+  .mode{display:none}
   body{background:#fff}
   body::before,body::after{display:none}
   .wrap{padding:0}
-}
-/* Linux: one laptop, centred, with Omarchy's bar drawn across the top of its screen,
-   as the Windows row draws its taskbar */
-.stage-linux .laptop{left:11.7%}
-.stage-linux .screen{position:relative;container-type:inline-size}
-.omarchy-bar{position:absolute;top:0;left:0;right:0;height:3.4cqw;display:flex;align-items:center;justify-content:center;gap:2.4cqw;
-  background:#0c0c0c;color:#d9d9d9;font:500 1.55cqw/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap}
-.omarchy-bar .ws{position:absolute;left:1.6cqw;display:flex;gap:1.3cqw;color:#7a7a7a}
-.omarchy-bar .ws b{font-weight:500;color:#d9d9d9}
-.stage-linux .screen img{position:absolute;left:0;top:3.4cqw;height:calc(100% - 3.4cqw)}
-.install{align-self:stretch;margin:0;padding:12px 14px;border:1px solid var(--rule);border-radius:8px;
-  font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink);white-space:pre-wrap;word-break:break-all}
-@media (max-width:860px){
-  .stage-linux{aspect-ratio:836/560}
-  .stage-linux .laptop{left:0;width:100%}
+  a{color:inherit;border-bottom:0}
 }
 </style>
 </head>
@@ -556,7 +230,7 @@ img{max-width:100%}
 <div class="wrap">
 
   <header class="masthead">
-    <a class="masthead-name" href="/">Pavel Guzhikov</a>
+    <a class="masthead-name" href="https://alwaysweather.uk/">Always Weather</a>
     <div class="masthead-meta">
       <div class="mode" role="group" aria-label="Colour mode">
         <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto: follow your system">
@@ -580,258 +254,26 @@ img{max-width:100%}
           </svg>
         </button>
       </div>
-      <a class="link-accent" href="mailto:apps@guzh.uk">apps@guzh.uk</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <img class="app-icon" src="/assets/weather/icon.png" width="72" height="72"
-           alt="Always Weather app icon: a white letter A and a warm yellow degree sign on a dark blue square.">
-      <div class="eyebrow">Always Weather</div>
-      <h1>The whole day, under your thumb.</h1>
-      <p class="lead">Open it, drag your thumb through the hours, and you know. The time, the temperature, what it feels like, the wind and the rain all follow your thumb, and each hour settles into place with a light tick.</p>
-      <p class="body-copy">One plain sentence sums the day up: “Rain from 13:00, clearing by 16:00.” or “Dry all day.” Exactly what you opened a weather app to find out. Today hour by hour, up to ten days ahead, your current location and up to ten saved places, and a small home-screen widget with the next few hours. It opens straight to your last forecast, even without a signal.</p>
-      <div class="availability">
-        <ul class="stores">
-          <li><a class="store" href="https://apps.apple.com/gb/app/always-weather/id6817032365"><span class="store-name">App Store</span> <span class="store-for">iPhone, Apple Watch and Mac, in one purchase</span> <span class="store-price">£3.99</span></a></li>
-          <li><a class="store" href="https://play.google.com/store/apps/details?id=com.empatiq.weather&amp;utm_source=guzh.uk&amp;utm_campaign=weather_page"><span class="store-name">Google Play</span> <span class="store-for">Android, Pixel Watch and Googlebooks</span> <span class="store-price">£3.59</span></a></li>
-          <li><a class="store" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7"><span class="store-name">Microsoft Store</span> <span class="store-for">Windows</span> <span class="store-price">£3.59</span></a></li>
-          <li><a class="store" href="#linux"><span class="store-name">Linux</span> <span class="store-for">Omarchy and other Arch systems</span> <span class="store-price">Free</span></a></li>
-        </ul>
-        <p class="availability-note">UK prices, paid once; free on Linux. Each store shows your local price.</p>
-      </div>
-    </section>
-
-    <section class="shots" aria-label="Screenshots">
-      <figure class="shot">
-        <img src="/assets/weather/shot-hours.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="Drag through the hours: London at 14:00, 16 degrees and rain, “Rain from 13:00, clearing by 16:00.”, the hourly bars with rain under them, and What to wear below.">
-      </figure>
-      <figure class="shot">
-        <img src="/assets/weather/shot-next-hour.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="Rain in the next few hours: London at 12:00, cloudy and 17 degrees, “4° warmer than yesterday.” and, from the Met Office's radar-based forecast, “Rain likely between 13:00 and 15:00.”">
-      </figure>
-      <figure class="shot">
-        <img src="/assets/weather/shot-night.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="Calm after dark: Brighton at 22:00, a clear night at 14 degrees on a night-blue screen, “Dry tonight.”, the hourly bars, and What to wear tonight.">
-      </figure>
-    </section>
-
-    <section class="platforms" aria-labelledby="platforms-heading">
-      <h2 id="platforms-heading">One forecast, on every screen you have</h2>
-      <p class="body-copy">The same forecast, the same words and the same one-thumb sweep through the hours, wherever you open it. On a wide screen the hour you're looking at sits beside sunrise, what to wear and the days ahead.</p>
-
-      <div class="platform-row">
-        <div class="platform-text">
-          <p class="platform-store">App Store</p>
-          <h3>Mac and iPhone</h3>
-          <p>One purchase covers both. Sky after dark on the Mac, Paper in your pocket: the same forecast, the same hours under your thumb.</p>
-          <ul class="stores">
-            <li><a class="store" href="https://apps.apple.com/gb/app/always-weather/id6817032365"><span class="store-name">App Store</span> <span class="store-price">£3.99</span></a></li>
-          </ul>
-        </div>
-        <div class="stage">
-          <div class="laptop">
-            <div class="lid"><div class="screen">
-              <img src="/assets/weather/platform-mac.webp" width="1400" height="1050" loading="lazy" decoding="async"
-                   alt="Always Weather on a Mac in Sky after dark: London at 20:00, 16 degrees on a clear night, the hourly bars on the left, and What to wear with its pictures on the right.">
-            </div></div>
-            <div class="base" aria-hidden="true"></div>
-          </div>
-          <div class="phone phone-iphone">
-            <div class="body"><div class="screen">
-              <img src="/assets/weather/platform-iphone.webp" width="520" height="1131" loading="lazy" decoding="async"
-                   alt="Always Weather on an iPhone in Paper: the row of days, then What to wear for a walk with pictures of a T-shirt, a light layer and sun cream, and sunrise and sunset.">
-            </div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="platform-row mirror">
-        <div class="platform-text">
-          <p class="platform-store">Google Play</p>
-          <h3>Android phone and Googlebook</h3>
-          <p>On a Googlebook the hours sit on the left and the days on the right. On the phone, one thumb drags you through the day.</p>
-          <ul class="stores">
-            <li><a class="store" href="https://play.google.com/store/apps/details?id=com.empatiq.weather"><span class="store-name">Google Play</span> <span class="store-price">£3.59</span></a></li>
-          </ul>
-        </div>
-        <div class="stage">
-          <div class="laptop">
-            <div class="lid"><div class="screen">
-              <img src="/assets/weather/platform-googlebook.webp" width="1400" height="875" loading="lazy" decoding="async"
-                   alt="Always Weather on a Googlebook in Paper: the day's sentence and the hours on the left, and What to wear with its pictures, sunrise and sunset and the days ahead on the right.">
-            </div></div>
-            <div class="base" aria-hidden="true"></div>
-          </div>
-          <div class="phone phone-android">
-            <div class="body"><div class="screen">
-              <img src="/assets/weather/platform-android.webp" width="520" height="1125" loading="lazy" decoding="async"
-                   alt="Always Weather on an Android phone in Sky: London at 14:00, 16 degrees and rain, with the hourly bars and the rain under them.">
-            </div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="platform-row">
-        <div class="platform-text">
-          <p class="platform-store">Microsoft Store</p>
-          <h3>Windows PC</h3>
-          <p>A window made for a PC: drag along the hours, scroll sideways on a touchpad or press the arrow keys. In Sky even the title bar takes the colour of the sky. For Windows 11 on Intel, AMD and Snapdragon PCs.</p>
-          <ul class="stores">
-            <li><a class="store" href="https://apps.microsoft.com/detail/9MSZVHC5NFX7"><span class="store-name">Microsoft Store</span> <span class="store-price">£3.59</span></a></li>
-          </ul>
-        </div>
-        <div class="stage stage-pc">
-          <div class="monitor">
-            <div class="panel"><div class="display">
-              <div class="window">
-                <div class="titlebar" aria-hidden="true">
-                  <img src="/assets/weather/icon.png" width="16" height="16" alt="">
-                  <span>Always Weather</span>
-                  <svg viewBox="0 0 138 32" fill="none" stroke="currentColor" stroke-width="1">
-                    <path d="M18 16.5h10"></path>
-                    <rect x="64.5" y="11.5" width="9" height="9" rx="1.5"></rect>
-                    <path d="M110 11l10 10M120 11l-10 10"></path>
-                  </svg>
-                </div>
-                <img src="/assets/weather/platform-windows.webp" width="1400" height="875" loading="lazy" decoding="async"
-                     alt="Always Weather on a Windows PC in Sky: a window on the desktop showing London at 14:00, 16 degrees and rain, “Rain from 13:00, clearing by 16:00.” and the hourly bars on the left, and What to wear, sunrise and sunset and the 10-day forecast on the right.">
-              </div>
-              <div class="taskbar" aria-hidden="true">
-                <span class="search"></span>
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="running"><img src="/assets/weather/icon.png" width="24" height="24" alt=""></span>
-                <span class="clock">14:00<br>17/09/2026</span>
-              </div>
-            </div></div>
-            <div class="neck" aria-hidden="true"></div>
-            <div class="foot" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="platform-row mirror">
-        <div class="platform-text">
-          <p class="platform-store">App Store and Google Play</p>
-          <h3>Apple Watch and Pixel Watch</h3>
-          <p>The next twelve hours on your wrist, in the colour of the sky. Turn the crown and the hours follow, with the same light tick as under your thumb. The watch takes your place from your phone and fetches its own forecast, so it stays right when the phone is out of reach.</p>
-          <p>Put the temperature and the next rain on your Apple Watch face, or today's high and low and a tile of the next four hours on your Pixel Watch. It comes with the iPhone and Android apps, at no extra cost.</p>
-          <ul class="stores">
-            <li><a class="store" href="https://apps.apple.com/gb/app/always-weather/id6817032365"><span class="store-name">App Store</span> <span class="store-price">£3.99</span></a></li>
-            <li><a class="store" href="https://play.google.com/store/apps/details?id=com.empatiq.weather"><span class="store-name">Google Play</span> <span class="store-price">£3.59</span></a></li>
-          </ul>
-        </div>
-        <div class="stage stage-watch">
-          <div class="watch watch-apple">
-            <div class="strap" aria-hidden="true"></div>
-            <div class="case"><div class="screen">
-              <img src="/assets/weather/platform-apple-watch.webp" width="416" height="496" loading="lazy" decoding="async"
-                   alt="Always Weather on an Apple Watch: London now, 15 degrees and partly cloudy, “Rain from 13:00, clearing by 16:00.”, and the next twelve hours' bars with the rain under them.">
-            </div></div>
-          </div>
-          <div class="watch watch-pixel">
-            <div class="strap" aria-hidden="true"></div>
-            <div class="case"><div class="screen">
-              <img src="/assets/weather/platform-pixel-watch.webp" width="454" height="454" loading="lazy" decoding="async"
-                   alt="Always Weather on a Pixel Watch: London at 13:00, 17 degrees and rain, 0.2 mm and wind 13 mph, on a grey rainy sky, with the hourly bars.">
-            </div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="platform-row" id="linux">
-        <div class="platform-text">
-          <p class="platform-store">Free</p>
-          <h3>Linux, made on Omarchy</h3>
-          <p>A tile of its own on Hyprland, the same sweep through the hours, two columns when the tile is wide, and your Omarchy theme's light or dark. A line in Omarchy's bar shows the hour's weather, and a click opens the app. For Arch systems on Intel and AMD.</p>
-          <p>Install it with one command; pacman adds Java 21 if it isn't there:</p>
-          <pre class="install"><code>curl -LO https://github.com/xternal/guzh.uk/releases/download/always-weather-linux-1.0.4/always-weather-bin-1.0.4-1-x86_64.pkg.tar.zst &amp;&amp; sudo pacman -U always-weather-bin-1.0.4-1-x86_64.pkg.tar.zst</code></pre>
-          <ul class="stores">
-            <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-weather-linux-1.0.4"><span class="store-name">Download for Arch Linux</span> <span class="store-price">Free</span></a></li>
-          </ul>
-        </div>
-        <div class="stage stage-linux">
-          <div class="laptop">
-            <div class="lid"><div class="screen">
-              <div class="omarchy-bar" aria-hidden="true">
-                <span class="ws"><b>1</b><span>2</span><span>3</span></span>
-                <span>Saturday 16:00</span>
-                <span>14° Rain</span>
-              </div>
-              <img src="/assets/weather/platform-linux.webp" width="1400" height="840" loading="lazy" decoding="async"
-                   alt="Always Weather on Linux, in Omarchy, in Sky: London at 16:00, 14 degrees and rain, “Rain until 18:00, then dry.” and the hourly bars on the left, and What to wear, sunrise and sunset and the 10-day forecast on the right. Omarchy's bar along the top shows the same hour: 14° Rain.">
-            </div></div>
-            <div class="base" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="numbers" aria-label="What you get">
-      <div class="stat">
-        <div class="stat-figure">10<span class="stat-unit"> days</span></div>
-        <div class="stat-label">ahead, and today hour by hour with feels-like, wind and rain</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">10<span class="stat-unit"> places</span></div>
-        <div class="stat-label">saved, plus wherever you happen to be standing</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">Once</div>
-        <div class="stat-label">£3.99 on the App Store, £3.59 on Google Play and the Microsoft Store in the UK, free on Linux, with no subscription and no in-app purchases</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">Zero</div>
-        <div class="stat-label">ads, accounts and trackers, by design rather than by promise</div>
-      </div>
-    </section>
-
-    <section class="blocks">
-      <article class="block">
-        <div class="block-index">01 Two looks</div>
-        <h2>The same forecast, shown your way</h2>
-        <p>Sky takes the colour of the weather at the hour you choose, so the screen itself tells you what the day is doing. Paper is warm and typographic: just the words and the numbers. Pick one when you first open the app, switch any time in Settings.</p>
-      </article>
-      <article class="block">
-        <div class="block-index">02 Made for everyone</div>
-        <h2>One thumb, or none at all</h2>
-        <p>Works with TalkBack: swipe up or down to move through the hours, and each hour is read out in full. Text stays high in contrast, and the layout holds together at twice the normal font size.</p>
-      </article>
-      <article class="block">
-        <div class="block-index">03 Private by design</div>
-        <h2>It knows the weather, not you</h2>
-        <ul>
-          <li>Your location is rounded to about a kilometre before it leaves your phone</li>
-          <li>No account, no ads, no analytics and nothing to sign up for</li>
-          <li>Saved places and settings stay on your phone</li>
-          <li>Anonymous crash reports, which you can turn off in Settings</li>
-        </ul>
-        <p><a class="link-accent" href="/weather/privacy/">Read the privacy policy</a></p>
-      </article>
-    </section>
+  <main class="moved">
+    <h1>Always Weather has its own home now</h1>
+    <p>The page for Always Weather, the calm weather app you drag through the hours, has moved to its own address. It has the stores and prices, the Linux install, and a sample day you can drag.</p>
+    <p class="go"><a href="https://alwaysweather.uk/">Go to alwaysweather.uk</a></p>
+    <p>The privacy policy, help and contact, and Suggest an idea stay here on guzh.uk, in the menu below.</p>
   </main>
 
-  <footer class="contact">
-    <div class="contact-left">
-      <div class="contact-line">Questions or ideas? We read everything.</div>
-      <a class="contact-email" href="mailto:apps@guzh.uk">apps@guzh.uk</a>
-    </div>
-    <div class="contact-right">
-      <nav class="footer-nav" aria-label="Always Weather">
-        <a href="/weather/" aria-current="page">Always Weather</a>
-        <a href="/weather/privacy/">Privacy policy</a>
-        <a href="/weather/support/">Help and contact</a>
-        <a href="/weather/ideas/">Suggest an idea</a>
-        <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
-        <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
-      </nav>
-      <p class="credit">Forecast data: MET Norway (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>), the Met Office (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>), Deutscher Wetterdienst (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>) and the US National Weather Service. Rain radar: EUMETNET OPERA (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>), and NOAA with Environment and Climate Change Canada. Always Weather is independent and isn’t affiliated with any weather service or government.</p>
-      <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Weather, made in London<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
-    </div>
+  <footer class="foot">
+    <nav class="foot-nav" aria-label="Always Weather">
+      <a href="https://alwaysweather.uk/">Always Weather</a>
+      <a href="/weather/privacy/">Privacy policy</a>
+      <a href="/weather/support/">Help and contact</a>
+      <a href="/weather/ideas/">Suggest an idea</a>
+      <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
+      <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+    </nav>
+    <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Weather</div>
   </footer>
 
 </div>
@@ -880,18 +322,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
   if (mq.addEventListener) mq.addEventListener("change", sync);
   sync();
-})();
-</script>
-
-<script>
-/* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
-   the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
-   The same token is on all five pages; see "Visitor numbers" in the README. */
-if (location.hostname === "guzh.uk") (function(){
-  var s = document.createElement("script");
-  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
-  s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
-  document.body.appendChild(s);
 })();
 </script>
 

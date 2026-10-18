@@ -8,7 +8,8 @@ Data safety form and the Apple privacy label:
     store/support-page.md    -> weather/support/index.html
 
 Each page file is an ordinary hand-written shell — head, masthead, footer, all the CSS — with one
-generated region:
+generated region (so the masthead's and footer's links to https://alwaysweather.uk/, the app's own
+page since 18 Oct 2026, are never touched by a re-render):
 
     <!-- BEGIN generated from store/<file>.md ... -->
     <!-- END generated -->
@@ -57,6 +58,9 @@ SUBSTITUTIONS = {
     "[date of publication]": "17 September 2026",
     # The documents assume flat files sitting next to each other; the site serves directories.
     "](./privacy)": "](/weather/privacy/)",
+    # The app's page moved to its own domain on 18 Oct 2026, and /weather/ only forwards there
+    # now. Delete this once store/support-page.md links to alwaysweather.uk itself.
+    "](https://guzh.uk/weather/#linux)": "](https://alwaysweather.uk/#linux)",
 }
 
 PAGES = [

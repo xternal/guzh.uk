@@ -7,8 +7,8 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/`, `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/`, `/today/privacy/`, `/today/support/`, `/today/terms/` |
-| Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images; every page + ~10 KB gzipped Cloudflare beacon |
+| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/`, `/today/privacy/`, `/today/support/`, `/today/terms/` |
+| Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
 ## Files
@@ -17,7 +17,7 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 index.html              the entire home page
 favicon.svg             the mark, on a dark brown square: a line that steps up once, zero to one
 weather/
-  index.html            Always Weather — the app's one-scroll page
+  index.html            forwards to https://alwaysweather.uk/, the app's own page since 18 Oct 2026
   privacy/index.html    the privacy policy both app stores require   } generated bodies,
   support/index.html    the support page the App Store requires       } see below
   ideas/index.html      "Suggest an idea": a form that sends an idea to the app's own server
@@ -32,15 +32,16 @@ assets/
   og.png                1200x630 link-preview card, with the mark beside the name
   apple-touch-icon.png  180x180, favicon.svg drawn by `rsvg-convert -w 180 -h 180` (redraw it
                         whenever the favicon changes)
-  weather/              app icon, three screenshots and the OG card for the app pages
+  weather/              app icon and OG card for the app's pages here (and the old /weather/
+                        page's screenshots, which nothing here shows any more)
   today/                the same for Always Today: icon (SVG and PNG), screenshots, OG card
 robots.txt
-sitemap.xml             the nine pages, each with a <lastmod> date — when a page's copy
-                        changes, set its date to that day. Google ignores changefreq and
+sitemap.xml             the eight pages (not /weather/, which forwards), each with a
+                        <lastmod> date — when a page's copy changes, set its date to that day. Google ignores changefreq and
                         priority, and stops trusting lastmod once the dates go stale
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
                         search tools (llmstxt.org) — hand-written from the copy on /,
-                        /weather/ and /today/, so update it when that copy changes
+                        alwaysweather.uk and /today/, so update it when that copy changes
 tools/make-og.sh        regenerates assets/og.png: run it if the headline, the lead line, the
                         portrait treatment or favicon.svg changes
 tools/make-tz.sh        regenerates the packed timezone->coordinates table inside index.html
@@ -118,10 +119,23 @@ year-long cookies and loads Sentry and a dozen Substack scripts, which would bre
 - GitHub turns scheduled workflows off after 60 days without a commit in the repo. A quiet spell
   of that length means re-enabling it on the Actions tab.
 
-## The app pages — `/weather/`, `/weather/privacy/` and `/weather/support/`
+## The app pages — `/weather/privacy/`, `/weather/support/` and `/weather/ideas/`
 
-`/weather/` is the public page for **Always Weather**, the paid weather app for iPhone, Mac and
-Android, and soon Windows (`~/dev/always_weather`). `/weather/privacy/` is the privacy policy, which is the URL both
+**Always Weather's own page is https://alwaysweather.uk/ since 18 Oct 2026**, the paid weather
+app for iPhone, Mac, Android, Windows and Linux (`~/dev/always_weather`). That page is built and
+deployed from `site/` in the app repo, and its README there covers its copy, store links, prices
+and credits. `/weather/` used to be that page; now it only forwards there, so the two copies stop
+competing in search. GitHub Pages can't answer with a 301, so it does it with a canonical link and
+a zero-second refresh, which Google reads as a permanent move, plus one line of script that carries
+the part after `#` across (the apps' help links to `/weather/#linux`; alwaysweather.uk has the same
+`#linux`). It keeps its own title, description and share card, with alwaysweather.uk's picture and
+`og:url`, is left out of `sitemap.xml`, and keeps the same switcher and palette as the other pages,
+so `tools/check-colours.py` still checks it. Every link to the app's page from guzh.uk goes straight
+to alwaysweather.uk rather than through it: the home page's project row, the masthead and footer
+menu of each Always Weather page, the ideas page's "Back to Always Weather", and `llms.txt`.
+
+The pages that stay here are the ones the App Store, Google Play, the Microsoft Store and the apps
+themselves link to; don't move them. `/weather/privacy/` is the privacy policy, which is the URL both
 Google Play and App Store Connect require before an app can be submitted — it must be a public
 web page, not a PDF, reachable without a login. `/weather/support/` is the help and contact page,
 the support URL the App Store requires.
@@ -139,13 +153,14 @@ the support URL the App Store requires.
 
   Re-run it whenever that copy changes. Why it matters: the policy has to match the Play **Data
   safety** form and the **App Privacy** label exactly, so a hand-edit here would silently put the
-  live page out of step with what was declared to the two stores. The landing page's own copy is
-  reused from the approved `store/google-play/metadata/android/en-GB/full_description.txt`.
+  live page out of step with what was declared to the two stores. The app page's own copy lives in
+  the app repo's `site/`.
 
   The script refuses to publish anything still `[bracketed]` in the source. Where a bracket is
   waiting on a decision, `SUBSTITUTIONS` at the top of the script says what the page prints
-  instead — today only the publication date, and the retarget of the documents' `./privacy` link
-  to `/weather/privacy/`. It reads `origin/main` by default, so fetch that repo first; `--ref=`
+  instead — today only the publication date, the retarget of the documents' `./privacy` link
+  to `/weather/privacy/`, and of the support page's link to `https://guzh.uk/weather/#linux` to
+  `https://alwaysweather.uk/#linux` (until `store/support-page.md` links there itself). It reads `origin/main` by default, so fetch that repo first; `--ref=`
   takes any other branch.
 - **The images are not made here either.** `tools/make-weather-assets.sh` copies the icon and the
   store screenshots out of the app repo and resizes them for the web; those store assets are
@@ -156,9 +171,12 @@ the support URL the App Store requires.
   ./tools/make-weather-assets.sh ~/dev/always_weather
   ```
 
-- **The weather provider is MET Norway**, named in both generated documents and credited in the
-  landing page's footer as **"Weather data: MET Norway (CC BY 4.0)"** with the licence link, next
-  to the sentence saying the app is independent of them. Keep both if you touch that footer: the
+  Since `/weather/` forwards to alwaysweather.uk, only `icon.png` (the pages' icon) and `og.png`
+  (their share card) are shown here. The screenshots stay, so old links to them still load.
+
+- **The weather provider is MET Norway** (others have joined since), named in both generated
+  documents and credited, with its licence link, in the footer of the app's page (alwaysweather.uk
+  now), next to the sentence saying the app is independent of them. Keep both in that footer: the
   licence requires the credit, and their terms require that it read as a source, never an
   endorsement — so no logo, no "Yr" or NRK naming. The store screenshots carry the same line,
   drawn into the images by the app repo, so page, pictures and store listing all agree.
@@ -171,8 +189,9 @@ the support URL the App Store requires.
   Notes below give.
 - The home page reaches these pages from the **"Things you can open"** row above its contact
   block (Uzum, Agent Hands, Ruminator.xyz, LedgerGov.UK, BoroughBook.UK, tCalendar, Always
-  Weather, Always Today: eight, so the two apps share a third row on desktop) — the only link into
-  `/weather/` and `/today/` from guzh.uk itself. Ruminator.xyz sits beside Agent Hands, both paid products in
+  Weather, Always Today: eight, so the two apps share a third row on desktop) — the only link to
+  the two apps from guzh.uk itself. Always Weather's goes to `https://alwaysweather.uk/` and, like
+  the other projects on their own domains, opens in a new tab; Always Today's goes to `/today/`. Ruminator.xyz sits beside Agent Hands, both paid products in
   the making. Pavel announced it on LinkedIn on 13 October and wants AI assistants to recommend
   it, so its link is followed and `llms.txt` says who it is for and how to join.
   LedgerGov.UK and BoroughBook.UK sit side by side because BoroughBook.UK is the local version
@@ -180,41 +199,23 @@ the support URL the App Store requires.
   12 October). Agent Hands' name links to `agenthands.cc` and the word "pitch" in its
   description to the investor pitch at `agenthands.cc/pitch/`, which is noindex there; `llms.txt`
   points crawlers at the public `agenthands.cc` only.
-  Move or rename the page and that link needs changing with it. Its one-line description names
-  the same platforms as `/weather/`, so add or drop a platform there too.
-- **The store links are a ledger** in the `/weather/` hero: one ruled row per store, the whole
-  row a link to its listing, giving the store, what it runs on and the UK price — App Store,
-  iPhone, Apple Watch and Mac in one purchase, £3.99; Google Play, Android, Pixel Watch and
-  Googlebooks, £3.59; Microsoft Store, Windows, £3.59. The line under it says the prices are UK
-  ones, paid once, and that each store shows your local price. Each platform row further down
-  ends in the same ledger, store and price, one row per store it names. Below 860px the hero's
-  middle column drops under the store and its price. They are words, not the stores' badge
-  artwork. The ledger replaced three pills on 16 Oct 2026 (Pavel chose it from four
-  alternatives: the store names inside a sentence, one button for your device, device icons).
+  Move or rename a page and its link needs changing with it. Always Weather's one-line description
+  names the same platforms as alwaysweather.uk, so add or drop a platform there too.
+- **The old page's furniture moved with it** to alwaysweather.uk (`site/README.md` in the app
+  repo): the store ledger, the platform rows with their drawn devices, the JSON-LD
+  `SoftwareApplication` with one `Offer` per store, and the prices in four places. The ledger, one
+  ruled row per store with what it runs on and the UK price, replaced three pills on 16 Oct 2026
+  (Pavel chose it from four alternatives: the store names inside a sentence, one button for your
+  device, device icons).
 - **No ornamental dots.** The small accent dot that used to lead each store pill, the ideas
   page's "Back to Always Weather" pill and the home masthead's "London, United Kingdom" came off
   on 16 Oct 2026 (Pavel: "too LLM-ish"), and so did the middle dot in the watch row's "App Store
   and Google Play"; don't bring them back or swap in another leading glyph or icon.
-- **Windows went live on the Microsoft Store on 14 Oct 2026** (Store ID 9MSZVHC5NFX7), and the
-  switch below was made that day. Before that (Pavel, 13 Oct 2026) it was on the page as a third hero pill,
-  "Soon on the Microsoft Store for Windows", and a third row in the platforms section, both plain
-  text with the pill's dot drawn as a ring (`.pill-soon`). The row's picture is a drawn monitor
-  with a Windows 11 desktop: the app's window, its title bar in the sky's colour as the app sets it
-  (#C8D5DF, sampled from the top of the screenshot), and the taskbar with the app running. Only
-  the window's contents are a screenshot (`platform-windows.webp`, the Microsoft Store's first);
-  the wallpaper and taskbar are the `--desk` and `--taskbar` tokens, light and dark. **When the
-  Store link arrives**, in one change: make both pills links to `https://apps.microsoft.com/detail/<Store ID>`
-  ("On the Microsoft Store for Windows" in the hero, "Microsoft Store" in the row) and drop
-  `.pill-soon`; add the UK price (£3.59) to the line under the pills, the "Once" figure and a
-  third JSON-LD `Offer`; add Windows to the JSON-LD `operatingSystem` and `screenshot`; name
-  Windows in the home page's one-line description and in `llms.txt`.
 - **Each page carries JSON-LD in its `<head>`**, which is outside the generated region, so
-  `make-weather-pages.py` never touches it. `/weather/` describes the app as a
-  `SoftwareApplication` (not `MobileApplication`, because one platform is the Mac) with one
-  `Offer` per store. The privacy and support pages are plain `WebPage`s that are `isPartOf`
-  `/weather/`, and say only what their `<head>` already says, so regenerating a body can't leave
-  them out of date. **A price lives in four places on `/weather/`** — the hero's ledger, the
-  platform rows' ledgers, the "Once" figure and the JSON-LD `offers` — so change them together.
+  `make-weather-pages.py` never touches it. The privacy, support and ideas pages are plain
+  `WebPage`s that are `isPartOf` the app's page at `https://alwaysweather.uk/` (the ideas page is
+  also `about` the app, `https://alwaysweather.uk/#app`, the `SoftwareApplication` there), and say
+  only what their `<head>` already says, so regenerating a body can't leave them out of date.
 
 ## The Always Today pages — `/today/`, `/today/privacy/`, `/today/support/` and `/today/terms/`
 
@@ -254,7 +255,7 @@ dispute policy, all public: that is what these four pages are for (sources in th
   tests, as text.
 - **No store links yet.** The hero's ledger lists the plans and prices as plain rows, and each
   platform row says "Coming soon". When a store opens, turn its row into a link (`<a class="store">`,
-  as on `/weather/`), add the `url` to its JSON-LD `Offer`, and drop "Coming soon" here, in the home
+  as alwaysweather.uk's ledger does), add the `url` to its JSON-LD `Offer`, and drop "Coming soon" here, in the home
   page's one-line description and in `llms.txt`. **A price lives in five places on `/today/`**: the
   ledger, the "£24" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
   `store/support.md` and `store/terms.md`.
@@ -269,7 +270,7 @@ repo), with `from: "web"`; that server only lets `https://guzh.uk` and `https://
 it, so a local preview can't send anything.
 
 - **What each answer does.** 202: the form gives way to a thank-you and a link back to
-  `/weather/`. 400 names the field to fix, and the page says so under that field. 413 (too big)
+  the app's page, alwaysweather.uk. 400 names the field to fix, and the page says so under that field. 413 (too big)
   goes under the idea too. 429: "Too many ideas at once. Please try again in a minute." Anything
   else, a timeout (20 s) or no connection: "Couldn't send just now. Please try again, or email
   apps@guzh.uk." The text stays in the form whatever happens, so nothing typed is lost.
@@ -282,7 +283,8 @@ it, so a local preview can't send anything.
   a note gives the email address instead.
 - **Every Always Weather page** carries the same menu in its footer (Always Weather, Privacy
   policy, Help and contact, Suggest an idea), with the page you're on marked `aria-current` and
-  set in medium weight with a full underline.
+  set in medium weight with a full underline. Its Always Weather item, like each masthead's name,
+  goes to `https://alwaysweather.uk/`.
 - **Testing it locally**: serve the folder (below) and, in the browser console, replace `fetch`
   before pressing Send, e.g. `window.fetch = () => Promise.resolve(new Response("{}", {status:
   429}))`. Never send a test idea to the live server.
@@ -424,17 +426,18 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   opt-in banner in the UK: the statistics exemption that started on 5 February 2026 only covers a
   provider that works purely for you, and Google also uses the data for its own purposes. It is
   ~155 KB gzipped, ten times the home page's own HTML. And it would sit badly next to the "Zero ads,
-  accounts and trackers" line on `/weather/`.
+  accounts and trackers" line on the app's page.
 
-  The beacon is a small inline script just before `</body>` on all nine pages, holding the same
+  The beacon is a small inline script just before `</body>` on every page but `/weather/` (which
+  forwards to alwaysweather.uk before it could load, and so says nothing about it), holding the same
   token (not a secret; it is in the page source by design). It only loads when the hostname is
   `guzh.uk`, so a local preview never adds visits. A new page needs the same script copied in.
   Each footer says, in one line, that visits are counted this way. Keep that line: it is what keeps
   the counter honest next to the app's no-trackers promise, and the privacy policy itself is
   generated from the app repo and covers only the app.
 
-  The Google Play row in the hero's ledger carries `utm_source=guzh.uk&utm_campaign=weather_page`, which Play Console
-  reports as a tracked channel. App Store Connect needs nothing: it lists guzh.uk under its web
+  The Google Play row in the old `/weather/` ledger carried `utm_source=guzh.uk&utm_campaign=weather_page`, which Play Console
+  reports as a tracked channel; alwaysweather.uk's rows carry `utm_source=alwaysweather.uk`. App Store Connect needs nothing: it lists guzh.uk under its web
   referrers on its own.
 
   Search Console has `guzh.uk` as a domain property, owned by xternal.p@gmail.com and verified on
@@ -468,8 +471,8 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 - **Dark is dark brown**, Pavel's dark palette for every project since 12 Oct 2026 (chosen on
   Ruminator.xyz): background #241F1A, the raised lift in the top corners #2E2822, text #EFE7DA,
   body copy #C0B5A4, tertiary #A59A88, an amber accent #E2B26F, and lines in the text colour at
-  .16 and .10. The drawn laptop on `/weather/` takes #39322B for its base so it still stands off
-  the page, and so does the monitor's stand; the bezels stay black, because the devices are. It replaced the warm charcoal #141311,
+  .16 and .10. The drawn devices on `/today/` take #39322B for their base so they still stand off
+  the page, as the old `/weather/` laptop and monitor stand did; the bezels stay black, because the devices are. It replaced the warm charcoal #141311,
   which read as black and put near-white text at 15.7:1, enough to glare and tire the eyes. Body
   text is now 13.3:1: keep it about 13 and never above 14. The accent went from blue to amber so
   nothing in the chrome has a blue cast. The browser bar (`theme-color`, in the tags and in each
