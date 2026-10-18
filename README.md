@@ -1,13 +1,13 @@
 # guzh.uk
 
-Personal one-pager for Pavel Guzhikov, plus the pages for the Always Weather app. Hand-written
+Personal one-pager for Pavel Guzhikov, plus the pages for the Always Weather and Always Today apps. Hand-written
 static HTML + CSS. No build step, no framework, and a little JavaScript (the copyright year, the
 light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-is on any static host.
 
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/`, `/weather/privacy/`, `/weather/support/`, `/weather/ideas/` |
+| Pages | `/`, `/weather/`, `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/`, `/today/privacy/`, `/today/support/`, `/today/terms/` |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; `/weather/` ~22 KB HTML (~7 KB gzipped) + 72 KB images; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
@@ -21,6 +21,11 @@ weather/
   privacy/index.html    the privacy policy both app stores require   } generated bodies,
   support/index.html    the support page the App Store requires       } see below
   ideas/index.html      "Suggest an idea": a form that sends an idea to the app's own server
+today/
+  index.html            Always Today — the app's one-scroll page, prices and questions
+  privacy/index.html    the privacy policy (Stripe and Google Play need one)  } generated bodies,
+  support/index.html    help, contact and the refund policy                   } see "The Always
+  terms/index.html      the terms of service (Stripe needs them)              } Today pages"
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
@@ -28,13 +33,14 @@ assets/
   apple-touch-icon.png  180x180, favicon.svg drawn by `rsvg-convert -w 180 -h 180` (redraw it
                         whenever the favicon changes)
   weather/              app icon, three screenshots and the OG card for the app pages
+  today/                the same for Always Today: icon (SVG and PNG), screenshots, OG card
 robots.txt
-sitemap.xml             the five pages, each with a <lastmod> date — when a page's copy
+sitemap.xml             the nine pages, each with a <lastmod> date — when a page's copy
                         changes, set its date to that day. Google ignores changefreq and
                         priority, and stops trusting lastmod once the dates go stale
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
-                        search tools (llmstxt.org) — hand-written from the copy on / and
-                        /weather/, so update it when that copy changes
+                        search tools (llmstxt.org) — hand-written from the copy on /,
+                        /weather/ and /today/, so update it when that copy changes
 tools/make-og.sh        regenerates assets/og.png: run it if the headline, the lead line, the
                         portrait treatment or favicon.svg changes
 tools/make-tz.sh        regenerates the packed timezone->coordinates table inside index.html
@@ -45,6 +51,9 @@ tools/make-weather-assets.sh
 tools/make-weather-pages.py
                         re-renders the policy and support page bodies from the Always Weather
                         repo's store/*.md — run it whenever that copy changes
+tools/make-today-assets.sh, tools/make-today-pages.py
+                        the same two jobs for Always Today, from its repo's logo, screenshots
+                        and store/*.md
 tools/make-writing.py   copies the three newest Substack posts into the "Writing" block on /
                         — run daily by .github/workflows/writing.yml, see below
 .github/workflows/writing.yml
@@ -162,8 +171,8 @@ the support URL the App Store requires.
   Notes below give.
 - The home page reaches these pages from the **"Things you can open"** row above its contact
   block (Uzum, Agent Hands, Ruminator.xyz, LedgerGov.UK, BoroughBook.UK, tCalendar, Always
-  Weather: seven, so Always Weather sits alone on a third row on desktop) — the only link into
-  `/weather/` from guzh.uk itself. Ruminator.xyz sits beside Agent Hands, both paid products in
+  Weather, Always Today: eight, so the two apps share a third row on desktop) — the only link into
+  `/weather/` and `/today/` from guzh.uk itself. Ruminator.xyz sits beside Agent Hands, both paid products in
   the making. Pavel announced it on LinkedIn on 13 October and wants AI assistants to recommend
   it, so its link is followed and `llms.txt` says who it is for and how to join.
   LedgerGov.UK and BoroughBook.UK sit side by side because BoroughBook.UK is the local version
@@ -206,6 +215,51 @@ the support URL the App Store requires.
   `/weather/`, and say only what their `<head>` already says, so regenerating a body can't leave
   them out of date. **A price lives in four places on `/weather/`** — the hero's ledger, the
   platform rows' ledgers, the "Once" figure and the JSON-LD `offers` — so change them together.
+
+## The Always Today pages — `/today/`, `/today/privacy/`, `/today/support/` and `/today/terms/`
+
+`/today/` is the public page for **Always Today**, a calm to-do list for Android phones and
+Googlebooks, Windows and the Linux terminal (`~/dev/always-today`; on the Linux machine
+`~/Work/always-today`). It is free on one device; sync costs £18 a year or £2.50 a month, or £49 once
+for Lifetime, with 14 days free and no card. Web purchases (Windows and Linux) are sold by **Stripe
+Managed Payments**, which shows itself to buyers as Onelink; Android purchases go through Google
+Play. Stripe reviews a business's website before switching Managed Payments on, and wants to see
+what is sold, the prices, a way to reach support, the terms, the privacy policy and the refund and
+dispute policy, all public: that is what these four pages are for (sources in the app repo's
+`docs/notes/website.md`).
+
+- **They follow the weather pages exactly**: the same tokens and dark brown, the same masthead,
+  switcher, footer menu, colophon and Cloudflare beacon, and `tools/check-colours.py` checks all
+  four. Two deliberate differences, from the app's own design rules: labels are in sentence case
+  (no all-caps eyebrows), and nothing animates on arrival.
+- **The copy is generated, as for the weather pages.** `tools/make-today-pages.py` renders
+  `store/privacy.md`, `store/support.md` (help, contact and the refund policy) and `store/terms.md`
+  from the Always Today repo into each page's `<!-- BEGIN generated … -->` region, with the same
+  renderer as `make-weather-pages.py` (it imports it). It reads `origin/main` by default:
+
+  ```bash
+  ./tools/make-today-pages.py ~/dev/always-today --ref=website
+  ```
+
+  `SUBSTITUTIONS` holds one open decision: `[operator]`, who sells the sync service and controls the
+  data (today "Pavel Guzhikov, an independent developer in London"; Empatiq Limited if the Stripe
+  account is the company's). It must match the name on the Stripe account.
+- **"Draft, not yet reviewed".** The three document pages carry a `.draft-note` paragraph just above
+  the generated region, and a few lines of CSS marked with the same name. Delete both once Pavel has
+  reviewed the copy; nothing else depends on them.
+- **Images**: `tools/make-today-assets.sh ~/dev/always-today` draws the icon from the app's logo
+  (`docs/logo/cut-reflect.svg`: a half-sun with the tick cut out of it, its horizon and reflection;
+  amber on the dark brown square), takes the screenshots from the app's own headless renders
+  (`./gradlew :app:desktopTest --tests 'alwaystoday.app.ScreensTest'` in that repo writes
+  `app/build/screenshots`), and draws the OG card in Geist, as the weather card is drawn. The Linux
+  row's screen is not a picture: it is the terminal app's real 80-column frame from its snapshot
+  tests, as text.
+- **No store links yet.** The hero's ledger lists the plans and prices as plain rows, and each
+  platform row says "Coming soon". When a store opens, turn its row into a link (`<a class="store">`,
+  as on `/weather/`), add the `url` to its JSON-LD `Offer`, and drop "Coming soon" here, in the home
+  page's one-line description and in `llms.txt`. **A price lives in five places on `/today/`**: the
+  ledger, the "£18" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
+  `store/support.md` and `store/terms.md`.
 
 ## Suggest an idea — `/weather/ideas/`
 
@@ -374,7 +428,7 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   ~155 KB gzipped, ten times the home page's own HTML. And it would sit badly next to the "Zero ads,
   accounts and trackers" line on `/weather/`.
 
-  The beacon is a small inline script just before `</body>` on all five pages, holding the same
+  The beacon is a small inline script just before `</body>` on all nine pages, holding the same
   token (not a secret; it is in the page source by design). It only loads when the hostname is
   `guzh.uk`, so a local preview never adds visits. A new page needs the same script copied in.
   Each footer says, in one line, that visits are counted this way. Keep that line: it is what keeps
