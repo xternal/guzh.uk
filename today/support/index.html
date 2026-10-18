@@ -207,12 +207,6 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 /* the legal basis under each thing the app sends */
 .basis{font-size:14.5px;color:var(--ink-3);margin-top:10px}
 
-/* "Draft, not yet reviewed": delete this block and the .draft-note paragraph once Pavel has
-   reviewed the page. Only existing tokens, so tools/check-colours.py already covers it. */
-.policy .draft-note{margin:0 0 36px;padding:12px 16px;border-left:2px solid var(--accent);background:var(--rule-soft);
-  font-size:15px;line-height:1.6;color:var(--ink-2);max-width:66ch}
-.draft-note strong{color:var(--ink);font-weight:500}
-
 /* ---------- footer ---------- */
 .foot{
   display:flex;align-items:flex-end;justify-content:space-between;
@@ -285,7 +279,6 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
   </header>
 
   <main class="policy">
-    <p class="draft-note" role="note"><strong>Draft, not yet reviewed.</strong> This page may change before Always Today goes on sale.</p>
     <!-- BEGIN generated from store/support.md — edit that file, then re-run tools/make-today-pages.py -->
     <h1>Always Today — help and contact</h1>
     <h2>Get in touch</h2>
@@ -309,7 +302,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
     <h3>Disputes</h3>
     <p>Please write to us before disputing a payment with your bank: a refund through us is quicker for you. If you do dispute a web purchase, Stripe handles it as the seller. While a payment is disputed, the plan it paid for is paused, and it comes back if the dispute is settled in our favour.</p>
     <h2>Plans and cancelling</h2>
-    <p><strong>What does it cost?</strong> Always Today is free on one device, for ever. Sync between your devices is £18 a year or £2.50 a month, or £49 once for Lifetime, with prices including VAT. Every new account gets 14 days of sync free, with no card needed. Outside the UK the checkout may show the price converted into your own currency.</p>
+    <p><strong>What does it cost?</strong> Always Today is free on one device, for ever. Sync between your devices is £24 a year or £3 a month, or £59 once for Lifetime, with prices including VAT. Every new account gets 14 days of sync free, with no card needed. Outside the UK the checkout may show the price converted into your own currency.</p>
     <p><strong>How do I buy a plan?</strong> From inside the app, with the account you sync with. On Windows and Linux, choosing a plan opens Stripe’s secure checkout in your browser (in the terminal: <code>always-today plan</code>). On Android you buy through Google Play. A plan belongs to your Always Today account, so it works on every device you sign in on, wherever you bought it.</p>
     <p><strong>Who will I see on my receipt?</strong> For web purchases, Onelink, Stripe’s checkout service, which sells the plan; your bank statement shows a line starting <code>LINK.COM*</code>. For Android purchases, Google Play.</p>
     <p><strong>How do I cancel?</strong> For a web purchase, at <a href="https://link.com" rel="noopener">link.com</a>, where Onelink lets you manage the subscription. For Android, in Google Play under Payments and subscriptions. Sync keeps working until the end of the period you’ve paid for; after that the app carries on, free, on each device.</p>

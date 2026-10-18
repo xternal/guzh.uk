@@ -82,7 +82,7 @@ magick -size 1200x630 xc:'#241F1A' \
   -fill '#C0B5A4' -pointsize 25 \
   -annotate +80+446 'A calm to-do list for phone, Googlebook,' \
   -annotate +80+482 'Windows and the Linux terminal.' \
-  -annotate +80+530 'Free on one device. Sync from £18 a year.' \
+  -annotate +80+530 'Free on one device. Sync from £24 a year.' \
   -depth 8 -strip assets/today/og.png
 
 echo "assets/today/: $(ls assets/today | tr '\n' ' ')"

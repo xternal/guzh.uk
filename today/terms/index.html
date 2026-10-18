@@ -207,12 +207,6 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 /* the legal basis under each thing the app sends */
 .basis{font-size:14.5px;color:var(--ink-3);margin-top:10px}
 
-/* "Draft, not yet reviewed": delete this block and the .draft-note paragraph once Pavel has
-   reviewed the page. Only existing tokens, so tools/check-colours.py already covers it. */
-.policy .draft-note{margin:0 0 36px;padding:12px 16px;border-left:2px solid var(--accent);background:var(--rule-soft);
-  font-size:15px;line-height:1.6;color:var(--ink-2);max-width:66ch}
-.draft-note strong{color:var(--ink);font-weight:500}
-
 /* ---------- footer ---------- */
 .foot{
   display:flex;align-items:flex-end;justify-content:space-between;
@@ -285,7 +279,6 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
   </header>
 
   <main class="policy">
-    <p class="draft-note" role="note"><strong>Draft, not yet reviewed.</strong> This page may change before Always Today goes on sale.</p>
     <!-- BEGIN generated from store/terms.md — edit that file, then re-run tools/make-today-pages.py -->
     <h1>Terms of service — Always Today</h1>
     <p class="updated">Last updated: 18 October 2026</p>
@@ -303,7 +296,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
       <li>If you turn on end-to-end encryption, only your passphrase or your recovery key can unlock your synced lists. We can’t recover them if you lose both.</li>
     </ul>
     <h2>Plans and payment</h2>
-    <p>Always Today is free on one device. Sync is £18 a year or £2.50 a month, or £49 once for Lifetime. Prices include VAT and any sales tax.</p>
+    <p>Always Today is free on one device. Sync is £24 a year or £3 a month, or £59 once for Lifetime. Prices include VAT and any sales tax.</p>
     <ul>
       <li><strong>Who sells the plan.</strong> On the web (Windows and Linux), plans are sold by Stripe through its Managed Payments service, which is the seller (the merchant of record) and is shown at checkout, on receipts and on your statement as Onelink; Stripe’s and Onelink’s terms apply to the payment. On Android, plans are sold by Google through Google Play, under Google Play’s terms. On iPhone and iPad, when that app arrives, they will be sold by Apple through the App Store. We provide the sync service itself.</li>
       <li><strong>Renewals.</strong> Monthly and yearly plans renew automatically at the end of each period, and are charged to your payment method until you cancel. You’ll get a reminder before a yearly plan renews.</li>

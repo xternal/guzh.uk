@@ -220,7 +220,7 @@ the support URL the App Store requires.
 
 `/today/` is the public page for **Always Today**, a calm to-do list for Android phones and
 Googlebooks, Windows and the Linux terminal (`~/dev/always-today`; on the Linux machine
-`~/Work/always-today`). It is free on one device; sync costs £18 a year or £2.50 a month, or £49 once
+`~/Work/always-today`). It is free on one device; sync costs £24 a year or £3 a month, or £59 once
 for Lifetime, with 14 days free and no card. Web purchases (Windows and Linux) are sold by **Stripe
 Managed Payments**, which shows itself to buyers as Onelink; Android purchases go through Google
 Play. Stripe reviews a business's website before switching Managed Payments on, and wants to see
@@ -245,9 +245,6 @@ dispute policy, all public: that is what these four pages are for (sources in th
   to the site's directories. The seller and data controller is **Empatiq Limited**, written in the
   documents exactly as on the weather pages (registered address, phone, company number), and in the
   colophon and the JSON-LD `author` on all four pages; it must match the Stripe account's legal name.
-- **"Draft, not yet reviewed".** The three document pages carry a `.draft-note` paragraph just above
-  the generated region, and a few lines of CSS marked with the same name. Delete both once Pavel has
-  reviewed the copy; nothing else depends on them.
 - **Images**: `tools/make-today-assets.sh ~/dev/always-today` draws the icon from the app's logo
   (`docs/logo/cut-reflect.svg`: a half-sun with the tick cut out of it, its horizon and reflection;
   amber on the dark brown square), takes the screenshots from the app's own headless renders
@@ -259,7 +256,7 @@ dispute policy, all public: that is what these four pages are for (sources in th
   platform row says "Coming soon". When a store opens, turn its row into a link (`<a class="store">`,
   as on `/weather/`), add the `url` to its JSON-LD `Offer`, and drop "Coming soon" here, in the home
   page's one-line description and in `llms.txt`. **A price lives in five places on `/today/`**: the
-  ledger, the "£18" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
+  ledger, the "£24" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
   `store/support.md` and `store/terms.md`.
 
 ## Suggest an idea — `/weather/ideas/`
