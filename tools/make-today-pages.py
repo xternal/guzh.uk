@@ -43,9 +43,6 @@ _spec.loader.exec_module(weather)
 # Exact source text -> what the published page says instead. Each one waits on a decision of Pavel's;
 # delete the entry once the source carries the real thing.
 SUBSTITUTIONS = {
-    # Who sells the sync service and is the controller: Pavel as a sole trader, or Empatiq Limited as
-    # for Always Weather. It must match the name on the Stripe account. Open in docs/notes/website.md.
-    "[operator]": "Pavel Guzhikov, an independent developer in London, United Kingdom",
     # The documents link to each other as flat files; the site serves directories.
     "](./privacy)": "](/today/privacy/)",
     "](./support)": "](/today/support/)",

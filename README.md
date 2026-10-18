@@ -241,9 +241,10 @@ dispute policy, all public: that is what these four pages are for (sources in th
   ./tools/make-today-pages.py ~/dev/always-today --ref=website
   ```
 
-  `SUBSTITUTIONS` holds one open decision: `[operator]`, who sells the sync service and controls the
-  data (today "Pavel Guzhikov, an independent developer in London"; Empatiq Limited if the Stripe
-  account is the company's). It must match the name on the Stripe account.
+  `SUBSTITUTIONS` only retargets the documents' links between each other (`./privacy` and so on)
+  to the site's directories. The seller and data controller is **Empatiq Limited**, written in the
+  documents exactly as on the weather pages (registered address, phone, company number), and in the
+  colophon and the JSON-LD `author` on all four pages; it must match the Stripe account's legal name.
 - **"Draft, not yet reviewed".** The three document pages carry a `.draft-note` paragraph just above
   the generated region, and a few lines of CSS marked with the same name. Delete both once Pavel has
   reviewed the copy; nothing else depends on them.
