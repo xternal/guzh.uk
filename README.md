@@ -245,9 +245,6 @@ dispute policy, all public: that is what these four pages are for (sources in th
   to the site's directories. The seller and data controller is **Empatiq Limited**, written in the
   documents exactly as on the weather pages (registered address, phone, company number), and in the
   colophon and the JSON-LD `author` on all four pages; it must match the Stripe account's legal name.
-- **"Draft, not yet reviewed".** The three document pages carry a `.draft-note` paragraph just above
-  the generated region, and a few lines of CSS marked with the same name. Delete both once Pavel has
-  reviewed the copy; nothing else depends on them.
 - **Images**: `tools/make-today-assets.sh ~/dev/always-today` draws the icon from the app's logo
   (`docs/logo/cut-reflect.svg`: a half-sun with the tick cut out of it, its horizon and reflection;
   amber on the dark brown square), takes the screenshots from the app's own headless renders
