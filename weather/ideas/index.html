@@ -23,8 +23,8 @@
 <meta name="twitter:image" content="https://guzh.uk/assets/weather/og.png">
 <meta name="twitter:image:alt" content="Always Weather: drag through the hours. A calm, paid weather app. No ads, no account, no tracking.">
 
-<!-- A WebPage that is part of /weather/ and about the app described there (the
-     SoftwareApplication with the same @id in /weather/index.html). -->
+<!-- A WebPage that is part of the app's own page, https://alwaysweather.uk/, and about the app
+     described there (the SoftwareApplication with the same @id on that page). -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -32,8 +32,8 @@
   "name": "Always Weather: suggest an idea",
   "url": "https://guzh.uk/weather/ideas/",
   "description": "Suggest an idea for Always Weather, the calm, paid weather app. It goes straight to the person who makes it. No account, nothing tracked.",
-  "isPartOf": {"@type": "WebPage", "name": "Always Weather", "url": "https://guzh.uk/weather/"},
-  "about": {"@id": "https://guzh.uk/weather/#app"}
+  "isPartOf": {"@type": "WebPage", "name": "Always Weather", "url": "https://alwaysweather.uk/"},
+  "about": {"@id": "https://alwaysweather.uk/#app"}
 }
 </script>
 
@@ -309,7 +309,7 @@ input.control{min-height:48px}
 <div class="wrap">
 
   <header class="masthead">
-    <a class="masthead-name" href="/weather/">Always Weather</a>
+    <a class="masthead-name" href="https://alwaysweather.uk/">Always Weather</a>
     <div class="masthead-meta">
       <div class="mode" role="group" aria-label="Colour mode">
         <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto: follow your system">
@@ -384,13 +384,13 @@ input.control{min-height:48px}
       <h2 tabindex="-1">Thank you</h2>
       <p>Your idea is on its way to the person who makes Always Weather.</p>
       <p data-if-email>If there’s something to answer, the reply will come to the email you gave.</p>
-      <a class="pill" href="/weather/">Back to Always Weather</a>
+      <a class="pill" href="https://alwaysweather.uk/">Back to Always Weather</a>
     </template>
   </main>
 
   <footer class="foot">
     <nav class="foot-nav" aria-label="Always Weather">
-      <a href="/weather/">Always Weather</a>
+      <a href="https://alwaysweather.uk/">Always Weather</a>
       <a href="/weather/privacy/">Privacy policy</a>
       <a href="/weather/support/">Help and contact</a>
       <a href="/weather/ideas/" aria-current="page">Suggest an idea</a>

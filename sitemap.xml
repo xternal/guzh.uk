@@ -7,26 +7,20 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://guzh.uk/weather/</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://guzh.uk/weather/privacy/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://guzh.uk/weather/support/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://guzh.uk/weather/ideas/</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
