@@ -51,6 +51,7 @@ plat() { magick "$SHOTS/$1.png" "${@:3}" -quality 82 "assets/today/$2.webp"; }
 plat phone-dark       platform-android    -gravity North -crop 824x1786+0+0 +repage -resize 520x
 plat googlebook-light platform-googlebook -gravity North -crop 1800x1125+0+0 +repage -resize 1400x
 plat desktop-light    platform-windows    -resize 1400x
+plat desktop-dark     platform-mac        -resize 1400x
 
 # ---- the 1200x630 link-preview card --------------------------------------------------------------
 FONT_DIR="${TMPDIR:-/tmp}/guzh-og-fonts"
