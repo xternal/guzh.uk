@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Always Today: a calm to-do list for phone, Googlebook, Windows and Linux</title>
-<meta name="description" content="Always Today is a calm, local-first to-do list. It works offline, understands plain words, and syncs across Android, Googlebook, Windows and the Linux terminal. Free on one device; sync from £24 a year.">
+<title>Always Today: a calm to-do list for phone, Googlebook, Windows, Mac and Linux</title>
+<meta name="description" content="Always Today is a calm, local-first to-do list. It works offline, understands plain words, and syncs across Android, Googlebook, Windows, Mac and the Linux terminal. Free on one device; sync from £24 a year.">
 <link rel="canonical" href="https://guzh.uk/today/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guzh.uk/today/">
 <meta property="og:site_name" content="Always Today">
 <meta property="og:title" content="Always Today: what am I doing today?">
-<meta property="og:description" content="A calm, local-first to-do list for your phone, Googlebook, Windows PC and Linux terminal. Free on one device; sync from £24 a year.">
+<meta property="og:description" content="A calm, local-first to-do list for your phone, Googlebook, Windows PC, Mac and Linux terminal. Free on one device; sync from £24 a year.">
 <meta property="og:image" content="https://guzh.uk/assets/today/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -33,8 +33,8 @@
   "name": "Always Today",
   "url": "https://guzh.uk/today/",
   "image": "https://guzh.uk/assets/today/icon.png",
-  "description": "A calm, local-first to-do list that works offline, understands plain words, and syncs across Android, Googlebook, Windows and the Linux terminal, with optional end-to-end encryption. No ads, no analytics, no tracking.",
-  "operatingSystem": "Android, Windows, Linux",
+  "description": "A calm, local-first to-do list that works offline, understands plain words, and syncs across Android, Googlebook, Windows, Mac and the Linux terminal, with optional end-to-end encryption. No ads, no analytics, no tracking.",
+  "operatingSystem": "Android, Windows, macOS, Linux",
   "applicationCategory": "ProductivityApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
   "screenshot": [
@@ -72,7 +72,7 @@
       "name": "How do I buy a plan, and who sells it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "From inside the app. On Windows and Linux it opens Stripe's secure checkout in your browser; Stripe sells the plan through its Managed Payments service, shown on your receipt as Onelink. On Android you buy through Google Play. A plan belongs to your Always Today account, so it works on every device you sign in on, wherever you bought it."
+        "text": "From inside the app. On Windows, Mac and Linux it opens Stripe's secure checkout in your browser; Stripe sells the plan through its Managed Payments service, shown on your receipt as Onelink. On Android you buy through Google Play. A plan belongs to your Always Today account, so it works on every device you sign in on, wherever you bought it."
       }
     },
     {
@@ -542,6 +542,36 @@ div.store .store-name{border-bottom-color:transparent}
 .stage-linux .screen{background:#241F1A}
 .tui{position:absolute;left:0;right:0;top:3.4cqw;bottom:0;margin:0;padding:3cqw 1.8cqw;overflow:hidden;
   background:#241F1A;color:#EFE7DA;font:400 1.98cqw/1.18 ui-monospace,"JetBrains Mono","DejaVu Sans Mono",Menlo,Consolas,monospace;white-space:pre}
+/* Mac: one laptop, centred like Linux's, with a Mac desktop drawn in the page's tokens: the menu bar
+   with the app's mark, the app's window in its dark brown, and the Dock with the app running.
+   Flat wallpaper, no gradient. Sizes in cqw, a share of the drawn screen's width. */
+.stage-mac .laptop{left:11.7%}
+.stage-mac .screen{position:relative;container-type:inline-size;background:var(--desk)}
+.menubar{position:absolute;top:0;left:0;right:0;height:2.6cqw;display:flex;align-items:center;gap:1.6cqw;padding:0 1.6cqw;
+  background:var(--taskbar);color:var(--taskbar-ink);font-size:1.15cqw;line-height:1;white-space:nowrap}
+.menubar b{font-weight:500}
+.menubar-right{margin-left:auto;display:flex;align-items:center;gap:1.4cqw}
+.menubar svg{width:1.9cqw;height:1.25cqw}
+.stage-mac .window{left:11cqw;top:5cqw;width:78cqw;border-radius:1cqw}
+.mac-titlebar{position:relative;justify-content:center;height:2.4cqw;padding:0;background:#2E2822;color:#C0B5A4;font-size:.95cqw}
+.mac-titlebar i{position:absolute;top:50%;width:.9cqw;height:.9cqw;margin-top:-.45cqw;border-radius:50%;background:rgba(239,231,218,.22)}
+.mac-titlebar i:nth-child(1){left:1cqw}
+.mac-titlebar i:nth-child(2){left:2.4cqw}
+.mac-titlebar i:nth-child(3){left:3.8cqw}
+.dock{position:absolute;left:50%;bottom:1cqw;transform:translateX(-50%);display:flex;align-items:center;gap:.8cqw;
+  padding:.7cqw .9cqw;border-radius:1.4cqw;background:var(--taskbar);border:1px solid var(--rule-soft)}
+.dock .tile{width:3.2cqw;height:3.2cqw;border-radius:.8cqw;background:var(--taskbar-tile)}
+.dock .running{position:relative;display:block}
+.stage .dock .running img{width:3.2cqw;height:3.2cqw;border-radius:.8cqw}
+.dock .running::after{content:"";position:absolute;bottom:-.55cqw;left:50%;width:.4cqw;height:.4cqw;transform:translateX(-50%);
+  border-radius:50%;background:var(--taskbar-ink)}
+/* The three install steps, as the DMG's own window shows them. */
+.steps{margin:4px 0 0;padding-left:1.4em;font-size:15px;line-height:1.7;color:var(--ink-2)}
+.steps li::marker{color:var(--ink-3)}
+@media (max-width:860px){
+  .stage-mac{aspect-ratio:836/560}
+  .stage-mac .laptop{left:0;width:100%}
+}
 /* Questions: a ruled list, each answer under its question. */
 .faq{margin-top:104px;max-width:760px}
 .faq h2{margin:0 0 20px;font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.2}
@@ -595,7 +625,7 @@ div.store .store-name{border-bottom-color:transparent}
            alt="Always Today app icon: an amber half-sun with a tick cut out of it, rising over a horizon, on a dark brown square.">
       <div class="eyebrow">Always Today</div>
       <h1>What am I doing today?</h1>
-      <p class="lead">A calm to-do list that answers that one question every morning. Your lists live on your device and work offline, and they sync across your phone, your Googlebook, your Windows PC and your Linux terminal when you want them to.</p>
+      <p class="lead">A calm to-do list that answers that one question every morning. Your lists live on your device and work offline, and they sync across your phone, your Googlebook, your Windows PC, your Mac and your Linux terminal when you want them to.</p>
       <p class="body-copy">Type a to-do the way you would say it, “call bank tomorrow 3pm #admin”, and it lands in the right list with its day, time and tag. Today, Upcoming, Anytime, Someday and a Logbook; areas and projects with headings; repeats that never double up; reminders; and a quiet line under Today that marks each thing as you finish it. Optional end-to-end encryption, and no ads, no analytics and no tracking.</p>
       <div class="availability">
         <ul class="stores" aria-label="Plans and prices">
@@ -604,7 +634,7 @@ div.store .store-name{border-bottom-color:transparent}
           <li><div class="store"><span class="store-name">Sync, monthly</span> <span class="store-for">The same sync, paid month by month</span> <span class="store-price">£3 a month</span></div></li>
           <li><div class="store"><span class="store-name">Lifetime</span> <span class="store-for">Sync for as long as the service runs, paid once</span> <span class="store-price">£59</span></div></li>
         </ul>
-        <p class="availability-note">UK prices, VAT included. Every new account gets 14 days of sync free, no card needed. Always Today is in its last round of testing: Google Play, Windows and Linux are coming soon, and an iPhone and iPad version is planned.</p>
+        <p class="availability-note">UK prices, VAT included. Every new account gets 14 days of sync free, no card needed. Always Today is in its last round of testing: Google Play, Windows, Mac and Linux are coming soon, and an iPhone and iPad version is on its way.</p>
       </div>
     </section>
 
@@ -693,7 +723,51 @@ div.store .store-name{border-bottom-color:transparent}
         </div>
       </div>
 
-      <div class="platform-row" id="linux">
+      <div class="platform-row" id="mac">
+        <div class="platform-text">
+          <p class="platform-store">macOS</p>
+          <h3>Mac</h3>
+          <p>Close the window and it waits in the menu bar, with quick entry a click away; click its Dock icon and Today is back. One plan covers every device you sign in on, bought in Stripe's secure checkout in your browser. For Macs with Apple silicon.</p>
+          <ol class="steps">
+            <li>Open the download</li>
+            <li>Drag Always Today into Applications</li>
+            <li>Open it from Applications</li>
+          </ol>
+          <ul class="stores">
+            <li><div class="store"><span class="store-name">Mac download</span> <span class="store-price">Coming soon</span></div></li>
+          </ul>
+        </div>
+        <div class="stage stage-mac">
+          <div class="laptop">
+            <div class="lid"><div class="screen">
+              <div class="menubar" aria-hidden="true">
+                <b>Always Today</b>
+                <span class="menubar-right">
+                  <svg viewBox="2 13 28 18" fill="currentColor"><mask id="mac-mark-cut"><rect width="32" height="40" fill="#fff"/><path d="M11.2 16.2l3.4 3.4 5.4-6.2" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></mask><path mask="url(#mac-mark-cut)" d="M5.5 20a10.5 10.5 0 0 1 21 0z"/><path d="M2.5 22.6h27M9 25.8h14M12.5 29h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  <span>Sat 17 Oct 09:40</span>
+                </span>
+              </div>
+              <div class="window">
+                <div class="titlebar mac-titlebar" aria-hidden="true">
+                  <i></i><i></i><i></i>
+                  <span>Always Today</span>
+                </div>
+                <img src="/assets/today/platform-mac.webp" width="1400" height="875" loading="lazy" decoding="async"
+                     alt="Always Today on a Mac in dark brown: the lists down the side, and Today with to-dos, a time, a deadline, tags and the day's line marking now.">
+              </div>
+              <div class="dock" aria-hidden="true">
+                <span class="tile"></span>
+                <span class="tile"></span>
+                <span class="tile"></span>
+                <span class="running"><img src="/assets/today/icon.png" width="24" height="24" alt=""></span>
+              </div>
+            </div></div>
+            <div class="base" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="platform-row mirror" id="linux">
         <div class="platform-text">
           <p class="platform-store">Terminal</p>
           <h3>Linux, made on Omarchy</h3>
@@ -787,7 +861,7 @@ div.store .store-name{border-bottom-color:transparent}
       </details>
       <details>
         <summary>How do I buy a plan, and who sells it?</summary>
-        <p>From inside the app. On Windows and Linux it opens Stripe's secure checkout in your browser; Stripe sells the plan through its Managed Payments service, shown on your receipt as Onelink. On Android you buy through Google Play. A plan belongs to your Always Today account, so it works on every device you sign in on, wherever you bought it.</p>
+        <p>From inside the app. On Windows, Mac and Linux it opens Stripe's secure checkout in your browser; Stripe sells the plan through its Managed Payments service, shown on your receipt as Onelink. On Android you buy through Google Play. A plan belongs to your Always Today account, so it works on every device you sign in on, wherever you bought it.</p>
       </details>
       <details>
         <summary>Can I get a refund?</summary>
