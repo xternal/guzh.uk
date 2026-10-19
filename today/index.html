@@ -24,7 +24,12 @@
 <meta name="twitter:image:alt" content="Always Today: what am I doing today? The Today list on a Windows PC, with the day's ink line.">
 
 <!-- The machine-readable twin of the price ledger in the hero and the "£24" figure: change a price
-     in all three places. No store links yet: each Offer gets its url when its store opens. -->
+     in all three places. Each store or download that is open has its own free Offer with its url:
+     the Mac and Linux downloads for now. Google Play's Offer and installUrl come back when Google
+     approves (git revert the commit "Always Today: Google Play in review"). The App Store comes back
+     when Apple approves (git revert "Always Today: Google Play only until Apple approves"), with
+     Apple's own prices (£23.99, £2.99 and £58.99, owner decision 48) named in the first two
+     questions; Windows gets its own when its download is out. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,6 +40,7 @@
   "image": "https://guzh.uk/assets/today/icon.png",
   "description": "A calm, local-first to-do list that works offline, understands plain words, and syncs across Android, Googlebook, Windows, Mac and the Linux terminal, with optional end-to-end encryption. No ads, no analytics, no tracking.",
   "operatingSystem": "Android, Windows, macOS, Linux",
+  "installUrl": ["https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg", "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0"],
   "applicationCategory": "ProductivityApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
   "screenshot": [
@@ -45,6 +51,8 @@
   ],
   "offers": [
     {"@type": "Offer", "name": "Free, on one device", "price": "0", "priceCurrency": "GBP"},
+    {"@type": "Offer", "name": "Mac download, for Macs with Apple silicon", "url": "https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg", "price": "0", "priceCurrency": "GBP"},
+    {"@type": "Offer", "name": "Linux download, for the terminal", "url": "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0", "price": "0", "priceCurrency": "GBP"},
     {"@type": "Offer", "name": "Sync, yearly", "price": "24.00", "priceCurrency": "GBP", "eligibleRegion": "GB",
      "priceSpecification": {"@type": "UnitPriceSpecification", "price": "24.00", "priceCurrency": "GBP", "billingDuration": "P1Y"}},
     {"@type": "Offer", "name": "Sync, monthly", "price": "3.00", "priceCurrency": "GBP", "eligibleRegion": "GB",
@@ -530,11 +538,21 @@ img{max-width:100%}
 /* ---------- Always Today: its own differences from the weather page ---------- */
 /* Labels in sentence case: the app's design rules have no all-caps eyebrows. */
 .eyebrow,.block-index,.platform-text .platform-store{text-transform:none;letter-spacing:.01em;font-size:13.5px}
-/* The ledger's rows are plain text until each store opens: not links, so no hover. */
+/* The hero has two ledgers, where to get it and then the plans, with a gap between them. */
+.availability .stores + .stores{margin-top:20px}
+/* A row is plain text until its store or download opens (the plans, Google Play while Google
+   reviews the app, and Windows until it's out): not a link, so no hover. The Mac and Linux
+   downloads are links. */
 div.store{cursor:default}
 div.store:hover{background:none}
 div.store .store-name{border-bottom-color:transparent}
 .store-price{white-space:nowrap}
+/* Google Play while Google reviews the app: its status is longer than a price, so the status
+   wraps instead of the store's name. */
+.store-wait .store-name{white-space:nowrap}
+.store-wait .store-price{white-space:normal;text-align:right;text-wrap:balance}
+.platform-text .store-wait{grid-template-columns:auto minmax(0,1fr)}
+@media (max-width:860px){.availability .store-wait{grid-template-columns:auto minmax(0,1fr)}}
 /* The Windows title bar takes the app's own paper, as the app sets it. */
 .titlebar{background:#F6F7F5}
 /* Linux: the terminal app itself, as text: its real frame at 80 columns, from its snapshot tests,
@@ -628,13 +646,18 @@ div.store .store-name{border-bottom-color:transparent}
       <p class="lead">A calm to-do list that answers that one question every morning. Your lists live on your device and work offline, and they sync across your phone, your Googlebook, your Windows PC, your Mac and your Linux terminal when you want them to.</p>
       <p class="body-copy">Type a to-do the way you would say it, “call bank tomorrow 3pm #admin”, and it lands in the right list with its day, time and tag. Today, Upcoming, Anytime, Someday and a Logbook; areas and projects with headings; repeats that never double up; reminders; and a quiet line under Today that marks each thing as you finish it. Optional end-to-end encryption, and no ads, no analytics and no tracking.</p>
       <div class="availability">
+        <ul class="stores" aria-label="Where to get it">
+          <li><div class="store store-wait"><span class="store-name">Google Play</span> <span class="store-for">Android phones and Googlebooks</span> <span class="store-price">In review, out in a few days</span></div></li>
+          <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg"><span class="store-name">Mac download</span> <span class="store-for">Macs with Apple silicon</span> <span class="store-price">Free</span></a></li>
+          <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0"><span class="store-name">Linux download</span> <span class="store-for">The terminal app, made on Omarchy</span> <span class="store-price">Free</span></a></li>
+        </ul>
         <ul class="stores" aria-label="Plans and prices">
           <li><div class="store"><span class="store-name">Free</span> <span class="store-for">Every feature on one device, for ever. No account needed</span> <span class="store-price">£0</span></div></li>
           <li><div class="store"><span class="store-name">Sync, yearly</span> <span class="store-for">Your lists on every device you sign in on</span> <span class="store-price">£24 a year</span></div></li>
           <li><div class="store"><span class="store-name">Sync, monthly</span> <span class="store-for">The same sync, paid month by month</span> <span class="store-price">£3 a month</span></div></li>
           <li><div class="store"><span class="store-name">Lifetime</span> <span class="store-for">Sync for as long as the service runs, paid once</span> <span class="store-price">£59</span></div></li>
         </ul>
-        <p class="availability-note">UK prices, VAT included. Every new account gets 7 days of sync free, no card needed. Always Today is in its last round of testing: Google Play, Windows, Mac and Linux are coming soon, and an iPhone and iPad version is on its way.</p>
+        <p class="availability-note">UK prices, VAT included. Every new account gets 7 days of sync free, no card needed. The Android app is in review at Google Play and out in a few days. iPhone, iPad and Windows are coming soon.</p>
       </div>
     </section>
 
@@ -663,7 +686,7 @@ div.store .store-name{border-bottom-color:transparent}
           <h3>Android phone and Googlebook</h3>
           <p>On the phone, a home-screen widget, reminders and sharing from other apps. On a Googlebook it behaves like a desktop: two panes, keyboard shortcuts, right-click menus and windows you can resize.</p>
           <ul class="stores">
-            <li><div class="store"><span class="store-name">Google Play</span> <span class="store-price">Coming soon</span></div></li>
+            <li><div class="store store-wait"><span class="store-name">Google Play</span> <span class="store-price">In review, out in a few days</span></div></li>
           </ul>
         </div>
         <div class="stage">
@@ -734,7 +757,7 @@ div.store .store-name{border-bottom-color:transparent}
             <li>Open it from Applications</li>
           </ol>
           <ul class="stores">
-            <li><div class="store"><span class="store-name">Mac download</span> <span class="store-price">Coming soon</span></div></li>
+            <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg"><span class="store-name">Mac download</span> <span class="store-price">Free</span></a></li>
           </ul>
         </div>
         <div class="stage stage-mac">
@@ -773,7 +796,7 @@ div.store .store-name{border-bottom-color:transparent}
           <h3>Linux, made on Omarchy</h3>
           <p>A fast native terminal app that starts at once and takes your terminal's colours, so it matches every Omarchy theme. Keys feel like Vim. The same program adds to-dos from scripts, puts Today in your bar and opens a one-line capture prompt in a floating window.</p>
           <ul class="stores">
-            <li><div class="store"><span class="store-name">Arch Linux package</span> <span class="store-price">Coming soon</span></div></li>
+            <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0"><span class="store-name">Linux download</span> <span class="store-price">Free</span></a></li>
           </ul>
         </div>
         <div class="stage stage-linux">
@@ -814,7 +837,7 @@ div.store .store-name{border-bottom-color:transparent}
         <div class="stat-label">for sync on every device, or £3 a month, or £59 once for Lifetime</div>
       </div>
       <div class="stat">
-        <div class="stat-figure">14<span class="stat-unit"> days</span></div>
+        <div class="stat-figure">7<span class="stat-unit"> days</span></div>
         <div class="stat-label">of sync free with every new account, and no card needed</div>
       </div>
       <div class="stat">
