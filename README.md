@@ -219,8 +219,8 @@ the support URL the App Store requires.
 
 ## The Always Today pages — `/today/`, `/today/privacy/`, `/today/support/` and `/today/terms/`
 
-`/today/` is the public page for **Always Today**, a calm to-do list for Android phones and
-Googlebooks, Windows and the Linux terminal (`~/dev/always-today`; on the Linux machine
+`/today/` is the public page for **Always Today**, a calm to-do list for iPhone, iPad, Android phones
+and Googlebooks, Windows, Mac and the Linux terminal (`~/dev/always-today`; on the Linux machine
 `~/Work/always-today`). It is free on one device; sync costs £24 a year or £3 a month, or £59 once
 for Lifetime, with 14 days free and no card. Web purchases (Windows and Linux) are sold by **Stripe
 Managed Payments**, which shows itself to buyers as Onelink; Android purchases go through Google
@@ -253,10 +253,15 @@ dispute policy, all public: that is what these four pages are for (sources in th
   `app/build/screenshots`), and draws the OG card in Geist, as the weather card is drawn. The Linux
   row's screen is not a picture: it is the terminal app's real 80-column frame from its snapshot
   tests, as text.
-- **No store links yet.** The hero's ledger lists the plans and prices as plain rows, and each
-  platform row says "Coming soon". When a store opens, turn its row into a link (`<a class="store">`,
-  as alwaysweather.uk's ledger does), add the `url` to its JSON-LD `Offer`, and drop "Coming soon" here, in the home
-  page's one-line description and in `llms.txt`. **A price lives in five places on `/today/`**: the
+- **Store links: Google Play and the App Store.** The hero has two ledgers: where to get it (Google
+  Play for Android phones and Googlebooks, the App Store for iPhone and iPad, each row a link) and
+  the plans and prices as plain rows. The Android row links to Google Play; the Windows, Mac and
+  Linux rows still say "Coming soon". When a download is out, turn its row into a link
+  (`<a class="store">`, as alwaysweather.uk's ledger does), add a free JSON-LD `Offer` with its
+  `url` (as Google Play's and the App Store's have, also listed in `installUrl`), and drop "Coming
+  soon" here, in the home page's one-line description and in `llms.txt`. The App Store sells the
+  plans at Apple's own prices (£23.99, £2.99, £58.99), named in the hero's note and the "How do I
+  buy a plan" question. **A price lives in five places on `/today/`**: the
   ledger, the "£24" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
   `store/support.md` and `store/terms.md`.
 
