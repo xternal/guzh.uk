@@ -253,15 +253,16 @@ dispute policy, all public: that is what these four pages are for (sources in th
   `app/build/screenshots`), and draws the OG card in Geist, as the weather card is drawn. The Linux
   row's screen is not a picture: it is the terminal app's real 80-column frame from its snapshot
   tests, as text.
-- **Store links: Google Play and the App Store.** The hero has two ledgers: where to get it (Google
-  Play for Android phones and Googlebooks, the App Store for iPhone and iPad, each row a link) and
-  the plans and prices as plain rows. The Android row links to Google Play; the Windows, Mac and
-  Linux rows still say "Coming soon". When a download is out, turn its row into a link
-  (`<a class="store">`, as alwaysweather.uk's ledger does), add a free JSON-LD `Offer` with its
-  `url` (as Google Play's and the App Store's have, also listed in `installUrl`), and drop "Coming
-  soon" here, in the home page's one-line description and in `llms.txt`. The App Store sells the
-  plans at Apple's own prices (£23.99, £2.99, £58.99), named in the hero's note and the "How do I
-  buy a plan" question. **A price lives in five places on `/today/`**: the
+- **Store links: Google Play for now.** The hero has two ledgers: where to get it (Google Play for
+  Android phones and Googlebooks, a link) and the plans and prices as plain rows. The Android row
+  links to Google Play; iPhone, iPad, Windows, Mac and Linux are "coming soon". When a store or
+  download opens, turn its row into a link (`<a class="store">`, as alwaysweather.uk's ledger
+  does), add a free JSON-LD `Offer` with its `url` (as Google Play's has, also in `installUrl`),
+  and drop "coming soon" here, in the home page's one-line description and in `llms.txt`. The App
+  Store's row was written and taken out until Apple approves (revert the commit "Always Today:
+  Google Play only until Apple approves"); it sells the plans at Apple's own prices (£23.99,
+  £2.99, £58.99), named in the hero's note and the "How do I buy a plan" question. **A price lives
+  in five places on `/today/`**: the
   ledger, the "£24" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
   `store/support.md` and `store/terms.md`.
 
