@@ -38,7 +38,7 @@
   "image": "https://guzh.uk/assets/today/icon.png",
   "description": "A calm, local-first to-do list that works offline, understands plain words, and syncs across Android, Googlebook, Windows, Mac and the Linux terminal, with optional end-to-end encryption. No ads, no analytics, no tracking.",
   "operatingSystem": "Android, Windows, macOS, Linux",
-  "installUrl": "https://play.google.com/store/apps/details?id=app.alwaystoday",
+  "installUrl": ["https://play.google.com/store/apps/details?id=app.alwaystoday", "https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg", "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0"],
   "applicationCategory": "ProductivityApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
   "screenshot": [
@@ -50,6 +50,8 @@
   "offers": [
     {"@type": "Offer", "name": "Free, on one device", "price": "0", "priceCurrency": "GBP"},
     {"@type": "Offer", "name": "Google Play, for Android phones and Googlebooks", "url": "https://play.google.com/store/apps/details?id=app.alwaystoday", "price": "0", "priceCurrency": "GBP"},
+    {"@type": "Offer", "name": "Mac download, for Macs with Apple silicon", "url": "https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg", "price": "0", "priceCurrency": "GBP"},
+    {"@type": "Offer", "name": "Linux download, for the terminal", "url": "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0", "price": "0", "priceCurrency": "GBP"},
     {"@type": "Offer", "name": "Sync, yearly", "price": "24.00", "priceCurrency": "GBP", "eligibleRegion": "GB",
      "priceSpecification": {"@type": "UnitPriceSpecification", "price": "24.00", "priceCurrency": "GBP", "billingDuration": "P1Y"}},
     {"@type": "Offer", "name": "Sync, monthly", "price": "3.00", "priceCurrency": "GBP", "eligibleRegion": "GB",
@@ -538,7 +540,7 @@ img{max-width:100%}
 /* The hero has two ledgers, where to get it and then the plans, with a gap between them. */
 .availability .stores + .stores{margin-top:20px}
 /* A row is plain text until its store or download opens (the plans, and Windows, Mac and Linux
-   until they're out): not a link, so no hover. Google Play is a link. */
+   until they're out): not a link, so no hover. Google Play and the Mac and Linux downloads are links. */
 div.store{cursor:default}
 div.store:hover{background:none}
 div.store .store-name{border-bottom-color:transparent}
@@ -638,6 +640,8 @@ div.store .store-name{border-bottom-color:transparent}
       <div class="availability">
         <ul class="stores" aria-label="Where to get it">
           <li><a class="store" href="https://play.google.com/store/apps/details?id=app.alwaystoday"><span class="store-name">Google Play</span> <span class="store-for">Android phones and Googlebooks</span> <span class="store-price">Free</span></a></li>
+          <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg"><span class="store-name">Mac download</span> <span class="store-for">Macs with Apple silicon</span> <span class="store-price">Free</span></a></li>
+          <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0"><span class="store-name">Linux download</span> <span class="store-for">The terminal app, made on Omarchy</span> <span class="store-price">Free</span></a></li>
         </ul>
         <ul class="stores" aria-label="Plans and prices">
           <li><div class="store"><span class="store-name">Free</span> <span class="store-for">Every feature on one device, for ever. No account needed</span> <span class="store-price">£0</span></div></li>
@@ -645,7 +649,7 @@ div.store .store-name{border-bottom-color:transparent}
           <li><div class="store"><span class="store-name">Sync, monthly</span> <span class="store-for">The same sync, paid month by month</span> <span class="store-price">£3 a month</span></div></li>
           <li><div class="store"><span class="store-name">Lifetime</span> <span class="store-for">Sync for as long as the service runs, paid once</span> <span class="store-price">£59</span></div></li>
         </ul>
-        <p class="availability-note">UK prices, VAT included. Every new account gets 7 days of sync free, no card needed. iPhone, iPad, Windows, Mac and Linux are coming soon.</p>
+        <p class="availability-note">UK prices, VAT included. Every new account gets 7 days of sync free, no card needed. iPhone, iPad and Windows are coming soon.</p>
       </div>
     </section>
 
@@ -745,7 +749,7 @@ div.store .store-name{border-bottom-color:transparent}
             <li>Open it from Applications</li>
           </ol>
           <ul class="stores">
-            <li><div class="store"><span class="store-name">Mac download</span> <span class="store-price">Coming soon</span></div></li>
+            <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.0/always-today-1.0.0-mac-arm64.dmg"><span class="store-name">Mac download</span> <span class="store-price">Free</span></a></li>
           </ul>
         </div>
         <div class="stage stage-mac">
@@ -784,7 +788,7 @@ div.store .store-name{border-bottom-color:transparent}
           <h3>Linux, made on Omarchy</h3>
           <p>A fast native terminal app that starts at once and takes your terminal's colours, so it matches every Omarchy theme. Keys feel like Vim. The same program adds to-dos from scripts, puts Today in your bar and opens a one-line capture prompt in a floating window.</p>
           <ul class="stores">
-            <li><div class="store"><span class="store-name">Arch Linux package</span> <span class="store-price">Coming soon</span></div></li>
+            <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.0"><span class="store-name">Linux download</span> <span class="store-price">Free</span></a></li>
           </ul>
         </div>
         <div class="stage stage-linux">

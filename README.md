@@ -253,9 +253,11 @@ dispute policy, all public: that is what these four pages are for (sources in th
   `app/build/screenshots`), and draws the OG card in Geist, as the weather card is drawn. The Linux
   row's screen is not a picture: it is the terminal app's real 80-column frame from its snapshot
   tests, as text.
-- **Store links: Google Play for now.** The hero has two ledgers: where to get it (Google Play for
-  Android phones and Googlebooks, a link) and the plans and prices as plain rows. The Android row
-  links to Google Play; iPhone, iPad, Windows, Mac and Linux are "coming soon". When a store or
+- **Store links: Google Play, and the Mac and Linux downloads.** The hero has two ledgers: where to
+  get it (Google Play for Android phones and Googlebooks, the Mac DMG and the Linux release, each a
+  link) and the plans and prices as plain rows. The downloads are this repository's own releases,
+  `always-today-mac-1.0.0` and `always-today-linux-1.0.0`, as Always Weather's Linux build is
+  (the app's own repository is private). iPhone, iPad and Windows are "coming soon". When a store or
   download opens, turn its row into a link (`<a class="store">`, as alwaysweather.uk's ledger
   does), add a free JSON-LD `Offer` with its `url` (as Google Play's has, also in `installUrl`),
   and drop "coming soon" here, in the home page's one-line description and in `llms.txt`. The App
