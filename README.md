@@ -222,7 +222,7 @@ the support URL the App Store requires.
 `/today/` is the public page for **Always Today**, a calm to-do list for iPhone, iPad, Android phones
 and Googlebooks, Windows, Mac and the Linux terminal (`~/dev/always-today`; on the Linux machine
 `~/Work/always-today`). It is free on one device; sync costs £24 a year or £3 a month, or £59 once
-for Lifetime, with 14 days free and no card. Web purchases (Windows and Linux) are sold by **Stripe
+for Lifetime, with 7 days free and no card. Web purchases (Windows and Linux) are sold by **Stripe
 Managed Payments**, which shows itself to buyers as Onelink; Android purchases go through Google
 Play. Stripe reviews a business's website before switching Managed Payments on, and wants to see
 what is sold, the prices, a way to reach support, the terms, the privacy policy and the refund and
