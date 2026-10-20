@@ -280,7 +280,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
   <main class="policy">
     <!-- BEGIN generated from store/privacy-policy.md — edit that file, then re-run tools/make-weather-pages.py -->
     <h1>Privacy policy — Always Weather</h1>
-    <p class="updated">Last updated: 17 October 2026</p>
+    <p class="updated">Last updated: 20 October 2026</p>
     <p>Always Weather is made by Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”). We are the controller of the little personal data the app handles. Contact: apps@guzh.uk or +44 7776 912598.</p>
     <h2>The short version</h2>
     <ul>
@@ -338,6 +338,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
     <ul>
       <li><strong>Your location.</strong> Linux gives apps no location service, so “Use my location” (off until you choose it) uses one of two things. First, the place Omarchy’s weather is set to, which the app reads from Omarchy’s own settings on your computer; if Omarchy has only a place’s name, the app finds it with a place search (above) and remembers the answer on your computer, so it searches once per name. Otherwise, or if you choose “Where this computer is” in Settings → Places → Your location, a rough place from your internet connection: the app asks our server for the place it’s in, sending no location at all, and our server answers with the place nearest Cloudflare’s estimate of where the connection comes from, which Cloudflare makes from your IP address and is usually the town. That estimate and the answer are never stored, logged or cached, and your IP address is used, as for every request, only to limit how often one address can call us. It can be wrong, for example behind a VPN; then search for a place instead. The app looks only when it opens on your current location, never in the background, and a point is rounded to about a kilometre before it leaves your computer, as on a phone.</li>
       <li><strong>Omarchy’s bar.</strong> If you add Always Weather to Omarchy’s bar, it shows the hour’s weather for the place the app opens with. When that forecast is out of date, the bar asks our server for it with the same request as the app (see Forecasts above). It never looks for your location itself.</li>
+      <li><strong>Checking for updates.</strong> No app store updates the Linux app, so once a day it asks our server for the newest version, to tell you in Settings (and in the bar’s tooltip) when one is out. The request carries nothing about you: no location, no place and no identifier, only the app’s name and version, as every request does. Like every request it appears in What left this computer. Settings → Privacy → Check for updates turns it off.</li>
       <li>It has no crash reporting, and for now no alerts.</li>
       <li>Saved places, settings, last forecasts and place names are stored only on your computer, in <code>~/.local/share/always-weather</code>; deleting that folder removes them. They aren’t synced anywhere.</li>
       <li>“Send feedback” includes your Linux distribution and kernel version instead of a phone’s model.</li>
