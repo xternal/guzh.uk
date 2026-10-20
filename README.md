@@ -257,7 +257,7 @@ dispute policy, all public: that is what these four pages are for (sources in th
   ledgers: where to get it (the Mac DMG and the Linux release, each a link, and Google Play for
   Android phones and Googlebooks as a plain row saying "In review, out in a few days") and the
   plans and prices as plain rows. The downloads are this repository's own releases,
-  `always-today-mac-1.0.0` and `always-today-linux-1.0.1`, as Always Weather's Linux build is
+  `always-today-mac-1.0.1` (and 1.0.0 before it) and `always-today-linux-1.0.1`, as Always Weather's Linux build is
   (the app's own repository is private). Google Play's link, its free JSON-LD `Offer` and its
   `installUrl` entry were written and taken out until Google approves the Android app: revert the
   commit "Always Today: Google Play in review" to put them back, along with the wording on the home
