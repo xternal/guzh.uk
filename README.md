@@ -8,7 +8,7 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/privacy/` |
+| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/privacy/`, and `404.html` for any address with no page |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
@@ -16,6 +16,8 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 
 ```
 index.html              the entire home page
+404.html                what GitHub Pages shows, with a 404 status, for any address with no
+                        page; see "The 404 page"
 favicon.svg             the mark, on a dark brown square: a line that steps up once, zero to one
 weather/
   index.html            forwards to https://alwaysweather.uk/, the app's own page since 18 Oct 2026
@@ -72,6 +74,8 @@ tools/publish-writing.sh
 tools/check-colours.py  checks contrast and the dark palette on every page, see Notes;
                         run by .github/workflows/colours.yml on every pull request that
                         touches a page
+tools/serve.py          the local preview, served the way GitHub Pages does: no folder
+                        listings, and 404.html for an address with no page
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 ```
@@ -293,10 +297,12 @@ accept the listing until it is live and public, which is why it goes up before t
   brown, switcher, colophon and Cloudflare beacon, and `tools/check-colours.py` checks it. The
   footer menu has just the policy (marked `aria-current`) and the credit.
 - **There is no `/goat-rodeo/` page yet**, on purpose: the game isn't on Google Play. GitHub Pages
-  serves `/goat-rodeo/privacy/` without a parent, so the masthead names the game without linking
+  serves `/goat-rodeo/privacy/` without a parent (and `/goat-rodeo/` gets the 404 page, which says
+  the game isn't out yet and links the policy), so the masthead names the game without linking
   anywhere and the JSON-LD has no `isPartOf`. When the game launches, its page needs adding (with
   the store link), the masthead and footer pointing at it, `isPartOf` in the JSON-LD, a row on the
-  home page's "Things you can open", and "coming to Google Play" taken out of `llms.txt`.
+  home page's "Things you can open", "coming to Google Play" taken out of `llms.txt`, and the
+  `goat-rodeo` line and the Goat Rodeo card on `404.html` brought up to date.
 - **The copy is generated, as for the other two apps.** `tools/make-goat-rodeo-pages.py` renders
   `store/privacy-policy.md` from the game's repo into the page's `<!-- BEGIN generated … -->`
   region, word for word, with the same renderer (it imports it). The policy has to match the game
@@ -312,6 +318,29 @@ accept the listing until it is live and public, which is why it goes up before t
 - **Images**: `tools/make-goat-rodeo-assets.sh ~/dev/goat-rodeo` copies the game's own Play icon
   (the goat's face with amber horns on the dark brown square) and cuts the OG card from its Play
   feature graphic, so the link preview and the store listing agree. Re-run it when either changes.
+
+## The 404 page — `404.html`
+
+GitHub Pages serves `404.html` from the repo root, with a 404 status, for every address on guzh.uk
+that has no page; without it, readers got GitHub's own grey "File not found". It is served at the
+broken address itself, so every link and asset in it starts with `/` or `https://`.
+
+- **The same shell as the app pages**: tokens, dark brown, switcher, colophon and Cloudflare beacon,
+  and `tools/check-colours.py` checks it. The beacon also shows, in Web Analytics, which broken
+  addresses people actually arrive at. `noindex`, and not in `sitemap.xml`; its share card is the
+  home page's image, with `og:url` sending a shared broken link home.
+- **The mark, running out of road**: the favicon's line steps up once, then trails off in three
+  fading dots.
+- **It names the address and, where it can, the page meant.** A short script reads the path: a
+  near miss on a real page (`/Today/Help`, `/weather/policy`, any capitals) gets "Did you mean
+  …?", and anything else under `/weather/`, `/today/` or `/goat-rodeo/` gets a line on where that
+  app lives. `PAGES` in that script lists every page on the site: **add a new page there too**, as
+  well as to the "Where to go instead" list below it and to `sitemap.xml`.
+- **A line of consolation**, dealt at random from thirteen original deadpan jokes in the manner of
+  Ricky Gervais, blunt with the reader and then with the author. "Another one" deals the next, and
+  none comes round again until all thirteen have; it fades unless the reader asks for reduced
+  motion. The first joke is also in the HTML, for a reader without JavaScript. Add or cut lines in
+  `JOKES`; keep them short, and keep them off " · " and long dashes like the rest of the copy.
 
 ## Suggest an idea — `/weather/ideas/`
 
@@ -345,10 +374,14 @@ it, so a local preview can't send anything.
 ## Local preview
 
 ```bash
-python3 -m http.server 8788 --bind 127.0.0.1
+./tools/serve.py
 ```
 
-Then open <http://127.0.0.1:8788/>. The `--bind` matters: without it the server answers on every
+Then open <http://127.0.0.1:8788/>. It is `python3 -m http.server` with GitHub Pages' two habits
+added: a folder with no `index.html` is a 404 rather than a file listing, and a 404 gets
+`404.html`, so the not-found page can be tried on real broken addresses (`/goat-rodeo/`,
+`/Today/Help`). It serves the repo root worked out from its own path, never the current directory.
+`.claude/launch.json` has it as "guzh.uk with 404s", beside the plain `http.server` one. The `--bind` matters: without it the server answers on every
 interface, so an unfinished draft is readable by anything on the same wifi.
 
 ### Keep this repo off Google Drive
