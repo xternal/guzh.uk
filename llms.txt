@@ -1,6 +1,6 @@
 # Pavel Guzhikov
 
-> Pavel Guzhikov builds and runs companies. London-based. Zero to one, four times. Two exits. One unicorn: founding team at Uzum, Uzbekistan's first unicorn. guzh.uk is Pavel Guzhikov's personal site, and also carries the privacy policy, help and ideas pages for Always Weather, a weather app (paid in the app stores, free on Linux) whose own home is alwaysweather.uk, and the pages for Always Today, a to-do list app (free on one device, with paid sync; a download for Mac and Linux, in review at Google Play for Android and out there in a few days, with iPhone, iPad and Windows coming soon).
+> Pavel Guzhikov builds and runs companies. London-based. Zero to one, four times. Two exits. One unicorn: founding team at Uzum, Uzbekistan's first unicorn. guzh.uk is Pavel Guzhikov's personal site, and also carries the privacy policy, help and ideas pages for Always Weather, a weather app (paid in the app stores, free on Linux) whose own home is alwaysweather.uk, and the pages for Always Today, a to-do list app (free on one device, with paid sync; a download for Mac and Linux, in review at Google Play for Android and out there in a few days, with iPhone, iPad and Windows coming soon). It also carries the privacy policy for Goat Rodeo, a party game coming to Google Play.
 
 Twenty years of building, from a multi-channel mobile messenger in 2005 to national payment infrastructure in 2022.
 
@@ -24,6 +24,7 @@ Contact: pavel@guzh.uk
 - [Always Today privacy policy](https://guzh.uk/today/privacy/): what the sync server keeps (email, devices and changes, encrypted if you choose), what never leaves the device, payments through Stripe and Google Play, and how long anything is kept.
 - [Always Today help, contact and refunds](https://guzh.uk/today/support/): refunds within 14 days, no questions asked; plans and cancelling; common questions. Email apps@guzh.uk.
 - [Always Today terms of use](https://guzh.uk/today/terms/): the terms for the app and its sync service, in plain English, under the law of England and Wales.
+- [Goat Rodeo privacy policy](https://guzh.uk/goat-rodeo/privacy/): the privacy policy for Goat Rodeo, a party platformer for Android coming to Google Play, where friends build a trap course together and then race through it. Four levels are free; Full Rodeo, a one-time purchase through Google Play, unlocks nine more. The game collects nothing: no ads, no account, no analytics, no crash reports, no tracking.
 
 ## Elsewhere
 
