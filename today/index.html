@@ -40,7 +40,7 @@
   "image": "https://guzh.uk/assets/today/icon.png",
   "description": "A calm, local-first to-do list that works offline, understands plain words, and syncs across Android, Googlebook, Windows, Mac and the Linux terminal, with optional end-to-end encryption. No ads, no analytics, no tracking.",
   "operatingSystem": "Android, Windows, macOS, Linux",
-  "installUrl": ["https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.1/always-today-1.0.1-mac-arm64.dmg", "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.1", "https://github.com/xternal/guzh.uk/releases/tag/always-today-desktop-linux-1.0.1"],
+  "installUrl": ["https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.1/always-today-1.0.1-mac-arm64.dmg", "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.2", "https://github.com/xternal/guzh.uk/releases/tag/always-today-desktop-linux-1.0.1"],
   "applicationCategory": "ProductivityApplication",
   "author": {"@type": "Organization", "name": "Empatiq Limited"},
   "screenshot": [
@@ -52,7 +52,7 @@
   "offers": [
     {"@type": "Offer", "name": "Free, on one device", "price": "0", "priceCurrency": "GBP"},
     {"@type": "Offer", "name": "Mac download, for Macs with Apple silicon", "url": "https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.1/always-today-1.0.1-mac-arm64.dmg", "price": "0", "priceCurrency": "GBP"},
-    {"@type": "Offer", "name": "Linux download, for the terminal", "url": "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.1", "price": "0", "priceCurrency": "GBP"},
+    {"@type": "Offer", "name": "Linux download, for the terminal", "url": "https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.2", "price": "0", "priceCurrency": "GBP"},
     {"@type": "Offer", "name": "Linux download, the window app for Linux desktops", "url": "https://github.com/xternal/guzh.uk/releases/tag/always-today-desktop-linux-1.0.1", "price": "0", "priceCurrency": "GBP"},
     {"@type": "Offer", "name": "Sync, yearly", "price": "24.00", "priceCurrency": "GBP", "eligibleRegion": "GB",
      "priceSpecification": {"@type": "UnitPriceSpecification", "price": "24.00", "priceCurrency": "GBP", "billingDuration": "P1Y"}},
@@ -348,6 +348,7 @@ img{max-width:100%}
 .platform-row.mirror{grid-template-columns:minmax(0,11fr) minmax(0,5fr)}
 .platform-row.mirror .platform-text{order:2}
 .platform-text{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.install{margin:10px 0 0;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--paper-lift);color:var(--ink);font:12.5px/1.5 ui-monospace,"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
 .platform-text .platform-store{margin:0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
 .platform-text h3{margin:0;font-size:24px;font-weight:500;letter-spacing:-.01em;line-height:1.25;color:var(--ink)}
 .platform-text p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
@@ -652,7 +653,7 @@ div.store .store-name{border-bottom-color:transparent}
           <li><div class="store store-wait"><span class="store-name">App Store</span> <span class="store-for">iPhone and iPad</span> <span class="store-price">In review, out in a few days</span></div></li>
           <li><div class="store store-wait"><span class="store-name">Microsoft Store</span> <span class="store-for">Windows 11 PCs</span> <span class="store-price">In review, out in a few days</span></div></li>
           <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/download/always-today-mac-1.0.1/always-today-1.0.1-mac-arm64.dmg"><span class="store-name">Mac download</span> <span class="store-for">Macs with Apple silicon</span> <span class="store-price">Free</span></a></li>
-          <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.1"><span class="store-name">Linux download</span> <span class="store-for">The terminal app, made on Omarchy</span> <span class="store-price">Free</span></a></li>
+          <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.2"><span class="store-name">Linux download</span> <span class="store-for">The terminal app, made on Omarchy</span> <span class="store-price">Free</span></a></li>
           <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-desktop-linux-1.0.1"><span class="store-name">Linux window app</span> <span class="store-for">The same app as on the Mac, for Linux desktops</span> <span class="store-price">Free</span></a></li>
         </ul>
         <ul class="stores" aria-label="Plans and prices">
@@ -800,9 +801,13 @@ div.store .store-name{border-bottom-color:transparent}
           <h3>Linux, made on Omarchy</h3>
           <p>A fast native terminal app that starts at once and takes your terminal's colours, so it matches every Omarchy theme. Keys feel like Vim. The same program adds to-dos from scripts, puts Today in your bar and opens a one-line capture prompt in a floating window. Prefer a window? The window app is the same app as on the Mac, shares the terminal app's lists and follows your Omarchy theme's light or dark.</p>
           <ul class="stores">
-            <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.1"><span class="store-name">Linux download</span> <span class="store-price">Free</span></a></li>
+            <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-linux-1.0.2"><span class="store-name">Linux download</span> <span class="store-price">Free</span></a></li>
             <li><a class="store" href="https://github.com/xternal/guzh.uk/releases/tag/always-today-desktop-linux-1.0.1"><span class="store-name">Linux window app</span> <span class="store-price">Free</span></a></li>
           </ul>
+          <p>On Arch or Omarchy, one line installs each as a package. The terminal app:</p>
+          <pre class="install">curl -LO https://github.com/xternal/guzh.uk/releases/download/always-today-linux-1.0.2/always-today-bin-1.0.2-1-x86_64.pkg.tar.zst &amp;&amp; sudo pacman -U always-today-bin-1.0.2-1-x86_64.pkg.tar.zst</pre>
+          <p>The window app:</p>
+          <pre class="install">curl -LO https://github.com/xternal/guzh.uk/releases/download/always-today-desktop-linux-1.0.1/always-today-desktop-bin-1.0.1-1-x86_64.pkg.tar.zst &amp;&amp; sudo pacman -U always-today-desktop-bin-1.0.1-1-x86_64.pkg.tar.zst</pre>
         </div>
         <div class="stage stage-linux">
           <div class="laptop">
