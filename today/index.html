@@ -4,121 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Always Today: a calm to-do list for phone, Googlebook, Windows, Mac and Linux</title>
-<meta name="description" content="Always Today is a calm, local-first to-do list. It works offline, understands plain words, and syncs across Android, Googlebook, Windows, Mac and the Linux terminal. Free on one device; sync from £24 a year.">
-<link rel="canonical" href="https://guzh.uk/today/">
+<!-- Always Today's page moved to its own domain on 20 Oct 2026: https://alwaystoday.uk/ (the
+     site/ folder of the Always Today repo), as the weather app's did on 18 Oct. This page only sends
+     readers and search engines there. GitHub Pages can't answer with a 301, so the canonical link
+     and a zero-second refresh do that job, and Google reads the pair as a permanent move. The
+     refresh drops the part after #, so the script carries it across. The privacy, help and terms
+     pages stay here: the app stores, Stripe and the apps link to them. -->
+<link rel="canonical" href="https://alwaystoday.uk/">
+<meta http-equiv="refresh" content="0; url=https://alwaystoday.uk/">
+<script>location.replace("https://alwaystoday.uk/" + location.hash);</script>
 
+<title>Always Today is now at alwaystoday.uk</title>
+<meta name="description" content="Always Today, the calm to-do list that answers what am I doing today, has its own home now: alwaystoday.uk. Its privacy policy, help and terms stay on guzh.uk.">
+
+<!-- A link to this old address shared anywhere shows the new page's card: the same picture,
+     and og:url naming the new address. -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://guzh.uk/today/">
+<meta property="og:url" content="https://alwaystoday.uk/">
 <meta property="og:site_name" content="Always Today">
 <meta property="og:title" content="Always Today: what am I doing today?">
-<meta property="og:description" content="A calm, local-first to-do list for your phone, Googlebook, Windows PC, Mac and Linux terminal. Free on one device; sync from £24 a year.">
-<meta property="og:image" content="https://guzh.uk/assets/today/og.png">
+<meta property="og:description" content="A calm to-do list for your phone, computer and terminal. Its home is now alwaystoday.uk.">
+<meta property="og:image" content="https://alwaystoday.uk/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Always Today: what am I doing today? The Today list on a Windows PC, with the day's ink line.">
+<meta property="og:image:alt" content="Always Today: what am I doing today? A Today list with two things ticked off, and the day's ink line marking when.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Always Today: what am I doing today?">
-<meta name="twitter:description" content="A calm, local-first to-do list. Free on one device; sync from £24 a year.">
-<meta name="twitter:image" content="https://guzh.uk/assets/today/og.png">
-<meta name="twitter:image:alt" content="Always Today: what am I doing today? The Today list on a Windows PC, with the day's ink line.">
-
-<!-- The machine-readable twin of the price ledger in the hero and the "£24" figure: change a price
-     in all three places. Each store or download that is open has its own free Offer with its url:
-     the Mac and Linux downloads for now. Google Play's Offer and installUrl come back when Google
-     approves (git revert the commit "Always Today: Google Play in review"). The App Store comes back
-     when Apple approves (git revert "Always Today: Google Play only until Apple approves"), with
-     Apple's own prices (£23.99, £2.99 and £58.99, owner decision 48) named in the first two
-     questions; Windows gets its own when its download is out. -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "@id": "https://guzh.uk/today/#app",
-  "name": "Always Today",
-  "url": "https://guzh.uk/today/",
-  "image": "https://guzh.uk/assets/today/icon.png",
-  "description": "A calm, local-first to-do list that works offline, understands plain words, and syncs across Android, Googlebook, Windows, Mac and the Linux terminal, with optional end-to-end encryption. No ads, no analytics, no tracking.",
-  "operatingSystem": "Android, Windows, macOS, Linux",
-  "installUrl": ["https://alwaystoday.uk/download/mac", "https://alwaystoday.uk/release/linux-terminal", "https://alwaystoday.uk/release/linux-desktop"],
-  "applicationCategory": "ProductivityApplication",
-  "author": {"@type": "Organization", "name": "Empatiq Limited"},
-  "screenshot": [
-    "https://guzh.uk/assets/today/platform-windows.webp",
-    "https://guzh.uk/assets/today/platform-googlebook.webp",
-    "https://guzh.uk/assets/today/shot-today.webp",
-    "https://guzh.uk/assets/today/shot-quick-entry.webp"
-  ],
-  "offers": [
-    {"@type": "Offer", "name": "Free, on one device", "price": "0", "priceCurrency": "GBP"},
-    {"@type": "Offer", "name": "Mac download, for Macs with Apple silicon", "url": "https://alwaystoday.uk/download/mac", "price": "0", "priceCurrency": "GBP"},
-    {"@type": "Offer", "name": "Linux download, for the terminal", "url": "https://alwaystoday.uk/release/linux-terminal", "price": "0", "priceCurrency": "GBP"},
-    {"@type": "Offer", "name": "Linux download, the window app for Linux desktops", "url": "https://alwaystoday.uk/release/linux-desktop", "price": "0", "priceCurrency": "GBP"},
-    {"@type": "Offer", "name": "Sync, yearly", "price": "24.00", "priceCurrency": "GBP", "eligibleRegion": "GB",
-     "priceSpecification": {"@type": "UnitPriceSpecification", "price": "24.00", "priceCurrency": "GBP", "billingDuration": "P1Y"}},
-    {"@type": "Offer", "name": "Sync, monthly", "price": "3.00", "priceCurrency": "GBP", "eligibleRegion": "GB",
-     "priceSpecification": {"@type": "UnitPriceSpecification", "price": "3.00", "priceCurrency": "GBP", "billingDuration": "P1M"}},
-    {"@type": "Offer", "name": "Lifetime", "price": "59.00", "priceCurrency": "GBP", "eligibleRegion": "GB"}
-  ]
-}
-</script>
-<!-- The same questions and answers as the Questions section at the foot of the page. -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is Always Today free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, on one device, for ever: every list, quick entry, repeats, reminders, import and export. You pay only if you want your lists to sync between devices: £24 a year, £3 a month, or £59 once for Lifetime. Every new account gets 7 days of sync free, with no card needed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I buy a plan, and who sells it?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "From inside the app. On Windows, Mac and Linux it opens Stripe's secure checkout in your browser; Stripe sells the plan through its Managed Payments service, shown on your receipt as Onelink. On Android you buy through Google Play. A plan belongs to your Always Today account, so it works on every device you sign in on, wherever you bought it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I get a refund?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes: refunds within 14 days, no questions asked, on top of your legal rights. The help page explains how, for the web and for Google Play."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need an account?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Without one, everything stays on your device. An account, just your email address with no password, is only needed to sync."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can the sync server read my to-dos?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Not if you turn on end-to-end encryption: your devices encrypt every change before it leaves, with a passphrase only you know. Without it, your lists are stored on the server as written, protected in transit and at rest, and never read, sold or analysed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I bring my lists from Things, Todoist or TickTick?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Always Today imports their exports and shows you what it found before adding anything. You can export everything as a JSON file at any time."
-      }
-    }
-  ]
-}
-</script>
+<meta name="twitter:description" content="A calm to-do list for your phone, computer and terminal. Its home is now alwaystoday.uk.">
+<meta name="twitter:image" content="https://alwaystoday.uk/og.png">
+<meta name="twitter:image:alt" content="Always Today: what am I doing today? A Today list with two things ticked off, and the day's ink line marking when.">
 
 <link rel="icon" href="/assets/today/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/today/icon.png">
@@ -130,8 +44,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <script>
-/* Pin the reader's explicit choice before first paint, exactly as on /weather/: Auto here is
-   prefers-color-scheme, and the "theme" key is shared across guzh.uk. */
+/* Pin the reader's explicit choice before first paint — anything later is a flash of the wrong
+   theme. Unlike the home page, Auto here is simply prefers-color-scheme. A pinned choice is shared (same origin, same
+   "theme" key), so Light or Dark chosen anywhere on guzh.uk follows the reader here. */
 (function(){
   try {
     var v = localStorage.getItem("theme");
@@ -154,11 +69,6 @@
   --underline:rgba(23,22,19,.22);
   --underline-accent:rgba(31,59,196,.28);
   --mode-active:rgba(23,22,19,.07);
-  --shot-shadow:0 1px 2px rgba(23,22,19,.06),0 18px 40px -22px rgba(23,22,19,.42);
-  /* the drawn device frames in the platforms section */
-  --bezel:#1E1D1A;--bezel-edge:transparent;--bezel-base:#D3CEC4;--bezel-notch:#B8B2A6;--bezel-dot:#3A3833;--bezel-hole:#0B0A09;
-  /* the drawn Windows desktop on the monitor: its wallpaper and its taskbar */
-  --desk:#E4E6EC;--desk-glow:rgba(31,59,196,.30);--desk-warm:rgba(224,122,69,.16);--taskbar:rgba(250,248,243,.84);--taskbar-ink:#171613;--taskbar-tile:rgba(23,22,19,.13);
   --grain:.05;
   --grain-blend:multiply;
 }
@@ -181,9 +91,6 @@
     --underline:rgba(239,231,218,.24);
     --underline-accent:rgba(226,178,111,.32);
     --mode-active:rgba(239,231,218,.10);
-    --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
-    --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
-    --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
   }
@@ -201,9 +108,6 @@
     --underline:rgba(239,231,218,.24);
     --underline-accent:rgba(226,178,111,.32);
     --mode-active:rgba(239,231,218,.10);
-    --shot-shadow:0 0 0 1px rgba(239,231,218,.08),0 20px 44px -24px rgba(0,0,0,.85);
-    --bezel:#0B0A09;--bezel-edge:rgba(239,231,218,.14);--bezel-base:#39322B;--bezel-notch:#2E2822;--bezel-dot:#39322B;--bezel-hole:#000;
-    --desk:#2E2822;--desk-glow:rgba(226,178,111,.46);--desk-warm:rgba(224,122,69,.24);--taskbar:rgba(36,31,26,.86);--taskbar-ink:#EFE7DA;--taskbar-tile:rgba(239,231,218,.16);
     --grain:.07;
     --grain-blend:screen;
 }
@@ -222,7 +126,6 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
-/* a warm light falling across the page, and a paper tooth over the top of it */
 body::before{
   content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
@@ -242,26 +145,24 @@ body::after{
   overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
 }
 
-a{color:inherit;text-decoration:none}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--underline-accent);padding-bottom:1px;transition:border-color 160ms ease}
+a:hover{border-bottom-color:var(--accent)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
-img{max-width:100%}
 
 .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:32px 56px 0}
 
 /* ---------- header ---------- */
 .masthead{
   display:flex;align-items:center;justify-content:space-between;
-  gap:20px;flex-wrap:wrap;padding-bottom:96px;
+  gap:20px;flex-wrap:wrap;padding-bottom:80px;
 }
 .masthead-name{
   font-size:14px;font-weight:500;letter-spacing:.01em;
-  border-bottom:1px solid transparent;padding-bottom:1px;
-  transition:border-color 160ms ease;
+  color:var(--ink);border-bottom:1px solid transparent;padding-bottom:1px;
 }
 .masthead-name:hover{border-bottom-color:var(--underline)}
 .masthead-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 
-/* ---------- light / dark switcher ---------- */
 .mode{
   display:inline-flex;align-items:center;gap:2px;
   padding:2px;border:1px solid var(--rule);border-radius:999px;
@@ -279,331 +180,47 @@ img{max-width:100%}
 .mode-btn[aria-pressed="true"]{background:var(--mode-active);color:var(--ink)}
 .mode-btn svg{display:block;width:14px;height:14px}
 
-.link-accent{
-  color:var(--accent);font-weight:500;
-  border-bottom:1px solid var(--underline-accent);
-  padding-bottom:1px;
-  transition:border-color 160ms ease;
+/* ---------- the move ---------- */
+.moved{max-width:58ch}
+.moved h1{
+  margin:0 0 20px;
+  font-weight:500;font-size:clamp(32px,3.6vw,44px);
+  line-height:1.08;letter-spacing:-.03em;text-wrap:balance;
 }
-.link-accent:hover{border-bottom-color:var(--accent)}
+.moved p{margin:14px 0 0;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
+.moved .go{margin-top:28px;font-size:20px;line-height:1.5}
+.moved .go a{font-weight:500}
 
-/* ---------- hero ---------- */
-.hero{display:flex;flex-direction:column;align-items:flex-start;gap:28px}
-.app-icon{
-  display:block;width:72px;height:72px;border-radius:16px;
-  box-shadow:var(--shot-shadow);
-}
-.eyebrow{
-  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);
-}
-.hero h1{
-  margin:0;
-  font-weight:500;
-  font-size:clamp(38px,4.6vw,58px);
-  line-height:1.05;letter-spacing:-.035em;
-  max-width:16ch;text-wrap:balance;
-}
-.lead{
-  margin:0;max-width:50ch;
-  font-size:20px;line-height:1.5;letter-spacing:-.005em;
-  color:var(--ink);text-wrap:pretty;
-}
-.body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
-
-/* where to get it — a ledger: one ruled row per store, the whole row its link, with what it runs
-   on and the UK price. Words, not Apple's or Google's badge artwork, and nothing in front of them */
-.availability{width:100%;max-width:760px}
-.stores{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
-.store{
-  display:grid;grid-template-columns:190px minmax(0,1fr) auto;align-items:baseline;column-gap:24px;
-  padding:15px 8px;border-top:1px solid var(--rule);
-  color:var(--ink);text-decoration:none;transition:background-color .15s;
-}
-.store:hover{background:var(--rule-soft)}
-.store:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.store-name{justify-self:start;font-size:17px;font-weight:500;border-bottom:1px solid var(--underline);transition:border-color .15s}
-.store:hover .store-name{border-bottom-color:var(--ink)}
-.store-for{font-size:15px;line-height:1.5;color:var(--ink-2)}
-.store-price{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
-.availability-note{margin:12px 0 0;padding:0 8px;font-size:13.5px;line-height:1.55;color:var(--ink-3)}
-
-/* ---------- screenshots ---------- */
-.shots{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:28px;margin-top:96px;
-}
-.shot{margin:0}
-.shot img{
-  display:block;width:100%;height:auto;aspect-ratio:9/16;
-  border-radius:8px;box-shadow:var(--shot-shadow);
-}
-
-/* ---------- platforms: each store's laptop with its phone in front ---------- */
-/* Drawn frames, not the makers' device photos: flat bezels in the page's own tokens. Every size is a
-   percentage of the stage, so the pair scales as one picture down to a phone's width. */
-.platforms{margin-top:112px;display:flex;flex-direction:column;gap:20px}
-.platforms h2{margin:0;font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.2;color:var(--ink)}
-.platform-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,11fr);gap:56px;align-items:center;margin-top:48px}
-.platform-row.mirror{grid-template-columns:minmax(0,11fr) minmax(0,5fr)}
-.platform-row.mirror .platform-text{order:2}
-.platform-text{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-.install{margin:10px 0 0;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--paper-lift);color:var(--ink);font:12.5px/1.5 ui-monospace,"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
-.platform-text .platform-store{margin:0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
-.platform-text h3{margin:0;font-size:24px;font-weight:500;letter-spacing:-.01em;line-height:1.25;color:var(--ink)}
-.platform-text p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
-/* each row ends in the same ledger, store and price, one row per store it names */
-.platform-text .stores{align-self:stretch;margin-top:8px}
-.platform-text .store{grid-template-columns:minmax(0,1fr) auto;padding:12px 6px}
-.platform-text .store-name{font-size:15px}
-.stage{position:relative;aspect-ratio:836/480}
-.stage img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
-.laptop{position:absolute;left:0;top:3.75%;width:76.6%}
-.mirror .laptop{left:auto;right:3.6%}
-.lid{position:relative;box-sizing:border-box;padding:1.9% 1.9% 2.2%;border-radius:20px 20px 8px 8px;
-  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
-.lid::before{content:"";position:absolute;top:.9%;left:50%;width:.8%;aspect-ratio:1;transform:translateX(-50%);
-  border-radius:50%;background:var(--bezel-dot)}
-.laptop .screen{aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#000}
-.base{position:relative;width:109.4%;margin-left:-4.7%;aspect-ratio:700/16;border-radius:0 0 14px 14px;
-  background:var(--bezel-base);box-shadow:var(--shot-shadow)}
-.base::before{content:"";position:absolute;top:0;left:50%;width:17%;height:38%;transform:translateX(-50%);
-  border-radius:0 0 8px 8px;background:var(--bezel-notch)}
-.phone{position:absolute;right:2.4%;bottom:0;width:23.4%;z-index:1}
-.mirror .phone{right:auto;left:2.4%}
-.phone .body{position:relative;box-sizing:border-box;padding:3.6%;border-radius:17%/8.2%;
-  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
-.phone .screen{aspect-ratio:9/19.5;border-radius:15%/7%;overflow:hidden;background:#000}
-.phone .body::before{content:"";position:absolute;top:3.9%;left:50%;transform:translateX(-50%);z-index:1;background:var(--bezel-hole)}
-.phone-iphone .body::before{width:27.5%;height:3.9%;border-radius:999px}
-.phone-android .body::before{width:5.1%;aspect-ratio:1;border-radius:50%}
-/* Windows: a monitor on its stand, and on it a Windows 11 desktop drawn in the page's tokens: the app's
-   window with its title bar in the colour of the sky under it (the app sets it so), and the taskbar
-   with the app running. The window is the only screenshot; inside the display every size is in cqw,
-   a share of the display's width, so the desktop scales as one picture. */
-.stage-pc{aspect-ratio:836/512}
-.monitor{position:absolute;left:10%;top:0;width:80%}
-.panel{box-sizing:border-box;padding:1.1% 1.1% 1.7%;border-radius:12px;
-  background:var(--bezel);border:1px solid var(--bezel-edge);box-shadow:var(--shot-shadow)}
-.display{position:relative;aspect-ratio:16/10;border-radius:4px;overflow:hidden;container-type:inline-size;
-  background:
-    radial-gradient(66% 84% at 50% 50%,var(--desk-glow) 38%,transparent 100%),
-    radial-gradient(42% 64% at 4% 104%,var(--desk-warm),transparent 72%),
-    radial-gradient(40% 56% at 98% -6%,var(--desk-warm),transparent 72%),
-    var(--desk)}
-.neck{width:13%;aspect-ratio:87/64;margin:0 auto;background:var(--bezel-base);
-  clip-path:polygon(22% 0,78% 0,90% 100%,10% 100%)}
-.foot{width:36%;aspect-ratio:240/13;margin:0 auto;border-radius:7px 7px 3px 3px;
-  background:var(--bezel-base);box-shadow:var(--shot-shadow)}
-.window{position:absolute;left:10cqw;top:4cqw;width:80cqw;border-radius:.7cqw;overflow:hidden;
-  box-shadow:0 0 0 1px rgba(0,0,0,.10),0 .5cqw 1.2cqw rgba(0,0,0,.16),0 2cqw 5cqw rgba(0,0,0,.30)}
-.stage .window>img{height:auto;aspect-ratio:16/10}
-.titlebar{display:flex;align-items:center;gap:.55cqw;height:1.8cqw;padding-left:.7cqw;
-  background:#C8D5DF;color:#171613;font-size:.68cqw;line-height:1;white-space:nowrap}
-.stage .titlebar img{width:.9cqw;height:.9cqw;border-radius:.15cqw}
-.titlebar svg{display:block;margin-left:auto;width:7.7cqw;height:1.8cqw}
-.taskbar{position:absolute;left:0;right:0;bottom:0;height:2.7cqw;display:flex;align-items:center;justify-content:center;gap:.5cqw;
-  background:var(--taskbar);border-top:1px solid var(--rule-soft);color:var(--taskbar-ink)}
-.taskbar .search{width:7.5cqw;height:1.5cqw;border-radius:999px;background:var(--taskbar-tile);margin-right:.3cqw}
-.taskbar .tile{width:1.35cqw;height:1.35cqw;border-radius:.3cqw;background:var(--taskbar-tile)}
-.taskbar .running{position:relative;display:grid;place-items:center;width:2.2cqw;height:2.2cqw;border-radius:.35cqw;background:var(--taskbar-tile)}
-.stage .taskbar .running img{width:1.35cqw;height:1.35cqw;border-radius:.3cqw}
-.taskbar .running::after{content:"";position:absolute;bottom:.1cqw;left:50%;width:.7cqw;height:.18cqw;transform:translateX(-50%);
-  border-radius:999px;background:var(--accent)}
-.taskbar .clock{position:absolute;right:1cqw;top:50%;transform:translateY(-50%);
-  font-size:.62cqw;line-height:1.35;text-align:right;white-space:nowrap}
-
-/* ---------- numbers ---------- */
-.numbers{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  column-gap:0;row-gap:36px;
-  margin-top:104px;padding-top:30px;
-  border-top:1px solid var(--rule);
-}
-.stat{
-  display:flex;flex-direction:column;gap:9px;
-  padding:0 28px;border-left:1px solid var(--rule-soft);
-}
-.stat:first-child{padding-left:0;border-left:0}
-.stat-figure{
-  font-weight:500;
-  font-size:32px;line-height:1.1;letter-spacing:-.035em;white-space:nowrap;
-}
-.stat-unit{font-size:19px;color:var(--ink-3)}
-.stat-label{font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:26ch;text-wrap:pretty}
-
-/* ---------- three blocks ---------- */
-.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;margin-top:104px}
-.block{display:flex;flex-direction:column;gap:11px;padding-top:22px;border-top:1px solid var(--rule)}
-.block-index{
-  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);
-}
-.block h2{margin:0;font-weight:500;font-size:17px;line-height:1.45;letter-spacing:-.015em}
-.block p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-2);text-wrap:pretty}
-.block ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
-.block li{font-size:15px;line-height:1.55;color:var(--ink-2);padding-left:16px;position:relative}
-.block li::before{
-  content:"";position:absolute;left:0;top:.62em;
-  width:5px;height:1px;background:var(--ink-3);
-}
-
-/* ---------- contact ---------- */
-.contact{
+/* ---------- footer ---------- */
+.foot{
   display:flex;align-items:flex-end;justify-content:space-between;
-  gap:48px;margin-top:120px;padding:36px 0 64px;
-  border-top:1px solid var(--rule);
+  gap:40px;margin-top:96px;padding:28px 0 64px;
+  border-top:1px solid var(--rule);flex-wrap:wrap;
 }
-.contact-left{display:flex;flex-direction:column;gap:14px}
-.contact-line{font-size:22px;font-weight:500;line-height:1.3;letter-spacing:-.02em}
-.contact-email{
-  font-size:21px;font-weight:500;letter-spacing:-.015em;
-  color:var(--accent);width:fit-content;
-  border-bottom:1px solid var(--underline-accent);
-  padding-bottom:2px;
-  transition:border-color 160ms ease;
-}
-.contact-email:hover{border-bottom-color:var(--accent)}
-.contact-right{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-.footer-nav{display:flex;gap:20px;flex-wrap:wrap}
-.footer-nav a{
+.foot-nav{display:flex;gap:20px;flex-wrap:wrap}
+.foot-nav a{
   font-size:15px;color:var(--ink);
-  border-bottom:1px solid var(--underline);
-  padding-bottom:2px;
+  border-bottom:1px solid var(--underline);padding-bottom:2px;
   transition:color 160ms ease,border-color 160ms ease;
 }
-.footer-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-/* the same menu on every Always Weather page, the page you're on marked */
-.footer-nav a[aria-current="page"]{font-weight:500;border-bottom-color:var(--ink)}
-/* the credit the data's licences ask for: each source, and nothing that could read as their
-   endorsement. The app and the store listing say the same words. */
-.credit{margin:0;font-size:13px;line-height:1.6;color:var(--ink-3);max-width:46ch;text-wrap:pretty}
-.credit a{
-  color:var(--ink-3);border-bottom:1px solid var(--rule);padding-bottom:1px;
-  transition:color 160ms ease,border-color 160ms ease;
-}
-.credit a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.foot-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
 
-/* ---------- responsive ---------- */
 @media (max-width:860px){
-  .platform-row,.platform-row.mirror{grid-template-columns:minmax(0,1fr);gap:28px}
-  .platform-row.mirror .platform-text{order:0}
-  /* the ledger's middle column drops under the store and its price */
-  .availability .store{grid-template-columns:minmax(0,1fr) auto;row-gap:3px;padding:14px 4px}
-  .availability .store-for{grid-column:1 / -1;grid-row:2}
-  .availability-note{padding:0 4px}
-  .stage-pc{aspect-ratio:836/634}
-  .monitor{left:0;width:100%}
   .wrap{padding-left:24px;padding-right:24px}
-  .masthead{padding-bottom:64px}
-  /* one thumb again: the shots become a snapping strip that bleeds to both edges,
-     rather than three full-width images to scroll past */
-  .shots{
-    display:flex;gap:16px;margin-top:72px;
-    overflow-x:auto;overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-    margin-left:-24px;margin-right:-24px;padding:4px 24px 10px;
-  }
-  .shot{flex:0 0 72%;scroll-snap-align:center}
-  .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:88px}
-  .stat{padding:0 20px}
-  .stat:nth-child(odd){padding-left:0;border-left:0}
-  .blocks{grid-template-columns:minmax(0,1fr);row-gap:32px;margin-top:80px}
-  .contact{flex-direction:column;align-items:flex-start;gap:32px;margin-top:88px}
+  .masthead{padding-bottom:56px}
+  .foot{flex-direction:column;align-items:flex-start;gap:24px;margin-top:72px}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:0.01ms !important}
 }
 @media print{
-  .mode,.shots{display:none}
+  .mode{display:none}
   body{background:#fff}
   body::before,body::after{display:none}
   .wrap{padding:0}
+  a{color:inherit;border-bottom:0}
 }
-/* Linux: one laptop, centred, with Omarchy's bar drawn across the top of its screen,
-   as the Windows row draws its taskbar */
-.stage-linux .laptop{left:11.7%}
-.stage-linux .screen{position:relative;container-type:inline-size}
-.omarchy-bar{position:absolute;top:0;left:0;right:0;height:3.4cqw;display:flex;align-items:center;justify-content:center;gap:2.4cqw;
-  background:#0c0c0c;color:#d9d9d9;font:500 1.55cqw/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap}
-.omarchy-bar .ws{position:absolute;left:1.6cqw;display:flex;gap:1.3cqw;color:#7a7a7a}
-.omarchy-bar .ws b{font-weight:500;color:#d9d9d9}
-.stage-linux .screen img{position:absolute;left:0;top:3.4cqw;height:calc(100% - 3.4cqw)}
-.install{align-self:stretch;margin:0;padding:12px 14px;border:1px solid var(--rule);border-radius:8px;
-  font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink);white-space:pre-wrap;word-break:break-all}
-@media (max-width:860px){
-  .stage-linux{aspect-ratio:836/560}
-  .stage-linux .laptop{left:0;width:100%}
-}
-
-/* ---------- Always Today: its own differences from the weather page ---------- */
-/* Labels in sentence case: the app's design rules have no all-caps eyebrows. */
-.eyebrow,.block-index,.platform-text .platform-store{text-transform:none;letter-spacing:.01em;font-size:13.5px}
-/* The hero has two ledgers, where to get it and then the plans, with a gap between them. */
-.availability .stores + .stores{margin-top:20px}
-/* A row is plain text until its store or download opens (the plans, Google Play while Google
-   reviews the app, and Windows until it's out): not a link, so no hover. The Mac and Linux
-   downloads are links. */
-div.store{cursor:default}
-div.store:hover{background:none}
-div.store .store-name{border-bottom-color:transparent}
-.store-price{white-space:nowrap}
-/* Google Play while Google reviews the app: its status is longer than a price, so the status
-   wraps instead of the store's name. */
-.store-wait .store-name{white-space:nowrap}
-.store-wait .store-price{white-space:normal;text-align:right;text-wrap:balance}
-.platform-text .store-wait{grid-template-columns:auto minmax(0,1fr)}
-@media (max-width:860px){.availability .store-wait{grid-template-columns:auto minmax(0,1fr)}}
-/* The Windows title bar takes the app's own paper, as the app sets it. */
-.titlebar{background:#F6F7F5}
-/* Linux: the terminal app itself, as text: its real frame at 80 columns, from its snapshot tests,
-   in the owner's dark brown terminal theme. Sizes in cqw so it scales with the drawn screen. */
-.stage-linux .screen{background:#241F1A}
-.tui{position:absolute;left:0;right:0;top:3.4cqw;bottom:0;margin:0;padding:3cqw 1.8cqw;overflow:hidden;
-  background:#241F1A;color:#EFE7DA;font:400 1.98cqw/1.18 ui-monospace,"JetBrains Mono","DejaVu Sans Mono",Menlo,Consolas,monospace;white-space:pre}
-/* Mac: one laptop, centred like Linux's, with a Mac desktop drawn in the page's tokens: the menu bar
-   with the app's mark, the app's window in its dark brown, and the Dock with the app running.
-   Flat wallpaper, no gradient. Sizes in cqw, a share of the drawn screen's width. */
-.stage-mac .laptop{left:11.7%}
-.stage-mac .screen{position:relative;container-type:inline-size;background:var(--desk)}
-.menubar{position:absolute;top:0;left:0;right:0;height:2.6cqw;display:flex;align-items:center;gap:1.6cqw;padding:0 1.6cqw;
-  background:var(--taskbar);color:var(--taskbar-ink);font-size:1.15cqw;line-height:1;white-space:nowrap}
-.menubar b{font-weight:500}
-.menubar-right{margin-left:auto;display:flex;align-items:center;gap:1.4cqw}
-.menubar svg{width:1.9cqw;height:1.25cqw}
-.stage-mac .window{left:11cqw;top:5cqw;width:78cqw;border-radius:1cqw}
-.mac-titlebar{position:relative;justify-content:center;height:2.4cqw;padding:0;background:#2E2822;color:#C0B5A4;font-size:.95cqw}
-.mac-titlebar i{position:absolute;top:50%;width:.9cqw;height:.9cqw;margin-top:-.45cqw;border-radius:50%;background:rgba(239,231,218,.22)}
-.mac-titlebar i:nth-child(1){left:1cqw}
-.mac-titlebar i:nth-child(2){left:2.4cqw}
-.mac-titlebar i:nth-child(3){left:3.8cqw}
-.dock{position:absolute;left:50%;bottom:1cqw;transform:translateX(-50%);display:flex;align-items:center;gap:.8cqw;
-  padding:.7cqw .9cqw;border-radius:1.4cqw;background:var(--taskbar);border:1px solid var(--rule-soft)}
-.dock .tile{width:3.2cqw;height:3.2cqw;border-radius:.8cqw;background:var(--taskbar-tile)}
-.dock .running{position:relative;display:block}
-.stage .dock .running img{width:3.2cqw;height:3.2cqw;border-radius:.8cqw}
-.dock .running::after{content:"";position:absolute;bottom:-.55cqw;left:50%;width:.4cqw;height:.4cqw;transform:translateX(-50%);
-  border-radius:50%;background:var(--taskbar-ink)}
-/* The three install steps, as the DMG's own window shows them. */
-.steps{margin:4px 0 0;padding-left:1.4em;font-size:15px;line-height:1.7;color:var(--ink-2)}
-.steps li::marker{color:var(--ink-3)}
-@media (max-width:860px){
-  .stage-mac{aspect-ratio:836/560}
-  .stage-mac .laptop{left:0;width:100%}
-}
-/* Questions: a ruled list, each answer under its question. */
-.faq{margin-top:104px;max-width:760px}
-.faq h2{margin:0 0 20px;font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.2}
-.faq details{border-top:1px solid var(--rule)}
-.faq details:last-of-type{border-bottom:1px solid var(--rule)}
-.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:16px 4px;font-size:17px;font-weight:500;line-height:1.45}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";color:var(--ink-3);font-weight:400}
-.faq details[open] summary::after{content:"\2212"}
-.faq summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.faq details p{margin:0 4px 18px;font-size:16px;line-height:1.68;color:var(--ink-2);max-width:62ch;text-wrap:pretty}
-@media (max-width:860px){.faq{margin-top:80px}}
 </style>
 </head>
 
@@ -611,7 +228,7 @@ div.store .store-name{border-bottom-color:transparent}
 <div class="wrap">
 
   <header class="masthead">
-    <a class="masthead-name" href="/">Pavel Guzhikov</a>
+    <a class="masthead-name" href="https://alwaystoday.uk/">Always Today</a>
     <div class="masthead-meta">
       <div class="mode" role="group" aria-label="Colour mode">
         <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto: follow your system">
@@ -635,302 +252,26 @@ div.store .store-name{border-bottom-color:transparent}
           </svg>
         </button>
       </div>
-      <a class="link-accent" href="mailto:apps@guzh.uk">apps@guzh.uk</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <img class="app-icon" src="/assets/today/icon.png" width="72" height="72"
-           alt="Always Today app icon: an amber half-sun with a tick cut out of it, rising over a horizon, on a dark brown square.">
-      <div class="eyebrow">Always Today</div>
-      <h1>What am I doing today?</h1>
-      <p class="lead">A calm to-do list that answers that one question every morning. Your lists live on your device and work offline, and they sync across your phone, your Googlebook, your Windows PC, your Mac and your Linux terminal when you want them to.</p>
-      <p class="body-copy">Type a to-do the way you would say it, “call bank tomorrow 3pm #admin”, and it lands in the right list with its day, time and tag. Today, Upcoming, Anytime, Someday and a Logbook; areas and projects with headings; repeats that never double up; reminders; and a quiet line under Today that marks each thing as you finish it. Optional end-to-end encryption, and no ads, no analytics and no tracking.</p>
-      <div class="availability">
-        <ul class="stores" aria-label="Where to get it">
-          <li><div class="store store-wait"><span class="store-name">Google Play</span> <span class="store-for">Android phones and Googlebooks</span> <span class="store-price">In review, out in a few days</span></div></li>
-          <li><div class="store store-wait"><span class="store-name">App Store</span> <span class="store-for">iPhone and iPad</span> <span class="store-price">In review, out in a few days</span></div></li>
-          <li><div class="store store-wait"><span class="store-name">Microsoft Store</span> <span class="store-for">Windows 11 PCs</span> <span class="store-price">In review, out in a few days</span></div></li>
-          <li><a class="store" href="https://alwaystoday.uk/download/mac"><span class="store-name">Mac download</span> <span class="store-for">Macs with Apple silicon</span> <span class="store-price">Free</span></a></li>
-          <li><a class="store" href="https://alwaystoday.uk/release/linux-terminal"><span class="store-name">Linux download</span> <span class="store-for">The terminal app, made on Omarchy</span> <span class="store-price">Free</span></a></li>
-          <li><a class="store" href="https://alwaystoday.uk/release/linux-desktop"><span class="store-name">Linux window app</span> <span class="store-for">The same app as on the Mac, for Linux desktops</span> <span class="store-price">Free</span></a></li>
-        </ul>
-        <ul class="stores" aria-label="Plans and prices">
-          <li><div class="store"><span class="store-name">Free</span> <span class="store-for">Every feature on one device, for ever. No account needed</span> <span class="store-price">£0</span></div></li>
-          <li><div class="store"><span class="store-name">Sync, yearly</span> <span class="store-for">Your lists on every device you sign in on</span> <span class="store-price">£24 a year</span></div></li>
-          <li><div class="store"><span class="store-name">Sync, monthly</span> <span class="store-for">The same sync, paid month by month</span> <span class="store-price">£3 a month</span></div></li>
-          <li><div class="store"><span class="store-name">Lifetime</span> <span class="store-for">Sync for as long as the service runs, paid once</span> <span class="store-price">£59</span></div></li>
-        </ul>
-        <p class="availability-note">UK prices, VAT included. Every new account gets 7 days of sync free, no card needed. The Android app is in review at Google Play, the iPhone and iPad app at the App Store and the Windows app at the Microsoft Store; each is out in a few days.</p>
-      </div>
-    </section>
-
-    <section class="shots" aria-label="Screenshots">
-      <figure class="shot">
-        <img src="/assets/today/shot-today.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="Today on an Android phone: five to-dos with a time, a deadline and tags, a quiet “5th day” note on one carried over, This evening below, and the day's line under the date.">
-      </figure>
-      <figure class="shot">
-        <img src="/assets/today/shot-quick-entry.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="Quick entry in dark mode: “call bank tomorrow 3pm #admin” typed, with what it understood shown as Tomorrow, 15:00 and #admin, and the button Add to Upcoming.">
-      </figure>
-      <figure class="shot">
-        <img src="/assets/today/shot-upcoming.webp" width="600" height="1067" loading="lazy" decoding="async"
-             alt="Upcoming: the days ahead as headings, Tomorrow with a repeating to-do, Wednesday with the dentist at 09:30, and Friday with a to-do tagged work.">
-      </figure>
-    </section>
-
-    <section class="platforms" aria-labelledby="platforms-heading">
-      <h2 id="platforms-heading">One list, on every screen you have</h2>
-      <p class="body-copy">The same lists and the same keys everywhere, so what your hands learn on one device works on the next. Each device keeps its own full copy, so nothing waits for the network.</p>
-
-      <div class="platform-row">
-        <div class="platform-text">
-          <p class="platform-store">Google Play</p>
-          <h3>Android phone and Googlebook</h3>
-          <p>On the phone, a home-screen widget, reminders and sharing from other apps. On a Googlebook it behaves like a desktop: two panes, keyboard shortcuts, right-click menus and windows you can resize.</p>
-          <ul class="stores">
-            <li><div class="store store-wait"><span class="store-name">Google Play</span> <span class="store-price">In review, out in a few days</span></div></li>
-          </ul>
-        </div>
-        <div class="stage">
-          <div class="laptop">
-            <div class="lid"><div class="screen">
-              <img src="/assets/today/platform-googlebook.webp" width="1400" height="875" loading="lazy" decoding="async"
-                   alt="Always Today on a Googlebook: the lists on the left and Today on the right, with its line under the date.">
-            </div></div>
-            <div class="base" aria-hidden="true"></div>
-          </div>
-          <div class="phone phone-android">
-            <div class="body"><div class="screen">
-              <img src="/assets/today/platform-android.webp" width="520" height="1127" loading="lazy" decoding="async"
-                   alt="Always Today on an Android phone in dark mode: Today with five to-dos and This evening.">
-            </div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="platform-row mirror">
-        <div class="platform-text">
-          <p class="platform-store">Windows 11</p>
-          <h3>Windows PC</h3>
-          <p>A global shortcut, Ctrl Alt Space, opens quick entry from anywhere, and the tray icon keeps it a click away. Plans are bought in Stripe's secure checkout, in your browser.</p>
-          <ul class="stores">
-            <li><div class="store store-wait"><span class="store-name">Microsoft Store</span> <span class="store-price">In review, out in a few days</span></div></li>
-          </ul>
-        </div>
-        <div class="stage stage-pc">
-          <div class="monitor">
-            <div class="panel"><div class="display">
-              <div class="window">
-                <div class="titlebar" aria-hidden="true">
-                  <img src="/assets/today/icon.png" width="16" height="16" alt="">
-                  <span>Always Today</span>
-                  <svg viewBox="0 0 138 32" fill="none" stroke="currentColor" stroke-width="1">
-                    <path d="M18 16.5h10"></path>
-                    <rect x="64.5" y="11.5" width="9" height="9" rx="1.5"></rect>
-                    <path d="M110 11l10 10M120 11l-10 10"></path>
-                  </svg>
-                </div>
-                <img src="/assets/today/platform-windows.webp" width="1400" height="875" loading="lazy" decoding="async"
-                     alt="Always Today on a Windows PC: the lists down the side, and Today with to-dos, a time, a deadline, tags, a note on one carried over for five days, and the day's line marking now.">
-              </div>
-              <div class="taskbar" aria-hidden="true">
-                <span class="search"></span>
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="running"><img src="/assets/today/icon.png" width="24" height="24" alt=""></span>
-                <span class="clock">09:40<br>17/10/2026</span>
-              </div>
-            </div></div>
-            <div class="neck" aria-hidden="true"></div>
-            <div class="foot" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="platform-row" id="mac">
-        <div class="platform-text">
-          <p class="platform-store">macOS</p>
-          <h3>Mac</h3>
-          <p>Close the window and it waits in the menu bar, with quick entry a click away; click its Dock icon and Today is back. One plan covers every device you sign in on, bought in Stripe's secure checkout in your browser. For Macs with Apple silicon.</p>
-          <ol class="steps">
-            <li>Open the download</li>
-            <li>Drag Always Today into Applications</li>
-            <li>Open it from Applications</li>
-          </ol>
-          <ul class="stores">
-            <li><a class="store" href="https://alwaystoday.uk/download/mac"><span class="store-name">Mac download</span> <span class="store-price">Free</span></a></li>
-          </ul>
-        </div>
-        <div class="stage stage-mac">
-          <div class="laptop">
-            <div class="lid"><div class="screen">
-              <div class="menubar" aria-hidden="true">
-                <b>Always Today</b>
-                <span class="menubar-right">
-                  <svg viewBox="2 13 28 18" fill="currentColor"><mask id="mac-mark-cut"><rect width="32" height="40" fill="#fff"/><path d="M11.2 16.2l3.4 3.4 5.4-6.2" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></mask><path mask="url(#mac-mark-cut)" d="M5.5 20a10.5 10.5 0 0 1 21 0z"/><path d="M2.5 22.6h27M9 25.8h14M12.5 29h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-                  <span>Sat 17 Oct 09:40</span>
-                </span>
-              </div>
-              <div class="window">
-                <div class="titlebar mac-titlebar" aria-hidden="true">
-                  <i></i><i></i><i></i>
-                  <span>Always Today</span>
-                </div>
-                <img src="/assets/today/platform-mac.webp" width="1400" height="875" loading="lazy" decoding="async"
-                     alt="Always Today on a Mac in dark brown: the lists down the side, and Today with to-dos, a time, a deadline, tags and the day's line marking now.">
-              </div>
-              <div class="dock" aria-hidden="true">
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="running"><img src="/assets/today/icon.png" width="24" height="24" alt=""></span>
-              </div>
-            </div></div>
-            <div class="base" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="platform-row mirror" id="linux">
-        <div class="platform-text">
-          <p class="platform-store">Terminal</p>
-          <h3>Linux, made on Omarchy</h3>
-          <p>A fast native terminal app that starts at once and takes your terminal's colours, so it matches every Omarchy theme. Keys feel like Vim. The same program adds to-dos from scripts, puts Today in your bar and opens a one-line capture prompt in a floating window. Prefer a window? The window app is the same app as on the Mac, shares the terminal app's lists and follows your Omarchy theme's light or dark.</p>
-          <ul class="stores">
-            <li><a class="store" href="https://alwaystoday.uk/release/linux-terminal"><span class="store-name">Linux download</span> <span class="store-price">Free</span></a></li>
-            <li><a class="store" href="https://alwaystoday.uk/release/linux-desktop"><span class="store-name">Linux window app</span> <span class="store-price">Free</span></a></li>
-          </ul>
-          <p>On Arch or Omarchy, one line installs each as a package. The terminal app:</p>
-          <pre class="install">curl -L -o always-today.pkg.tar.zst https://alwaystoday.uk/download/linux-terminal &amp;&amp; sudo pacman -U always-today.pkg.tar.zst</pre>
-          <p>The window app:</p>
-          <pre class="install">curl -L -o always-today-desktop.pkg.tar.zst https://alwaystoday.uk/download/linux-desktop &amp;&amp; sudo pacman -U always-today-desktop.pkg.tar.zst</pre>
-        </div>
-        <div class="stage stage-linux">
-          <div class="laptop">
-            <div class="lid"><div class="screen">
-              <div class="omarchy-bar" aria-hidden="true">
-                <span class="ws"><b>1</b><span>2</span><span>3</span></span>
-                <span>Saturday 09:40</span>
-                <span>Today 5</span>
-              </div>
-<pre class="tui" aria-label="The Always Today terminal app, showing Today: the lists on the left, and five to-dos for Saturday 17 October on the right.">╭─ Lists ────────────╮╭─ Today ────────────────────────────────────────────────╮
-│  Inbox           1 ││ Saturday 17 October                                    │
-│ ▌Today           5 ││ ───────────────○────────────────────────────────────── │
-│  Upcoming          ││                                                        │
-│  Anytime           ││ ▌       [ ] Call the bank about the mortgage letter    │
-│  Someday           ││         [ ] Pay rent                   due Mon 19 Oct  │
-│  Logbook           ││         [ ] Book physio                  1/2  #health  │
-│                    ││ 4th day [ ] Renew passport photo                       │
-│  Home              ││                                                        │
-│    Kitchen refit   ││ This evening                                           │
-│  Work              ││         [ ] Read a chapter of Middlemarch              │
-╰────────────────────╯╰────────────────────────────────────────────────────────╯
- ? keys   / search   : command   o add   x complete         On this device only</pre>
-            </div></div>
-            <div class="base" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="numbers" aria-label="What it costs">
-      <div class="stat">
-        <div class="stat-figure">Free</div>
-        <div class="stat-label">on one device, for ever, with every feature and no account</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">£24<span class="stat-unit"> a year</span></div>
-        <div class="stat-label">for sync on every device, or £3 a month, or £59 once for Lifetime</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">7<span class="stat-unit"> days</span></div>
-        <div class="stat-label">of sync free with every new account, and no card needed</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">Zero</div>
-        <div class="stat-label">ads, analytics and trackers, by design rather than by promise</div>
-      </div>
-    </section>
-
-    <section class="blocks">
-      <article class="block">
-        <div class="block-index">01 Local first</div>
-        <h2>Your lists live on your device</h2>
-        <p>Everything works offline and opens at once. Sign in with just your email to sync, and a change reaches your other devices when they next open, or within a few minutes while they're open. Two devices editing different parts of the same to-do both keep their changes.</p>
-      </article>
-      <article class="block">
-        <div class="block-index">02 Plain words</div>
-        <h2>Type it the way you say it</h2>
-        <ul>
-          <li>“call bank tomorrow 3pm #admin”</li>
-          <li>“pay rent every 3 months on the 1st”</li>
-          <li>“report due friday 5pm”</li>
-          <li>“dentist 21/10 at 9:30”, with UK dates, day first</li>
-        </ul>
-        <p>It shows what it understood as you type, before you press Enter.</p>
-      </article>
-      <article class="block">
-        <div class="block-index">03 Private by design</div>
-        <h2>It knows your day, nobody else does</h2>
-        <ul>
-          <li>No account needed on one device</li>
-          <li>Optional end-to-end encryption: the server stores only what it can't read</li>
-          <li>No ads, no analytics, no tracking</li>
-          <li>Export everything as a file at any time</li>
-        </ul>
-        <p><a class="link-accent" href="/today/privacy/">Read the privacy policy</a></p>
-      </article>
-    </section>
-
-    <section class="faq" aria-labelledby="faq-heading">
-      <h2 id="faq-heading">Questions</h2>
-      <details>
-        <summary>Is Always Today free?</summary>
-        <p>Yes, on one device, for ever: every list, quick entry, repeats, reminders, import and export. You pay only if you want your lists to sync between devices: £24 a year, £3 a month, or £59 once for Lifetime. Every new account gets 7 days of sync free, with no card needed.</p>
-      </details>
-      <details>
-        <summary>How do I buy a plan, and who sells it?</summary>
-        <p>From inside the app. On Windows, Mac and Linux it opens Stripe's secure checkout in your browser; Stripe sells the plan through its Managed Payments service, shown on your receipt as Onelink. On Android you buy through Google Play. A plan belongs to your Always Today account, so it works on every device you sign in on, wherever you bought it.</p>
-      </details>
-      <details>
-        <summary>Can I get a refund?</summary>
-        <p>Yes: refunds within 14 days, no questions asked, on top of your legal rights. The <a class="link-accent" href="/today/support/">help page</a> explains how, for the web and for Google Play.</p>
-      </details>
-      <details>
-        <summary>Do I need an account?</summary>
-        <p>No. Without one, everything stays on your device. An account, just your email address with no password, is only needed to sync.</p>
-      </details>
-      <details>
-        <summary>Can the sync server read my to-dos?</summary>
-        <p>Not if you turn on end-to-end encryption: your devices encrypt every change before it leaves, with a passphrase only you know. Without it, your lists are stored on the server as written, protected in transit and at rest, and never read, sold or analysed.</p>
-      </details>
-      <details>
-        <summary>Can I bring my lists from Things, Todoist or TickTick?</summary>
-        <p>Yes. Always Today imports their exports and shows you what it found before adding anything. You can export everything as a JSON file at any time.</p>
-      </details>
-    </section>
+  <main class="moved">
+    <h1>Always Today has its own home now</h1>
+    <p>The page for Always Today, the calm to-do list that answers one question every morning, what am I doing today, has moved to its own address. It has the downloads and stores, the plans and prices, and a Today list you can tick off.</p>
+    <p class="go"><a href="https://alwaystoday.uk/">Go to alwaystoday.uk</a></p>
+    <p>The privacy policy, help and refunds, and terms of use stay here on guzh.uk, in the menu below.</p>
   </main>
 
-  <footer class="contact">
-    <div class="contact-left">
-      <div class="contact-line">Questions or ideas? We read everything.</div>
-      <a class="contact-email" href="mailto:apps@guzh.uk">apps@guzh.uk</a>
-    </div>
-    <div class="contact-right">
-      <nav class="footer-nav" aria-label="Always Today">
-        <a href="/today/" aria-current="page">Always Today</a>
-        <a href="/today/privacy/">Privacy policy</a>
-        <a href="/today/support/">Help and refunds</a>
-        <a href="/today/terms/">Terms</a>
-        <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
-        <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
-      </nav>
-      <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Today, made in London<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
-    </div>
+  <footer class="foot">
+    <nav class="foot-nav" aria-label="Always Today">
+      <a href="https://alwaystoday.uk/">Always Today</a>
+      <a href="/today/privacy/">Privacy policy</a>
+      <a href="/today/support/">Help and refunds</a>
+      <a href="/today/terms/">Terms of use</a>
+      <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
+      <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+    </nav>
+    <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Today</div>
   </footer>
 
 </div>
@@ -979,18 +320,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
   if (mq.addEventListener) mq.addEventListener("change", sync);
   sync();
-})();
-</script>
-
-<script>
-/* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
-   the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
-   The same token is on every page; see "Visitor numbers" in the README. */
-if (location.hostname === "guzh.uk") (function(){
-  var s = document.createElement("script");
-  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
-  s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
-  document.body.appendChild(s);
 })();
 </script>
 
