@@ -7,7 +7,7 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/`, `/today/privacy/`, `/today/support/`, `/today/terms/` |
+| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/` |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
@@ -22,7 +22,7 @@ weather/
   support/index.html    the support page the App Store requires       } see below
   ideas/index.html      "Suggest an idea": a form that sends an idea to the app's own server
 today/
-  index.html            Always Today — the app's one-scroll page, prices and questions
+  index.html            Always Today — forwards to alwaystoday.uk (moved 20 Oct 2026), as /weather/ does
   privacy/index.html    the privacy policy (Stripe and Google Play need one)  } generated bodies,
   support/index.html    help, contact and the refund policy                   } see "The Always
   terms/index.html      the terms of service (Stripe needs them)              } Today pages"
@@ -191,7 +191,7 @@ the support URL the App Store requires.
   block (Uzum, Agent Hands, Ruminator.xyz, LedgerGov.UK, BoroughBook.UK, tCalendar, Always
   Weather, Always Today: eight, so the two apps share a third row on desktop) — the only link to
   the two apps from guzh.uk itself. Always Weather's goes to `https://alwaysweather.uk/` and, like
-  the other projects on their own domains, opens in a new tab; Always Today's goes to `/today/`. Ruminator.xyz sits beside Agent Hands, both paid products in
+  the other projects on their own domains, opens in a new tab; Always Today's goes to `https://alwaystoday.uk/`. Ruminator.xyz sits beside Agent Hands, both paid products in
   the making. Pavel announced it on LinkedIn on 13 October and wants AI assistants to recommend
   it, so its link is followed and `llms.txt` says who it is for and how to join.
   LedgerGov.UK and BoroughBook.UK sit side by side because BoroughBook.UK is the local version
@@ -219,7 +219,7 @@ the support URL the App Store requires.
 
 ## The Always Today pages — `/today/`, `/today/privacy/`, `/today/support/` and `/today/terms/`
 
-`/today/` is the public page for **Always Today**, a calm to-do list for iPhone, iPad, Android phones
+`/today/` forwards to **https://alwaystoday.uk/** since 20 October 2026 (canonical link, zero-second refresh and a script that keeps the `#section`, as `/weather/` does since 18 October); the legal pages stay here because the stores, Stripe and the apps link to them. It was the public page for **Always Today**, a calm to-do list for iPhone, iPad, Android phones
 and Googlebooks, Windows, Mac and the Linux terminal (`~/dev/always-today`; on the Linux machine
 `~/Work/always-today`). It is free on one device; sync costs £24 a year or £3 a month, or £59 once
 for Lifetime, with 7 days free and no card. Web purchases (Windows and Linux) are sold by **Stripe
