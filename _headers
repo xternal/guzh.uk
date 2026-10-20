@@ -18,3 +18,6 @@
 
 /today/*
   Cache-Control: public, max-age=0, must-revalidate
+
+/goat-rodeo/*
+  Cache-Control: public, max-age=0, must-revalidate
