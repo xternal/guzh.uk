@@ -306,9 +306,9 @@ accept the listing until it is live and public, which is why it goes up before t
 - **The copy is generated, as for the other two apps.** `tools/make-goat-rodeo-pages.py` renders
   `store/privacy-policy.md` from the game's repo into the page's `<!-- BEGIN generated … -->`
   region, word for word, with the same renderer (it imports it). The policy has to match the game
-  and the Play **Data safety** form, so don't hand-edit the body. The game's folder is not a git
-  repository yet, so the script reads the file on disk; once it is one, it reads `origin/main`, as
-  the others do, and `--ref=` takes any branch:
+  and the Play **Data safety** form, so don't hand-edit the body. It reads `origin/main` of the
+  game's repo (`github.com/xternal/goat-rodeo`, in git since 20 October 2026), as the others do, so
+  fetch that repo first; `--ref=` takes any branch, and `--ref=worktree` the file on disk:
 
   ```bash
   ./tools/make-goat-rodeo-pages.py ~/dev/goat-rodeo

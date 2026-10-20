@@ -16,8 +16,8 @@ and only that region is rewritten:
 
     ./tools/make-goat-rodeo-pages.py [path-to-goat-rodeo-repo] [--ref=origin/main]
 
-The game's folder is not a git repository yet, so by default the file is read as it is on disk.
-Once it is one, the default becomes origin/main, as for the other two apps; --ref takes any other
+By default the file is read from origin/main, as for the other two apps, so fetch that repo first
+(a copy of the game that is not a git repository is read as it is on disk). --ref takes any other
 branch, or --ref=worktree for the file on disk. Anything still [bracketed] in the source needs an
 entry in SUBSTITUTIONS below, or the script refuses to publish it.
 """
