@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- GitHub Pages serves this file, with a 404 status, for any address on guzh.uk that has no page.
+     It is served at whatever address was asked for, so every link and asset below starts with "/"
+     or "https://": a relative one would break one folder down. It stays out of search (noindex)
+     and out of sitemap.xml. -->
+<title>Page not found: guzh.uk</title>
+<meta name="description" content="There is no page at this address on guzh.uk. Here is where to go instead: Pavel Guzhikov's home page and the Always Weather, Always Today and Goat Rodeo pages.">
+<meta name="robots" content="noindex">
+
+<!-- A broken guzh.uk link shared anywhere still gets a card, and og:url sends it home, which is
+     where this page sends its readers too. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/">
+<meta property="og:site_name" content="Pavel Guzhikov">
+<meta property="og:title" content="Page not found: guzh.uk">
+<meta property="og:description" content="Nothing at this address. Pavel Guzhikov's home page and the app pages are one click away.">
+<meta property="og:image" content="https://guzh.uk/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pavel Guzhikov: I build and run companies.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Page not found: guzh.uk">
+<meta name="twitter:description" content="Nothing at this address. Pavel Guzhikov's home page and the app pages are one click away.">
+<meta name="twitter:image" content="https://guzh.uk/assets/og.png">
+<meta name="twitter:image:alt" content="Pavel Guzhikov: I build and run companies.">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#241F1A" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<script>
+/* Pin the reader's explicit choice before first paint, as on the app pages: Auto here is simply
+   prefers-color-scheme (see "Light and dark" in the README). */
+(function(){
+  try {
+    var v = localStorage.getItem("theme");
+    if (v === "light" || v === "dark") document.documentElement.setAttribute("data-theme", v);
+  } catch (e) {}
+})();
+</script>
+
+<style>
+:root{
+  color-scheme:light;
+  --paper:#F1EFE9;
+  --paper-lift:#FAF8F3;
+  --ink:#171613;
+  --ink-2:#544F46;
+  --ink-3:#6C675F;
+  --accent:#1F3BC4;
+  --rule:rgba(23,22,19,.14);
+  --rule-soft:rgba(23,22,19,.07);
+  --underline:rgba(23,22,19,.22);
+  --underline-accent:rgba(31,59,196,.28);
+  --mode-active:rgba(23,22,19,.07);
+  --grain:.05;
+  --grain-blend:multiply;
+}
+
+/* Dark, declared twice on purpose and deliberately kept identical: see the README. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
+    --grain:.07;
+    --grain-blend:screen;
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --underline:rgba(239,231,218,.24);
+    --underline-accent:rgba(226,178,111,.32);
+    --mode-active:rgba(239,231,218,.10);
+    --grain:.07;
+    --grain-blend:screen;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  position:relative;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 8% -8%, var(--paper-lift), transparent 68%),
+    radial-gradient(700px 520px at 96% 4%, var(--paper-lift), transparent 62%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:var(--grain);mix-blend-mode:var(--grain-blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection{background:var(--ink);color:var(--paper)}
+
+.visually-hidden{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--underline-accent);padding-bottom:1px;transition:border-color 160ms ease}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:32px 56px 0}
+
+/* ---------- header ---------- */
+.masthead{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;padding-bottom:80px;
+}
+.masthead-name{
+  font-size:14px;font-weight:500;letter-spacing:.01em;
+  color:var(--ink);border-bottom:1px solid transparent;padding-bottom:1px;
+}
+a.masthead-name:hover{border-bottom-color:var(--underline)}
+.masthead-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
+.mode{
+  display:inline-flex;align-items:center;gap:2px;
+  padding:2px;border:1px solid var(--rule);border-radius:999px;
+}
+.mode-btn{
+  display:grid;place-items:center;
+  width:26px;height:26px;padding:0;margin:0;
+  border:0;border-radius:999px;background:none;
+  color:var(--ink-3);cursor:pointer;
+  font:inherit;-webkit-tap-highlight-color:transparent;
+  transition:color 160ms ease,background-color 160ms ease;
+}
+.mode-btn:hover{color:var(--ink)}
+.mode-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mode-btn[aria-pressed="true"]{background:var(--mode-active);color:var(--ink)}
+.mode-btn svg{display:block;width:14px;height:14px}
+
+/* ---------- the missing page ---------- */
+/* the site's mark, the line that steps up once, drawn running out of road */
+.lost-mark{display:block;width:168px;height:auto;margin:0 0 30px;color:var(--ink)}
+.lost-mark .riser{stroke:var(--accent)}
+.lost-mark .trail{fill:var(--ink-3)}
+.code{
+  margin:0 0 14px;
+  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.missing h1{
+  margin:0 0 18px;
+  font-weight:500;font-size:clamp(34px,4.4vw,56px);
+  line-height:1.04;letter-spacing:-.035em;text-wrap:balance;
+}
+.where,.hint{margin:0;max-width:60ch;font-size:17px;line-height:1.65;color:var(--ink-2);text-wrap:pretty}
+.where strong{color:var(--ink);font-weight:500;overflow-wrap:anywhere}
+.hint{margin-top:10px}
+.hint[hidden]{display:none}
+
+/* one line of consolation, dealt at random from the deck in the script below */
+.joke{
+  margin:52px 0 0;padding:4px 0 4px 22px;max-width:40ch;
+  border-left:2px solid var(--accent);
+}
+.joke p{
+  margin:0;font-size:clamp(20px,2.1vw,24px);font-weight:400;
+  line-height:1.45;letter-spacing:-.015em;color:var(--ink);text-wrap:pretty;
+  transition:opacity 180ms ease;
+}
+.joke p.swap{opacity:0}
+.another{
+  margin:18px 0 0;padding:7px 15px;
+  border:1px solid var(--rule);border-radius:999px;background:none;
+  font:inherit;font-size:14px;color:var(--ink-2);cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:color 160ms ease,border-color 160ms ease,background-color 160ms ease;
+}
+.another:hover{color:var(--ink);border-color:var(--ink-3)}
+.another:active{background:var(--mode-active)}
+.another:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.another[hidden]{display:none}
+
+/* ---------- where to go instead ---------- */
+.instead{margin-top:96px;padding-top:22px;border-top:1px solid var(--rule)}
+.instead-label{
+  margin:0 0 22px;
+  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.place-list{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:40px;row-gap:26px;
+  margin:0;padding:0;list-style:none;
+}
+.place{display:flex;flex-direction:column;gap:7px}
+.place > a{
+  width:fit-content;color:var(--ink);
+  font-size:17px;font-weight:500;letter-spacing:-.015em;
+  border-bottom:1px solid var(--underline);padding-bottom:2px;
+  transition:color 160ms ease,border-color 160ms ease;
+}
+.place > a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.place p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-2);text-wrap:pretty}
+.sub{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:4px;font-size:14.5px}
+.sub a{
+  color:var(--ink-2);border-bottom:1px solid var(--underline);padding-bottom:1px;
+  transition:color 160ms ease,border-color 160ms ease;
+}
+.sub a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ---------- footer ---------- */
+.foot{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;margin-top:96px;padding:28px 0 64px;
+  border-top:1px solid var(--rule);flex-wrap:wrap;
+}
+.foot-nav{display:flex;gap:20px;flex-wrap:wrap}
+.foot-nav a{
+  font-size:15px;color:var(--ink);
+  border-bottom:1px solid var(--underline);padding-bottom:2px;
+  transition:color 160ms ease,border-color 160ms ease;
+}
+.foot-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.colophon{font-size:13px;color:var(--ink-3);line-height:1.6}
+
+@media (max-width:960px){
+  .place-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .wrap{padding-left:24px;padding-right:24px}
+  .masthead{padding-bottom:56px}
+  .instead{margin-top:72px}
+  .foot{flex-direction:column;align-items:flex-start;gap:24px;margin-top:72px}
+}
+@media (max-width:560px){
+  .lost-mark{width:132px}
+  .place-list{grid-template-columns:minmax(0,1fr);row-gap:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:0.01ms !important}
+}
+@media print{
+  .mode,.another{display:none}
+  body{background:#fff}
+  body::before,body::after{display:none}
+  .wrap{padding:0}
+  a{color:inherit;border-bottom:0}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <a class="masthead-name" href="/">Pavel Guzhikov</a>
+    <div class="masthead-meta">
+      <div class="mode" role="group" aria-label="Colour mode">
+        <button type="button" class="mode-btn" data-mode="auto" aria-pressed="true" title="Auto: follow your system">
+          <span class="visually-hidden">Auto: follow your system</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.6"></circle>
+            <path d="M12 3.4a8.6 8.6 0 0 1 0 17.2z" fill="currentColor" stroke="none"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="light" aria-pressed="false" title="Light">
+          <span class="visually-hidden">Light</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.4"></circle>
+            <path d="M12 3v1.6M12 19.4V21M5.2 5.2l1.1 1.1M17.7 17.7l1.1 1.1M3 12h1.6M19.4 12H21M5.2 18.8l1.1-1.1M17.7 6.3l1.1-1.1"></path>
+          </svg>
+        </button>
+        <button type="button" class="mode-btn" data-mode="dark" aria-pressed="false" title="Dark">
+          <span class="visually-hidden">Dark</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4 8.2 8.2 0 1 0 20 14.2Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="missing">
+    <svg class="lost-mark" viewBox="0 0 168 56" aria-hidden="true">
+      <path d="M4 46H64V12H120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="riser" d="M64 43V15" stroke-width="3"/>
+      <circle class="trail" cx="133" cy="12" r="1.8"/>
+      <circle class="trail" cx="146" cy="12" r="1.8" opacity=".6"/>
+      <circle class="trail" cx="159" cy="12" r="1.8" opacity=".3"/>
+    </svg>
+
+    <p class="code">Error 404</p>
+    <h1>Nothing at this address</h1>
+    <p class="where" id="where">This link doesn’t lead to a page. It may have a typo, or the page may have moved.</p>
+    <p class="hint" id="hint" hidden></p>
+
+    <figure class="joke" aria-live="polite">
+      <p id="joke">You clicked a link, it went nowhere, and now you’re cross with a web page. Have a word with yourself.</p>
+    </figure>
+    <button type="button" class="another" id="another" hidden>Another one</button>
+
+    <section class="instead" aria-labelledby="instead-label">
+      <h2 class="instead-label" id="instead-label">Where to go instead</h2>
+      <ul class="place-list">
+        <li class="place">
+          <a href="/">Pavel Guzhikov</a>
+          <p>The home page: who I am, what I build, and how to reach me.</p>
+        </li>
+        <li class="place">
+          <a href="https://alwaysweather.uk/">Always Weather</a>
+          <p>A calm weather app. Its home is alwaysweather.uk; these pages stay here.</p>
+          <div class="sub">
+            <a href="/weather/privacy/">Privacy policy</a>
+            <a href="/weather/support/">Help and contact</a>
+            <a href="/weather/ideas/">Suggest an idea</a>
+          </div>
+        </li>
+        <li class="place">
+          <a href="https://alwaystoday.uk/">Always Today</a>
+          <p>A calm to-do list. Its home is alwaystoday.uk; these pages stay here.</p>
+          <div class="sub">
+            <a href="/today/privacy/">Privacy policy</a>
+            <a href="/today/support/">Help and refunds</a>
+            <a href="/today/terms/">Terms</a>
+          </div>
+        </li>
+        <li class="place">
+          <a href="/goat-rodeo/privacy/">Goat Rodeo</a>
+          <p>A party platformer for Android, coming to Google Play. For now, just its policy.</p>
+          <div class="sub">
+            <a href="/goat-rodeo/privacy/">Privacy policy</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <nav class="foot-nav" aria-label="guzh.uk">
+      <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
+      <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+    </nav>
+    <div class="colophon">© <span id="year">2026</span> Pavel Guzhikov, guzh.uk<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Names the address that was asked for, and when it is close to a real page, points at that one.
+   PAGES is every page on guzh.uk; add a new one here as well as to sitemap.xml. */
+(function(){
+  var PAGES = ["/", "/weather/privacy/", "/weather/support/", "/weather/ideas/",
+               "/today/privacy/", "/today/support/", "/today/terms/", "/goat-rodeo/privacy/"];
+  /* what people type instead of the real folder name, per app */
+  var ALIASES = [
+    [/^(privacy|policy|privacy-policy|privacypolicy)$/, "privacy"],
+    [/^(support|help|contact|faq|refund|refunds)$/, "support"],
+    [/^(terms|tos|terms-of-service|terms-of-use|legal)$/, "terms"],
+    [/^(ideas|idea|suggest|suggestions|feedback)$/, "ideas"]
+  ];
+  var APPS = {
+    "weather": "Always Weather lives at <a href=\"https://alwaysweather.uk/\">alwaysweather.uk</a> now. Its privacy policy, help and ideas pages are still here, below.",
+    "today": "Always Today lives at <a href=\"https://alwaystoday.uk/\">alwaystoday.uk</a> now. Its privacy policy, help and terms are still here, below.",
+    "goat-rodeo": "Goat Rodeo isn’t on Google Play yet, so it has no page of its own. Its <a href=\"/goat-rodeo/privacy/\">privacy policy</a> is here."
+  };
+
+  var path = location.pathname, shown = path;
+  try { shown = decodeURIComponent(path); } catch (e) {}
+  var where = document.getElementById("where"), hint = document.getElementById("hint");
+
+  where.textContent = "";
+  var b = document.createElement("strong");
+  b.textContent = location.host + shown;
+  where.appendChild(b);
+  where.appendChild(document.createTextNode(" doesn’t lead to a page. It may have a typo, or the page may have moved."));
+
+  var parts = shown.toLowerCase().split("/").filter(Boolean);
+  var guess = null;
+  if (parts.length) {
+    var app = parts[0].replace(/_/g, "-"), leaf = parts[1] || "";
+    if (app === "goatrodeo") app = "goat-rodeo";
+    ALIASES.forEach(function(a){ if (!guess && a[0].test(leaf)) guess = "/" + app + "/" + a[1] + "/"; });
+    if (guess && PAGES.indexOf(guess) < 0) guess = null;
+    if (guess === path) guess = null;
+
+    if (guess) {
+      hint.textContent = "Did you mean ";
+      var a = document.createElement("a");
+      a.href = guess;
+      a.textContent = location.host + guess;
+      hint.appendChild(a);
+      hint.appendChild(document.createTextNode("?"));
+      hint.hidden = false;
+    } else if (APPS[app]) {
+      hint.innerHTML = APPS[app];
+      hint.hidden = false;
+    }
+  }
+})();
+
+/* The consolation. Original lines in a deadpan, mock-blunt voice, dealt like a deck: shuffled
+   on load, one at a time, and no line comes round again until every other one has. The first
+   line is also in the HTML, for a reader without JavaScript. */
+(function(){
+  var JOKES = [
+    "You clicked a link, it went nowhere, and now you’re cross with a web page. Have a word with yourself.",
+    "This page has gone. It’s in a better place now. It isn’t. There is no better place. It’s just gone.",
+    "I’m not saying you made a typo. I’m just saying the computer didn’t.",
+    "Somebody sent you a broken link. I’d have a think about whether they’re really your friend.",
+    "You came all this way for nothing. To be fair, that’s most of the internet.",
+    "I looked everywhere for this page. Well, I looked in one folder. Same thing, really.",
+    "Page not found. Don’t take it personally. Actually, do. You typed it.",
+    "There’s nothing here. I could pretend there is, but you’re an adult. Probably.",
+    "Good news: nobody saw you get this wrong. Bad news: there’s a visit counter. It doesn’t know who you are, but it knows what you did.",
+    "This is the only page on the site that’s completely honest about having nothing to offer you.",
+    "Lower your expectations and you’ll never be disappointed. You clearly haven’t, and look where it got you.",
+    "The page you wanted isn’t here. Neither am I. I’m off building something else, which is how this happened.",
+    "You were promised a page. Welcome to adulthood."
+  ];
+  var el = document.getElementById("joke"), btn = document.getElementById("another");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var deck = [], last = null;
+
+  function deal(){
+    if (!deck.length) {
+      deck = JOKES.slice();
+      for (var i = deck.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1)), t = deck[i];
+        deck[i] = deck[j]; deck[j] = t;
+      }
+      /* a fresh deck never opens with the line that closed the last one */
+      if (deck[deck.length - 1] === last) deck.unshift(deck.pop());
+    }
+    last = deck.pop();
+    return last;
+  }
+
+  el.textContent = deal();
+  btn.hidden = false;
+  btn.addEventListener("click", function(){
+    var next = deal();
+    if (reduce) { el.textContent = next; return; }
+    el.classList.add("swap");
+    setTimeout(function(){ el.textContent = next; el.classList.remove("swap"); }, 180);
+  });
+})();
+
+/* Auto / Light / Dark: the same switcher as the app pages, sharing the "theme" key. */
+(function(){
+  var root = document.documentElement,
+      btns = [].slice.call(document.querySelectorAll(".mode-btn")),
+      mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function stored(){
+    try { var v = localStorage.getItem("theme"); return v === "light" || v === "dark" ? v : null; }
+    catch (e) { return null; }
+  }
+
+  function sync(){
+    var choice = stored(), mode = choice || "auto";
+    if (choice) root.setAttribute("data-theme", choice);
+    else root.removeAttribute("data-theme");
+
+    btns.forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode));
+    });
+
+    /* see the README: pinned, both tags take the choice; unpinned, each its own */
+    [].forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){
+      var dark = choice ? choice === "dark" : /dark/.test(m.getAttribute("media"));
+      m.setAttribute("content", dark ? "#241F1A" : "#F1EFE9");
+    });
+  }
+
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){
+      var m = b.getAttribute("data-mode");
+      try { m === "auto" ? localStorage.removeItem("theme") : localStorage.setItem("theme", m); }
+      catch (e) {}
+      sync();
+    });
+  });
+
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  sync();
+})();
+</script>
+
+<script>
+/* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
+   the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
+   The same token is on every page; see "Visitor numbers" in the README. Here it also shows which
+   broken addresses people actually arrive at. */
+if (location.hostname === "guzh.uk") (function(){
+  var s = document.createElement("script");
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
+  document.body.appendChild(s);
+})();
+</script>
+
+</body>
+</html>

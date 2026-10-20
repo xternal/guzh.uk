@@ -4,8 +4,21 @@
     {
       "name": "guzh.uk",
       "runtimeExecutable": "sh",
-      "runtimeArgs": ["-c", "exec python3 -m http.server \"${PORT:-8788}\" --bind 127.0.0.1"],
+      "runtimeArgs": [
+        "-c",
+        "exec python3 -m http.server \"${PORT:-8788}\" --bind 127.0.0.1"
+      ],
       "port": 8788,
+      "autoPort": true
+    },
+    {
+      "name": "guzh.uk with 404s",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "exec python3 tools/serve.py \"${PORT:-8789}\""
+      ],
+      "port": 8789,
       "autoPort": true
     }
   ]
