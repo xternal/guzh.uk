@@ -34,7 +34,8 @@ goat-rodeo/
                         and the Google Play link; see "The Goat Rodeo pages"
   race/index.html       where race links ("Challenge a friend") open: who is in the race, a button
                         that opens it in the game, how race links work; see "The Goat Rodeo pages"
-  privacy/index.html    the game's privacy policy, which Google Play requires: a generated body
+  privacy/index.html    the game's privacy policy, which Google Play and the App Store require: a
+                        generated body
 .well-known/
   assetlinks.json       lets Goat Rodeo for Android open guzh.uk/goat-rodeo/race/ links itself
 _config.yml             one line, so GitHub Pages' Jekyll build serves .well-known/
