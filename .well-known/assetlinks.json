@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.empatiq.goatrodeo",
+      "sha256_cert_fingerprints": ["98:E1:09:D8:99:77:24:D8:DF:06:9F:82:75:8D:94:52:CC:BE:12:27:4F:96:E5:58:FB:95:FF:56:39:F7:97:99"]
+    }
+  }
+]
