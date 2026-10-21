@@ -301,7 +301,11 @@ Play Billing, unlocks nine more. The game collects nothing of its own.
   view (`aria-current="true"`), scrolling itself on a phone so the marked item stays visible.
   JSON-LD: a `VideoGame`/`MobileApplication` with both offers, the page, and the FAQ.
 - **The Play link** is `https://play.google.com/store/apps/details?id=com.empatiq.goatrodeo`. It
-  only works once the game is in production on Google Play, so this page goes live with the launch.
+  only works once Google Play publishes the game. Until then (from 21 October 2026, when the page
+  went live early) the hero says "Coming soon to Google Play" without a link, and the home page, the
+  404 card and `llms.txt` say "coming soon". **On launch day**, put back the link (the comment in the
+  hero says where), the JSON-LD `installUrl`, `downloadUrl` and `sameAs`, and the
+  `google-play-app` meta tag, and change every "coming soon" to "on Google Play".
 - **Seasonal copy**: "New for Halloween" (the hero's screenshots, the card under Levels and the
   FAQ's free levels) is right until 7 November, when the game stops showing its Halloween line; then
   reword the card to plain "Pumpkin Hollow" or take it out.
