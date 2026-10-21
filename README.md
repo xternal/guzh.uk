@@ -289,15 +289,15 @@ dispute policy, all public: that is what these four pages are for (sources in th
 
 **Goat Rodeo** is a party platformer for Android (`~/dev/goat-rodeo`, app ID
 `com.empatiq.goatrodeo`), published on Google Play by Empatiq Limited: friends build a trap course
-together, then race through it. Four levels are free; Full Rodeo, a one-time purchase through Google
-Play Billing, unlocks nine more. The game collects nothing unless the player says yes to anonymous
+together, then race through it. Five levels are free; Full Rodeo, a one-time purchase through Google
+Play Billing, unlocks twelve more. The game collects nothing unless the player says yes to anonymous
 play counts (from 0.5.0; see the policy).
 
 - **`/goat-rodeo/` is the game's page** (added for the launch, 21 October 2026). The same shell,
   tokens, dark brown, switcher, colophon and Cloudflare beacon as the app pages, all copied from the
   policy page so they can't drift, and `tools/check-colours.py` checks it. On top: a hero (icon, name,
   "Build the trap course together. Then race through it.", the Google Play link and the price line),
-  "How it plays" (four steps and six screenshots), "Play together", "Levels" (with the seasonal
+  "How it plays" (four steps and seven screenshots, Block Party among them), "Play together", "Levels" (with the seasonal
   Pumpkin Hollow card) and a FAQ. The masthead stays at the top and its menu marks the section in
   view (`aria-current="true"`), scrolling itself on a phone so the marked item stays visible.
   JSON-LD: a `VideoGame`/`MobileApplication` with both offers, the page, and the FAQ.
