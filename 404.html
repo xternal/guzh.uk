@@ -358,8 +358,8 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
           </div>
         </li>
         <li class="place">
-          <a href="/goat-rodeo/privacy/">Goat Rodeo</a>
-          <p>A party platformer for Android, coming to Google Play. For now, just its policy.</p>
+          <a href="/goat-rodeo/">Goat Rodeo</a>
+          <p>A party game for one phone and up to four friends: build the trap course, then race through it. On Google Play.</p>
           <div class="sub">
             <a href="/goat-rodeo/privacy/">Privacy policy</a>
           </div>
@@ -385,7 +385,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
    PAGES is every page on guzh.uk; add a new one here as well as to sitemap.xml. */
 (function(){
   var PAGES = ["/", "/weather/privacy/", "/weather/support/", "/weather/ideas/",
-               "/today/privacy/", "/today/support/", "/today/terms/", "/goat-rodeo/privacy/"];
+               "/today/privacy/", "/today/support/", "/today/terms/", "/goat-rodeo/", "/goat-rodeo/privacy/"];
   /* what people type instead of the real folder name, per app */
   var ALIASES = [
     [/^(privacy|policy|privacy-policy|privacypolicy)$/, "privacy"],
@@ -396,7 +396,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   var APPS = {
     "weather": "Always Weather lives at <a href=\"https://alwaysweather.uk/\">alwaysweather.uk</a> now. Its privacy policy, help and ideas pages are still here, below.",
     "today": "Always Today lives at <a href=\"https://alwaystoday.uk/\">alwaystoday.uk</a> now. Its privacy policy, help and terms are still here, below.",
-    "goat-rodeo": "Goat Rodeo isn’t on Google Play yet, so it has no page of its own. Its <a href=\"/goat-rodeo/privacy/\">privacy policy</a> is here."
+    "goat-rodeo": "Goat Rodeo’s page is <a href=\"/goat-rodeo/\">guzh.uk/goat-rodeo</a>, and its <a href=\"/goat-rodeo/privacy/\">privacy policy</a> is here too."
   };
 
   var path = location.pathname, shown = path;

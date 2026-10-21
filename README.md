@@ -1,14 +1,14 @@
 # guzh.uk
 
 Personal one-pager for Pavel Guzhikov, plus the pages for the Always Weather and Always Today apps
-and the privacy policy for the Goat Rodeo game. Hand-written
+and the page and privacy policy for the Goat Rodeo game. Hand-written
 static HTML + CSS. No build step, no framework, and a little JavaScript (the copyright year, the
 light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-is on any static host.
 
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/privacy/`, and `404.html` for any address with no page |
+| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/`, `/goat-rodeo/privacy/`, and `404.html` for any address with no page |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
@@ -30,8 +30,9 @@ today/
   support/index.html    help, contact and the refund policy                   } see "The Always
   terms/index.html      the terms of service (Stripe needs them)              } Today pages"
 goat-rodeo/
-  privacy/index.html    the game's privacy policy, which Google Play requires: a generated body,
-                        see "The Goat Rodeo page" (no /goat-rodeo/ page yet)
+  index.html            the game's page: what it is, how a round works, screenshots, levels, FAQ,
+                        and the Google Play link; see "The Goat Rodeo pages"
+  privacy/index.html    the game's privacy policy, which Google Play requires: a generated body
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
@@ -41,9 +42,9 @@ assets/
   weather/              app icon and OG card for the app's pages here (and the old /weather/
                         page's screenshots, which nothing here shows any more)
   today/                the same for Always Today: icon (SVG and PNG), screenshots, OG card
-  goat-rodeo/           the game's icon (SVG and PNG) and OG card
+  goat-rodeo/           the game's icon (SVG and PNG), OG card and screenshots (WebP, 1280 and 640)
 robots.txt
-sitemap.xml             the nine pages (not /weather/, which forwards), each with a
+sitemap.xml             the ten pages (not /weather/, which forwards), each with a
                         <lastmod> date — when a page's copy changes, set its date to that day. Google ignores changefreq and
                         priority, and stops trusting lastmod once the dates go stale
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
@@ -284,40 +285,47 @@ dispute policy, all public: that is what these four pages are for (sources in th
   ledger, the "£24" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
   `store/support.md` and `store/terms.md`.
 
-## The Goat Rodeo page — `/goat-rodeo/privacy/`
+## The Goat Rodeo pages — `/goat-rodeo/` and `/goat-rodeo/privacy/`
 
 **Goat Rodeo** is a party platformer for Android (`~/dev/goat-rodeo`, app ID
 `com.empatiq.goatrodeo`), published on Google Play by Empatiq Limited: friends build a trap course
 together, then race through it. Four levels are free; Full Rodeo, a one-time purchase through Google
-Play Billing, unlocks nine more. The game collects nothing of its own. `/goat-rodeo/privacy/` is its
-privacy policy, the URL in the Play listing and behind the game's Settings link, so Play won't
-accept the listing until it is live and public, which is why it goes up before the game does.
+Play Billing, unlocks nine more. The game collects nothing of its own.
 
-- **It follows the weather and Always Today policy pages exactly**: the same shell, tokens and dark
-  brown, switcher, colophon and Cloudflare beacon, and `tools/check-colours.py` checks it. The
-  footer menu has just the policy (marked `aria-current`) and the credit.
-- **There is no `/goat-rodeo/` page yet**, on purpose: the game isn't on Google Play. GitHub Pages
-  serves `/goat-rodeo/privacy/` without a parent (and `/goat-rodeo/` gets the 404 page, which says
-  the game isn't out yet and links the policy), so the masthead names the game without linking
-  anywhere and the JSON-LD has no `isPartOf`. When the game launches, its page needs adding (with
-  the store link), the masthead and footer pointing at it, `isPartOf` in the JSON-LD, a row on the
-  home page's "Things you can open", "coming to Google Play" taken out of `llms.txt`, and the
-  `goat-rodeo` line and the Goat Rodeo card on `404.html` brought up to date.
-- **The copy is generated, as for the other two apps.** `tools/make-goat-rodeo-pages.py` renders
-  `store/privacy-policy.md` from the game's repo into the page's `<!-- BEGIN generated … -->`
-  region, word for word, with the same renderer (it imports it). The policy has to match the game
-  and the Play **Data safety** form, so don't hand-edit the body. It reads `origin/main` of the
-  game's repo (`github.com/xternal/goat-rodeo`, in git since 20 October 2026), as the others do, so
-  fetch that repo first; `--ref=` takes any branch, and `--ref=worktree` the file on disk:
+- **`/goat-rodeo/` is the game's page** (added for the launch, 21 October 2026). The same shell,
+  tokens, dark brown, switcher, colophon and Cloudflare beacon as the app pages, all copied from the
+  policy page so they can't drift, and `tools/check-colours.py` checks it. On top: a hero (icon, name,
+  "Build the trap course together. Then race through it.", the Google Play link and the price line),
+  "How it plays" (four steps and six screenshots), "Play together", "Levels" (with the seasonal
+  Pumpkin Hollow card) and a FAQ. The masthead stays at the top and its menu marks the section in
+  view (`aria-current="true"`), scrolling itself on a phone so the marked item stays visible.
+  JSON-LD: a `VideoGame`/`MobileApplication` with both offers, the page, and the FAQ.
+- **The Play link** is `https://play.google.com/store/apps/details?id=com.empatiq.goatrodeo`. It
+  only works once the game is in production on Google Play, so this page goes live with the launch.
+- **Seasonal copy**: "New for Halloween" (the hero's screenshots, the card under Levels and the
+  FAQ's free levels) is right until 7 November, when the game stops showing its Halloween line; then
+  reword the card to plain "Pumpkin Hollow" or take it out.
+- **No promises the game can't keep**: gamepads aren't mentioned until one has been tried on a real
+  device (the Play listing doesn't promise them either).
+- **`/goat-rodeo/privacy/`** is the privacy policy, the URL in the Play listing and behind the game's
+  Settings link. It follows the weather and Always Today policy pages exactly; its masthead and footer
+  point at `/goat-rodeo/`, and its JSON-LD has `isPartOf` the game's page.
+- **The policy copy is generated, as for the other two apps.** `tools/make-goat-rodeo-pages.py`
+  renders `store/privacy-policy.md` from the game's repo into the page's `<!-- BEGIN generated … -->`
+  region, word for word, with the same renderer (it imports it). The policy has to match the game and
+  the Play **Data safety** form, so don't hand-edit the body. It reads `origin/main` of the game's repo
+  (`github.com/xternal/goat-rodeo`), as the others do, so fetch that repo first; `--ref=` takes any
+  branch, and `--ref=worktree` the file on disk:
 
   ```bash
   ./tools/make-goat-rodeo-pages.py ~/dev/goat-rodeo
   ```
 
   When the policy changes, also set the page's `<lastmod>` in `sitemap.xml` to that day.
-- **Images**: `tools/make-goat-rodeo-assets.sh ~/dev/goat-rodeo` copies the game's own Play icon
-  (the goat's face with amber horns on the dark brown square) and cuts the OG card from its Play
-  feature graphic, so the link preview and the store listing agree. Re-run it when either changes.
+- **Images**: `tools/make-goat-rodeo-assets.sh ~/dev/goat-rodeo` copies the game's own Play icon,
+  cuts the OG card from its Play feature graphic, and makes the page's screenshots from its Play
+  phone screenshots, so the page, its link preview and the store listing agree. Re-run it when any of
+  those change.
 
 ## The 404 page — `404.html`
 
@@ -379,7 +387,7 @@ it, so a local preview can't send anything.
 
 Then open <http://127.0.0.1:8788/>. It is `python3 -m http.server` with GitHub Pages' two habits
 added: a folder with no `index.html` is a 404 rather than a file listing, and a 404 gets
-`404.html`, so the not-found page can be tried on real broken addresses (`/goat-rodeo/`,
+`404.html`, so the not-found page can be tried on real broken addresses (`/goat-rodeo/help`,
 `/Today/Help`). It serves the repo root worked out from its own path, never the current directory.
 `.claude/launch.json` has it as "guzh.uk with 404s", beside the plain `http.server` one. The `--bind` matters: without it the server answers on every
 interface, so an unfinished draft is readable by anything on the same wifi.
