@@ -38,6 +38,8 @@ goat-rodeo/
                         generated body
 .well-known/
   assetlinks.json       lets Goat Rodeo for Android open guzh.uk/goat-rodeo/race/ links itself
+  apple-app-site-association
+                        the same for Goat Rodeo for iPhone and iPad (universal links)
 _config.yml             one line, so GitHub Pages' Jekyll build serves .well-known/
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
@@ -341,7 +343,7 @@ play counts (from 0.5.0; see the policy).
   phone screenshots, so the page, its link preview and the store listing agree. Re-run it when any of
   those change.
 
-### Race links — `/goat-rodeo/race/` and `/.well-known/assetlinks.json`
+### Race links — `/goat-rodeo/race/` and the two files in `/.well-known/`
 
 From the game's 0.7.0, "Challenge a friend" on the results screen shares a link like
 `https://guzh.uk/goat-rodeo/race/#z…`: everything after `#` is the race itself (the level, the items
@@ -354,17 +356,28 @@ on it and each runner's button presses; the format is `raceBytes` in the game's 
   links reaches anyone. GitHub Pages' Jekyll build leaves out folders starting with a dot;
   `_config.yml` brings `.well-known` back. Check it with
   `curl -s https://guzh.uk/.well-known/assetlinks.json` (it must be JSON, with no redirect).
-- **Anywhere else** (a browser, or before Android has checked the file), the page reads the race in
-  the browser and shows who is in it; on Android and ChromeOS its button opens
-  `goatrodeo://race/…` through an `intent:` link, falling back to `/goat-rodeo/`. It is the same shell
-  as the game's page, and `tools/check-colours.py` checks it.
+- **On an iPhone or iPad with the game**, the same happens through a universal link:
+  `/.well-known/apple-app-site-association` names the app (`QV79H74X9J.com.empatiq.goatrodeo`, team
+  Empatiq Limited) for `/goat-rodeo/race/` addresses that carry a race after `#`, and the app has the
+  Associated Domains entitlement `applinks:guzh.uk`. Apple's CDN fetches the file, not the phone, and
+  caches it for a while; check what Apple has with
+  `curl -s https://app-site-association.cdn-apple.com/a/v1/guzh.uk` (it should print this file).
+  GitHub Pages serves it, having no extension, as `application/octet-stream`; if Apple's CDN ever
+  refuses it for that, the page's button still opens the game.
+- **Anywhere else** (a browser, or before the phone knows the app), the page reads the race in
+  the browser and shows who is in it. On Android and ChromeOS its button opens
+  `goatrodeo://race/…` through an `intent:` link, falling back to `/goat-rodeo/`; on iPhone and iPad
+  (an iPad's Safari calls itself a Mac, with a touch screen) it opens `goatrodeo://race/…` directly,
+  and if the game is not there, the button comes back after a few seconds with what to do. It is the
+  same shell as the game's page, and `tools/check-colours.py` checks it.
 - **It counts nothing.** It is the one page without the Cloudflare beacon, so the race in its address
   can't end up in anyone's analytics; the game's privacy policy says so. Its colophon says so too.
 - **Its share card** is `assets/goat-rodeo/og-race.png`, "Can you beat my goat?" over a real race (a
   duck after a goat's ghost), made by `tools/race-card.mjs` in the game's repo
   (`store/race-card.png` there); copy it over when it changes.
-- **The words about the store** ("in review at Google Play") follow the game's page: change them
-  there and here together, on launch day too.
+- **The words about the stores** follow the game's page: "in review at Google Play" there and here,
+  and here also "in testing for the App Store" for the iPhone and iPad app. Change them together, on
+  launch day too.
 
 ## The 404 page — `404.html`
 
