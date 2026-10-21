@@ -686,7 +686,7 @@ img{max-width:100%}
         <a href="https://instagram.com/xternal" target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
       </nav>
-      <div class="colophon">© <span id="year">2026</span> Pavel Guzhikov, guzh.uk<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
+      <div class="colophon">© <span id="year">2026</span> Pavel Guzhikov, guzh.uk<br>Visits are counted by Cloudflare Web Analytics and a simple page counter, without cookies or tracking you.</div>
       <script>
 document.getElementById("year").textContent=new Date().getFullYear();
 
@@ -902,6 +902,16 @@ if (location.hostname === "guzh.uk") (function(){
   s.src = "https://static.cloudflareinsights.com/beacon.min.js";
   s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
   document.body.appendChild(s);
+})();
+</script>
+<script>
+/* guzh.uk's own page counter: adds one to this page's count for today and sends nothing else, so no
+   cookies, nothing kept on the reader's device and nothing about the reader. The numbers are
+   public at https://guzh-uk-views.xternal.workers.dev/views.json; see "Visitor numbers" in the README. */
+if (location.hostname === "guzh.uk" && navigator.sendBeacon) (function(){
+  function send(){ navigator.sendBeacon("https://guzh-uk-views.xternal.workers.dev/hit", location.pathname); }
+  if (document.prerendering) document.addEventListener("prerenderingchange", send, {once: true});
+  else send();
 })();
 </script>
 

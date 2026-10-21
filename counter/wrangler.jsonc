@@ -1,0 +1,22 @@
+{
+  // guzh.uk's page counter (views.js): https://guzh-uk-views.xternal.workers.dev. guzh.uk itself is static
+  // on GitHub Pages and its DNS is at GoDaddy, so the counter lives on workers.dev, as Goat Rodeo's play
+  // counts do. Deploy: cd counter && wrangler deploy
+  "name": "guzh-uk-views",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  // no request logs: the Worker keeps nothing about who opened a page
+  "observability": { "enabled": false },
+
+  // One Durable Object keeping a row per page per day in its own SQLite storage, which the free plan
+  // includes. The migration creates it on the first deploy.
+  "durable_objects": { "bindings": [{ "name": "VIEWS", "class_name": "Views" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Views"] }],
+
+  // A reader opens a page or two a minute; this stops one address running a count up.
+  "ratelimits": [
+    { "name": "LIMIT", "namespace_id": "4702", "simple": { "limit": 20, "period": 60 } }
+  ]
+}
