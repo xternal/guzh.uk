@@ -303,10 +303,10 @@ dispute policy, all public: that is what these four pages are for (sources in th
 
 ## The Goat Rodeo pages — `/goat-rodeo/` and `/goat-rodeo/privacy/`
 
-**Goat Rodeo** is a party platformer for Android (`~/dev/goat-rodeo`, app ID
-`com.empatiq.goatrodeo`), published on Google Play by Empatiq Limited: friends build a trap course
-together, then race through it. Five levels are free; Full Rodeo, a one-time purchase through Google
-Play Billing, unlocks twelve more. The game collects nothing unless the player says yes to anonymous
+**Goat Rodeo** is a party platformer for iPhone, iPad and Android (`~/dev/goat-rodeo`, app ID
+`com.empatiq.goatrodeo` on both), published on the App Store and Google Play by Empatiq Limited:
+friends build a trap course together, then race through it. Five levels are free; Full Rodeo, a
+one-time purchase through the App Store or Google Play Billing, unlocks twelve more. The game collects nothing unless the player says yes to anonymous
 play counts (from 0.5.0; see the policy).
 
 - **`/goat-rodeo/` is the game's page** (added for the launch, 21 October 2026). The same shell,
@@ -321,9 +321,13 @@ play counts (from 0.5.0; see the policy).
   only works once Google Play publishes the game. Until then (from 21 October 2026, when the page
   went live early) the hero says "Coming soon to Google Play" without a link, and the home page, the
   404 card and `llms.txt` say "coming soon". Since 21 October 2026, when 0.6.0 was sent for review,
-  they say "In review at Google Play" instead (still no link, and no date). **On launch day**, put back the link (the comment in the
-  hero says where), the JSON-LD `installUrl`, `downloadUrl` and `sameAs`, and the
-  `google-play-app` meta tag, and change every "coming soon" to "on Google Play". Say "in review"
+  they say "In review at Google Play" instead (still no link, and no date). Since 21 October 2026,
+  when 0.7.0 went to both stores (App Store 17:21 BST), they say "In review at the App Store and
+  Google Play" (the hero's button, "In review at Apple and Google", so it stays one line on a phone), and the page names iPhone and iPad beside Android (description, JSON-LD platforms,
+  FAQ) and has Challenge a friend under "Play together". **On launch day**, put in the App Store link
+  (`https://apps.apple.com/app/id6825379225`) and put back the Play link (the comment in the hero
+  says where), the JSON-LD `installUrl`, `downloadUrl` and `sameAs`, and the `google-play-app` meta
+  tag, and change every "in review" to "on the App Store and Google Play". Say "in review"
   only once a production release has actually been sent for review (`docs/versions.md` in the game's
   repo says where it stands), and never promise a date.
 - **Seasonal copy**: "New for Halloween" (the hero's screenshots, the card under Levels and the
@@ -383,9 +387,9 @@ on it and each runner's button presses; the format is `raceBytes` in the game's 
 - **Its share card** is `assets/goat-rodeo/og-race.png`, "Can you beat my goat?" over a real race (a
   duck after a goat's ghost), made by `tools/race-card.mjs` in the game's repo
   (`store/race-card.png` there); copy it over when it changes.
-- **The words about the stores** follow the game's page: "in review at Google Play" there and here,
-  and here also "in testing for the App Store" for the iPhone and iPad app. Change them together, on
-  launch day too.
+- **The words about the stores** follow the game's page: "in review at the App Store and Google
+  Play" there and here (until 21 October 2026, 17:21 BST, the iPhone and iPad app was "in testing for
+  the App Store"). Change them together, on launch day too.
 
 ## The 404 page — `404.html`
 
