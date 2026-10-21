@@ -32,7 +32,8 @@ today/
 goat-rodeo/
   index.html            the game's page: what it is, how a round works, screenshots, levels, FAQ,
                         and the Google Play link; see "The Goat Rodeo pages"
-  privacy/index.html    the game's privacy policy, which Google Play requires: a generated body
+  privacy/index.html    the game's privacy policy, which Google Play and the App Store require: a
+                        generated body
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
