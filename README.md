@@ -8,7 +8,7 @@ light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-i
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/`, `/goat-rodeo/privacy/`, and `404.html` for any address with no page |
+| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/`, `/goat-rodeo/race/`, `/goat-rodeo/privacy/`, and `404.html` for any address with no page |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
@@ -32,8 +32,13 @@ today/
 goat-rodeo/
   index.html            the game's page: what it is, how a round works, screenshots, levels, FAQ,
                         and the Google Play link; see "The Goat Rodeo pages"
+  race/index.html       where race links ("Challenge a friend") open: who is in the race, a button
+                        that opens it in the game, how race links work; see "The Goat Rodeo pages"
   privacy/index.html    the game's privacy policy, which Google Play and the App Store require: a
                         generated body
+.well-known/
+  assetlinks.json       lets Goat Rodeo for Android open guzh.uk/goat-rodeo/race/ links itself
+_config.yml             one line, so GitHub Pages' Jekyll build serves .well-known/
 assets/
   pavel-web.webp        portrait, 560x560, 24 KB  (what browsers actually load)
   pavel-web.png         same portrait, PNG fallback, 572 KB
@@ -336,6 +341,31 @@ play counts (from 0.5.0; see the policy).
   phone screenshots, so the page, its link preview and the store listing agree. Re-run it when any of
   those change.
 
+### Race links — `/goat-rodeo/race/` and `/.well-known/assetlinks.json`
+
+From the game's 0.7.0, "Challenge a friend" on the results screen shares a link like
+`https://guzh.uk/goat-rodeo/race/#z…`: everything after `#` is the race itself (the level, the items
+on it and each runner's button presses; the format is `raceBytes` in the game's `web/index.html`).
+
+- **On an Android phone with the game**, the link opens the game straight away, because
+  `/.well-known/assetlinks.json` names the app (`com.empatiq.goatrodeo`) and the SHA-256 of Google
+  Play's signing certificate for it (read from the Play-installed app on 21 Oct 2026). Android checks
+  that file when the app is installed or updated, so it has to be live before the version with race
+  links reaches anyone. GitHub Pages' Jekyll build leaves out folders starting with a dot;
+  `_config.yml` brings `.well-known` back. Check it with
+  `curl -s https://guzh.uk/.well-known/assetlinks.json` (it must be JSON, with no redirect).
+- **Anywhere else** (a browser, or before Android has checked the file), the page reads the race in
+  the browser and shows who is in it; on Android and ChromeOS its button opens
+  `goatrodeo://race/…` through an `intent:` link, falling back to `/goat-rodeo/`. It is the same shell
+  as the game's page, and `tools/check-colours.py` checks it.
+- **It counts nothing.** It is the one page without the Cloudflare beacon, so the race in its address
+  can't end up in anyone's analytics; the game's privacy policy says so. Its colophon says so too.
+- **Its share card** is `assets/goat-rodeo/og-race.png`, "Can you beat my goat?" over a real race (a
+  duck after a goat's ghost), made by `tools/race-card.mjs` in the game's repo
+  (`store/race-card.png` there); copy it over when it changes.
+- **The words about the store** ("in review at Google Play") follow the game's page: change them
+  there and here together, on launch day too.
+
 ## The 404 page — `404.html`
 
 GitHub Pages serves `404.html` from the repo root, with a 404 status, for every address on guzh.uk
@@ -532,7 +562,8 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   accounts and trackers" line on the app's page.
 
   The beacon is a small inline script just before `</body>` on every page but `/weather/` (which
-  forwards to alwaysweather.uk before it could load, and so says nothing about it), holding the same
+  forwards to alwaysweather.uk before it could load, and so says nothing about it) and
+  `/goat-rodeo/race/` (whose address holds a race that must stay in the browser), holding the same
   token (not a secret; it is in the page source by design). It only loads when the hostname is
   `guzh.uk`, so a local preview never adds visits. A new page needs the same script copied in.
   Each footer says, in one line, that visits are counted this way. Keep that line: it is what keeps
