@@ -43,6 +43,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://guzh.uk/goat-rodeo/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://guzh.uk/goat-rodeo/privacy/</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>yearly</changefreq>
