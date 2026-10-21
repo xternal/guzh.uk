@@ -41,7 +41,7 @@ magick "$IMAGES/featureGraphic.png" -resize x630 -gravity West -crop 1200x630+0+
 # ---- the screenshots on /goat-rodeo/ --------------------------------------------------------------
 # The game's own Play screenshots (1920x1080, phone mode), as WebP at two widths for srcset: 1280 for
 # wide screens and retina phones, 640 for the rest. About 40-90 KB each.
-for s in 1-run 6-title 7-halloween 2-caught 3-place 4-pick 5-results; do
+for s in 1-run 6-title 7-halloween 8-block-party 2-caught 3-place 4-pick 5-results; do
   name="${s#*-}"
   magick "$IMAGES/phoneScreenshots/$s.png" -resize 1280x -quality 76 -strip "assets/goat-rodeo/shot-$name-1280.webp"
   magick "$IMAGES/phoneScreenshots/$s.png" -resize 640x -quality 78 -strip "assets/goat-rodeo/shot-$name-640.webp"

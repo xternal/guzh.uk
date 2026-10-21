@@ -297,7 +297,7 @@ play counts (from 0.5.0; see the policy).
   tokens, dark brown, switcher, colophon and Cloudflare beacon as the app pages, all copied from the
   policy page so they can't drift, and `tools/check-colours.py` checks it. On top: a hero (icon, name,
   "Build the trap course together. Then race through it.", the Google Play link and the price line),
-  "How it plays" (four steps and six screenshots), "Play together", "Levels" (with the seasonal
+  "How it plays" (four steps and seven screenshots, Block Party among them), "Play together", "Levels" (with the seasonal
   Pumpkin Hollow card) and a FAQ. The masthead stays at the top and its menu marks the section in
   view (`aria-current="true"`), scrolling itself on a phone so the marked item stays visible.
   JSON-LD: a `VideoGame`/`MobileApplication` with both offers, the page, and the FAQ.
