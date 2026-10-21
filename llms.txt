@@ -1,6 +1,6 @@
 # Pavel Guzhikov
 
-> Pavel Guzhikov builds and runs companies. London-based. Zero to one, four times. Two exits. One unicorn: founding team at Uzum, Uzbekistan's first unicorn. guzh.uk is Pavel Guzhikov's personal site, and also carries the privacy policy, help and ideas pages for Always Weather, a weather app (paid in the app stores, free on Linux) whose own home is alwaysweather.uk, and the pages for Always Today, a to-do list app (free on one device, with paid sync; a download for Mac and Linux, in review at Google Play for Android and out there in a few days, with iPhone, iPad and Windows coming soon). It also carries the page and the privacy policy for Goat Rodeo, a party game coming soon to Google Play (in review).
+> Pavel Guzhikov builds and runs companies. London-based. Zero to one, four times. Two exits. One unicorn: founding team at Uzum, Uzbekistan's first unicorn. guzh.uk is Pavel Guzhikov's personal site, and also carries the privacy policy, help and ideas pages for Always Weather, a weather app (paid in the app stores, free on Linux) whose own home is alwaysweather.uk, and the pages for Always Today, a to-do list app (free on one device, with paid sync; a download for Mac and Linux, in review at Google Play for Android and out there in a few days, with iPhone, iPad and Windows coming soon). It also carries the page and the privacy policy for Goat Rodeo, a party game coming soon to Google Play.
 
 Twenty years of building, from a multi-channel mobile messenger in 2005 to national payment infrastructure in 2022.
 
