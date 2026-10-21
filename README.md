@@ -290,7 +290,8 @@ dispute policy, all public: that is what these four pages are for (sources in th
 **Goat Rodeo** is a party platformer for Android (`~/dev/goat-rodeo`, app ID
 `com.empatiq.goatrodeo`), published on Google Play by Empatiq Limited: friends build a trap course
 together, then race through it. Four levels are free; Full Rodeo, a one-time purchase through Google
-Play Billing, unlocks nine more. The game collects nothing of its own.
+Play Billing, unlocks nine more. The game collects nothing unless the player says yes to anonymous
+play counts (from 0.5.0; see the policy).
 
 - **`/goat-rodeo/` is the game's page** (added for the launch, 21 October 2026). The same shell,
   tokens, dark brown, switcher, colophon and Cloudflare beacon as the app pages, all copied from the
@@ -305,7 +306,9 @@ Play Billing, unlocks nine more. The game collects nothing of its own.
   went live early) the hero says "Coming soon to Google Play" without a link, and the home page, the
   404 card and `llms.txt` say "coming soon". **On launch day**, put back the link (the comment in the
   hero says where), the JSON-LD `installUrl`, `downloadUrl` and `sameAs`, and the
-  `google-play-app` meta tag, and change every "coming soon" to "on Google Play".
+  `google-play-app` meta tag, and change every "coming soon" to "on Google Play". Say "in review"
+  only once a production release has actually been sent for review (`docs/versions.md` in the game's
+  repo says where it stands), and never promise a date.
 - **Seasonal copy**: "New for Halloween" (the hero's screenshots, the card under Levels and the
   FAQ's free levels) is right until 7 November, when the game stops showing its Halloween line; then
   reword the card to plain "Pumpkin Hollow" or take it out.
