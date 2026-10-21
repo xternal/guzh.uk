@@ -289,8 +289,8 @@ dispute policy, all public: that is what these four pages are for (sources in th
 
 **Goat Rodeo** is a party platformer for Android (`~/dev/goat-rodeo`, app ID
 `com.empatiq.goatrodeo`), published on Google Play by Empatiq Limited: friends build a trap course
-together, then race through it. Four levels are free; Full Rodeo, a one-time purchase through Google
-Play Billing, unlocks nine more. The game collects nothing unless the player says yes to anonymous
+together, then race through it. Five levels are free; Full Rodeo, a one-time purchase through Google
+Play Billing, unlocks twelve more. The game collects nothing unless the player says yes to anonymous
 play counts (from 0.5.0; see the policy).
 
 - **`/goat-rodeo/` is the game's page** (added for the launch, 21 October 2026). The same shell,
