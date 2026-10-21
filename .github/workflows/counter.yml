@@ -1,0 +1,27 @@
+# Checks the page counter (counter/views.test.mjs) on every pull request that touches a page or the
+# counter: which beacons count, the shape of /views.json, and that every page carrying the counter
+# script is on its list and every page on the list carries it.
+name: Counter
+
+on:
+  pull_request:
+    paths:
+      - "**.html"
+      - counter/**
+      - .github/workflows/counter.yml
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test the page counter
+        run: node --test counter/views.test.mjs

@@ -8,3 +8,7 @@ Icon?
 
 # scratch
 /tmp/
+
+# the page counter's local Wrangler state (counter/): never committed
+.wrangler/
+node_modules/

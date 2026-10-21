@@ -333,7 +333,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
       <a href="https://guzh.uk/">Made by Pavel Guzhikov</a>
       <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha</a>
     </nav>
-    <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Weather<br>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</div>
+    <div class="colophon">© <span id="year">2026</span> Empatiq Limited, Always Weather<br>Visits are counted by Cloudflare Web Analytics and a simple page counter, without cookies or tracking you.</div>
   </footer>
 
 </div>
@@ -391,6 +391,16 @@ if (location.hostname === "guzh.uk") (function(){
   s.src = "https://static.cloudflareinsights.com/beacon.min.js";
   s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
   document.body.appendChild(s);
+})();
+</script>
+<script>
+/* guzh.uk's own page counter: adds one to this page's count for today and sends nothing else, so no
+   cookies, nothing kept on the reader's device and nothing about the reader. The numbers are
+   public at https://guzh-uk-views.xternal.workers.dev/views.json; see "Visitor numbers" in the README. */
+if (location.hostname === "guzh.uk" && navigator.sendBeacon) (function(){
+  function send(){ navigator.sendBeacon("https://guzh-uk-views.xternal.workers.dev/hit", location.pathname); }
+  if (document.prerendering) document.addEventListener("prerenderingchange", send, {once: true});
+  else send();
 })();
 </script>
 

@@ -3,7 +3,8 @@
 Personal one-pager for Pavel Guzhikov, plus the pages for the Always Weather and Always Today apps
 and the page and privacy policy for the Goat Rodeo game. Hand-written
 static HTML + CSS. No build step, no framework, and a little JavaScript (the copyright year, the
-light/dark switcher, and a cookie-free visit counter). Deploy the repo root as-is on any static host.
+light/dark switcher, and two cookie-free visit counters). Deploy the repo root as-is on any static host;
+the page counter's Worker in `counter/` deploys on its own.
 
 | | |
 |---|---|
@@ -87,6 +88,13 @@ tools/serve.py          the local preview, served the way GitHub Pages does: no 
                         listings, and 404.html for an address with no page
 _headers                cache + security headers — used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
+counter/                guzh.uk's own page counter, a Cloudflare Worker at
+                        https://guzh-uk-views.xternal.workers.dev, see "Visitor numbers"
+  views.js              which pages count, and the shape of /views.json
+  worker.js             the beacon (POST /hit), /views.json and the counter (a Durable Object)
+  views.test.mjs        `node --test counter/views.test.mjs`: the rules, and that the page list
+                        matches the pages carrying the script; run by .github/workflows/counter.yml
+  wrangler.jsonc        `cd counter && wrangler deploy` publishes it
 ```
 
 The original Claude Design handoff — spec, prototype and the old 1 MB React snapshot — is **not** in
@@ -582,6 +590,25 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   Each footer says, in one line, that visits are counted this way. Keep that line: it is what keeps
   the counter honest next to the app's no-trackers promise, and the privacy policy itself is
   generated from the app repo and covers only the app.
+
+  **The page counter** (since 21 Oct 2026) gives the same pages one number per page per UTC day at
+  https://guzh-uk-views.xternal.workers.dev/views.json, in the format of Pavel's other sites'
+  `/views.json` counters, so his daily Site visits report (the private xternal/site-visits repo)
+  reads guzh.uk next to them. GitHub Pages cannot run code, and guzh.uk's DNS is at GoDaddy, so the
+  counter is a Cloudflare Worker on workers.dev (`counter/`, as Goat Rodeo's play counts are). A
+  second small inline script after the beacon sends the page's own path, once, with
+  `navigator.sendBeacon` (a prerendered page waits until it is actually shown); 404.html sends
+  `/404` whatever the missing address was. The Worker counts it only if it comes from a
+  `https://guzh.uk` page, from a browser rather than a crawler or script, and names a page on its
+  list (`PAGES` in `counter/views.js`), so nothing a visitor types becomes a row. It stores the page
+  and the day, nothing else: no cookies, no IP address (used only by a rate limiter of 20 a minute,
+  in memory), no device or referrer, and no request logs. The footer line names it: "Cloudflare Web
+  Analytics and a simple page counter". `/weather/` and `/today/` forward before anything could
+  load, and `/goat-rodeo/race/` promises it counts no visits, so those three are not on the list.
+  A new page needs the script copied in, its path added to `PAGES`, and `cd counter && wrangler
+  deploy`; `node --test counter/views.test.mjs` fails until the page and the list agree. If
+  `/views.json` answers 503, the counter (the Worker's Durable Object) could not be read: deploy it
+  again the same way.
 
   The Google Play row in the old `/weather/` ledger carried `utm_source=guzh.uk&utm_campaign=weather_page`, which Play Console
   reports as a tracked channel; alwaysweather.uk's rows carry `utm_source=alwaysweather.uk`. App Store Connect needs nothing: it lists guzh.uk under its web
