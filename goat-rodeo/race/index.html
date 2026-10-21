@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Goat Rodeo race links: race a friend’s ghost</title>
-<meta name="description" content="A race link from Goat Rodeo holds a friend’s run on the course they built. Open it on an Android phone with the game and race their ghost, then send your own run back. Free, even on Full Rodeo levels.">
+<meta name="description" content="A race link from Goat Rodeo holds a friend’s run on the course they built. Open it on an iPhone, iPad or Android phone with the game and race their ghost, then send your own run back. Free, even on Full Rodeo levels.">
 <link rel="canonical" href="https://guzh.uk/goat-rodeo/race/">
 
 <meta property="og:type" content="website">
@@ -32,7 +32,7 @@
    "@id": "https://guzh.uk/goat-rodeo/race/#page",
    "url": "https://guzh.uk/goat-rodeo/race/",
    "name": "Goat Rodeo race links",
-   "description": "A race link from Goat Rodeo holds a friend’s run on the course they built. Open it on an Android phone with the game and race their ghost, then send your own run back.",
+   "description": "A race link from Goat Rodeo holds a friend’s run on the course they built. Open it on an iPhone, iPad or Android phone with the game and race their ghost, then send your own run back.",
    "inLanguage": "en-GB",
    "isPartOf": {"@id": "https://guzh.uk/goat-rodeo/#game"},
    "about": {"@id": "https://guzh.uk/goat-rodeo/#game"},
@@ -44,7 +44,7 @@
     {"@type": "Question", "name": "Does racing cost anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. Races are free, even on Full Rodeo levels you haven’t unlocked."}},
     {"@type": "Question", "name": "What’s in a race link?", "acceptedAnswer": {"@type": "Answer", "text": "The level, where the items were placed, which animal each runner played and the buttons they pressed, step by step, with their times. Nothing about anyone: no name, no account. Everything after the # stays on the phone that opens it; browsers never send that part to a server."}},
     {"@type": "Question", "name": "It says the ghosts don’t run true. Why?", "acceptedAnswer": {"@type": "Answer", "text": "Ghosts replay button presses, so both phones need the same version of the game. Update Goat Rodeo on both, then open the link again."}},
-    {"@type": "Question", "name": "Does it work on an iPhone or a computer?", "acceptedAnswer": {"@type": "Answer", "text": "Not yet. Race links open in Goat Rodeo for Android phones, tablets and Chromebooks."}}
+    {"@type": "Question", "name": "Does it work on an iPhone or a computer?", "acceptedAnswer": {"@type": "Answer", "text": "On an iPhone or iPad, yes: race links open in Goat Rodeo for iPhone and iPad, which is in testing before the App Store. They open in Goat Rodeo for Android phones, tablets and Chromebooks too. On other computers, not yet."}}
    ]
   }
  ]
@@ -371,7 +371,7 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
       <ol class="ghosts" id="ghosts" hidden aria-label="Who is in this race"></ol>
       <div class="cta">
         <a class="btn-play" id="open" href="/goat-rodeo/" aria-busy="false"><span class="spin" aria-hidden="true"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 3.2v17.6c0 .5.5.8.9.5L20 12.6c.4-.2.4-.8 0-1.1L5.4 2.7c-.4-.3-.9 0-.9.5z" fill="currentColor"/></svg><span id="openLbl">About Goat Rodeo</span></a>
-        <span class="price" id="note">Race links open in Goat Rodeo for Android phones, tablets and Chromebooks. The game is in review at Google Play.</span>
+        <span class="price" id="note">Race links open in Goat Rodeo on iPhone, iPad, Android phones, tablets and Chromebooks. The game is in review at Google Play and in testing for the App Store.</span>
       </div>
       <p class="msg" id="msg" role="status"></p>
     </section>
@@ -399,7 +399,7 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
       <h3>It says the ghosts don’t run true. Why?</h3>
       <p>Ghosts replay button presses, so both phones need the same version of the game. Update Goat Rodeo on both, then open the link again.</p>
       <h3>Does it work on an iPhone or a computer?</h3>
-      <p>Not yet. Race links open in Goat Rodeo for Android phones, tablets and Chromebooks.</p>
+      <p>On an iPhone or iPad, yes: race links open in Goat Rodeo for iPhone and iPad, which is in testing before the App Store. They open in Goat Rodeo for Android phones, tablets and Chromebooks too. On other computers, not yet.</p>
       </div>
     </section>
   </main>
@@ -446,26 +446,35 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
 <script>
 /* The race is everything after "#": the game's own link format (raceBytes in the game's
    web/index.html), read here only to say who is in it. It never leaves the browser, which is why
-   this page, alone on guzh.uk, loads no visit counter. On Android and ChromeOS the button opens it
-   in the game (goatrodeo://race/…); once the app is on a phone, guzh.uk/.well-known/assetlinks.json
-   lets the link skip this page altogether. */
+   this page, alone on guzh.uk, loads no visit counter. On Android, ChromeOS, iPhone and iPad the
+   button opens it in the game (goatrodeo://race/…); once the app is on a phone,
+   guzh.uk/.well-known/assetlinks.json (Android) and apple-app-site-association (iPhone and iPad) let
+   the link skip this page altogether. */
 (function(){
   var NAMES = ["Goat", "Duck", "Frog", "Cat", "Pig", "Penguin"],
       WHY = ["", "fell off", "caught by a saw", "hit by a bolt", "burnt", "hit by the wrecking ball", "landed on spikes", "gave up", "ran out of time"],
       p = location.hash.slice(1),
-      app = /Android|CrOS/i.test(navigator.userAgent),
+      ua = navigator.userAgent,
+      android = /Android|CrOS/i.test(ua),
+      /* an iPad's Safari says it is a Mac; a Mac has no touch screen */
+      ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1),
+      app = android || ios,
       $ = function(id){ return document.getElementById(id); },
       open = $("open");
   if (!/^[zr][A-Za-z0-9_-]{8,}$/.test(p)) {
     if (p) { $("title").textContent = "This race link is broken"; $("lead").textContent = "It was cut short, or changed on the way. Ask your friend to send it again."; }
     return;
   }
-  if (app) {
+  if (android) {
     open.href = "intent://race/" + p + "#Intent;scheme=goatrodeo;package=com.empatiq.goatrodeo;S.browser_fallback_url=" + encodeURIComponent("https://guzh.uk/goat-rodeo/") + ";end";
     $("openLbl").textContent = "Open in Goat Rodeo";
     $("note").textContent = "Needs the newest Goat Rodeo for Android. The game is in review at Google Play.";
+  } else if (ios) {
+    open.href = "goatrodeo://race/" + p;
+    $("openLbl").textContent = "Open in Goat Rodeo";
+    $("note").textContent = "Needs the newest Goat Rodeo for iPhone and iPad, which is in testing before the App Store.";
   } else {
-    $("note").textContent = "Open this link on an Android phone, tablet or Chromebook with Goat Rodeo. The game is in review at Google Play.";
+    $("note").textContent = "Open this link on an iPhone, iPad, Android phone, tablet or Chromebook with Goat Rodeo. The game is in review at Google Play and in testing for the App Store.";
   }
   var t = p.slice(1).replace(/-/g, "+").replace(/_/g, "/"), s;
   try { s = atob(t + "===".slice((t.length + 3) % 4)); } catch (e) { return; }
@@ -511,7 +520,9 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
   function reset(msg){ clearTimeout(timer); open.setAttribute("aria-busy", "false"); $("msg").textContent = msg || ""; }
   open.addEventListener("click", function(){
     open.setAttribute("aria-busy", "true"); $("msg").textContent = "";
-    timer = setTimeout(function(){ if (!document.hidden) reset("Didn’t open? Update Goat Rodeo to the newest version, then try again."); }, 3500);
+    timer = setTimeout(function(){ if (!document.hidden) reset(ios
+      ? "Didn’t open? Goat Rodeo has to be on this " + (/iPad|Macintosh/.test(ua) ? "iPad" : "iPhone") + ", in its newest version. Then try again."
+      : "Didn’t open? Update Goat Rodeo to the newest version, then try again."); }, 3500);
   });
   document.addEventListener("visibilitychange", function(){ if (document.hidden) reset(); });
   addEventListener("pageshow", function(e){ if (e.persisted) reset(); });

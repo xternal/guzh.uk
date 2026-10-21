@@ -1,4 +1,5 @@
 # GitHub Pages builds this site with Jekyll, which leaves out folders starting with a dot. This brings
-# back the one that has to be served: /.well-known/assetlinks.json, which lets Goat Rodeo for Android
-# open race links (https://guzh.uk/goat-rodeo/race/#…) straight in the game.
+# back the one that has to be served: /.well-known/, whose assetlinks.json (Android) and
+# apple-app-site-association (iPhone and iPad) let Goat Rodeo open race links
+# (https://guzh.uk/goat-rodeo/race/#…) straight in the game.
 include: [".well-known"]

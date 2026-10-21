@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["QV79H74X9J.com.empatiq.goatrodeo"],
+        "components": [
+          {"/": "/goat-rodeo/race/", "#": "?*", "comment": "A race link (Challenge a friend) opens in Goat Rodeo for iPhone and iPad"},
+          {"/": "/goat-rodeo/race", "#": "?*", "comment": "The same without the last slash"}
+        ]
+      }
+    ]
+  }
+}
