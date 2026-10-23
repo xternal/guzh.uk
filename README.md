@@ -324,7 +324,7 @@ play counts (from 0.5.0; see the policy).
   they say "In review at Google Play" instead (still no link, and no date). Since 21 October 2026,
   when 0.7.0 went to both stores (App Store 17:21 BST), they say "In review at the App Store and
   Google Play" (the hero's button, "In review at Apple and Google", so it stays one line on a phone), and the page names iPhone and iPad beside Android (description, JSON-LD platforms,
-  FAQ) and has Challenge a friend under "Play together". Google Play published 0.7.0 on 22 October 2026: the Play link, `installUrl`, `downloadUrl`, `sameAs` and the `google-play-app` tag are back, every "in review at Google Play" became "on Google Play", and the race page's Android fallback goes to the Play page. **When Apple approves**, put in the App Store link
+  FAQ) and has Challenge a friend under "Play together". Google Play published 0.7.0 on 22 October 2026: the Play link, `installUrl`, `downloadUrl`, `sameAs` and the `google-play-app` tag are back, every "in review at Google Play" became "on Google Play", and the race page's Android fallback goes to the Play page. Apple released 0.7.0 on 23 October 2026: the hero has "Get it on the App Store" beside the Play button, `sameAs` and the `apple-itunes-app` tag name it, and every "in review at the App Store" became "on the App Store". (The note from before: when Apple approves, put in the App Store link
   (`https://apps.apple.com/app/id6825379225`) and put back the Play link (the comment in the hero
   says where), the JSON-LD `installUrl`, `downloadUrl` and `sameAs`, and the `google-play-app` meta
   tag, and change every "in review" to "on the App Store and Google Play". Say "in review"

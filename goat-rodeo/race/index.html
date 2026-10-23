@@ -44,7 +44,7 @@
     {"@type": "Question", "name": "Does racing cost anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. Races are free, even on Full Rodeo levels you haven’t unlocked."}},
     {"@type": "Question", "name": "What’s in a race link?", "acceptedAnswer": {"@type": "Answer", "text": "The level, where the items were placed, which animal each runner played and the buttons they pressed, step by step, with their times. Nothing about anyone: no name, no account. Everything after the # stays on the phone that opens it; browsers never send that part to a server."}},
     {"@type": "Question", "name": "It says the ghosts don’t run true. Why?", "acceptedAnswer": {"@type": "Answer", "text": "Ghosts replay button presses, so both phones need the same version of the game. Update Goat Rodeo on both, then open the link again."}},
-    {"@type": "Question", "name": "Does it work on an iPhone or a computer?", "acceptedAnswer": {"@type": "Answer", "text": "On an iPhone or iPad, yes: race links open in Goat Rodeo for iPhone and iPad, which is in review at the App Store. They open in Goat Rodeo for Android phones, tablets and Chromebooks too. On other computers, not yet."}}
+    {"@type": "Question", "name": "Does it work on an iPhone or a computer?", "acceptedAnswer": {"@type": "Answer", "text": "On an iPhone or iPad, yes: race links open in Goat Rodeo for iPhone and iPad, from the App Store. They open in Goat Rodeo for Android phones, tablets and Chromebooks too. On other computers, not yet."}}
    ]
   }
  ]
@@ -371,7 +371,7 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
       <ol class="ghosts" id="ghosts" hidden aria-label="Who is in this race"></ol>
       <div class="cta">
         <a class="btn-play" id="open" href="/goat-rodeo/" aria-busy="false"><span class="spin" aria-hidden="true"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 3.2v17.6c0 .5.5.8.9.5L20 12.6c.4-.2.4-.8 0-1.1L5.4 2.7c-.4-.3-.9 0-.9.5z" fill="currentColor"/></svg><span id="openLbl">About Goat Rodeo</span></a>
-        <span class="price" id="note">Race links open in Goat Rodeo on iPhone, iPad, Android phones, tablets and Chromebooks. The game is on Google Play and in review at the App Store.</span>
+        <span class="price" id="note">Race links open in Goat Rodeo on iPhone, iPad, Android phones, tablets and Chromebooks. The game is on the App Store and Google Play.</span>
       </div>
       <p class="msg" id="msg" role="status"></p>
     </section>
@@ -399,7 +399,7 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
       <h3>It says the ghosts don’t run true. Why?</h3>
       <p>Ghosts replay button presses, so both phones need the same version of the game. Update Goat Rodeo on both, then open the link again.</p>
       <h3>Does it work on an iPhone or a computer?</h3>
-      <p>On an iPhone or iPad, yes: race links open in Goat Rodeo for iPhone and iPad, which is in review at the App Store. They open in Goat Rodeo for Android phones, tablets and Chromebooks too. On other computers, not yet.</p>
+      <p>On an iPhone or iPad, yes: race links open in Goat Rodeo for iPhone and iPad, from the App Store. They open in Goat Rodeo for Android phones, tablets and Chromebooks too. On other computers, not yet.</p>
       </div>
     </section>
   </main>
@@ -472,9 +472,9 @@ a.masthead-name:hover{border-bottom-color:var(--underline)}
   } else if (ios) {
     open.href = "goatrodeo://race/" + p;
     $("openLbl").textContent = "Open in Goat Rodeo";
-    $("note").textContent = "Needs the newest Goat Rodeo for iPhone and iPad, which is in review at the App Store.";
+    $("note").textContent = "Needs the newest Goat Rodeo for iPhone and iPad, from the App Store.";
   } else {
-    $("note").textContent = "Open this link on an iPhone, iPad, Android phone, tablet or Chromebook with Goat Rodeo. The game is on Google Play and in review at the App Store.";
+    $("note").textContent = "Open this link on an iPhone, iPad, Android phone, tablet or Chromebook with Goat Rodeo. The game is on the App Store and Google Play.";
   }
   var t = p.slice(1).replace(/-/g, "+").replace(/_/g, "/"), s;
   try { s = atob(t + "===".slice((t.length + 3) % 4)); } catch (e) { return; }
