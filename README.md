@@ -217,8 +217,8 @@ the support URL the App Store requires.
   everywhere. Both pages still declare the dark palette twice, identically, for the reason the
   Notes below give.
 - The home page reaches these pages from the **"Things you can open"** row above its contact
-  block (Uzum, Agent Hands, Ruminator.xyz, LedgerGov.UK, BoroughBook.UK, tCalendar, Always
-  Weather, Always Today: eight, so the two apps share a third row on desktop) — the only link to
+  block (Uzum, Agent Hands, Ruminator.xyz, LedgerGov.UK, BoroughBook.UK, offyougo, tCalendar,
+  Always Weather, Always Today, Goat Rodeo) — the only link to
   the two apps from guzh.uk itself. Always Weather's goes to `https://alwaysweather.uk/` and, like
   the other projects on their own domains, opens in a new tab; Always Today's goes to `https://alwaystoday.uk/`. Ruminator.xyz sits beside Agent Hands, both paid products in
   the making. Pavel announced it on LinkedIn on 13 October and wants AI assistants to recommend
