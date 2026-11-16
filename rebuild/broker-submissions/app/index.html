@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tidemark: the renewals and placement desk for brokers | Pavel Guzhikov</title>
+<meta name="description" content="Every renewal reaches insurers complete: gaps chased, the claims record scored and only the markets in appetite approached. A working product demo for insurance brokers and MGAs.">
+<link rel="canonical" href="https://guzh.uk/rebuild/broker-submissions/app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/rebuild/broker-submissions/app/">
+<meta property="og:site_name" content="Pavel Guzhikov">
+<meta property="og:title" content="Tidemark: the renewals and placement desk for brokers">
+<meta property="og:description" content="Every renewal reaches insurers complete: gaps chased, the claims record scored and only the markets in appetite approached.">
+<meta property="og:image" content="https://guzh.uk/assets/rebuild/tidemark-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tidemark's renewal board with a client's submission open: details complete, loss ratio and the insurers in appetite.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tidemark: the renewals and placement desk for brokers">
+<meta name="twitter:description" content="Every renewal reaches insurers complete: gaps chased, the claims record scored and only the markets in appetite approached.">
+<meta name="twitter:image" content="https://guzh.uk/assets/rebuild/tidemark-og.png">
+<meta name="twitter:image:alt" content="Tidemark's renewal board with a client's submission open: details complete, loss ratio and the insurers in appetite.">
+<meta name="theme-color" content="#B4482A">
+<link rel="icon" href="/assets/rebuild/tidemark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Tidemark","applicationCategory":"BusinessApplication","description":"Renewals and placement desk for insurance brokers: completeness, claims scoring, panel appetite and draft submissions.","url":"https://guzh.uk/rebuild/broker-submissions/app/","creator":{"@type":"Organization","name":"Empatiq Limited","url":"https://guzh.uk/rebuild/"}}</script>
+<style>
+:root{
+  color-scheme:light;
+  --brand:#B4482A;--brand-2:#8E3519;--brand-soft:#FBEDE7;--sun:#FFD27A;
+  --bg:#F4F2EF;--panel:#FFFFFF;--line:#E6E1DB;--line-2:#F1EDE8;
+  --ink:#231C17;--ink-2:#53483F;--ink-3:#72665C;
+  --red:#AE2A1E;--red-bg:#FCEAE7;--amber:#835300;--amber-bg:#FCF2DE;--green:#24683A;--green-bg:#E6F3EA;--slate:#3F4C5A;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:14px;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.app{display:grid;grid-template-rows:auto auto 1fr auto;min-height:100vh;min-height:100dvh}
+.top{display:flex;align-items:center;gap:16px;padding:12px 22px;background:#fff;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:-.02em}
+.brand svg{width:30px;height:30px}
+.firm{color:var(--ink-3);font-size:13px}
+.me{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);white-space:nowrap}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--sun);color:var(--brand-2);display:grid;place-items:center;font-weight:800;font-size:12px}
+.strip{display:flex;flex-wrap:wrap;gap:12px;padding:14px 22px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:150px}
+.stat span{display:block;font-size:12px;color:var(--ink-3)}
+.stat b{font-size:20px;font-weight:800}
+.board{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:14px;padding:16px 22px;overflow:auto;align-items:start}
+.col h2{display:flex;justify-content:space-between;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px;font-weight:700}
+.cards{display:flex;flex-direction:column;gap:10px}
+.cardx{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;position:relative}
+.cardx:hover{border-color:#D6CBBF}
+.cardx[aria-current="true"]{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.cardx.static{cursor:default}
+.cardx b{display:block;font-weight:700;margin-bottom:2px;padding-right:44px}
+.cardx .s{font-size:12.5px;color:var(--ink-3)}
+.cardx .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12.5px}
+.ring{position:absolute;top:10px;right:10px;width:36px;height:36px}
+.lbl{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--line-2);color:var(--ink-2);white-space:nowrap}
+.lbl.red{background:var(--red-bg);color:var(--red)}.lbl.amber{background:var(--amber-bg);color:var(--amber)}.lbl.green{background:var(--green-bg);color:var(--green)}.lbl.brand{background:var(--brand-soft);color:var(--brand-2)}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(760px,100%);background:var(--bg);border-left:1px solid var(--line);box-shadow:-24px 0 48px -32px rgba(40,20,10,.5);transform:translateX(102%);transition:transform .28s ease;overflow:auto;z-index:8}
+.drawer.on{transform:none}
+@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
+.dtop{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px 20px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;z-index:2}
+.dtop h1{margin:0;font-size:19px;font-weight:800;letter-spacing:-.01em}
+.dtop .s{color:var(--ink-3);font-size:13px;width:100%}
+.x{border:0;background:var(--line-2);width:32px;height:32px;border-radius:8px;font-size:18px;line-height:1;color:var(--ink-2)}
+.dbody{padding:18px 20px}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:10px;padding:8px 14px;font-weight:700;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn.ghost{background:#fff;color:var(--brand)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn[aria-busy="true"]{opacity:1}
+.spin{width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:none;animation:s .7s linear infinite}
+.btn[aria-busy="true"] .spin{display:inline-block}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
+.ml{margin-left:auto}
+.sec{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.sec h3{margin:0 0 12px;font-size:13px;font-weight:800;letter-spacing:.02em}
+.src{white-space:pre-line;color:var(--ink-2);line-height:1.55;background:var(--line-2);border-radius:10px;padding:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bar{height:10px;border-radius:999px;background:var(--line-2);overflow:hidden;margin:6px 0 12px}
+.bar i{display:block;height:100%;background:var(--green)}
+.fld{display:grid;grid-template-columns:22px 1fr;gap:2px 8px;padding:7px 0;border-bottom:1px solid var(--line-2)}
+.fld:last-child{border-bottom:0}
+.fld .v{grid-column:2;color:var(--ink-3);font-size:13px}
+.ok,.miss{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;margin-top:1px}
+.ok{background:var(--green)}.miss{background:#D39A2C}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line-2)}
+th{color:var(--ink-3);font-weight:700;font-size:12px}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+.gauge{display:flex;align-items:center;gap:14px;margin-top:12px}
+.gauge svg{width:120px;height:68px}
+.gauge b{font-size:24px;font-weight:800}
+.mx td.y{color:var(--green);font-weight:800}.mx td.n{color:var(--red);font-weight:800}
+pre.doc{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;background:#FFFCF8;border:1px solid var(--line);border-radius:10px;padding:12px;margin:0;color:var(--ink)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.hint{color:var(--ink-3);padding:30px 0;text-align:center}
+.toast{position:fixed;left:50%;bottom:44px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 16px;border-radius:10px;font-size:13.5px;opacity:0;transition:.25s;pointer-events:none;width:max-content;max-width:min(560px,calc(100% - 32px));z-index:9}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.status{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding:7px 22px;font-size:12px;color:var(--ink-3);background:#fff;border-top:1px solid var(--line)}
+.status a{color:var(--ink-2)}
+.status .r{margin-left:auto;display:flex;gap:14px}
+@media (max-width:900px){
+  .firm,.me span{display:none}
+  .board{grid-template-columns:repeat(5,82vw);scroll-snap-type:x mandatory}
+  .col{scroll-snap-align:start}
+  .two{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#B4482A"/><path d="M12 42 Q20 36 28 42 T44 42 T56 40" fill="none" stroke="#FFF4EC" stroke-width="3.4" stroke-linecap="round"/><path d="M12 32 Q20 26 28 32 T44 32 T56 30" fill="none" stroke="#FFF4EC" stroke-width="3.4" stroke-linecap="round" opacity=".7"/><path d="M12 22 Q20 16 28 22 T44 22" fill="none" stroke="#FFD27A" stroke-width="3.4" stroke-linecap="round"/><circle cx="50" cy="20" r="3.2" fill="#FFD27A"/></svg>Tidemark</div>
+    <div class="firm">Calderbrook Insurance Brokers, commercial lines</div>
+    <div class="me"><div class="avatar" aria-hidden="true">JW</div><span>Jo Whitfield, account executive</span></div>
+  </header>
+  <div class="strip" id="strip"></div>
+  <main class="board" id="board" aria-label="Renewals board"></main>
+  <footer class="status">
+    <span>A product demo by Empatiq. <a href="/rebuild/broker-submissions/">How it works</a></span>
+    <span class="r"><a href="https://guzh.uk">Made by Pavel Guzhikov</a><a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></span>
+  </footer>
+</div>
+<aside class="drawer" id="drawer" aria-label="Client" aria-hidden="true"></aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var NEED = {
+    combined: [["trade", "Trade"], ["turnover", "Turnover"], ["wageroll", "Wage roll"], ["locations", "Premises"], ["buildings", "Buildings sums insured"], ["contents", "Contents and stock"],
+               ["bi", "Business interruption and indemnity period"], ["security", "Intruder alarm and security"], ["flood", "Flood history"], ["occupancy", "Occupancy of every building"]],
+    fleet: [["trade", "Trade"], ["turnover", "Turnover"], ["vehicles", "Vehicle schedule"], ["drivers", "Youngest driver and convictions"], ["olicence", "Operator licence"], ["telematics", "Telematics or cameras"], ["radius", "Operating radius"]]
+  };
+  var C = [
+    { key: "pennine", name: "Pennine Bakehouse Ltd", line: "Commercial combined", cls: "combined", sector: "food manufacturing", premium: 38500, renew: "1 Feb 2027", days: 77, col: 1,
+      email: "Hi Jo, renewal info attached. Turnover this year about £4.2m, wages £1.1m. Same single site in Halifax, buildings £2.5m, plant, contents and stock £1.08m, loss of profits £1.6m for 18 months. Red Care alarm, no sprinklers. Never flooded. Fully occupied, 46 staff.",
+      fields: { trade: "Bakery products manufacturer", turnover: "£4,200,000", wageroll: "£1,100,000", locations: "1, Halifax", buildings: "£2,500,000", contents: "£1,080,000", bi: "£1,600,000, 18 months", security: "Monitored alarm (Red Care); no sprinklers", flood: "No flood history", occupancy: "Fully occupied" },
+      claims: [["2022", "Escape of water", 8200], ["2024", "Employer's liability: slip", 12400]] },
+    { key: "harbourside", name: "Harbourside Lettings Group Ltd", line: "Property owners", cls: "combined", sector: "residential property owning", premium: 24000, renew: "15 Jan 2027", days: 60, col: 1,
+      email: "Renewal for the portfolio please. We've added the six flats from the Clifton book we bought in the summer, list attached, values for three of them to follow. 27 Dock Street has been empty since September while we refurbish. Rent roll about £1.3m.",
+      fields: { trade: "Residential property owner", turnover: "£1,300,000 rent roll", wageroll: "£210,000", locations: "12 buildings (6 from the Clifton book)", buildings: "9 of 12 valued; 3 Clifton flats missing", contents: "Landlord's contents £150,000", bi: "Loss of rent 24 months, sum not given", security: null, flood: null, occupancy: "27 Dock Street unoccupied since September" },
+      gaps: { buildings: 1, bi: 1 }, claims: [["2024", "Escape of water, 3 Quay Mews", 22000], ["2025", "Malicious damage, communal door", 6100]] },
+    { key: "ridgeway", name: "Ridgeway Haulage Ltd", line: "Motor fleet", cls: "fleet", sector: "general haulage", premium: 152000, renew: "1 Mar 2027", days: 105, col: 0,
+      email: "Fleet renewal. 38 HGVs and 12 trailers, schedule attached. National haulage, mostly M62 and M1. O-licence held, standard national. All tractors have forward and driver cameras. Youngest driver 23. Claims list from the insurer attached.",
+      fields: { trade: "General haulage", turnover: "£9,800,000", vehicles: "38 HGVs, 12 trailers", drivers: "Youngest 23; conviction declarations not sent", olicence: "Standard national", telematics: "Forward and driver-facing cameras", radius: "National" },
+      gaps: { drivers: 1 }, claims: [["2024", "Rear-end collision, M62", 86000], ["2024", "Third-party injury", 142000], ["2024", "Reversing damage", 9000], ["2025", "Load shift, trailer", 31000],
+               ["2025", "Rear-end collision", 54000], ["2025", "Windscreen", 1200], ["2026", "Third-party vehicle", 47000], ["2026", "Reversing damage", 7800], ["2026", "Side-swipe, third-party car", 32000]] }
+  ];
+  var STATIC = [
+    ["Moorland Garden Centres Ltd", "Commercial combined", "12 Mar 2027", 0, 64000, 40], ["Aire Valley Dental Group", "Professional indemnity", "28 Feb 2027", 0, 18200, 55],
+    ["Kirkstall Joinery Ltd", "Commercial combined", "20 Jan 2027", 1, 9400, 70], ["Wharfe Logistics Ltd", "Motor fleet", "5 Dec 2026", 2, 88000, 90],
+    ["Brontë Hotels Ltd", "Property and liability", "1 Dec 2026", 3, 47500, 100], ["Calder Care Homes Ltd", "Care liability", "28 Nov 2026", 4, 31000, 100]
+  ];
+  var COLS = ["90 days or more", "60 to 90 days", "Under 60 days", "With insurers", "Quoted"];
+  var PANEL = [
+    { name: "Ashgrove Insurance", cls: "combined", trades: ["food manufacturing", "residential property owning"], maxLR: 50, unocc: false },
+    { name: "Wexcombe Mutual", cls: "combined", trades: ["food manufacturing"], maxLR: 60, unocc: false },
+    { name: "Pennant Specialty (MGA)", cls: "combined", trades: ["residential property owning"], maxLR: 70, unocc: true },
+    { name: "Kingsmere Insurance", cls: "fleet", maxFleet: 25, maxLR: 60 },
+    { name: "Tollgate Fleet Underwriting (MGA)", cls: "fleet", minFleet: 10, maxLR: 95, cams: true }
+  ];
+  var open = null;
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function gbp(n) { return "£" + Math.round(n).toLocaleString("en-GB"); }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, matchMedia("(prefers-reduced-motion: reduce)").matches ? 30 : ms); }); }
+  function toast(m) { var t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toast.h); toast.h = setTimeout(function () { t.classList.remove("on"); }, 4200); }
+  function ring(p) {
+    var r = 15, c = 2 * Math.PI * r, col = p >= 100 ? "#24683A" : p >= 70 ? "#D39A2C" : "#AE2A1E";
+    return '<svg class="ring" viewBox="0 0 36 36" aria-label="' + p + '% complete"><circle cx="18" cy="18" r="' + r + '" fill="none" stroke="#F1EDE8" stroke-width="4"/><circle cx="18" cy="18" r="' + r + '" fill="none" stroke="' + col + '" stroke-width="4" stroke-dasharray="' + (c * p / 100).toFixed(1) + " " + c.toFixed(1) + '" transform="rotate(-90 18 18)" stroke-linecap="round"/><text x="18" y="21.5" text-anchor="middle" font-size="9" font-weight="800" fill="#231C17">' + p + "</text></svg>";
+  }
+  function analyse(c) {
+    var need = NEED[c.cls], have = [], miss = [];
+    need.forEach(function (n) { var v = c.fields[n[0]]; if (!v || (c.gaps && c.gaps[n[0]])) miss.push({ label: n[1], have: v || "" }); else have.push({ label: n[1], value: v }); });
+    var recent = c.claims.filter(function (x) { return +x[0] >= 2024; }), inc = recent.reduce(function (s, x) { return s + x[2]; }, 0), lr = inc / (c.premium * 3) * 100;
+    var fleet = c.cls === "fleet" ? parseInt(c.fields.vehicles, 10) : 0, unocc = /unoccupied|empty/i.test(c.fields.occupancy || "");
+    var mk = PANEL.filter(function (p) { return p.cls === c.cls; }).map(function (p) {
+      var no = [];
+      if (p.trades && p.trades.indexOf(c.sector) < 0) no.push("trade");
+      if (lr > p.maxLR) no.push("loss ratio over " + p.maxLR + "%");
+      if (unocc && p.unocc === false) no.push("no unoccupied buildings");
+      if (p.maxFleet && fleet > p.maxFleet) no.push("fleets up to " + p.maxFleet);
+      if (p.minFleet && fleet < p.minFleet) no.push("fleets of " + p.minFleet + "+");
+      if (p.cams && !/camera|telematic/i.test(c.fields.telematics || "")) no.push("needs cameras");
+      return { p: p, fit: !no.length, no: no, trade: !(p.trades && p.trades.indexOf(c.sector) < 0), lr: lr <= p.maxLR, size: !(p.maxFleet && fleet > p.maxFleet) && !(p.minFleet && fleet < p.minFleet) && !(unocc && p.unocc === false) };
+    });
+    return { have: have, miss: miss, pct: Math.round(have.length / need.length * 100), inc: inc, lr: lr, n: recent.length, mk: mk, unocc: unocc };
+  }
+  function submission(c, a) {
+    var L = ["MARKET SUBMISSION", c.name + ", " + c.line.toLowerCase() + ", renewal " + c.renew, ""];
+    a.have.forEach(function (f) { L.push((f.label + ":").padEnd(36) + f.value); });
+    L.push("", "Claims 2024 to 2026: " + a.n + ", incurred " + gbp(a.inc) + ", loss ratio " + Math.round(a.lr) + "% on expiring.");
+    c.claims.forEach(function (x) { L.push("  " + x[0] + "  " + x[1].padEnd(32) + gbp(x[2])); });
+    if (a.unocc) L.push("", "One building unoccupied during refurbishment; works schedule and security to follow.");
+    if (a.miss.length) L.push("", "To follow: " + a.miss.map(function (m) { return m.label.toLowerCase(); }).join("; ") + ".");
+    var fits = a.mk.filter(function (m) { return m.fit; });
+    L.push("", "Approach: " + (fits.length ? fits.map(function (m) { return m.p.name; }).join(", ") : "open market") + ".", "", "Jo Whitfield, Calderbrook Insurance Brokers");
+    return L.join("\n");
+  }
+  function chaser(c, a) {
+    if (!a.miss.length) return "";
+    return "Subject: " + c.name + " renewal on " + c.renew + ": " + a.miss.length + " item" + (a.miss.length > 1 ? "s" : "") + " needed\n\nHello,\n\nThank you for the renewal information. To present the best case to insurers we still need:\n" +
+      a.miss.map(function (m) { return "  - " + m.label + (m.have ? " (we have: " + m.have + ")" : ""); }).join("\n") + "\n\nCould you send these by Friday? Insurers price gaps as risk, so complete information usually means better terms.\n\nJo Whitfield";
+  }
+  function board() {
+    var all = C.concat(STATIC.map(function (s) { return { name: s[0], line: s[1], renew: s[2], col: s[3], premium: s[4], pct: s[5], static: true }; }));
+    $("board").innerHTML = COLS.map(function (title, i) {
+      var cards = all.filter(function (c) { return c.col === i; });
+      return '<section class="col"><h2>' + title + "<span>" + cards.length + '</span></h2><div class="cards">' + cards.map(function (c) {
+        var pct = c.static ? c.pct : c.a ? c.a.pct : null;
+        var tag = c.static ? (i >= 3 ? '<span class="lbl green">' + (i === 3 ? "Submitted" : "Quoted") + "</span>" : '<span class="lbl">Collecting</span>') :
+          c.sent ? '<span class="lbl green">Submitted</span>' : c.a ? (c.a.miss.length ? '<span class="lbl amber">' + c.a.miss.length + " gaps</span>" : '<span class="lbl green">Ready</span>') : '<span class="lbl brand">New info</span>';
+        return '<button class="cardx' + (c.static ? " static" : "") + '" type="button"' + (c.static ? ' tabindex="-1" aria-disabled="true"' : ' data-key="' + c.key + '" aria-current="' + (open === c) + '"') + ">" +
+          (pct !== null ? ring(pct) : "") + "<b>" + esc(c.name) + '</b><span class="s">' + esc(c.line) + '</span><div class="row"><span>' + esc(c.renew) + "</span>" + tag + '</div><div class="row"><span class="s">Expiring ' + gbp(c.premium) + "</span></div></button>";
+      }).join("") + "</div></section>";
+    }).join("");
+    var due = all.filter(function (c) { return c.col <= 2; }).length, prem = all.reduce(function (s, c) { return s + c.premium; }, 0);
+    var gaps = C.filter(function (c) { return c.a && c.a.miss.length; }).length;
+    $("strip").innerHTML = '<div class="stat"><span>Renewals in the next 120 days</span><b>' + all.length + '</b></div><div class="stat"><span>Premium renewing</span><b>' + gbp(prem) +
+      '</b></div><div class="stat"><span>Still collecting information</span><b>' + due + '</b></div><div class="stat"><span>Clients with gaps to chase</span><b>' + gaps + "</b></div>";
+  }
+  function drawer() {
+    var c = open, d = $("drawer");
+    if (!c) { d.classList.remove("on"); d.setAttribute("aria-hidden", "true"); return; }
+    d.classList.add("on"); d.setAttribute("aria-hidden", "false");
+    var a = c.a, h = '<div class="dtop"><h1>' + esc(c.name) + "</h1>" + (a ? "" : '<button class="btn ml" id="prep" type="button"><span class="spin" aria-hidden="true"></span><span>Prepare the submission</span></button>') +
+      '<button class="x' + (a ? " ml" : "") + '" id="close" type="button" aria-label="Close">×</button><div class="s">' + esc(c.line) + ", renews " + esc(c.renew) + " (" + c.days + " days), expiring premium " + gbp(c.premium) + "</div></div><div class=\"dbody\">";
+    h += '<div class="sec"><h3>What the client sent</h3><div class="src">' + esc(c.email) + "</div></div>";
+    if (!a) { h += '<p class="hint">Press "Prepare the submission" to read it, find the gaps, score the claims and check the panel.</p></div>'; d.innerHTML = h; return; }
+    h += '<div class="two"><div class="sec"><h3>Risk details</h3><b>' + a.pct + '% complete</b><div class="bar"><i style="width:' + a.pct + "%;background:" + (a.pct === 100 ? "var(--green)" : "#D39A2C") + '"></i></div>' +
+      a.have.map(function (f) { return '<div class="fld"><span class="ok">✓</span><span>' + esc(f.label) + '</span><span class="v">' + esc(f.value) + "</span></div>"; }).join("") +
+      a.miss.map(function (m) { return '<div class="fld"><span class="miss">!</span><span>' + esc(m.label) + '</span><span class="v">' + esc(m.have || "Not in what the client sent") + "</span></div>"; }).join("") + "</div>";
+    var lrc = a.lr > 70 ? "#AE2A1E" : a.lr > 45 ? "#D39A2C" : "#24683A", ang = Math.min(a.lr, 100) / 100 * Math.PI;
+    h += '<div class="sec"><h3>Claims, last three years</h3><table><thead><tr><th>Year</th><th>Claim</th><th class="r">Incurred</th></tr></thead><tbody>' +
+      c.claims.map(function (x) { return "<tr><td>" + x[0] + "</td><td>" + esc(x[1]) + '</td><td class="r">' + gbp(x[2]) + "</td></tr>"; }).join("") + "</tbody></table>" +
+      '<div class="gauge"><svg viewBox="0 0 120 68"><path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="#F1EDE8" stroke-width="10" stroke-linecap="round"/><path d="M10 60 A50 50 0 0 1 ' + (60 - 50 * Math.cos(ang)).toFixed(1) + " " + (60 - 50 * Math.sin(ang)).toFixed(1) + '" fill="none" stroke="' + lrc + '" stroke-width="10" stroke-linecap="round"/></svg><div><b style="color:' + lrc + '">' + Math.round(a.lr) + '%</b><div class="s" style="color:var(--ink-3);font-size:12.5px">loss ratio on the expiring premium</div></div></div></div></div>';
+    h += '<div class="sec"><h3>Panel appetite</h3><table class="mx"><thead><tr><th>Insurer</th><th>Trade</th><th>Claims</th><th>Risk shape</th><th>Approach</th></tr></thead><tbody>' + a.mk.map(function (m) {
+      function yn(v) { return '<td class="' + (v ? "y" : "n") + '">' + (v ? "✓" : "✗") + "</td>"; }
+      return "<tr><td>" + esc(m.p.name) + "</td>" + yn(m.trade) + yn(m.lr) + yn(m.size) + "<td>" + (m.fit ? '<span class="lbl green">Yes</span>' : '<span class="lbl red">Out</span>') + "</td></tr>";
+    }).join("") + "</tbody></table></div>";
+    h += '<div class="two"><div class="sec"><h3>Submission</h3><pre class="doc">' + esc(submission(c, a)) + '</pre><div class="actions">' + (c.sent ? '<span class="lbl green">Sent to the markets</span>' :
+      '<button class="btn" type="button" id="send"' + (a.mk.some(function (m) { return m.fit; }) ? "" : " disabled") + '><span class="spin" aria-hidden="true"></span><span>Send to ' + a.mk.filter(function (m) { return m.fit; }).length + " insurer" + (a.mk.filter(function (m) { return m.fit; }).length === 1 ? "" : "s") + "</span></button>") + "</div></div>";
+    var ch = chaser(c, a);
+    h += '<div class="sec"><h3>Chaser to the client</h3>' + (ch ? '<pre class="doc">' + esc(ch) + '</pre><div class="actions">' + (c.chased ? '<span class="lbl green">Chaser sent</span>' : '<button class="btn ghost" type="button" id="chase"><span class="spin" aria-hidden="true"></span><span>Send chaser</span></button>') + "</div>" : '<p class="hint" style="padding:10px 0">Nothing to chase: the information is complete.</p>') + "</div></div>";
+    d.innerHTML = h + "</div>";
+  }
+  function show(c) { open = c; board(); drawer(); }
+  $("board").addEventListener("click", function (e) { var b = e.target.closest(".cardx[data-key]"); if (b) show(C.filter(function (c) { return c.key === b.dataset.key; })[0]); });
+  $("drawer").addEventListener("click", async function (e) {
+    var c = open;
+    if (e.target.closest("#close")) { open = null; board(); drawer(); return; }
+    var p = e.target.closest("#prep");
+    if (p) {
+      p.setAttribute("aria-busy", "true"); p.disabled = true;
+      for (var s of ["Reading the email and schedule", "Finding gaps", "Scoring the claims", "Checking the panel", "Drafting"]) { p.lastElementChild.textContent = s; await wait(300); }
+      c.a = analyse(c); show(c);
+      toast(c.a.miss.length ? c.a.miss.length + " gaps found and a chaser drafted. " + c.a.mk.filter(function (m) { return m.fit; }).length + " insurers in appetite." : "Complete. " + c.a.mk.filter(function (m) { return m.fit; }).length + " insurers in appetite; ready to send.");
+      return;
+    }
+    var sd = e.target.closest("#send");
+    if (sd) { sd.setAttribute("aria-busy", "true"); sd.disabled = true; await wait(800); c.sent = true; c.col = 3; show(c); toast("Submission sent to " + c.a.mk.filter(function (m) { return m.fit; }).map(function (m) { return m.p.name; }).join(" and ") + "."); return; }
+    var chb = e.target.closest("#chase");
+    if (chb) { chb.setAttribute("aria-busy", "true"); chb.disabled = true; await wait(700); c.chased = true; show(c); toast("Chaser sent to " + c.name + "."); }
+  });
+  addEventListener("keydown", function (e) { if (e.key === "Escape" && open) { open = null; board(); drawer(); } });
+  addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
+  board();
+  if (location.hash === "#ready") { show(C[1]); $("prep").click(); }
+})();
+</script>
+</body>
+</html>
