@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Defence tech: you build the thing that flies, I'll build the company that delivers it | Pavel Guzhikov</title>
+<meta name="description" content="For UK defence and dual-use startups after a raise or a first contract. Pavel Guzhikov, twenty years of building, two exits, founding team of a unicorn, takes on delivery, product feedback, hiring and paperwork, hands-on, so your engineers stay on the product.">
+<link rel="canonical" href="https://guzh.uk/defence/route/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/defence/route/">
+<meta property="og:site_name" content="Pavel Guzhikov">
+<meta property="og:title" content="You build the thing that flies. I'll build the company that delivers it.">
+<meta property="og:description" content="Twenty years of building, from a mobile messenger in 2005 to national payment infrastructure in 2022. Now: delivery, product feedback, scale and paperwork for UK defence and dual-use startups.">
+<meta property="og:image" content="https://guzh.uk/assets/defence/route-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A flight route through Pavel Guzhikov's waypoints, from a mobile messenger in 2005 to a unicorn and national payment infrastructure, ending at your next 18 months, under the line: You build the thing that flies. I'll build the company that delivers it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="You build the thing that flies. I'll build the company that delivers it.">
+<meta name="twitter:description" content="Twenty years of building, from a mobile messenger in 2005 to national payment infrastructure in 2022. Now: delivery, product feedback, scale and paperwork for UK defence and dual-use startups.">
+<meta name="twitter:image" content="https://guzh.uk/assets/defence/route-og.png">
+<meta name="twitter:image:alt" content="A flight route through Pavel Guzhikov's waypoints, ending at your next 18 months, under the line: You build the thing that flies. I'll build the company that delivers it.">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#241F1A" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,400..900&amp;family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Delivery, product and scale-up partner for UK defence and dual-use technology companies", "description": "After a raise or a first contract, Pavel Guzhikov takes on delivery, product feedback, hiring and paperwork, hands-on, so the engineers stay on the product.", "url": "https://guzh.uk/defence/route/", "areaServed": "GB", "serviceType": "Delivery, product and scale-up partner for defence and dual-use technology companies", "provider": {"@type": "Person", "name": "Pavel Guzhikov", "url": "https://guzh.uk/", "email": "mailto:pavel@guzh.uk", "address": {"@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB"}, "sameAs": ["https://www.linkedin.com/in/pavelguzhikov/", "https://github.com/xternal"]}}</script>
+<script>
+/* The reader's explicit choice from guzh.uk's switcher (shared localStorage), else the OS. */
+try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+document.documentElement.className += " js";
+</script>
+<style>
+:root{
+  color-scheme:light;
+  --paper:#F1EFE9;
+  --paper-lift:#FAF8F3;
+  --ink:#171613;
+  --ink-2:#544F46;
+  --ink-3:#6C675F;
+  --accent:#1F3BC4;
+  --rule:rgba(23,22,19,.14);
+  --rule-soft:rgba(23,22,19,.07);
+  --card:#FBFAF6;
+  --red:#A3311E;
+  --amber:#7D5500;
+  --green:#2C6A39;
+  --red-bg:rgba(163,49,30,.09);
+  --amber-bg:rgba(125,85,0,.10);
+  --green-bg:rgba(44,106,57,.09);
+  --on-accent:#FFFFFF;
+}
+
+/* Dark is guzh.uk's dark brown. Declared twice and kept identical: the OS asking for dark,
+   and the reader's own choice. tools/check-colours.py checks both. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --card:#2E2822;
+    --red:#EC9286;
+    --amber:#F0DCAA;
+    --green:#A6D49B;
+    --red-bg:#47322B;
+    --amber-bg:#3D3222;
+    --green-bg:#2F3A2A;
+    --on-accent:#241F1A;
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#241F1A;
+    --paper-lift:#2E2822;
+    --ink:#EFE7DA;
+    --ink-2:#C0B5A4;
+    --ink-3:#A59A88;
+    --accent:#E2B26F;
+    --rule:rgba(239,231,218,.16);
+    --rule-soft:rgba(239,231,218,.10);
+    --card:#2E2822;
+    --red:#EC9286;
+    --amber:#F0DCAA;
+    --green:#A6D49B;
+    --red-bg:#47322B;
+    --amber-bg:#3D3222;
+    --green-bg:#2F3A2A;
+    --on-accent:#241F1A;
+}
+
+/* Fonts: Anybody (display, variable width), Geist (text), JetBrains Mono (waypoint labels). All SIL OFL 1.1. */
+:root{--display:"Anybody","Arial Narrow",Impact,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--max:1240px}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+a{color:var(--accent);text-underline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:6px 10px;border-radius:6px;z-index:9}
+.skip:focus{left:16px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+@media (min-width:760px){.wrap{padding:0 32px}}
+[hidden]{display:none!important}
+.mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+
+/* Header */
+.top{position:sticky;top:0;z-index:6;background:var(--paper);border-bottom:1px solid var(--rule-soft)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{color:var(--ink-2);text-decoration:none;padding:6px 11px;border-radius:999px;white-space:nowrap;font-size:15px}
+.tabs a:hover{color:var(--ink)}
+.tabs a.home{color:var(--ink);font-weight:600;margin-right:6px}
+.tabs a[aria-current="page"]{background:var(--ink);color:var(--paper)}
+.theme{border:1px solid var(--rule);background:transparent;color:var(--ink-2);width:32px;height:32px;border-radius:999px;display:grid;place-items:center;cursor:pointer;flex:none}
+.theme svg{width:15px;height:15px}
+
+/* Hero */
+.hero{padding-top:clamp(28px,6vw,72px)}
+.hero .tag{margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.hero .tag span{color:var(--accent)}
+h1{font-family:var(--display);font-weight:800;font-stretch:118%;font-size:clamp(38px,7.6vw,108px);line-height:.93;letter-spacing:-.025em;margin:0;max-width:none}
+h1 .l2{display:block;color:var(--accent)}
+.takeoff{margin:clamp(14px,2.4vw,26px) 0 0;height:auto;display:block;width:100%;aspect-ratio:1200/110}
+.takeoff svg{display:block;width:100%;height:100%;overflow:visible}
+.hero-grid{display:grid;gap:28px 56px;grid-template-columns:1fr;margin-top:clamp(18px,3vw,34px)}
+@media (min-width:900px){.hero-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
+.claim{font-size:clamp(19px,2vw,24px);line-height:1.42;font-weight:500;margin:0;max-width:40ch}
+.claim strong{font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.stats div{padding:12px 10px 12px 0}
+.stats dt{font-family:var(--display);font-weight:800;font-stretch:62%;font-size:clamp(38px,5vw,60px);line-height:1;color:var(--ink)}
+.stats dd{margin:4px 0 0;font-size:13.5px;line-height:1.3;color:var(--ink-2)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 0}
+.btn{font:inherit;font-size:16px;font-weight:500;border-radius:999px;padding:11px 20px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:hover{filter:brightness(1.06)}
+.lede{color:var(--ink-2);margin:16px 0 0;max-width:46ch}
+
+/* Section heads */
+section{scroll-margin-top:64px}
+.sec{padding-top:clamp(64px,9vw,120px)}
+h2{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:clamp(30px,4.4vw,58px);line-height:.98;letter-spacing:-.02em;margin:8px 0 16px;max-width:20ch}
+h3{font-size:19px;line-height:1.25;font-weight:600;margin:0 0 6px}
+p{max-width:68ch}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--ink-2);max-width:60ch;margin:0}
+
+/* T shape */
+.tee{margin-top:36px;position:relative}
+.bar{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:20px;position:relative;overflow:hidden}
+.bar::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--accent);transform-origin:left center}
+.bar ul,.stem ul{list-style:none;margin:10px 0 0;padding:0}
+.bar ul{display:grid;gap:14px 26px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.bar li b,.stem li b{display:block;font-weight:600}
+.bar li span,.stem li span{color:var(--ink-2);font-size:15.5px}
+.stem{position:relative;margin:0 auto;max-width:560px;padding:26px 0 6px 30px}
+.stem::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent);border-radius:0 0 3px 3px;transform-origin:center top}
+.stem li{padding:10px 0;border-bottom:1px solid var(--rule-soft)}
+.stem li:last-child{border-bottom:0}
+.gh{margin-top:14px;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px 16px}
+.gh p{margin:4px 0 0;font-size:15.5px;color:var(--ink-2)}
+.spark{display:flex;align-items:flex-end;gap:2px;height:34px;margin-top:10px}
+.spark i{flex:1;min-height:2px;background:var(--rule);border-radius:1px}
+.spark i.on{background:var(--accent)}
+.js .tee.armed .bar::before{transform:scaleX(0)}
+.js .tee.armed .stem::before{transform:scaleY(0)}
+.tee.go .bar::before{transform:scaleX(1);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.tee.go .stem::before{transform:scaleY(1);transition:transform 1.1s .7s cubic-bezier(.2,.7,.2,1)}
+
+/* The route */
+.flight{position:relative;margin-top:40px;padding-bottom:20px}
+.flight svg.path{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.planned{fill:none;stroke:var(--ink-3);stroke-width:1.5;stroke-dasharray:3 7;opacity:.55}
+.flown{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round}
+.plane{fill:var(--accent);stroke:var(--paper);stroke-width:1.2}
+.legs{list-style:none;margin:0;padding:0}
+.leg{position:relative;padding:0 0 44px 48px}
+.leg .pin{position:absolute;left:10px;top:6px;width:20px;height:20px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-3);transition:background .3s,border-color .3s,transform .3s}
+.leg.passed .pin{background:var(--accent);border-color:var(--accent)}
+.leg .when{font-family:var(--display);font-weight:800;font-stretch:58%;font-size:clamp(40px,5vw,64px);line-height:.9;color:var(--accent);display:block;margin:0 0 4px}
+.leg .code{margin:0 0 6px}
+.leg p{margin:6px 0 0;color:var(--ink-2)}
+.leg .card{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:18px 20px}
+.today{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:10px}
+.today a{font-weight:600}
+.today span{color:var(--ink-2);font-size:15.5px}
+.dest .card{border:2px dashed var(--accent);background:var(--paper-lift)}
+.takes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:14px}
+.takes div{border-top:3px solid var(--accent);padding-top:10px}
+.takes .mono{display:block;margin-bottom:4px}
+.takes h4{font-size:17px;margin:0 0 4px}
+.takes p{font-size:15.5px;margin:0}
+html:not(.js) .flight::before{content:"";position:absolute;left:19px;top:10px;bottom:40px;border-left:2px dashed var(--rule)}
+@media (min-width:900px){
+  .leg{width:38%;padding:0}
+  .leg:nth-child(odd){margin-right:auto}
+  .leg:nth-child(even){margin-left:auto}
+  .leg + .leg{margin-top:-40px}
+  .leg .pin{top:24px}
+  .leg:nth-child(odd) .pin{left:auto;right:-58px}
+  .leg:nth-child(even) .pin{left:-58px}
+  .leg.dest{width:100%;margin-top:60px;padding-top:56px}
+  .leg.dest .pin{left:calc(50% - 10px);right:auto;top:0}
+  html:not(.js) .flight::before{left:50%}
+}
+.hud{position:fixed;left:50%;bottom:16px;z-index:5;transform:translate(-50%,8px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px 9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;white-space:nowrap;transition:opacity .25s,transform .25s;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis}
+.hud.on{opacity:1;transform:translate(-50%,0)}
+.hud b{color:var(--paper);font-weight:600}
+
+/* Stays yours */
+.yours{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:26px;list-style:none;padding:0}
+.yours li{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px 18px}
+.yours li b{display:block;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:22px;line-height:1.1}
+.yours li span{color:var(--ink-2);font-size:15.5px}
+.note{border-left:4px solid var(--accent);padding:4px 0 4px 16px;color:var(--ink-2);margin-top:22px}
+
+/* Approach and landing */
+.glide{position:relative;margin-top:34px;aspect-ratio:1200/170;width:100%}
+.glide svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.slope{fill:none;stroke:var(--ink-3);stroke-width:1.5;stroke-dasharray:4 8}
+.slope-flown{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round}
+.runway{fill:var(--rule)}
+.centre{stroke:var(--paper);stroke-width:2;stroke-dasharray:14 12}
+.gp{fill:var(--paper);stroke:var(--accent);stroke-width:2}
+.steps{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}}
+.steps li{border-top:1px solid var(--rule);padding-top:12px}
+.steps .mono{display:block;margin-bottom:4px;color:var(--accent)}
+.steps p{margin:4px 0 0;color:var(--ink-2)}
+
+/* FAQ */
+.faq{margin-top:22px;max-width:860px}
+.faq details{border-top:1px solid var(--rule);padding:14px 0}
+.faq details:last-child{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;font-weight:600;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--accent);flex:none}
+.faq details[open] summary::after{content:"\2212"}
+.faq p{color:var(--ink-2);margin:8px 0 0}
+
+/* CTA */
+.cta{margin-top:clamp(64px,9vw,120px);background:var(--paper-lift);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:clamp(40px,6vw,80px) 0}
+.cta h2{max-width:22ch}
+
+.foot{padding-top:24px;padding-bottom:40px;font-size:14px;color:var(--ink-3)}
+.foot p{margin:.35em 0;max-width:none}
+.foot .credit{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot a{color:var(--ink-2)}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  h1{font-stretch:104%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .hud{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top">
+  <div class="wrap">
+    <nav class="tabs" aria-label="Site">
+      <a class="home" href="/">Pavel Guzhikov</a>
+      <a href="/defence/route/" aria-current="page">Defence tech</a>
+      <a href="/rebuild/">Back-office rebuild</a>
+    </nav>
+    <button class="theme" type="button" aria-label="Switch light or dark">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.8a6.2 6.2 0 0 1 0 12.4z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+<script>
+(function () {
+  var root = document.documentElement;
+  function isDark() {
+    var t = root.getAttribute("data-theme");
+    return t ? t === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function paintBar() {
+    var dark = isDark();
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+      m.setAttribute("content", dark ? "#241F1A" : "#F1EFE9");
+    });
+  }
+  var btn = document.querySelector(".theme");
+  if (btn) btn.addEventListener("click", function () {
+    var next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    paintBar();
+  });
+  paintBar();
+
+  /* Keep the current tab visible on a narrow screen. */
+  var cur = document.querySelector('.tabs a[aria-current="page"]');
+  var tabs = document.querySelector(".tabs");
+  if (cur && tabs) tabs.scrollLeft = Math.max(0, cur.offsetLeft - (tabs.clientWidth - cur.offsetWidth) / 2);
+})();
+</script>
+
+<main id="main">
+<section class="hero wrap" aria-labelledby="h1">
+  <p class="tag mono">Defence and dual-use tech <span>/</span> London <span>/</span> Hands-on</p>
+  <h1 id="h1">You build the thing that flies. <span class="l2">I'll build the company that delivers it.</span></h1>
+  <div class="takeoff" aria-hidden="true">
+    <svg viewBox="0 0 1200 110" preserveAspectRatio="xMidYMid meet" focusable="false">
+      <rect class="runway" x="0" y="96" width="470" height="12" rx="2"/>
+      <line class="centre" x1="8" y1="102" x2="462" y2="102"/>
+      <path id="climb-planned" class="planned" d="M20 102 L430 102 C620 102 760 86 900 56 S1120 12 1190 8"/>
+      <path id="climb" class="flown" d="M20 102 L430 102 C620 102 760 86 900 56 S1120 12 1190 8"/>
+      <g id="climb-plane"><path class="plane" transform="scale(1.6)" d="M0-12C1.2-12 1.8-10 1.8-8V-3L11 2.5V5L1.8 2V7L4.5 9.5V11.5L0 10L-4.5 11.5V9.5L-1.8 7V2L-11 5V2.5L-1.8-3V-8C-1.8-10-1.2-12 0-12Z"/></g>
+    </svg>
+  </div>
+  <div class="hero-grid">
+    <div>
+      <p class="claim"><strong>After a raise or a first contract, the hard part stops being the technology.</strong> It's everything around it: hiring fast, suppliers, paperwork, and getting feedback from trials back into the product before the next round. I take that on, hands-on, so your engineers stay on the product.</p>
+      <div class="row">
+        <a class="btn" href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book 30 minutes</a>
+        <a class="btn ghost" href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>
+      </div>
+    </div>
+    <div>
+      <dl class="stats">
+        <div><dt>20</dt><dd>years of building</dd></div>
+        <div><dt>4</dt><dd>times zero to one</dd></div>
+        <div><dt>2</dt><dd>exits</dd></div>
+        <div><dt>1</dt><dd>unicorn</dd></div>
+      </dl>
+      <p class="lede">Pavel Guzhikov, London. Founding team of Uzbekistan's first unicorn: 1,000+ people in two years. You know defence; he knows how to make a fast-growing company deliver on the date it promised.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="t-shape" aria-labelledby="t-h">
+  <p class="mono">Built T-shaped</p>
+  <h2 id="t-h">Deep in the business. Deep in the engineering. Hands on both.</h2>
+  <p class="lead">Most operators can run the company but can't read the code. Most engineers can build the product but have never hired a hundred people in a quarter. The work after a raise needs both, in the same head, in the trenches with your team rather than above it.</p>
+  <div class="tee armed" id="tee">
+    <div class="bar">
+      <p class="mono">Across: the business</p>
+      <ul>
+        <li><b>Founding teams</b><span>Zero to one, four times. Two companies built and sold.</span></li>
+        <li><b>Hiring at speed</b><span>1,000+ people in two years at Uzum, in a market with no digital infrastructure.</span></li>
+        <li><b>Partners who set the pace</b><span>Fintech products with more than 100 banks, each with its own rules and timelines.</span></li>
+        <li><b>Scale</b><span>Millions of users, and the processes that keep a company working while it grows ten times.</span></li>
+      </ul>
+    </div>
+    <div class="stem">
+      <p class="mono">Down: the engineering</p>
+      <ul>
+        <li><b>Writes and ships the code himself</b><span>Not a manager of engineers who used to code. The repositories below are his.</span></li>
+        <li><b>Payments, cards and lending systems</b><span>Up to national payment infrastructure in 2022.</span></li>
+        <li><b>The data culture underneath</b><span>The data behind fintech, lending, a marketplace and payments at Uzum.</span></li>
+      </ul>
+      <div class="gh" id="gh">
+        <p class="mono">Live from github.com/xternal</p>
+        <p id="gh-text">His public code and its activity are at <a href="https://github.com/xternal" target="_blank" rel="noopener noreferrer">github.com/xternal</a>.</p>
+        <div class="spark" id="gh-spark" aria-hidden="true" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="route" aria-labelledby="route-h">
+  <p class="mono">The route so far</p>
+  <h2 id="route-h">Twenty years in the air. Your company is the next waypoint.</h2>
+  <p class="lead">From a mobile messenger in 2005 to national payment infrastructure in 2022, and what he builds now. Scroll, and the route draws itself.</p>
+  <div class="flight" id="flight">
+    <svg class="path" id="route-svg" aria-hidden="true" focusable="false">
+      <path id="route-planned" class="planned" d=""/>
+      <path id="route-flown" class="flown" d=""/>
+      <g id="route-plane"><path class="plane" transform="scale(1.5)" d="M0-12C1.2-12 1.8-10 1.8-8V-3L11 2.5V5L1.8 2V7L4.5 9.5V11.5L0 10L-4.5 11.5V9.5L-1.8 7V2L-11 5V2.5L-1.8-3V-8C-1.8-10-1.2-12 0-12Z"/></g>
+    </svg>
+    <ol class="legs">
+      <li class="leg" data-hud="2005: first product">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="when">2005</span>
+          <p class="code mono">Waypoint 1: first product</p>
+          <h3>A multi-channel mobile messenger</h3>
+          <p>The first product, and the start of twenty years of building products, teams and the systems under them.</p>
+        </div>
+      </li>
+      <li class="leg" data-hud="Fintech: 100+ banks">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="when">100+</span>
+          <p class="code mono">Waypoint 2: fintech</p>
+          <h3>Fintech products with more than 100 banks</h3>
+          <p>Selling to institutions that move at their own pace, under their own rules and audits. Good practice for selling to a ministry.</p>
+        </div>
+      </li>
+      <li class="leg" data-hud="Worki: exit">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="when">Exit</span>
+          <p class="code mono">Waypoint 3: Worki, 2019</p>
+          <h3>Founded and sold a jobs marketplace</h3>
+          <p>Worki, a fast-growing jobs marketplace, acquired by Mail.Ru Group in 2019.</p>
+        </div>
+      </li>
+      <li class="leg" data-hud="Earned-wage access: exit">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="when">Exit</span>
+          <p class="code mono">Waypoint 4: earned-wage access</p>
+          <h3>Co-founded and sold again</h3>
+          <p>An earned-wage-access company, letting people draw the pay they have already earned, backed by Target Global and sold.</p>
+        </div>
+      </li>
+      <li class="leg" data-hud="Uzum: first unicorn">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="when">1,000+</span>
+          <p class="code mono">Waypoint 5: Uzum, founding team</p>
+          <h3>Uzbekistan's first unicorn</h3>
+          <p>Fintech, lending, a marketplace, payments, cards, and the data culture underneath them. Millions of users and more than 1,000 employees in two years, in a market with no digital infrastructure.</p>
+        </div>
+      </li>
+      <li class="leg" data-hud="2022: national payments">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="when">2022</span>
+          <p class="code mono">Waypoint 6: national scale</p>
+          <h3>National payment infrastructure</h3>
+          <p>Where the technology is hard, the deployment is political and the blast radius is national. The kind of problem he now looks for: sovereign infrastructure, public systems, defence and dual-use.</p>
+        </div>
+      </li>
+      <li class="leg" data-hud="Today: building, hands-on">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="when">Today</span>
+          <p class="code mono">Waypoint 7: building now, alongside</p>
+          <h3>Code he writes himself, a bit to the side: for society and the state</h3>
+          <ul class="today">
+            <li><a href="https://ruminator.xyz/" target="_blank" rel="noopener noreferrer">Ruminator</a> <span>reads Russia's regional and local press every day, from state television to exiled outlets and residents' Telegram channels, and shows what each reports and how it frames it. Every claim checked word for word. Invite-only.</span></li>
+            <li><a href="https://ledgergov.uk/" target="_blank" rel="noopener noreferrer">LedgerGov.UK</a> <span>an open P&amp;L of the UK state: where public money comes from, where it goes and what every promise would cost, each number linked to its official source. Built as a citizen.</span></li>
+            <li><a href="https://boroughbook.uk/" target="_blank" rel="noopener noreferrer">BoroughBook.UK</a> <span>the same for one London borough, Hammersmith &amp; Fulham.</span></li>
+            <li><a href="https://agenthands.cc/" target="_blank" rel="noopener noreferrer">Agent Hands</a> <span>lets any AI hire a person nearby for a real-world task; the money is locked before anyone sees the task.</span></li>
+          </ul>
+        </div>
+      </li>
+      <li class="leg dest" data-hud="Next: your 18 months">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <p class="code mono">Waypoint 8: destination</p>
+          <h3 style="font-family:var(--display);font-weight:800;font-stretch:112%;font-size:clamp(28px,3.4vw,44px);line-height:1;letter-spacing:-.015em">Your next 18 months</h3>
+          <p>The leg where most hardware companies lose time is not the engineering. It's everything around it. This is what I take on, hands-on:</p>
+          <div class="takes">
+            <div><span class="mono">Delivery</span><h4>From prototype to production on time</h4><p>Production tracking, supplier onboarding, quality and test paperwork, so the build plan you promised is the one that happens.</p></div>
+            <div><span class="mono">Product</span><h4>Trial feedback into the next release</h4><p>What operators and customers say after a trial, captured, sorted and turned into the next version, not lost in someone's notes.</p></div>
+            <div><span class="mono">Scale</span><h4>Hiring and systems that hold</h4><p>The first operations team, hiring at speed, and the internal software that keeps 40 people working like 400.</p></div>
+            <div><span class="mono">Paperwork</span><h4>The admin around every contract</h4><p>Bid packs, contract reporting and customer documentation, drafted and tracked, so your founders sign them instead of writing them.</p></div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec wrap" id="yours" aria-labelledby="yours-h">
+  <p class="mono">Pilot in command</p>
+  <h2 id="yours-h">You stay in the left seat.</h2>
+  <p class="lead">What stays yours, all of it:</p>
+  <ul class="yours">
+    <li><b>The technology</b><span>Your design, your IP, your roadmap.</span></li>
+    <li><b>The defence know-how</b><span>The operational and domain judgement you were funded for.</span></li>
+    <li><b>The clearances</b><span>Who is vetted, and for what, stays your call.</span></li>
+    <li><b>The customer relationships</b><span>You hold them; I make sure you deliver on them.</span></li>
+  </ul>
+  <p class="note">The work sits on the unclassified side of the business: the machinery that turns funding and contracts into delivery. Where any part of it needs vetting, we say so plainly at the start.</p>
+</section>
+
+<section class="sec wrap" id="start" aria-labelledby="start-h">
+  <p class="mono">How we start</p>
+  <h2 id="start-h">Final approach, then wheels down.</h2>
+  <p class="lead">Three steps, each one small enough to stop after.</p>
+  <div class="glide" aria-hidden="true">
+    <svg viewBox="0 0 1200 170" preserveAspectRatio="xMidYMid meet" focusable="false">
+      <rect class="runway" x="900" y="146" width="300" height="18" rx="2"/>
+      <line class="centre" x1="912" y1="155" x2="1192" y2="155"/>
+      <path class="slope" d="M10 14 L960 146 L1180 146"/>
+      <path id="glide-flown" class="slope-flown" d="M10 14 L960 146 L1180 146"/>
+      <circle class="gp" cx="200" cy="40.4" r="7"/>
+      <circle class="gp" cx="600" cy="96" r="7"/>
+      <circle class="gp" cx="960" cy="146" r="7"/>
+      <g id="glide-plane"><path class="plane" transform="scale(1.6)" d="M0-12C1.2-12 1.8-10 1.8-8V-3L11 2.5V5L1.8 2V7L4.5 9.5V11.5L0 10L-4.5 11.5V9.5L-1.8 7V2L-11 5V2.5L-1.8-3V-8C-1.8-10-1.2-12 0-12Z"/></g>
+    </svg>
+  </div>
+  <ol class="steps">
+    <li><span class="mono">1. Approach</span><h3>A 30-minute call</h3><p>Where delivery is slowest right now, and what the next 18 months need to look like.</p></li>
+    <li><span class="mono">2. Final approach</span><h3>Two weeks on one bottleneck</h3><p>The bottleneck mapped, a working fix for the worst of it, and a plain plan for the rest.</p></li>
+    <li><span class="mono">3. Touchdown</span><h3>Build it together</h3><p>As a project, a part-time role inside your team, or something closer. We pick the shape that fits.</p></li>
+  </ol>
+</section>
+
+<section class="sec wrap" id="faq" aria-labelledby="faq-h">
+  <p class="mono">Questions</p>
+  <h2 id="faq-h">Before you book.</h2>
+  <div class="faq">
+    <details><summary>Why someone from outside defence?</summary><p>Because the problems after a raise are the same in every fast-growing company: too much to do, too few people, and processes built for ten staff carrying a hundred. Defence adds rules on top; it doesn't change the arithmetic. The defence judgement stays with you.</p></details>
+    <details><summary>Is this a consultancy?</summary><p>No decks. Working software and processes that run differently the following week, built hands-on with your team.</p></details>
+    <details><summary>Do you need a security clearance?</summary><p>Not for the unclassified work. Where a task needs vetting, we agree at the start who does it and how.</p></details>
+    <details><summary>What size of company is this for?</summary><p>UK defence and dual-use companies from about 15 to a few hundred people: drones, counter-drone, autonomy, defence AI, space, advanced manufacturing. Usually just after a funding round, a first big contract or a new site.</p></details>
+    <details><summary>What are Ruminator and LedgerGov.UK, and why mention them?</summary><p>Projects he builds himself, to the side of his main work, for society and the state: one reads Russia's regional press, the other is an open P&amp;L of the UK state. They show the code is his own, and the kind of problem he cares about.</p></details>
+  </div>
+</section>
+
+<section class="cta" aria-labelledby="cta-h">
+  <div class="wrap">
+    <p class="mono">Cleared to talk</p>
+    <h2 id="cta-h">Where is delivery slowest right now?</h2>
+    <p class="lead">Thirty minutes, no slides. Bring the bottleneck; leave with a first idea of how to clear it.</p>
+    <div class="row">
+      <a class="btn" href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book 30 minutes</a>
+      <a class="btn ghost" href="mailto:pavel@guzh.uk">Write to pavel@guzh.uk</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/pavelguzhikov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="hud" id="hud" aria-hidden="true"><b id="hud-n">01/08</b> <span id="hud-t"></span></div>
+
+<footer class="foot wrap">
+  <p>Pavel Guzhikov, London. <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book 30 minutes</a>, or write to <a href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>.</p>
+  <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
+  <p>Visits are counted by Cloudflare Web Analytics, without cookies or tracking you.</p>
+</footer>
+
+<script>
+/* The flight: the route draws itself as you scroll, the aircraft follows it through each waypoint.
+   Under reduced motion everything is drawn at once and nothing moves. */
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var raf = window.requestAnimationFrame.bind(window);
+
+  function sampler(path, step) {
+    var L = path.getTotalLength(), n = Math.max(2, Math.ceil(L / step)), pts = [];
+    for (var i = 0; i <= n; i++) { var p = path.getPointAtLength(L * i / n); pts.push({ l: L * i / n, x: p.x, y: p.y }); }
+    return { L: L, pts: pts };
+  }
+  function place(g, s, idx) {
+    var a = s.pts[Math.max(0, idx - 1)], b = s.pts[Math.min(s.pts.length - 1, idx + 1)], p = s.pts[idx];
+    var ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 90;
+    g.setAttribute("transform", "translate(" + p.x.toFixed(1) + " " + p.y.toFixed(1) + ") rotate(" + ang.toFixed(1) + ")");
+  }
+  function dash(path, L, frac) {
+    path.style.strokeDasharray = L + " " + L;
+    path.style.strokeDashoffset = (L * (1 - frac)).toFixed(1);
+  }
+
+  /* 1. Take-off in the hero, once. */
+  var climb = document.getElementById("climb"), cPlane = document.getElementById("climb-plane");
+  var cs = sampler(climb, 3);
+  function climbAt(f) {
+    dash(climb, cs.L, f);
+    place(cPlane, cs, Math.round(f * (cs.pts.length - 1)));
+  }
+  if (reduce) climbAt(1);
+  else {
+    climbAt(0);
+    var t0 = null, dur = 2600;
+    setTimeout(function () {
+      raf(function tick(t) {
+        if (t0 === null) t0 = t;
+        var x = Math.min(1, (t - t0) / dur);
+        /* Accelerate down the runway, then ease into the climb. */
+        var f = x < .55 ? .5 * Math.pow(x / .55, 2) : .5 + .5 * (1 - Math.pow(1 - (x - .55) / .45, 2));
+        climbAt(f);
+        if (x < 1) raf(tick);
+      });
+    }, 350);
+  }
+
+  /* 2. The T draws its bar, then its stem. */
+  var tee = document.getElementById("tee");
+  if (reduce || !("IntersectionObserver" in window)) tee.classList.remove("armed");
+  else new IntersectionObserver(function (es, o) {
+    es.forEach(function (e) { if (e.isIntersecting) { tee.classList.add("go"); o.disconnect(); } });
+  }, { threshold: .35 }).observe(tee);
+
+  /* 3. The route through the waypoints. */
+  var flight = document.getElementById("flight"), svg = document.getElementById("route-svg");
+  var planned = document.getElementById("route-planned"), flown = document.getElementById("route-flown");
+  var plane = document.getElementById("route-plane"), legs = [].slice.call(flight.querySelectorAll(".leg"));
+  var hud = document.getElementById("hud"), hudN = document.getElementById("hud-n"), hudT = document.getElementById("hud-t");
+  var rs = null, pins = [], lastW = 0, lastH = 0;
+
+  function build() {
+    var fr = flight.getBoundingClientRect(), w = flight.clientWidth, h = flight.offsetHeight;
+    lastW = w; lastH = h;
+    svg.setAttribute("width", w); svg.setAttribute("height", h);
+    svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+    pins = legs.map(function (li) {
+      var r = li.querySelector(".pin").getBoundingClientRect();
+      return { x: r.left - fr.left + r.width / 2, y: r.top - fr.top + r.height / 2 };
+    });
+    var wide = w >= 860, d = "M" + pins[0].x + " " + (pins[0].y - 40) + " L" + pins[0].x + " " + pins[0].y;
+    for (var i = 1; i < pins.length; i++) {
+      var a = pins[i - 1], b = pins[i], dy = b.y - a.y, sw = wide ? 0 : (i % 2 ? 14 : -14);
+      d += " C" + (a.x + sw).toFixed(1) + " " + (a.y + dy * .55).toFixed(1) + " " + (b.x + sw).toFixed(1) + " " + (b.y - dy * .55).toFixed(1) + " " + b.x.toFixed(1) + " " + b.y.toFixed(1);
+    }
+    planned.setAttribute("d", d); flown.setAttribute("d", d);
+    rs = sampler(flown, 4);
+    update();
+  }
+
+  function idxForY(y) {
+    var p = rs.pts, lo = 0, hi = p.length - 1;
+    if (y <= p[0].y) return 0;
+    if (y >= p[hi].y) return hi;
+    while (hi - lo > 1) { var m = (lo + hi) >> 1; if (p[m].y < y) lo = m; else hi = m; }
+    return hi;
+  }
+
+  var queued = false;
+  function update() {
+    queued = false;
+    if (!rs) return;
+    var fr = flight.getBoundingClientRect(), vh = window.innerHeight;
+    var y = reduce ? Infinity : vh * .55 - fr.top;
+    var i = idxForY(y), f = i / (rs.pts.length - 1);
+    dash(flown, rs.L, f);
+    place(plane, rs, i);
+    var py = rs.pts[i].y, n = 0;
+    legs.forEach(function (li, k) { var on = pins[k].y <= py + 2; li.classList.toggle("passed", on); if (on) n = k + 1; });
+    var inView = !reduce && fr.top < vh * .6 && fr.bottom > vh * .45;
+    hud.classList.toggle("on", inView && n > 0);
+    if (n > 0) { hudN.textContent = ("0" + n).slice(-2) + "/" + ("0" + legs.length).slice(-2); hudT.textContent = legs[n - 1].getAttribute("data-hud"); }
+  }
+
+  /* 4. The glide slope into "How we start". */
+  var gPath = document.getElementById("glide-flown"), gPlane = document.getElementById("glide-plane"), glide = document.querySelector(".glide");
+  var gs = sampler(gPath, 4);
+  function updateGlide() {
+    var r = glide.getBoundingClientRect(), vh = window.innerHeight;
+    var f = reduce ? 1 : Math.max(0, Math.min(1, (vh * .92 - r.top) / (vh * .6)));
+    var i = Math.round(f * (gs.pts.length - 1));
+    dash(gPath, gs.L, f);
+    place(gPlane, gs, i);
+  }
+
+  function onScroll() { if (!queued) { queued = true; raf(function () { update(); updateGlide(); }); } }
+  build(); updateGlide();
+  if (!reduce) { window.addEventListener("scroll", onScroll, { passive: true }); }
+  window.addEventListener("resize", onScroll);
+  if ("ResizeObserver" in window) new ResizeObserver(function () {
+    if (flight.clientWidth !== lastW || flight.offsetHeight !== lastH) build();
+  }).observe(flight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+})();
+
+/* Live proof: public GitHub activity, counts, repo names and dates only. Falls back to the plain link. */
+(function () {
+  var text = document.getElementById("gh-text"), spark = document.getElementById("gh-spark");
+  if (!window.fetch) return;
+  fetch("https://api.github.com/users/xternal/events/public?per_page=100", { headers: { Accept: "application/vnd.github+json" } })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (ev) {
+      var day = 864e5, now = Date.now(), since = now - 30 * day, days = new Array(30).fill(0), repos = {}, latest = 0, pushes = 0;
+      ev.forEach(function (e) {
+        var t = Date.parse(e.created_at);
+        if (e.type !== "PushEvent" || !(t >= since)) return;
+        pushes++;
+        days[Math.min(29, Math.floor((t - since) / day))]++;
+        var name = (e.repo && e.repo.name || "").replace(/^xternal\//, "");
+        if (name) repos[name] = (repos[name] || 0) + 1;
+        if (t > latest) latest = t;
+      });
+      if (!pushes) return;
+      var names = Object.keys(repos).sort(function (a, b) { return repos[b] - repos[a]; });
+      var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+      var when = new Date(latest).toLocaleDateString("en-GB", { day: "numeric", month: "long" });
+      text.innerHTML = "<strong>" + pushes + " public push" + (pushes === 1 ? "" : "es") + "</strong> in the last 30 days, to " +
+        names.length + " repositor" + (names.length === 1 ? "y" : "ies") + " (" + names.slice(0, 3).map(esc).join(", ") + (names.length > 3 ? " and more" : "") +
+        "). Latest on " + when + ". All of it at <a href=\"https://github.com/xternal\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/xternal</a>.";
+      var max = Math.max.apply(null, days);
+      spark.innerHTML = days.map(function (n) { return '<i class="' + (n ? "on" : "") + '" style="height:' + (n ? Math.max(14, Math.round(n / max * 100)) : 6) + '%"></i>'; }).join("");
+      spark.hidden = false;
+    })
+    .catch(function () {});
+})();
+</script>
+<script>
+/* Cloudflare Web Analytics: counts visits and page views, sets no cookies and stores nothing on
+   the reader's device. Loaded only on guzh.uk itself, so local previews stay out of the numbers.
+   The same token is on all five pages; see "Visitor numbers" in the README. */
+if (location.hostname === "guzh.uk") (function(){
+  var s = document.createElement("script");
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "bb18b698dcf74edab4f19890c1fb5005"}');
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>

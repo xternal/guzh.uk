@@ -54,15 +54,6 @@ PAGES = [
         "image_alt": "A renewal turned into a submission: details found and missing, loss ratio, and the markets in appetite.",
         "body": "broker-submissions.html",
     },
-    {
-        "path": "defence/index.html", "url": "https://guzh.uk/defence/", "nav": "defence", "navset": "defence",
-        "title": "Defence tech: you build the thing that flies, I build the company that delivers it",
-        "description": "For UK defence and dual-use startups after a raise or a first contract: Pavel Guzhikov takes on delivery, product feedback, hiring and paperwork, so your engineers stay on the product.",
-        "image": "defence-og.png",
-        "image_alt": "You build the thing that flies. I'll build the company that delivers it: delivery, product, scale, paperwork.",
-        "body": "defence.html",
-        "footer": 'Pavel Guzhikov. <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book 30 minutes</a>, or write to <a href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>.',
-    },
 ]
 
 NAVSETS = {"defence": [("defence", "/defence/", "Defence tech"), ("overview", "/rebuild/", "Back-office rebuild")]}
