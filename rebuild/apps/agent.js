@@ -45,7 +45,7 @@
       clearTimeout(this.fold); this.fold = setTimeout(function () { self.setMin(true); }, 9000);
       if (!this.offered) {
         this.offered = true;
-        var li = el("li", "ag-go ag-cta", '<i>✦</i><span>Want this on your own process? <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book a free 45-minute teardown</a></span>');
+        var li = el("li", "ag-go ag-cta", '<i>✦</i><span>Want this on your own process? <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book a free 30-minute teardown</a></span>');
         this.list.appendChild(li); this.list.scrollTop = this.list.scrollHeight;
       }
     },
