@@ -127,6 +127,7 @@ ul.docs li::before{content:"";width:14px;height:14px;border:1.5px solid var(--in
   .field{grid-template-columns:110px 1fr}
 }
 </style>
+<link rel="stylesheet" href="/rebuild/apps/agent.css">
 </head>
 <body>
 <div class="app" id="app">
@@ -145,7 +146,7 @@ ul.docs li::before{content:"";width:14px;height:14px;border:1.5px solid var(--in
     </header>
     <div class="cols">
       <aside class="intake" aria-label="New enquiries">
-        <div class="ihead"><b>New enquiries</b><span class="n" id="n"></span><button class="btn ml" id="runall" type="button"><span class="spin" aria-hidden="true"></span><span id="runLabel">Check all</span></button></div>
+        <div class="ihead"><b>New enquiries</b><span class="n" id="n"></span><button class="btn ml ai-cta" id="runall" type="button"><span class="spin" aria-hidden="true"></span><span id="runLabel">Check all</span></button></div>
         <div id="list"></div>
       </aside>
       <main class="desk" id="desk"></main>
@@ -157,7 +158,7 @@ ul.docs li::before{content:"";width:14px;height:14px;border:1.5px solid var(--in
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
+<script src="/rebuild/apps/agent.js"></script>
 <script>
 (function () {
   var FIRMS = { AL: ["Ashby & Lowe", "Leeds", "var(--al)"], HP: ["Hollins Partners", "Bristol", "var(--hp)"], MG: ["Marsh Gate Law", "London", "var(--mg)"] };
@@ -278,7 +279,7 @@ ul.docs li::before{content:"";width:14px;height:14px;border:1.5px solid var(--in
     if (!e) { $("desk").innerHTML = '<p class="empty">Choose an enquiry on the left.</p>'; return; }
     var f = FIRMS[e.firm], r = e.r, h = '<button class="btn ghost back" id="back" type="button" style="margin-bottom:12px">All enquiries</button>';
     h += '<div class="dhead"><div><h2 class="serif">' + esc(e.from) + '</h2><div class="s"><span class="firm"><i style="background:' + f[2] + '"></i>' + esc(f[0]) + "</span>, " + esc(e.via.toLowerCase()) + " at " + e.time + "</div></div>";
-    if (!r) h += '<button class="btn ml" id="check" type="button"><span class="spin" aria-hidden="true"></span><span>Run intake checks</span></button>';
+    if (!r) h += '<button class="btn ml ai-cta" id="check" type="button"><span class="spin" aria-hidden="true"></span>' + SPARK + '<span>Run intake checks</span></button>';
     else if (r.dup) h += '<span class="b ml">Merged into the ' + esc(FIRMS[r.dup.firm][0]) + " enquiry at " + r.dup.time + "</span>";
     else if (!e.done) h += '<div class="actions ml">' + (r.conflicts.length ? '<button class="btn warn" type="button" data-act="Referred to risk"><span class="spin" aria-hidden="true"></span><span>Refer to risk team</span></button>' :
       '<button class="btn" type="button" data-act="Matter opened, letter sent"><span class="spin" aria-hidden="true"></span><span>Open matter and send letter</span></button>') + "</div>";
@@ -310,29 +311,51 @@ ul.docs li::before{content:"";width:14px;height:14px;border:1.5px solid var(--in
       for (var s of ["Reading the enquiry", "Searching 3 firms", "Rating AML risk", "Drafting the letter"]) { btn.lastElementChild.textContent = s; await wait(260); }
     }
     e.r = assess(e);
+    await Agent.say(line(e), e.r.dup ? "info" : e.r.conflicts.length || e.r.level === 3 ? "bad" : e.r.level === 2 ? "warn" : "ok");
+  }
+  function line(e) {
+    var r = e.r, f = FIRMS[e.firm][0];
+    if (r.dup) return e.from + " wrote to " + f + " too. Merged into the " + FIRMS[r.dup.firm][0] + " enquiry.";
+    var s = e.from + " (" + f + "): " + (r.type ? r.type.label.toLowerCase() : "unclear") + ". ";
+    if (r.conflicts.length) { var rc = r.conflicts[0].rec; s += rc[0] + (rc[4] === "open" ? " is a current client of " + FIRMS[rc[2]][0] : " was a client of " + FIRMS[rc[2]][0] + " until " + rc[4].replace("closed ", "")) + ". Possible conflict."; }
+    else s += "Clear across the group.";
+    if (r.level === 3) s += " " + r.watch.join(", ") + " is on the screening list.";
+    else if (r.level === 2) s += " Gifted deposit: source of funds needed.";
+    return s;
   }
 
   $("list").addEventListener("click", function (ev) { var b = ev.target.closest(".item"); if (b) pick(E[+b.dataset.id]); });
   $("desk").addEventListener("click", async function (ev) {
     if (ev.target.closest("#back")) { $("app").classList.remove("open"); return; }
     var c = ev.target.closest("#check");
-    if (c) { await run(sel, c); list(); desk(); toast(sel.r.dup ? "Duplicate enquiry merged." : sel.r.conflicts.length ? "Possible conflict found. Refer to the risk team." : "Clear across all three firms."); return; }
+    if (c) { Agent.start("checking " + sel.from); await run(sel, c); Agent.done("waiting for you"); list(); desk(); return; }
     var a = ev.target.closest("[data-act]");
-    if (a) { a.setAttribute("aria-busy", "true"); a.disabled = true; await wait(700); sel.done = a.dataset.act; list(); desk(); toast(sel.from + ": " + sel.done.toLowerCase() + "."); }
+    if (a) { a.setAttribute("aria-busy", "true"); a.disabled = true; await wait(700); sel.done = a.dataset.act; list(); desk(); Agent.note(sel.from + ": " + sel.done.toLowerCase() + ".", "ok"); }
   });
   $("runall").addEventListener("click", async function () {
     var b = this, t0 = performance.now(), todo = E.filter(function (e) { return !e.r; });
     b.setAttribute("aria-busy", "true"); b.disabled = true;
-    for (var i = 0; i < todo.length; i++) { await run(todo[i]); list(); await wait(150); }
+    Agent.start("checking " + todo.length + " enquiries");
+    await Agent.say("Searching " + INDEX.length + " parties held by Ashby & Lowe, Hollins Partners and Marsh Gate Law.", "go");
+    for (var i = 0; i < todo.length; i++) { await run(todo[i]); list(); }
     b.setAttribute("aria-busy", "false"); list(); desk();
     var c = E.filter(function (e) { return e.r && e.r.conflicts.length && !e.r.dup; }).length, d = E.filter(function (e) { return e.r && e.r.dup; }).length, m = E.filter(function (e) { return e.r && e.r.level > 1 && !e.r.dup; }).length;
-    toast(todo.length + " enquiries checked in " + ((performance.now() - t0) / 1000).toFixed(1) + " s against " + INDEX.length + " parties in 3 firms: " + c + " possible conflicts, " + m + " need extra AML checks, " + d + " duplicate merged.");
+    await Agent.say(todo.length + " enquiries checked: " + c + " possible conflicts for the risk team, " + m + " need extra AML checks, " + d + " duplicate merged. Letters are drafted; nothing goes out until a fee earner opens the matter.", "go");
+    Agent.done("waiting for you");
   });
 
   addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
   list();
   if (matchMedia("(min-width: 901px)").matches) { sel = E[1]; list(); }
   desk();
+  $("runall").insertAdjacentHTML("afterbegin", SPARK);
+  Agent.init("Clerkwell");
+  Tour.mount([
+    { el: "#runall", title: "Start here", text: "The agent reads every new enquiry from all three firms, types the matter, checks every party against all the firms' client lists at once and drafts the client care letter." },
+    { el: "#list", title: "One intake for the group", text: "Enquiries from Ashby & Lowe, Hollins Partners and Marsh Gate Law in one list, colour-coded by firm. Duplicates sent to two firms are merged." },
+    { el: "#desk", title: "The matter, checked", text: "Each enquiry shows the conflict search across the group, the AML risk, the documents to ask for and the letter, ready to send." },
+    { el: ".agent", title: "The agent", text: "It tells you what it found as it works. A fee earner opens the matter, and the risk team decides on every possible conflict." }
+  ], "clerkwell", function () { agPulse("#runall"); });
   if (location.hash === "#ready") { $("runall").click(); }
 })();
 </script>

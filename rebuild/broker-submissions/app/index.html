@@ -114,6 +114,7 @@ pre.doc{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;backg
   .two{grid-template-columns:1fr}
 }
 </style>
+<link rel="stylesheet" href="/rebuild/apps/agent.css">
 </head>
 <body>
 <div class="app" id="app">
@@ -131,7 +132,7 @@ pre.doc{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;backg
 </div>
 <aside class="drawer" id="drawer" aria-label="Client" aria-hidden="true"></aside>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
+<script src="/rebuild/apps/agent.js"></script>
 <script>
 (function () {
   var NEED = {
@@ -184,7 +185,7 @@ pre.doc{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;backg
     var fleet = c.cls === "fleet" ? parseInt(c.fields.vehicles, 10) : 0, unocc = /unoccupied|empty/i.test(c.fields.occupancy || "");
     var mk = PANEL.filter(function (p) { return p.cls === c.cls; }).map(function (p) {
       var no = [];
-      if (p.trades && p.trades.indexOf(c.sector) < 0) no.push("trade");
+      if (p.trades && p.trades.indexOf(c.sector) < 0) no.push("does not write " + c.sector);
       if (lr > p.maxLR) no.push("loss ratio over " + p.maxLR + "%");
       if (unocc && p.unocc === false) no.push("no unoccupied buildings");
       if (p.maxFleet && fleet > p.maxFleet) no.push("fleets up to " + p.maxFleet);
@@ -231,7 +232,7 @@ pre.doc{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;backg
     var c = open, d = $("drawer");
     if (!c) { d.classList.remove("on"); d.setAttribute("aria-hidden", "true"); return; }
     d.classList.add("on"); d.setAttribute("aria-hidden", "false");
-    var a = c.a, h = '<div class="dtop"><h1>' + esc(c.name) + "</h1>" + (a ? "" : '<button class="btn ml" id="prep" type="button"><span class="spin" aria-hidden="true"></span><span>Prepare the submission</span></button>') +
+    var a = c.a, h = '<div class="dtop"><h1>' + esc(c.name) + "</h1>" + (a ? "" : '<button class="btn ml ai-cta" id="prep" type="button"><span class="spin" aria-hidden="true"></span>' + SPARK + '<span>Prepare the submission</span></button>') +
       '<button class="x' + (a ? " ml" : "") + '" id="close" type="button" aria-label="Close">×</button><div class="s">' + esc(c.line) + ", renews " + esc(c.renew) + " (" + c.days + " days), expiring premium " + gbp(c.premium) + "</div></div><div class=\"dbody\">";
     h += '<div class="sec"><h3>What the client sent</h3><div class="src">' + esc(c.email) + "</div></div>";
     if (!a) { h += '<p class="hint">Press "Prepare the submission" to read it, find the gaps, score the claims and check the panel.</p></div>'; d.innerHTML = h; return; }
@@ -252,7 +253,7 @@ pre.doc{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;backg
     h += '<div class="sec"><h3>Chaser to the client</h3>' + (ch ? '<pre class="doc">' + esc(ch) + '</pre><div class="actions">' + (c.chased ? '<span class="lbl green">Chaser sent</span>' : '<button class="btn ghost" type="button" id="chase"><span class="spin" aria-hidden="true"></span><span>Send chaser</span></button>') + "</div>" : '<p class="hint" style="padding:10px 0">Nothing to chase: the information is complete.</p>') + "</div></div>";
     d.innerHTML = h + "</div>";
   }
-  function show(c) { open = c; board(); drawer(); }
+  function show(c) { open = c; board(); drawer(); if (c && !c.a && !(location.hash === "#ready")) agPulse("#prep"); }
   $("board").addEventListener("click", function (e) { var b = e.target.closest(".cardx[data-key]"); if (b) show(C.filter(function (c) { return c.key === b.dataset.key; })[0]); });
   $("drawer").addEventListener("click", async function (e) {
     var c = open;
@@ -260,19 +261,33 @@ pre.doc{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;backg
     var p = e.target.closest("#prep");
     if (p) {
       p.setAttribute("aria-busy", "true"); p.disabled = true;
-      for (var s of ["Reading the email and schedule", "Finding gaps", "Scoring the claims", "Checking the panel", "Drafting"]) { p.lastElementChild.textContent = s; await wait(300); }
-      c.a = analyse(c); show(c);
-      toast(c.a.miss.length ? c.a.miss.length + " gaps found and a chaser drafted. " + c.a.mk.filter(function (m) { return m.fit; }).length + " insurers in appetite." : "Complete. " + c.a.mk.filter(function (m) { return m.fit; }).length + " insurers in appetite; ready to send.");
+      p.lastElementChild.textContent = "Working";
+      var A = analyse(c), fit = A.mk.filter(function (m) { return m.fit; });
+      Agent.start("preparing " + c.name);
+      await Agent.say("Reading the client's email and last year's schedule.", "go");
+      await Agent.say(A.have.length + " of " + (A.have.length + A.miss.length) + " details found." + (A.miss.length ? " Missing: " + A.miss.map(function (m) { return m.label.toLowerCase(); }).join("; ") + "." : ""), A.miss.length ? "warn" : "ok");
+      await Agent.say("Claims: " + A.n + " in three years, " + gbp(A.inc) + " incurred, loss ratio " + Math.round(A.lr) + "%.", A.lr > 70 ? "bad" : A.lr > 45 ? "warn" : "ok");
+      for (var mi = 0; mi < A.mk.length; mi++) await Agent.say(A.mk[mi].p.name + ": " + (A.mk[mi].fit ? "in appetite." : "out, " + A.mk[mi].no.join(", ") + "."), A.mk[mi].fit ? "ok" : "info");
+      await Agent.say("Submission drafted for " + (fit.length ? fit.map(function (m) { return m.p.name; }).join(" and ") : "the open market") + (A.miss.length ? ", and a chaser to the client for the gaps." : "."), "go");
+      Agent.done("waiting for you");
+      c.a = A; show(c);
       return;
     }
     var sd = e.target.closest("#send");
-    if (sd) { sd.setAttribute("aria-busy", "true"); sd.disabled = true; await wait(800); c.sent = true; c.col = 3; show(c); toast("Submission sent to " + c.a.mk.filter(function (m) { return m.fit; }).map(function (m) { return m.p.name; }).join(" and ") + "."); return; }
+    if (sd) { sd.setAttribute("aria-busy", "true"); sd.disabled = true; await wait(800); c.sent = true; c.col = 3; show(c); Agent.note("Submission sent to " + c.a.mk.filter(function (m) { return m.fit; }).map(function (m) { return m.p.name; }).join(" and ") + ". I'll chase for quotes in 5 working days.", "ok"); return; }
     var chb = e.target.closest("#chase");
-    if (chb) { chb.setAttribute("aria-busy", "true"); chb.disabled = true; await wait(700); c.chased = true; show(c); toast("Chaser sent to " + c.name + "."); }
+    if (chb) { chb.setAttribute("aria-busy", "true"); chb.disabled = true; await wait(700); c.chased = true; show(c); Agent.note("Chaser sent to " + c.name + ". I'll remind them on Friday if nothing arrives.", "ok"); }
   });
   addEventListener("keydown", function (e) { if (e.key === "Escape" && open) { open = null; board(); drawer(); } });
   addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
   board();
+  Agent.init("Tidemark");
+  Tour.mount([
+    { el: "#strip", title: "Your renewals at a glance", text: "Everything renewing in the next 120 days, the premium at stake, and how many clients still owe you information." },
+    { el: "#board", title: "The board", text: "Renewals move left to right as the date gets closer. The ring on each card shows how complete the client's information is." },
+    { el: '.cardx[data-key="harbourside"]', title: "Start here", text: "New information has arrived from Harbourside. Open the client and let the agent prepare the submission." },
+    { el: ".agent", title: "The agent", text: "It tells you what it found as it works: gaps, claims, which insurers will look at it. Nothing goes to a market or a client until you press Send." }
+  ], "tidemark", function () { agPulse('.cardx[data-key="harbourside"]'); });
   if (location.hash === "#ready") { show(C[1]); $("prep").click(); }
 })();
 </script>

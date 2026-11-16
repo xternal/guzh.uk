@@ -124,6 +124,7 @@ textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:
   .status .r a:first-child{display:none}
 }
 </style>
+<link rel="stylesheet" href="/rebuild/apps/agent.css">
 </head>
 <body>
 <div class="app" id="app">
@@ -146,7 +147,7 @@ textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:
     <section class="list" aria-label="Requests">
       <div class="bar">
         <div><h2 id="viewTitle">Inbox</h2><div class="sub" id="viewSub"></div></div>
-        <button class="btn ml" id="triage" type="button"><span class="spin" aria-hidden="true"></span><span id="triageLabel">Triage new</span></button>
+        <button class="btn ml ai-cta" id="triage" type="button"><span class="spin" aria-hidden="true"></span><span id="triageLabel">Triage new</span></button>
       </div>
       <div class="rows" id="rows" role="listbox" aria-label="Requests"></div>
     </section>
@@ -160,7 +161,7 @@ textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:
   </footer>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
+<script src="/rebuild/apps/agent.js"></script>
 <script>
 (function () {
   var BLOCKS = [["Marlowe Court", 48], ["Kestrel House", 36], ["The Foundry", 22], ["Albion Wharf", 64]];
@@ -364,20 +365,27 @@ textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:
     var t = T.filter(function (x) { return x.id === selected; })[0];
     if (e.target.closest("#back")) { $("app").classList.remove("open"); return; }
     var d = e.target.closest("#dispatch");
-    if (d && t) act(d, 700, function () { var k = kindOf(t.kind); t.state = "contractor"; t.log.push([now(), (k.note === "Internal" ? "Assigned to " : "Job sent to ") + k.who]); toast(t.job + " sent to " + k.who + "."); });
+    if (d && t) act(d, 700, function () { var k = kindOf(t.kind); t.state = "contractor"; t.log.push([now(), (k.note === "Internal" ? "Assigned to " : "Job sent to ") + k.who]); Agent.note(t.job + " sent to " + k.who + ". I'll chase if they haven't confirmed in an hour.", "ok"); });
     var s = e.target.closest("#send");
-    if (s && t) act(s, 700, function () { t.draft = $("draft").value; t.state = t.state === "contractor" ? "contractor" : "replied"; t.replied = true; t.log.push([now(), "Reply sent to " + t.from]); toast("Reply sent to " + t.from + "."); if (t.state === "contractor") { t.draft = null; } });
+    if (s && t) act(s, 700, function () { t.draft = $("draft").value; t.state = t.state === "contractor" ? "contractor" : "replied"; t.replied = true; t.log.push([now(), "Reply sent to " + t.from]); toast("Reply sent to " + t.from + "."); Agent.note("Reply sent to " + t.from + " and logged on " + t.job + ".", "ok"); if (t.state === "contractor") { t.draft = null; } });
   });
 
   $("triage").addEventListener("click", async function () {
     var b = this, fresh = T.filter(function (t) { return t.state === "new"; }), t0 = performance.now();
     b.setAttribute("aria-busy", "true"); b.disabled = true; $("triageLabel").textContent = "Triaging";
+    Agent.start("reading " + fresh.length + " emails");
+    await Agent.say("Reading " + fresh.length + " new emails to the shared inbox.", "go");
     for (var i = 0; i < fresh.length; i++) {
-      triageOne(fresh[i]);
+      var t = fresh[i];
+      triageOne(t);
       render();
-      var el = document.querySelector('.row[data-id="' + (fresh[i].state === "merged" ? fresh[i].mergedId : fresh[i].id) + '"]');
+      var el = document.querySelector('.row[data-id="' + (t.state === "merged" ? t.mergedId : t.id) + '"]');
       if (el) el.classList.add("flash");
-      await wait(170);
+      var k = t.kind && kindOf(t.kind), where = t.block ? t.block + (t.flat ? ", Flat " + t.flat : "") : "block not found";
+      if (t.state === "merged") await Agent.say(t.from + " is chasing " + t.mergedInto + ". Added to the open job.", "warn");
+      else if (t.urg === "e") await Agent.say(t.from + ", " + where + ": " + t.why.split(".")[0].replace("Emergency because the email says", "says") + ". Emergency, " + k.who + ".", "bad");
+      else if (t.urg === "r") await Agent.say(t.from + ": not sure what this is. A person should read it.", "warn");
+      else await Agent.say(t.from + ", " + where + ": " + k.label.toLowerCase() + ". To " + k.who + ", reply drafted.", "ok");
     }
     var em = fresh.filter(function (t) { return t.urg === "e" && t.state !== "merged"; }).length,
         mg = fresh.filter(function (t) { return t.state === "merged"; }).length,
@@ -385,12 +393,22 @@ textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:
     b.setAttribute("aria-busy", "false");
     if (!selected) selected = visible()[0] && visible()[0].id;
     render();
-    toast(fresh.length + " emails triaged in " + ((performance.now() - t0) / 1000).toFixed(1) + " s: " + em + " emergencies first, " + mg + " chasers merged into open jobs, " + rv + " for a person to read.");
+    await Agent.say("Done in " + Math.max(1, Math.round((performance.now() - t0) / 1000)) + " s: " + em + " emergencies at the top, " + mg + " chasers merged, " + rv + " for you to read. Replies are drafted; nothing is sent until you press Send.", "go");
+    Agent.done("sorted, waiting for you");
   });
 
   addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
   selected = "N-1";
   render();
+  $("triage").insertAdjacentHTML("afterbegin", SPARK);
+  Agent.init("Hallkeeper");
+  Tour.mount([
+    { el: "#triage", title: "Start here", text: "The agent reads this morning's 14 resident emails, sorts them by urgency, matches each to its block and flat, and drafts every reply." },
+    { el: "#views", title: "Emergencies first", text: "Emergencies sit at the top. Requests waiting on a contractor or a resident have their own lists, so nothing is forgotten." },
+    { el: "#rows", title: "The queue", text: "Each request shows its deadline, type, block and flat. A resident chasing an open job is folded into that job, not booked twice." },
+    { el: "#detail", title: "Approve, don't type", text: "Open a request to see why the agent decided, send the job to the contractor on the rota, and send the drafted reply." },
+    { el: ".agent", title: "The agent", text: "It tells you what it is doing as it works. Nothing goes to a resident or a contractor until you press the button." }
+  ], "hallkeeper", function () { agPulse("#triage"); });
   /* #triaged opens the app with this morning's emails already sorted (used for the share image) */
   if (location.hash === "#triaged") $("triage").click();
 })();

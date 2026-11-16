@@ -125,6 +125,7 @@ textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:
   .kv{grid-template-columns:120px 1fr}
 }
 </style>
+<link rel="stylesheet" href="/rebuild/apps/agent.css">
 </head>
 <body>
 <div class="app" id="app">
@@ -149,7 +150,7 @@ textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:
   </footer>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
+<script src="/rebuild/apps/agent.js"></script>
 <script>
 (function () {
   var RATE = 0.14;
@@ -234,7 +235,7 @@ textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:
     add("Applicant is a director", a.reg.directors.indexOf(a.app.director) >= 0 ? "pass" : "fail", "Application names " + a.app.director + "; registry lists " + a.reg.directors.join(" and ") + ".");
     add("Trading " + P.years + " years or more", a.app.years >= P.years ? "pass" : "fail", a.app.years.toFixed(1) + " years trading.");
     var v = Math.abs(f.variance);
-    add("Turnover matches statements", v <= P.variancePass ? "pass" : v <= P.varianceFail ? "refer" : "fail", "Stated " + gbp(a.app.turnover) + "; statements annualise to " + gbp(f.annual) + " (" + (f.variance >= 0 ? "+" : "") + f.variance.toFixed(1) + "%).");
+    add("Turnover against statements", v <= P.variancePass ? "pass" : v <= P.varianceFail ? "refer" : "fail", "Stated " + gbp(a.app.turnover) + "; statements annualise to " + gbp(f.annual) + " (" + (f.variance >= 0 ? "+" : "") + f.variance.toFixed(1) + "%).");
     add("Returned items", f.returns <= P.returnsPass ? "pass" : f.returns <= P.returnsFail ? "refer" : "fail", f.returns + " in three months.");
     add("Gambling", f.gambling === 0 ? "pass" : "fail", f.gambling ? f.gambling + " payments to a betting operator." : "None found.");
     add("Days overdrawn", f.overdrawn <= P.overdrawnPass ? "pass" : f.overdrawn <= P.overdrawnFail ? "refer" : "fail", f.overdrawn + " of 92 days; lowest " + gbp(f.lowest) + ".");
@@ -298,7 +299,7 @@ textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:
     if (!a) { $("work").innerHTML = '<p class="hint">Pick an application from the queue.</p>'; return; }
     var r = a.result, h = '<button class="btn ghost back" id="back" type="button" style="margin-bottom:12px">Back to the queue</button>';
     h += '<div class="whead"><div><h1>' + esc(a.name) + '</h1><div class="s">' + gbp(a.app.amount) + " over " + a.app.term + " months, " + esc(a.app.purpose.toLowerCase()) + "</div></div>";
-    h += r ? '<span class="pill ' + r[1] + '" style="font-size:13px;padding:4px 12px">Keelson suggests: ' + r[0] + "</span>" : '<button class="btn ml" id="analyse" type="button"><span class="spin" aria-hidden="true"></span><span>Analyse the pack</span></button>';
+    h += r ? '<span class="pill ' + r[1] + '" style="font-size:13px;padding:4px 12px">Keelson suggests: ' + r[0] + "</span>" : '<button class="btn ml ai-cta" id="analyse" type="button"><span class="spin" aria-hidden="true"></span>' + SPARK + '<span>Analyse the pack</span></button>';
     h += "</div>";
     h += '<div class="subtabs" role="tablist">' + [["overview", "Overview"], ["statements", "Statements"], ["checks", "Policy checks"], ["memo", "Credit memo"]].map(function (t) {
       return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (tab === t[0]) + '"' + (!r && t[0] !== "overview" ? " disabled" : "") + ">" + t[1] + "</button>";
@@ -342,10 +343,18 @@ textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:
     var an = e.target.closest("#analyse");
     if (an) {
       an.setAttribute("aria-busy", "true"); an.disabled = true;
-      var steps = ["Reading the application", "Pulling the registry record", "Categorising " + current.tx.length + " transactions", "Working out affordability", "Applying credit policy", "Drafting the memo"];
-      for (var i = 0; i < steps.length; i++) { an.lastElementChild.textContent = steps[i]; await wait(330); }
-      var a = current; a.f = analyse(a, a.tx); a.checks = checks(a, a.f); a.result = verdict(a.checks); a.memo = memo(a, a.f, a.checks, a.result);
-      queue(); work(); toast(a.tx.length + " statement lines read and " + a.checks.length + " policy checks run. Suggested: " + a.result[0] + ".");
+      var a = current, f = analyse(a, a.tx), cks = checks(a, f), v = verdict(cks);
+      an.lastElementChild.textContent = "Working";
+      Agent.start("analysing " + a.name);
+      await Agent.say("Reading the application: " + gbp(a.app.amount) + " over " + a.app.term + " months for " + a.app.purpose.toLowerCase() + ".", "go");
+      await Agent.say("Registry: " + a.reg.status.toLowerCase() + ", directors " + a.reg.directors.join(" and ") + ". " + (a.reg.directors.indexOf(a.app.director) >= 0 ? a.app.director + " matches." : a.app.director + " is not a director."), a.reg.directors.indexOf(a.app.director) >= 0 ? "ok" : "bad");
+      await Agent.say("Categorised " + a.tx.length + " statement lines: revenue " + gbp(f.credits) + " a month, debt service " + gbp(f.debt) + ".", "ok");
+      for (var ci = 0; ci < cks.length; ci++) if (cks[ci].state !== "pass" && cks[ci].name.indexOf("Debt service") < 0) await Agent.say(cks[ci].name + ": " + cks[ci].why, cks[ci].state === "fail" ? "bad" : "warn");
+      await Agent.say("Affordability: free cash " + gbp(f.free) + " a month, cover " + f.dscr.toFixed(2) + "x with the new loan.", f.dscr >= 1.25 ? "ok" : "warn");
+      await Agent.say("Suggestion: " + v[0].toLowerCase() + ". The memo is drafted; the decision is yours.", "go");
+      Agent.done("memo ready for you");
+      a.f = f; a.checks = cks; a.result = v; a.memo = memo(a, f, cks, v);
+      queue(); work();
       return;
     }
     var d = e.target.closest("[data-decide]");
@@ -353,13 +362,20 @@ textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:
       d.setAttribute("aria-busy", "true"); document.querySelectorAll("[data-decide]").forEach(function (b) { b.disabled = true; });
       await wait(700);
       current.memo = $("memo").value; current.decided = d.dataset.decide.split("|"); queue(); work();
-      toast(current.name + ": " + current.decided[0].toLowerCase() + ". Memo saved to the file.");
+      Agent.note(current.name + ": " + current.decided[0].toLowerCase() + " by Rachel Ibe. Memo filed; the broker is told.", current.decided[1] === "ok" ? "ok" : current.decided[1] === "ref" ? "warn" : "bad");
     }
   });
 
   addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
   queue();
   if (matchMedia("(min-width: 901px)").matches) open(APPS[1]); else { $("work").innerHTML = ""; }
+  Agent.init("Keelson");
+  Tour.mount([
+    { el: ".queue", title: "Today's applications", text: "New packs from brokers and direct applicants land here. Decided ones stay below for reference." },
+    { el: "#analyse", title: "Start here", text: "The agent reads the application and three months of bank statements, checks the registry, applies your credit policy and drafts the memo." },
+    { el: ".subtabs", title: "Everything it found", text: "Charts of the balance and cash flow, every transaction categorised, each policy check with its reason, and the memo." },
+    { el: ".agent", title: "The agent", text: "It tells you what it found as it works. The decision, approve, refer or decline, is always the underwriter's." }
+  ], "keelson", function () { agPulse("#analyse"); });
   if (location.hash === "#ready") { open(APPS[1]); $("analyse").click(); }
 })();
 </script>
