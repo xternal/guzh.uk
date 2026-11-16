@@ -67,3 +67,5 @@ body{background:
 .btn[aria-busy="true"] .spark{display:none}
 .detail,.desk,.work,.dbody,.rows,.queue,.intake{padding-bottom:110px !important}
 .agent.min{width:auto;min-width:220px}
+.agent li.ag-cta a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.agent li.ag-cta{margin-top:4px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}

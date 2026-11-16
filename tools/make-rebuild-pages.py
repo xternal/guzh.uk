@@ -118,7 +118,7 @@ try {{ var t = localStorage.getItem("theme"); if (t === "light" || t === "dark")
 {body}
 </main>
 <footer class="foot">
-  <p>Empatiq Limited. Write to <a href="mailto:pavel@guzh.uk?subject=Teardown">pavel@guzh.uk</a> for a free 45-minute teardown of one process.</p>
+  <p>Empatiq Limited. <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book a free 45-minute teardown of one process</a>, or write to <a href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>.</p>
   <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
 </footer>
 </body>
