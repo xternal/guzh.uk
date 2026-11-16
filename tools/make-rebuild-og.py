@@ -23,13 +23,13 @@ def row(x, y, items):
         out += c
     return out
 
-def frame(kicker, title_lines, inner):
+def frame(kicker, title_lines, inner, foot="guzh.uk/rebuild"):
     t = "".join(f'<text x="64" y="{150 + i * 62}" font-size="54" font-weight="600" fill="{INK}">{l}</text>'
                 for i, l in enumerate(title_lines))
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" font-family="{FONT}">'
             f'<rect width="1200" height="630" fill="{BG}"/>'
             f'<text x="64" y="84" font-size="22" letter-spacing="2" fill="{INK3}">{kicker}</text>{t}{inner}'
-            f'<text x="64" y="590" font-size="22" fill="{INK2}">Pavel Guzhikov, guzh.uk/rebuild</text>'
+            f'<text x="64" y="590" font-size="22" fill="{INK2}">Pavel Guzhikov, {foot}</text>'
             f'<path d="M1080 590 h40 v-24 h40" fill="none" stroke="{ACC}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def mail(y, subj, chips):
@@ -66,6 +66,10 @@ cards = {
         "".join(f'{chip(92, 356 + i * 44, s, fg, bg)[0]}<text x="{92 + 16 + len(s) * 11.0 + 18:.0f}" y="{379 + i * 44}" font-size="20" fill="{INK2}">{t}</text>'
                 for i, (s, fg, bg, t) in enumerate([("missing", AMB, ABG, "Values for 3 flats from the acquired Clifton book"), ("39%", INK2, "#39322B", "Loss ratio on the expiring premium"),
                                                      ("out", RED, RBG, "Ashgrove Insurance: no unoccupied buildings"), ("approach", GRN, GBG, "Pennant Specialty (MGA)")]))),
+    "defence-og.png": frame("DEFENCE AND DUAL-USE TECH", ["You build the thing that flies.", "I'll build the company that delivers it."],
+        f'<text x="64" y="330" font-size="30" fill="{INK2}">After the raise, the hard part is everything around the product.</text>' +
+        row(64, 380, [("Delivery", BG, ACC), ("Trial feedback to product", INK2, "#39322B"),
+                      ("Hiring at speed", INK2, "#39322B"), ("Paperwork", INK2, "#39322B")]), foot="guzh.uk/defence"),
 }
 for name, svg in cards.items():
     if "\u2014" in svg or "\u00b7" in svg:
