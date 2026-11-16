@@ -16,6 +16,10 @@ Contact: pavel@guzh.uk
 
 ## Pages
 
+- [Rebuild one back-office process](https://guzh.uk/rebuild/): Pavel's re-engineering offer through Empatiq Limited. One back-office process mapped end to end and shipped as working software in 4 to 6 weeks, at a fixed price, with the hours measured before and after. Starts with a free 45-minute teardown of one process. For UK lenders, property and lettings groups, broker and MGA consolidators, legal and accountancy groups, recruitment groups and PE operating partners.
+- [Demo: block-management requests](https://guzh.uk/rebuild/block-requests/): a working demo on invented data. Residents' emails are sorted by kind and urgency, matched to block and flat, routed to the right contractor and answered; chasers are linked to the open job. Runs in the browser; nothing is sent.
+- [Demo: SME loan pack to credit memo](https://guzh.uk/rebuild/lending-intake/): a working demo on invented data. An application and three months of bank statements are categorised, checked against a sample lending policy (registry, director, turnover, returned items, gambling, overdrawn days, HMRC arrangements, debt service cover) and written up as a draft credit memo for the underwriter.
+
 - [Pavel Guzhikov](https://guzh.uk/): the home page. Background, track record, current focus and contact details.
 - [Always Weather](https://alwaysweather.uk/): a calm weather app for iPhone, Apple Watch and Mac (App Store), Android phones, Pixel Watch and Googlebooks (Google Play) and Windows PCs (Microsoft Store), paid once in each store, and free on Linux (made on Omarchy, for Arch systems, with a line in Omarchy's bar; one-command install from the page). Drag your thumb through the hours to see exactly when the rain starts and stops. Ten days ahead, up to ten saved places. No subscription, no ads, no account, no tracking.
 - [Always Weather privacy policy](https://guzh.uk/weather/privacy/): the app's privacy policy. Location only if you choose it, rounded to about a kilometre before it leaves the device; saved places and settings stay on the device.

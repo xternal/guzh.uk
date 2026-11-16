@@ -1,0 +1,198 @@
+<p class="kicker">Demo · block management</p>
+<h1>Residents' requests, triaged in seconds</h1>
+<p class="lead">A block manager's shared inbox on a Monday morning. Press the button: each email is sorted by kind and urgency, matched to its block and flat, routed to the right contractor or team, and answered. Chasers are linked to the job already open, so nobody books the same plumber twice.</p>
+<p class="note">Invented sample data. In this demo the sorting runs on plain rules in your browser and nothing leaves the page. The production build reads the real inbox, uses a language model with your block list and contractor rota, and a person approves anything it is unsure of.</p>
+
+<ul class="pipe" id="pipe" aria-label="Steps">
+  <li>Read</li><li>Sort and score urgency</li><li>Match block and flat</li><li>Link chasers</li><li>Route</li><li>Answer</li>
+</ul>
+<div class="row">
+  <button class="btn" id="run" type="button"><span class="spin" aria-hidden="true"></span><span>Triage the inbox</span></button>
+  <button class="btn ghost" id="reset" type="button">Start again</button>
+  <span class="small" id="status" role="status"></span>
+</div>
+<div class="stats" id="stats" hidden></div>
+<div class="inbox" id="inbox"></div>
+
+<h2>Try one of your own</h2>
+<p class="muted">Paste or write a resident's email. Use one of the sample blocks (Marlowe Court, Kestrel House, The Foundry, Albion Wharf) to see it matched.</p>
+<textarea id="own" aria-label="A resident's email">Hi, water is coming through the ceiling of Flat 14 at Kestrel House from the flat above, it's getting worse and near the light fitting. Please send someone today.</textarea>
+<div class="row"><button class="btn" id="one" type="button"><span class="spin" aria-hidden="true"></span><span>Triage it</span></button></div>
+<div id="oneOut"></div>
+
+<h2>Before and after, with your numbers</h2>
+<p class="muted">Example inputs. Change them to your own: how many requests a week, how long one takes to read, sort, log, route and answer by hand today, and how long a person needs to check the triaged version.</p>
+<form class="calc" id="calc" onsubmit="return false">
+  <label>Requests a week <input name="count" type="number" min="0" value="300" inputmode="numeric"></label>
+  <label>Minutes each now <input name="before" type="number" min="0" step="0.5" value="6" inputmode="decimal"></label>
+  <label>Minutes each after <input name="after" type="number" min="0" step="0.5" value="1.5" inputmode="decimal"></label>
+</form>
+<div class="stats" id="calcOut"></div>
+<p class="small">The audit measures your real figures before anything is built, and the build is measured against them.</p>
+
+<h2>What the real build adds</h2>
+<div class="grid">
+  <div class="card"><h3>Your systems</h3><p class="muted">Jobs raised in your property management system, contractors instructed from your rota, leaseholder records read rather than guessed.</p></div>
+  <div class="card"><h3>Out of hours</h3><p class="muted">Emergencies (water near electrics, a lift with someone in it, an alarm sounding) go to the on-call contractor at once, with a text to the duty manager.</p></div>
+  <div class="card"><h3>After an acquisition</h3><p class="muted">A newly bought book of blocks joins the same inbox and the same rules on day one, before its systems are merged.</p></div>
+</div>
+<div class="row"><a class="btn" href="mailto:pavel@guzh.uk?subject=Teardown%3A%20resident%20requests">Book a free 45-minute teardown</a></div>
+
+<script>
+(function () {
+  var R = window.Rebuild;
+  var BLOCKS = ["Marlowe Court", "Kestrel House", "The Foundry", "Albion Wharf"];
+  var NOW = "Mon 09:12";
+  var INBOX = [
+    { from: "Aisha K.", time: "Sun 23:41", subj: "Water pouring through ceiling!!", text: "Water is pouring through the bathroom ceiling in Flat 22, Albion Wharf. It's coming from the flat above and it's near the light switch. I've turned the electrics off. Please help." },
+    { from: "Tom R.", time: "Mon 07:05", subj: "Lift out again", text: "The lift at Marlowe Court is out of order again this morning. My mum is on the 6th floor and can't do the stairs. Flat 31." },
+    { from: "J. Okafor", time: "Mon 07:30", subj: "Service charge query", text: "Could you explain why the service charge for Flat 4, The Foundry has gone up by so much this year? I'd like to see the budget breakdown." },
+    { from: "Priya S.", time: "Mon 07:52", subj: "Fob not working", text: "My key fob for the main door at Kestrel House stopped working on Saturday. Flat 9. Can I get a new one?" },
+    { from: "Mark D.", time: "Mon 08:01", subj: "Still no one about the leak", text: "Chasing again about the leak at Albion Wharf. My neighbour in Flat 22 reported it last night and still no one has come. It's now coming into Flat 12 below." },
+    { from: "Helen W.", time: "Mon 08:10", subj: "Fire door wedged open", text: "Someone keeps wedging the fire door open on the 3rd floor corridor at Marlowe Court with a chair. Flat 18." },
+    { from: "Daniel P.", time: "Mon 08:14", subj: "Selling my flat: management pack", text: "I'm selling Flat 7, Kestrel House. My solicitor needs the LPE1 management pack and the EWS1 form. How long will it take and what's the fee?" },
+    { from: "Grace L.", time: "Mon 08:20", subj: "Bins overflowing", text: "The bin store at The Foundry hasn't been emptied and there are bags all over the floor. Foxes have got into them. Flat 2." },
+    { from: "Sam T.", time: "Mon 08:33", subj: "Noise from upstairs", text: "There has been loud music from the flat above me at Albion Wharf every night until 2am. Flat 5. I've asked them to stop." },
+    { from: "Olu A.", time: "Mon 08:40", subj: "Insurance claim for the leak", text: "Following the leak at Albion Wharf, I need to make a claim on the building insurance for my damaged ceiling and carpet in Flat 12. What's the excess and who do I send photos to?" },
+    { from: "Ben H.", time: "Mon 08:47", subj: "Someone in my parking bay", text: "There's a car I don't recognise parked in my allocated bay at Marlowe Court again. Bay 14, Flat 26." },
+    { from: "Chloe M.", time: "Mon 08:58", subj: "Lift: someone stuck", text: "URGENT someone is stuck in the lift at Kestrel House right now, the alarm button isn't answering. I'm in Flat 3." },
+    { from: "R. Fenwick", time: "Mon 09:04", subj: "Hello", text: "Hi, I'm a new owner at The Foundry, Flat 11, and wanted to introduce myself and ask who I should contact about things." },
+    { from: "Tom R.", time: "Mon 09:10", subj: "Re: Lift out again", text: "Any update on the lift at Marlowe Court? Still not working. Flat 31." }
+  ];
+
+  /* kind: keywords, default urgency, emergency words, route, reply */
+  var KINDS = [
+    { key: "leak", label: "Leak or water", words: ["leak", "water", "dripping", "ceiling", "flood", "burst"], urgency: "24 hours",
+      emergency: ["pouring", "electric", "light switch", "light fitting", "flood", "burst", "getting worse", "coming into"],
+      route: "Plumber on call", reply: "We have sent our on-call plumber to {where}. If water is near anything electrical, keep the power off at the consumer unit." },
+    { key: "lift", label: "Lift", words: ["lift", "elevator"], urgency: "24 hours", emergency: ["stuck", "trapped"],
+      route: "Lift contractor", reply: "We have reported the lift fault at {block} to our lift contractor and will update you when the engineer is booked." },
+    { key: "fire", label: "Fire safety", words: ["fire door", "fire alarm", "smoke", "extinguisher", "fire exit"], urgency: "24 hours", emergency: ["alarm going off", "smoke"],
+      route: "Fire safety contractor and property manager", reply: "Thank you for reporting this. A fire door must close on its own, so the property manager will inspect {block} within 24 hours." },
+    { key: "access", label: "Door entry and fobs", words: ["fob", "door entry", "intercom", "gate", "lock"], urgency: "5 working days", emergency: ["won't close", "insecure", "broken lock"],
+      route: "Access control contractor", reply: "We have ordered a replacement fob for {where}. You will receive a note when it is ready to collect." },
+    { key: "money", label: "Service charge and accounts", words: ["service charge", "invoice", "ground rent", "budget", "arrears", "payment"], urgency: "10 working days", emergency: [],
+      route: "Accounts team", reply: "Our accounts team will send you the budget breakdown for {block} within 10 working days." },
+    { key: "insurance", label: "Insurance claim", words: ["insurance", "claim", "excess"], urgency: "5 working days", emergency: [],
+      route: "Insurance team", reply: "Our insurance team will send you the claim form and the policy excess for {block}. Please keep photos of the damage." },
+    { key: "sale", label: "Sale pack and building safety", words: ["lpe1", "management pack", "ews1", "cladding", "selling", "remediation"], urgency: "10 working days", emergency: [],
+      route: "Sales packs team", reply: "Our sales packs team will reply with the turnaround and fee for the LPE1 pack and the building safety documents for {block}." },
+    { key: "bins", label: "Bins and cleaning", words: ["bin", "rubbish", "cleaning", "bulky", "bags", "litter"], urgency: "5 working days", emergency: [],
+      route: "Cleaning contractor", reply: "We have asked our cleaning contractor to clear the bin store at {block} and to check the collection schedule." },
+    { key: "noise", label: "Noise and neighbours", words: ["noise", "music", "neighbour", "party", "smoking", "smell"], urgency: "5 working days", emergency: [],
+      route: "Property manager", reply: "Thank you for telling us. The property manager will write to the flat concerned under the lease and keep you informed." },
+    { key: "parking", label: "Parking", words: ["parking", "parked", "bay", "car park"], urgency: "10 working days", emergency: [],
+      route: "Property manager", reply: "We will put a notice on the vehicle in your bay at {block} and check the permits." }
+  ];
+  var CHASE = ["still", "again", "chasing", "any update", "no one has", "re:"];
+
+  function lower(s) { return s.toLowerCase(); }
+
+  function triage(m, open) {
+    var t = lower(m.subj + " " + m.text);
+    var scored = KINDS.map(function (k) {
+      return { k: k, n: k.words.filter(function (w) { return t.indexOf(w) >= 0; }).length };
+    }).filter(function (x) { return x.n > 0; }).sort(function (a, b) { return b.n - a.n; });
+    var block = BLOCKS.filter(function (b) { return t.indexOf(lower(b)) >= 0; })[0] || null;
+    var flat = (m.text.match(/\bFlat\s+(\d+[A-Z]?)/i) || [])[1] || null;
+    var res = { block: block, flat: flat, kind: null, urgency: "Review", route: "Property manager", sure: false, link: null };
+    if (scored.length) {
+      var k = scored[0].k;
+      res.kind = k;
+      res.urgency = k.emergency.some(function (w) { return t.indexOf(w) >= 0; }) ? "Emergency" : k.urgency;
+      res.route = k.route;
+      res.sure = block !== null && (scored.length === 1 || scored[0].n > scored[1].n);
+      /* insurance after a leak is its own job, not a chaser */
+      var isChase = CHASE.some(function (w) { return t.indexOf(w) >= 0; });
+      var job = open.filter(function (j) { return j.block === block && j.kind === k.key; })[0];
+      if (job && isChase) res.link = job;
+    }
+    var where = (flat ? "Flat " + flat + ", " : "") + (block || "your building");
+    if (res.link) {
+      res.reply = "Thank you. This is already logged as job " + res.link.id + " (" + res.link.kind_label + ", " + block + "), raised " + res.link.when + ". " +
+        "We have added your message to it" + (res.urgency === "Emergency" ? " and told the contractor it is spreading." : ".");
+    } else if (res.kind) {
+      res.reply = res.kind.reply.replace("{where}", where).replace("{block}", block || "your building");
+    } else {
+      res.reply = "Thank you for your message. The property manager for " + (block || "your building") + " will reply personally.";
+    }
+    res.reply = "Dear resident,\n\n" + res.reply + "\n\nTarget response: " + (res.urgency === "Review" ? "2 working days" : res.urgency.toLowerCase()) + ".\nBlock management team";
+    return res;
+  }
+
+  function urgencyChip(u) {
+    var cls = u === "Emergency" ? "red" : u === "24 hours" ? "amber" : u === "Review" ? "" : "green";
+    return '<span class="chip ' + cls + '">' + R.esc(u) + "</span>";
+  }
+
+  function tags(r) {
+    var h = urgencyChip(r.urgency);
+    h += '<span class="chip ink">' + R.esc(r.kind ? r.kind.label : "Unclear: a person reads it") + "</span>";
+    h += '<span class="chip">' + R.esc((r.block || "Block not found") + (r.flat ? ", Flat " + r.flat : "")) + "</span>";
+    h += '<span class="chip">→ ' + R.esc(r.link ? "Added to " + r.link.id : r.route) + "</span>";
+    if (!r.sure && !r.link) h += '<span class="chip amber">Check before sending</span>';
+    return h;
+  }
+
+  function card(m, i) {
+    return '<article class="mail pending" id="m' + i + '"><div class="meta"><span>' + R.esc(m.from) + "</span><span>" + R.esc(m.time) +
+      '</span></div><p class="subj">' + R.esc(m.subj) + '</p><p class="text">' + R.esc(m.text) + '</p><div class="tags"></div></article>';
+  }
+
+  var inbox = document.getElementById("inbox"), stats = document.getElementById("stats"),
+      run = document.getElementById("run"), reset = document.getElementById("reset"),
+      status = document.getElementById("status"), pipe = document.querySelectorAll("#pipe li");
+
+  function draw() {
+    inbox.innerHTML = INBOX.map(card).join("");
+    stats.hidden = true;
+    status.textContent = INBOX.length + " unread, oldest " + INBOX[0].time;
+    pipe.forEach(function (li) { li.className = ""; });
+  }
+
+  run.addEventListener("click", async function () {
+    draw();
+    R.busy(run, [run, reset], true);
+    status.textContent = "Working…";
+    var open = [], n = 0, counts = { Emergency: 0, link: 0, check: 0 }, t0 = performance.now();
+    for (var s = 0; s < pipe.length; s++) { pipe[s].className = "on"; await R.wait(120); pipe[s].className = "ok"; }
+    for (var i = 0; i < INBOX.length; i++) {
+      var r = triage(INBOX[i], open);
+      if (r.kind && !r.link) open.push({ id: "J-" + (1040 + (++n)), block: r.block, kind: r.kind.key, kind_label: r.kind.label, when: INBOX[i].time });
+      if (r.urgency === "Emergency") counts.Emergency++;
+      if (r.link) counts.link++;
+      if (!r.sure && !r.link) counts.check++;
+      var el = document.getElementById("m" + i);
+      el.classList.remove("pending"); el.classList.add("done");
+      el.querySelector(".tags").innerHTML = tags(r);
+      el.insertAdjacentHTML("beforeend", "<details><summary>Draft reply</summary><pre>" + R.esc(r.reply) + "</pre></details>");
+      await R.wait(140);
+    }
+    var secs = (performance.now() - t0) / 1000;
+    stats.innerHTML =
+      '<div class="stat"><b>' + INBOX.length + '</b><span>emails triaged</span></div>' +
+      '<div class="stat"><b>' + counts.Emergency + '</b><span>emergencies sent on at once</span></div>' +
+      '<div class="stat"><b>' + n + '</b><span>jobs opened</span></div>' +
+      '<div class="stat"><b>' + counts.link + '</b><span>chasers linked to an open job</span></div>' +
+      '<div class="stat"><b>' + counts.check + '</b><span>for a person to check</span></div>';
+    stats.hidden = false;
+    status.textContent = "Done in " + R.num(secs, 1) + " seconds, at " + NOW + ".";
+    R.busy(run, [run, reset], false);
+  });
+  reset.addEventListener("click", draw);
+  draw();
+
+  var one = document.getElementById("one"), own = document.getElementById("own"), oneOut = document.getElementById("oneOut");
+  one.addEventListener("click", async function () {
+    var text = own.value.trim();
+    if (!text) { oneOut.innerHTML = '<p class="err">Write or paste an email first.</p>'; return; }
+    R.busy(one, [one], true);
+    await R.wait(450);
+    var r = triage({ subj: "", text: text }, []);
+    oneOut.innerHTML = '<article class="mail done"><div class="tags">' + tags(r) + "</div><details open><summary>Draft reply</summary><pre>" + R.esc(r.reply) + "</pre></details></article>";
+    R.busy(one, [one], false);
+  });
+
+  R.calc(document.getElementById("calc"), document.getElementById("calcOut"));
+})();
+</script>
