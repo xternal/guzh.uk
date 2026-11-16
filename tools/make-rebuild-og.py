@@ -12,7 +12,7 @@ RED, RBG, AMB, ABG, GRN, GBG = "#EC9286", "#47322B", "#F0DCAA", "#3D3222", "#A6D
 FONT = "Geist, Helvetica Neue, Helvetica, Arial, sans-serif"
 
 def chip(x, y, text, fg, bg):
-    w = 16 + len(text) * 10.2
+    w = 20 + len(text) * 11.0
     return (f'<rect x="{x}" y="{y}" width="{w:.0f}" height="34" rx="17" fill="{bg}"/>'
             f'<text x="{x + 16}" y="{y + 23}" font-size="18" fill="{fg}" font-weight="500">{text}</text>'), x + w + 10
 
@@ -42,7 +42,7 @@ cards = {
     "lending-intake-og.png": frame("DEMO · SME LENDING", ["A loan pack to a", "draft credit memo"],
         f'<rect x="64" y="290" width="1072" height="250" rx="16" fill="{LIFT}"/>'
         f'<text x="92" y="334" font-size="22" font-weight="600" fill="{INK}">Northgate Coffee Roasters Ltd · £40,000 over 24 months</text>' +
-        "".join(f'{chip(92, 356 + i * 44, s, fg, bg)[0]}<text x="{92 + 16 + len(s) * 10.2 + 14:.0f}" y="{379 + i * 44}" font-size="20" fill="{INK2}">{t}</text>'
+        "".join(f'{chip(92, 356 + i * 44, s, fg, bg)[0]}<text x="{92 + 16 + len(s) * 11.0 + 18:.0f}" y="{379 + i * 44}" font-size="20" fill="{INK2}">{t}</text>'
                 for i, (s, fg, bg, t) in enumerate([("pass", GRN, GBG, "Applicant is a director"), ("refer", AMB, ABG, "Statements annualise 22% below stated turnover"),
                                                      ("refer", AMB, ABG, "Debt service cover 1.16x against 1.25x policy"), ("draft", BG, ACC, "Credit memo written for the underwriter")]))),
     "rebuild-og.png": frame("EMPATIQ · PROCESS RE-ENGINEERING", ["One back-office process,", "rebuilt as software"],
@@ -50,6 +50,15 @@ cards = {
         f'<text x="64" y="376" font-size="30" fill="{INK2}">Fixed price. Hours measured before and after.</text>' +
         chip(64, 420, "Teardown, free", BG, ACC)[0] + chip(250, 420, "Audit, 2 weeks", INK2, "#39322B")[0] +
         chip(426, 420, "Build, 4 to 6 weeks", INK2, "#39322B")[0] + chip(654, 420, "Run and improve", INK2, "#39322B")[0]),
+    "legal-intake-og.png": frame("DEMO · LEGAL GROUPS", ["New matters from every", "acquired firm, one intake"],
+        mail(290, "Daniel Shaw: unfair dismissal claim", [("Possible conflict", RED, RBG), ("Employment", BG, INK), ("Kestrel Logistics is a Hollins Partners client", INK2, "#39322B")]) +
+        mail(386, "Northwind Analytics Ltd: share sale", [("AML: enhanced", AMB, ABG), ("Corporate", BG, INK), ("No conflict across 3 firms", GRN, GBG)])),
+    "broker-submissions-og.png": frame("DEMO · INSURANCE BROKERS", ["Renewal information to a", "market-ready submission"],
+        f'<rect x="64" y="290" width="1072" height="250" rx="16" fill="{LIFT}"/>'
+        f'<text x="92" y="334" font-size="22" font-weight="600" fill="{INK}">Harbourside Lettings Group Ltd · renewal 15 Jan 2027</text>' +
+        "".join(f'{chip(92, 356 + i * 44, s, fg, bg)[0]}<text x="{92 + 16 + len(s) * 11.0 + 18:.0f}" y="{379 + i * 44}" font-size="20" fill="{INK2}">{t}</text>'
+                for i, (s, fg, bg, t) in enumerate([("missing", AMB, ABG, "Values for 3 flats from the acquired Clifton book"), ("39%", INK2, "#39322B", "Loss ratio on the expiring premium"),
+                                                     ("out", RED, RBG, "Ashgrove Insurance: no unoccupied buildings"), ("approach", GRN, GBG, "Pennant Specialty (MGA)")]))),
 }
 for name, svg in cards.items():
     with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False) as f:
