@@ -21,3 +21,6 @@
 
 /goat-rodeo/*
   Cache-Control: public, max-age=0, must-revalidate
+
+/rebuild/*
+  Cache-Control: public, max-age=0, must-revalidate
