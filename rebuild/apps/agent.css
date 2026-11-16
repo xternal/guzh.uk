@@ -1,0 +1,69 @@
+/* Shared layer for the four /rebuild/ product demos: a modern finish, the agent panel and the first-run tour.
+   Each app defines --brand (and its own palette); everything here keys off it. */
+
+/* Modern finish */
+body{background:
+  radial-gradient(1100px 600px at 100% -10%, color-mix(in srgb, var(--brand) 9%, transparent), transparent 60%),
+  radial-gradient(900px 500px at -10% 110%, color-mix(in srgb, var(--brand) 7%, transparent), transparent 60%),
+  var(--bg)}
+.card,.box,.sec,.kpi,.stat,.cardx,.mail,.letter{border-radius:16px !important;box-shadow:0 1px 2px rgba(20,20,30,.04),0 10px 28px -18px rgba(20,20,30,.28)}
+.row,.item,.qitem,.cardx{transition:background .15s ease,border-color .15s ease,transform .15s ease}
+.cardx:not(.static):hover{transform:translateY(-2px)}
+.ag-in{animation:agIn .35s ease both}
+@keyframes agIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* The AI action: one obvious button */
+.ai-cta{position:relative;border:0 !important;color:#fff !important;border-radius:999px !important;padding:10px 18px !important;font-weight:700 !important;
+  background:linear-gradient(120deg, var(--brand), color-mix(in srgb, var(--brand) 55%, #7C5CFF) 60%, color-mix(in srgb, var(--brand) 40%, #26C6DA)) !important;
+  box-shadow:0 8px 22px -8px color-mix(in srgb, var(--brand) 70%, transparent),inset 0 1px 0 rgba(255,255,255,.25) !important;background-size:200% 100% !important}
+.ai-cta .spark{width:15px;height:15px;flex:none}
+.ai-cta[aria-busy="true"]{animation:agShimmer 1.4s linear infinite}
+.ai-cta:disabled:not([aria-busy="true"]){filter:saturate(.3);opacity:.6 !important}
+@keyframes agShimmer{to{background-position:-200% 0}}
+.ag-pulse{animation:agPulse 1.8s ease-out infinite}
+@keyframes agPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--brand) 55%, transparent),0 8px 22px -8px color-mix(in srgb, var(--brand) 70%, transparent)}
+  70%{box-shadow:0 0 0 14px transparent,0 8px 22px -8px color-mix(in srgb, var(--brand) 70%, transparent)}100%{box-shadow:0 0 0 0 transparent}}
+
+/* Agent panel */
+.agent{position:fixed;right:18px;bottom:46px;width:min(380px,calc(100% - 36px));z-index:20;border-radius:18px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(28,26,40,.94),rgba(18,18,28,.94));backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 0 0 1px color-mix(in srgb, var(--brand) 35%, transparent),0 24px 60px -20px rgba(10,10,30,.6);font-size:13px;color:#ECEAF6;
+  transition:transform .25s ease,opacity .25s ease}
+.agent.hidden{transform:translateY(12px);opacity:0;pointer-events:none}
+.agent header{display:flex;align-items:center;gap:8px;padding:10px 12px 10px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.agent header b{font-weight:700}
+.agent header .st{color:#A9A6BE;font-size:12px}
+.agent .dot{width:8px;height:8px;border-radius:50%;background:#7CE0B5;box-shadow:0 0 8px #7CE0B5}
+.agent.working .dot{background:#B9A7FF;box-shadow:0 0 10px #B9A7FF;animation:agDot 1s ease-in-out infinite}
+@keyframes agDot{50%{transform:scale(1.6);opacity:.5}}
+.agent .tog{margin-left:auto;border:0;background:rgba(255,255,255,.08);border-radius:8px;width:26px;height:26px;color:#DCD9EA;font-size:15px;line-height:1}
+.agent ol{list-style:none;margin:0;padding:8px 14px 12px;max-height:240px;overflow:auto}
+.agent li{width:auto;height:auto;border-radius:0;background:none;color:inherit;font-size:13px;font-weight:400;display:grid;grid-template-columns:18px 1fr;gap:6px;padding:4px 0;line-height:1.4;animation:agIn .3s ease both}
+.agent li i{font-style:normal;text-align:center}
+.agent li.ag-ok i{color:#7CE0B5}.agent li.ag-warn i{color:#FFC86B}.agent li.ag-bad i{color:#FF8C7A}.agent li.ag-go i{color:#B9A7FF}
+.agent li .cur::after{content:"";display:inline-block;width:6px;height:13px;margin-left:2px;vertical-align:-2px;background:currentColor;animation:agBlink .8s steps(1) infinite}
+@keyframes agBlink{50%{opacity:0}}
+.agent .empty{color:#A9A6BE;padding:10px 0}
+.agent.min ol{display:none}
+
+/* First-run tour */
+.tour-dim{position:fixed;inset:0;z-index:40}
+.tour-hole{position:fixed;z-index:41;border-radius:14px;box-shadow:0 0 0 9999px rgba(12,14,24,.58),0 0 0 3px #fff,0 0 0 7px color-mix(in srgb, var(--brand) 70%, transparent);transition:all .25s ease;pointer-events:none}
+.tour-tip{position:fixed;z-index:42;width:min(320px,calc(100% - 24px));background:#fff;color:#1d1d28;border-radius:16px;padding:16px 16px 12px;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);font-size:14px;line-height:1.45}
+.tour-tip .n{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
+.tour-tip h4{margin:0 0 6px;font-size:16px}
+.tour-tip p{margin:0;color:#4b4b5a}
+.tour-tip .tb{display:flex;align-items:center;gap:8px;margin-top:14px}
+.tour-tip .tb button{font:inherit;border-radius:999px;padding:7px 14px;border:1px solid transparent;cursor:pointer}
+.tour-tip .skip{background:none;color:#666;padding-left:0 !important}
+.tour-tip .next{margin-left:auto;background:var(--brand);color:#fff;font-weight:700}
+.tour-help{position:fixed;left:16px;bottom:46px;z-index:19;width:38px;height:38px;border-radius:50%;border:0;background:#fff;color:var(--brand);font:700 17px/1 system-ui,sans-serif;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);cursor:pointer}
+@media (prefers-reduced-motion:reduce){.ag-pulse,.ai-cta[aria-busy="true"],.agent.working .dot,.agent li .cur::after{animation:none}.tour-hole{transition:none}}
+@media (max-width:900px){
+  .agent{right:10px;left:10px;width:auto;bottom:52px}
+  .agent ol{max-height:150px}
+  .tour-help{bottom:52px}
+}
+.btn[aria-busy="true"] .spark{display:none}
+.detail,.desk,.work,.dbody,.rows,.queue,.intake{padding-bottom:110px !important}
+.agent.min{width:auto;min-width:220px}
