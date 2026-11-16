@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clerkwell: one matter intake for every firm in the group | Pavel Guzhikov</title>
+<meta name="description" content="Every new matter at every firm in a legal group is typed, conflict-checked against all the firms' client lists at once, risk-rated for AML and given a client care letter. A working product demo for legal and accountancy groups.">
+<link rel="canonical" href="https://guzh.uk/rebuild/legal-intake/app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/rebuild/legal-intake/app/">
+<meta property="og:site_name" content="Pavel Guzhikov">
+<meta property="og:title" content="Clerkwell: one matter intake for every firm in the group">
+<meta property="og:description" content="Every new matter at every firm in the group is conflict-checked against all the firms' client lists at once, risk-rated for AML and given a client care letter.">
+<meta property="og:image" content="https://guzh.uk/assets/rebuild/clerkwell-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Clerkwell's intake console: new enquiries from three firms and a group-wide conflict search with one possible conflict.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clerkwell: one matter intake for every firm in the group">
+<meta name="twitter:description" content="Every new matter at every firm in the group is conflict-checked against all the firms' client lists at once, risk-rated for AML and given a client care letter.">
+<meta name="twitter:image" content="https://guzh.uk/assets/rebuild/clerkwell-og.png">
+<meta name="twitter:image:alt" content="Clerkwell's intake console: new enquiries from three firms and a group-wide conflict search with one possible conflict.">
+<meta name="theme-color" content="#6E1E38">
+<link rel="icon" href="/assets/rebuild/clerkwell.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Clerkwell","applicationCategory":"BusinessApplication","description":"Matter intake for legal groups: one conflict check across every acquired firm, AML risk rating and client care letters.","url":"https://guzh.uk/rebuild/legal-intake/app/","creator":{"@type":"Organization","name":"Empatiq Limited","url":"https://guzh.uk/rebuild/"}}</script>
+<style>
+:root{
+  color-scheme:light;
+  --brand:#6E1E38;--brand-2:#521429;--brand-soft:#F6E9EC;--gold:#E8B04B;
+  --bg:#FBF7F0;--panel:#FFFFFF;--line:#E9E1D5;--line-2:#F3EEE5;
+  --ink:#2A1F1A;--ink-2:#5A4E46;--ink-3:#7A6D63;
+  --red:#A6261C;--red-bg:#FBEAE7;--amber:#855200;--amber-bg:#FCF1DD;--green:#26683D;--green-bg:#E6F2E9;
+  --al:#2F6B8A;--hp:#8A5A2F;--mg:#4E6B2F;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.serif{font-family:"Source Serif 4",Georgia,serif}
+.app{display:grid;grid-template-columns:64px 1fr;min-height:100vh;min-height:100dvh}
+.rail{background:var(--brand);display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 0}
+.rail .mark{width:40px;height:40px;margin-bottom:12px}
+.rail span{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:#F1D9DF}
+.rail span[aria-current="page"]{background:rgba(255,255,255,.14);color:#fff}
+.rail svg.i{width:20px;height:20px}
+.body{display:grid;grid-template-rows:auto 1fr auto;min-width:0}
+.top{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--bg)}
+.top h1{margin:0;font-size:20px;font-weight:600}
+.top .grp{color:var(--ink-3);font-size:14px}
+.top .me{margin-left:auto;font-size:13.5px;color:var(--ink-2);text-align:right;line-height:1.3}
+.cols{display:grid;grid-template-columns:330px 1fr;min-height:0}
+.intake{border-right:1px solid var(--line);overflow:auto;background:#FDFAF5}
+.ihead{display:flex;align-items:center;gap:8px;padding:14px 16px}
+.ihead b{font-size:14px}
+.ihead .n{color:var(--ink-3);font-size:13px}
+.firm{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.firm i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.item{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 16px;border-top:1px solid var(--line-2);border-left:3px solid transparent}
+.item:hover{background:#FFFDF9}
+.item[aria-current="true"]{background:var(--brand-soft);border-left-color:var(--brand)}
+.item .t{display:flex;justify-content:space-between;gap:8px}
+.item b{font-weight:600}
+.item .w{font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.item p{margin:3px 0 6px;color:var(--ink-2);font-size:13.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.badges{display:flex;flex-wrap:wrap;gap:5px}
+.b{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--line-2);color:var(--ink-2)}
+.b.red{background:var(--red-bg);color:var(--red)}.b.amber{background:var(--amber-bg);color:var(--amber)}.b.green{background:var(--green-bg);color:var(--green)}.b.ink{background:var(--brand);color:#fff}
+.desk{overflow:auto;padding:20px 24px}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:6px;padding:8px 14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--brand)}
+.btn.warn{background:var(--amber);border-color:var(--amber)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn[aria-busy="true"]{opacity:1}
+.spin{width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:none;animation:s .7s linear infinite}
+.btn[aria-busy="true"] .spin{display:inline-block}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
+.ml{margin-left:auto}
+.dhead{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px 16px;margin-bottom:16px}
+.dhead h2{margin:0 0 3px;font-size:24px;font-weight:600}
+.dhead .s{color:var(--ink-3)}
+.panes{display:grid;gap:16px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:16px}
+.box h3{margin:0 0 12px;font-size:16px;font-weight:600}
+.field{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;margin:0}
+.field dt{color:var(--ink-3);font-size:14px}.field dd{margin:0}
+.quote{border-left:3px solid var(--line);padding:2px 0 2px 12px;color:var(--ink-2);margin:0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line-2);vertical-align:top}
+th{color:var(--ink-3);font-weight:600;font-size:12.5px}
+tr.hit td{background:#FFF6F4}
+tr.note td{background:#FFFBF0}
+.meter{display:flex;gap:4px;margin:4px 0 10px}
+.meter i{flex:1;height:8px;border-radius:2px;background:var(--line-2)}
+.meter.l1 i:nth-child(1){background:#7BAE85}
+.meter.l2 i:nth-child(-n+2){background:#E0A23C}
+.meter.l3 i{background:#C2483D}
+ul.docs{margin:0;padding:0;list-style:none}
+ul.docs li{padding:6px 0;border-bottom:1px dashed var(--line);display:flex;gap:8px}
+ul.docs li:last-child{border-bottom:0}
+ul.docs li::before{content:"";width:14px;height:14px;border:1.5px solid var(--ink-3);border-radius:3px;flex:none;margin-top:3px}
+.letter{background:#FFFEFB;border:1px solid var(--line);box-shadow:0 1px 0 var(--line),0 12px 24px -18px rgba(60,30,20,.35);padding:28px 32px;font-family:"Source Serif 4",Georgia,serif;font-size:15px;line-height:1.6;white-space:pre-line;color:#2A1F1A}
+.letter .lh{font-family:"Source Sans 3",sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:16px}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.empty{color:var(--ink-3);text-align:center;padding:80px 20px}
+.toast{position:fixed;left:50%;bottom:44px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;width:max-content;max-width:min(560px,calc(100% - 32px));z-index:9}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.status{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding:7px 22px;font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--line);background:var(--bg)}
+.status a{color:var(--ink-2)}
+.status .r{margin-left:auto;display:flex;gap:14px}
+.back{display:none}
+@media (max-width:1150px){.panes{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .rail{display:none}
+  .top .me,.top .grp{display:none}
+  .cols{grid-template-columns:1fr}
+  .desk{display:none;padding:16px}
+  .app.open .desk{display:block}
+  .app.open .intake{display:none}
+  .back{display:inline-flex}
+  .letter{padding:20px}
+  .field{grid-template-columns:110px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <nav class="rail" aria-label="Clerkwell">
+    <svg class="mark" viewBox="0 0 64 64" aria-label="Clerkwell"><rect width="64" height="64" rx="14" fill="#6E1E38"/><circle cx="25" cy="32" r="13" fill="none" stroke="#FBF3E6" stroke-width="3.4"/><circle cx="39" cy="32" r="13" fill="none" stroke="#FBF3E6" stroke-width="3.4"/><path d="M32 21.2 A13 13 0 0 1 32 42.8 A13 13 0 0 1 32 21.2 Z" fill="#E8B04B"/></svg>
+    <span aria-current="page" title="Intake"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13h4l2 3h4l2-3h4M4 13l2-8h12l2 8v6H4z" stroke-linejoin="round"/></svg></span>
+    <span title="Matters"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h7l2 2h9v10H3z" stroke-linejoin="round"/></svg></span>
+    <span title="Conflicts"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg></span>
+    <span title="Risk"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" stroke-linejoin="round"/></svg></span>
+  </nav>
+  <div class="body">
+    <header class="top">
+      <h1 class="serif">Clerkwell</h1>
+      <span class="grp">Northvale Legal Group: Ashby &amp; Lowe, Hollins Partners, Marsh Gate Law</span>
+      <div class="me">Priya Nair<br>Group risk and compliance</div>
+    </header>
+    <div class="cols">
+      <aside class="intake" aria-label="New enquiries">
+        <div class="ihead"><b>New enquiries</b><span class="n" id="n"></span><button class="btn ml" id="runall" type="button"><span class="spin" aria-hidden="true"></span><span id="runLabel">Check all</span></button></div>
+        <div id="list"></div>
+      </aside>
+      <main class="desk" id="desk"></main>
+    </div>
+    <footer class="status">
+      <span>A product demo by Empatiq. <a href="/rebuild/legal-intake/">How it works</a></span>
+      <span class="r"><a href="https://guzh.uk">Made by Pavel Guzhikov</a><a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></span>
+    </footer>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var FIRMS = { AL: ["Ashby & Lowe", "Leeds", "var(--al)"], HP: ["Hollins Partners", "Bristol", "var(--hp)"], MG: ["Marsh Gate Law", "London", "var(--mg)"] };
+  var INDEX = [
+    ["Kestrel Logistics Limited", "client", "HP", "HP-2291 commercial contracts", "open"],
+    ["Michael J. Brennan", "client", "AL", "AL-0874 will and lasting power of attorney", "closed 2023"],
+    ["Albion Estates LLP", "opponent", "MG", "MG-1180 lease dispute", "closed 2025"],
+    ["Harrow & Vale Developments Ltd", "client", "MG", "MG-1422 site acquisition", "open"],
+    ["S. Patel", "client", "AL", "AL-1102 remortgage", "closed 2024"],
+    ["Fernhill Bakery Limited", "client", "HP", "HP-2410 employment advice", "closed 2026"],
+    ["Okoye, Grace", "client", "AL", "AL-0651 will", "closed 2019"],
+    ["Brightwater Plumbing", "client", "HP", "HP-2533 debt recovery", "open"],
+    ["Linden Care Homes Ltd", "opponent", "MG", "MG-1390 personal injury", "open"],
+    ["T. Nakamura", "client", "MG", "MG-1201 residential purchase", "closed 2025"]
+  ];
+  var WATCH = ["Viktor Sorel"];
+  var TYPES = [
+    { key: "conv", label: "Residential conveyancing", team: "Property", fe: "Helen Marsh", words: ["buying", "purchase", "completion", "remortgage"], docs: ["Photo ID and proof of address", "Mortgage offer", "Source of funds for the deposit"] },
+    { key: "emp", label: "Employment", team: "Employment", fe: "Owen Price", words: ["dismiss", "tribunal", "whistleblow", "redundan", "grievance"], docs: ["Photo ID and proof of address", "Contract of employment", "Dismissal letter"] },
+    { key: "lease", label: "Commercial property", team: "Commercial property", fe: "Jas Gill", words: ["lease", "landlord", "unit", "premises"], docs: ["Company ID: register extract and director ID", "Heads of terms"] },
+    { key: "fam", label: "Family", team: "Family", fe: "Clare Dunn", words: ["divorce", "separation", "children", "finances from"], docs: ["Photo ID and proof of address", "Marriage certificate"] },
+    { key: "prob", label: "Probate", team: "Private client", fe: "Martin Hale", words: ["probate", "executor", "estate", "died"], docs: ["Executor's photo ID", "Death certificate", "The original will"] },
+    { key: "corp", label: "Corporate: share sale", team: "Corporate", fe: "Ade Okafor", words: ["share sale", "selling the company", "heads of terms"], docs: ["Company ID: register extract and director ID", "Heads of terms", "Cap table"] },
+    { key: "debt", label: "Debt recovery", team: "Commercial litigation", fe: "Leo Shah", words: ["won't pay", "owe", "invoices", "overdue", "recovery"], docs: ["Company ID: register extract and director ID", "Unpaid invoices", "Terms of business"] }
+  ];
+  var E = [
+    { firm: "AL", from: "Emma Clarke", via: "Web form", time: "08:02", text: "We're buying 14 Wren Close, Harrogate for £385,000 from Mr R. Doyle. Part of the deposit is a £60,000 gift from my parents. Can you act for us? Completion hoped for January." },
+    { firm: "HP", from: "Daniel Shaw", via: "Email", time: "08:20", text: "I was dismissed last week by Kestrel Logistics Ltd after raising a safety complaint. I'd like advice on an unfair dismissal and whistleblowing claim." },
+    { firm: "MG", from: "Fernhill Bakery Ltd", via: "Email", time: "08:41", text: "We are taking a new 10-year lease on a unit at Canal Yard from Albion Estates LLP and need the lease reviewed. Director: Ruth Osei." },
+    { firm: "AL", from: "Laura Brennan", via: "Phone note", time: "09:05", text: "Wants advice on divorce and finances from her husband Michael Brennan. Two children. Family home in Leeds in joint names." },
+    { firm: "HP", from: "Peter Okoye", via: "Email", time: "09:30", text: "My mother Grace Okoye died last month. I am the executor of her will and need help with probate. The estate includes her house and savings." },
+    { firm: "MG", from: "Northwind Analytics Ltd", via: "Email", time: "09:48", text: "We are selling the company to a private buyer, Sorel Capital Partners, whose principal is Viktor Sorel. Heads of terms agreed. Need a share sale team. Director: Hannah Reid." },
+    { firm: "HP", from: "Brightwater Plumbing Ltd", via: "Email", time: "10:02", text: "Another customer won't pay: J & K Builders owe us £8,400 on three invoices, now 90 days overdue. Please start recovery as before." },
+    { firm: "MG", from: "Emma Clarke", via: "Email", time: "10:15", text: "Hi, I sent this to your Harrogate colleagues too. We're buying 14 Wren Close, Harrogate with a gift from my parents for part of the deposit. Who will act?" }
+  ];
+  E.forEach(function (e, i) { e.id = i; });
+  var sel = null, seen = {};
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, matchMedia("(prefers-reduced-motion: reduce)").matches ? 30 : ms); }); }
+  function toast(m) { var t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toast.h); toast.h = setTimeout(function () { t.classList.remove("on"); }, 4200); }
+  function norm(s) { return s.toLowerCase().replace(/&/g, " and ").replace(/\b(limited|ltd|llp|plc|mr|mrs|ms|dr)\b/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim(); }
+  function same(a, b) {
+    var x = norm(a).split(" ").filter(function (w) { return w.length > 1; }), y = norm(b).split(" ").filter(function (w) { return w.length > 1; });
+    if (x.length < 2 || y.length < 2) return false;
+    return x.filter(function (w) { return y.indexOf(w) >= 0; }).length >= 2;
+  }
+  function parties(e) {
+    var names = [e.from], m, re = /([A-Z][a-z]+(?:\s(?:[A-Z][a-z]+|&))*\s(?:Ltd|Limited|LLP|Partners|Builders|Plumbing))|((?:Mr|Mrs|Ms)?\s?[A-Z][a-z]+\s[A-Z][a-z]+)/g;
+    while ((m = re.exec(e.text))) {
+      var n = (m[1] || m[2]).trim();
+      if (/\b(Close|Road|Street|Lane|Mews|Yard|Way|Avenue)$/.test(n)) continue;
+      if (!/^(Can|Need|Please|Part|Director|Family|Two|Heads|Canal|We|Hi|Who|My|The|Another)\b/.test(n) && names.indexOf(n) < 0) names.push(n);
+    }
+    [/\b([A-Z] & [A-Z] [A-Z][a-z]+)/, /\b(?:Mr|Mrs|Ms)\.? ([A-Z]\. [A-Z][a-z]+)/, /Director:\s*([A-Z][a-z]+ [A-Z][a-z]+)/].forEach(function (rx) { var x = e.text.match(rx); if (x && names.indexOf(x[1]) < 0) names.push(x[1]); });
+    return names;
+  }
+  function assess(e) {
+    var t = e.text.toLowerCase(), r = {};
+    var sc = TYPES.map(function (k) { return { k: k, n: k.words.filter(function (w) { return t.indexOf(w) >= 0; }).length }; }).filter(function (x) { return x.n; }).sort(function (a, b) { return b.n - a.n; });
+    r.type = sc.length ? sc[0].k : null;
+    r.parties = parties(e);
+    r.company = /\b(Ltd|Limited|LLP)\b/.test(e.from);
+    var key = norm(e.from) + "|" + (r.type ? r.type.key : "");
+    r.dup = seen[key] && seen[key] !== e ? seen[key] : null;
+    if (!seen[key]) seen[key] = e;
+    r.rows = [];
+    r.parties.forEach(function (p) {
+      var hits = INDEX.filter(function (x) { return same(p, x[0]); });
+      if (!hits.length) r.rows.push({ party: p, rec: null });
+      hits.forEach(function (x) {
+        var self = same(p, e.from);
+        var kind = self ? "known" : x[1] === "client" && !(r.type && r.type.key === "prob") ? "conflict" : "note";
+        r.rows.push({ party: p, rec: x, kind: kind });
+      });
+    });
+    r.conflicts = r.rows.filter(function (x) { return x.kind === "conflict"; });
+    r.watch = r.parties.filter(function (p) { return WATCH.some(function (w) { return same(p, w); }); });
+    r.gift = /gift/.test(t);
+    r.level = r.watch.length ? 3 : r.gift ? 2 : 1;
+    r.risk = ["", "Standard", "Standard, plus source of funds", "Enhanced due diligence"][r.level];
+    r.docs = r.type ? r.type.docs.slice() : ["Photo ID and proof of address"];
+    if (r.gift) r.docs.push("Gifted deposit letter, and the donors' ID and bank statements");
+    if (r.watch.length) r.docs.push("Source of wealth for " + r.watch.join(", ") + ", and MLRO sign-off");
+    r.state = r.dup ? "merged" : r.conflicts.length ? "risk" : "ready";
+    return r;
+  }
+  function badges(e) {
+    var r = e.r;
+    if (!r) return '<span class="b">Not checked</span>';
+    if (r.dup) return '<span class="b">Duplicate: merged into ' + esc(FIRMS[r.dup.firm][0]) + "</span>";
+    var h = '<span class="b ink">' + esc(r.type ? r.type.label : "Unclear") + "</span>";
+    h += r.conflicts.length ? '<span class="b red">Possible conflict</span>' : '<span class="b green">Clear across the group</span>';
+    if (r.level > 1) h += '<span class="b ' + (r.level === 3 ? "red" : "amber") + '">AML: ' + (r.level === 3 ? "enhanced" : "source of funds") + "</span>";
+    if (e.done) h += '<span class="b">' + esc(e.done) + "</span>";
+    return h;
+  }
+  function list() {
+    $("list").innerHTML = E.map(function (e) {
+      var f = FIRMS[e.firm];
+      return '<button class="item" type="button" data-id="' + e.id + '" aria-current="' + (sel === e) + '"><div class="t"><b>' + esc(e.from) + '</b><span class="w">' + e.time + '</span></div><span class="firm"><i style="background:' + f[2] + '"></i>' + esc(f[0]) + ", " + esc(e.via.toLowerCase()) +
+        "</span><p>" + esc(e.text) + '</p><div class="badges">' + badges(e) + "</div></button>";
+    }).join("");
+    var left = E.filter(function (e) { return !e.r; }).length;
+    $("n").textContent = E.length + " today";
+    $("runLabel").textContent = left ? "Check all " + left : "All checked";
+    if ($("runall").getAttribute("aria-busy") !== "true") $("runall").disabled = !left;
+  }
+  function letter(e, r) {
+    var f = FIRMS[e.firm], first = r.company ? e.from : e.from.split(" ")[0];
+    return '<div class="lh">' + esc(f[0]) + ", " + esc(f[1]) + "</div>" + esc("Dear " + first + ",\n\nThank you for asking " + f[0] + " to help with your " + (r.type ? r.type.label.toLowerCase() : "matter") + ". " +
+      (r.type ? r.type.fe + " in our " + r.type.team + " team" : "A member of our team") + " will look after it.\n\nBefore we can start, please send us:\n" + r.docs.map(function (d) { return "    " + d; }).join("\n") +
+      "\n\nOnce we have these, we will confirm the scope of our work and our estimate of costs in writing.\n\nYours sincerely,\n\n" + (r.type ? r.type.fe : "") + "\n" + f[0]);
+  }
+  function desk() {
+    var e = sel;
+    if (!e) { $("desk").innerHTML = '<p class="empty">Choose an enquiry on the left.</p>'; return; }
+    var f = FIRMS[e.firm], r = e.r, h = '<button class="btn ghost back" id="back" type="button" style="margin-bottom:12px">All enquiries</button>';
+    h += '<div class="dhead"><div><h2 class="serif">' + esc(e.from) + '</h2><div class="s"><span class="firm"><i style="background:' + f[2] + '"></i>' + esc(f[0]) + "</span>, " + esc(e.via.toLowerCase()) + " at " + e.time + "</div></div>";
+    if (!r) h += '<button class="btn ml" id="check" type="button"><span class="spin" aria-hidden="true"></span><span>Run intake checks</span></button>';
+    else if (r.dup) h += '<span class="b ml">Merged into the ' + esc(FIRMS[r.dup.firm][0]) + " enquiry at " + r.dup.time + "</span>";
+    else if (!e.done) h += '<div class="actions ml">' + (r.conflicts.length ? '<button class="btn warn" type="button" data-act="Referred to risk"><span class="spin" aria-hidden="true"></span><span>Refer to risk team</span></button>' :
+      '<button class="btn" type="button" data-act="Matter opened, letter sent"><span class="spin" aria-hidden="true"></span><span>Open matter and send letter</span></button>') + "</div>";
+    else h += '<span class="b green ml">' + esc(e.done) + "</span>";
+    h += "</div>";
+    h += '<div class="box"><h3 class="serif">Enquiry</h3><p class="quote">' + esc(e.text) + "</p></div>";
+    if (r && !r.dup) {
+      h += '<div class="panes"><div>';
+      h += '<div class="box"><h3 class="serif">Matter</h3><dl class="field"><dt>Type</dt><dd>' + esc(r.type ? r.type.label : "Unclear: a supervisor decides") + "</dd><dt>Team</dt><dd>" + esc(r.type ? r.type.team : "") + "</dd><dt>Fee earner</dt><dd>" + esc(r.type ? r.type.fe : "") +
+        "</dd><dt>Client</dt><dd>" + esc(e.from) + (r.company ? " (company)" : " (individual)") + "</dd><dt>Firm</dt><dd>" + esc(f[0]) + "</dd></dl></div>";
+      h += '<div class="box"><h3 class="serif">Anti-money laundering</h3><div class="meter l' + r.level + '"><i></i><i></i><i></i></div><b>' + esc(r.risk) + "</b>" +
+        (r.watch.length ? '<p style="margin:8px 0 0;color:var(--red)">' + esc(r.watch.join(", ")) + " is on the screening list. MLRO approval needed before work starts.</p>" : "") +
+        (r.gift ? '<p style="margin:8px 0 0;color:var(--ink-2)">Gifted deposit: the donors need to be identified and their funds evidenced.</p>' : "") +
+        '<h3 class="serif" style="margin-top:16px">Documents to request</h3><ul class="docs">' + r.docs.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul></div>";
+      h += '</div><div><div class="box"><h3 class="serif">Conflict search across the group</h3><table><thead><tr><th>Party</th><th>Found</th><th>Result</th></tr></thead><tbody>' + r.rows.map(function (x) {
+        if (!x.rec) return "<tr><td>" + esc(x.party) + '</td><td style="color:var(--ink-3)">No record in 3 firms</td><td><span class="b green">Clear</span></td></tr>';
+        var rf = FIRMS[x.rec[2]], res = x.kind === "conflict" ? '<span class="b red">Conflict</span>' : x.kind === "known" ? '<span class="b">Returning client</span>' : '<span class="b amber">Note</span>';
+        var why = x.kind === "conflict" ? "We act or acted for them." : x.kind === "known" ? "" : x.rec[1] === "opponent" ? "Past opponent: acting against them again is fine." : "Past client: the original will may be held there.";
+        return '<tr class="' + (x.kind === "conflict" ? "hit" : x.kind === "note" ? "note" : "") + '"><td>' + esc(x.party) + "</td><td>" + esc(x.rec[0]) + ", " + x.rec[1] + " of " + esc(rf[0]) + "<br><span style=\"color:var(--ink-3)\">" + esc(x.rec[3]) + ", " + x.rec[4] + "</span></td><td>" + res + (why ? '<div style="font-size:12.5px;color:var(--ink-3);margin-top:3px">' + why + "</div>" : "") + "</td></tr>";
+      }).join("") + '</tbody></table><p style="font-size:12.5px;color:var(--ink-3);margin:10px 0 0">' + INDEX.length + " parties from Ashby &amp; Lowe, Hollins Partners and Marsh Gate Law searched at once.</p></div>";
+      h += '<div class="box"><h3 class="serif">Client care letter</h3><div class="letter">' + letter(e, r) + "</div></div></div></div>";
+    }
+    $("desk").innerHTML = h;
+  }
+  function pick(e) { sel = e; $("app").classList.add("open"); list(); desk(); }
+  async function run(e, btn) {
+    if (btn) {
+      btn.setAttribute("aria-busy", "true"); btn.disabled = true;
+      for (var s of ["Reading the enquiry", "Searching 3 firms", "Rating AML risk", "Drafting the letter"]) { btn.lastElementChild.textContent = s; await wait(260); }
+    }
+    e.r = assess(e);
+  }
+
+  $("list").addEventListener("click", function (ev) { var b = ev.target.closest(".item"); if (b) pick(E[+b.dataset.id]); });
+  $("desk").addEventListener("click", async function (ev) {
+    if (ev.target.closest("#back")) { $("app").classList.remove("open"); return; }
+    var c = ev.target.closest("#check");
+    if (c) { await run(sel, c); list(); desk(); toast(sel.r.dup ? "Duplicate enquiry merged." : sel.r.conflicts.length ? "Possible conflict found. Refer to the risk team." : "Clear across all three firms."); return; }
+    var a = ev.target.closest("[data-act]");
+    if (a) { a.setAttribute("aria-busy", "true"); a.disabled = true; await wait(700); sel.done = a.dataset.act; list(); desk(); toast(sel.from + ": " + sel.done.toLowerCase() + "."); }
+  });
+  $("runall").addEventListener("click", async function () {
+    var b = this, t0 = performance.now(), todo = E.filter(function (e) { return !e.r; });
+    b.setAttribute("aria-busy", "true"); b.disabled = true;
+    for (var i = 0; i < todo.length; i++) { await run(todo[i]); list(); await wait(150); }
+    b.setAttribute("aria-busy", "false"); list(); desk();
+    var c = E.filter(function (e) { return e.r && e.r.conflicts.length && !e.r.dup; }).length, d = E.filter(function (e) { return e.r && e.r.dup; }).length, m = E.filter(function (e) { return e.r && e.r.level > 1 && !e.r.dup; }).length;
+    toast(todo.length + " enquiries checked in " + ((performance.now() - t0) / 1000).toFixed(1) + " s against " + INDEX.length + " parties in 3 firms: " + c + " possible conflicts, " + m + " need extra AML checks, " + d + " duplicate merged.");
+  });
+
+  addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
+  list();
+  if (matchMedia("(min-width: 901px)").matches) { sel = E[1]; list(); }
+  desk();
+  if (location.hash === "#ready") { $("runall").click(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keelson: the underwriting workbench for SME lenders | Pavel Guzhikov</title>
+<meta name="description" content="Underwriters start every application from a drafted memo with the checks done: bank statements categorised, affordability worked out, policy applied. A working product demo for SME and specialist lenders.">
+<link rel="canonical" href="https://guzh.uk/rebuild/lending-intake/app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/rebuild/lending-intake/app/">
+<meta property="og:site_name" content="Pavel Guzhikov">
+<meta property="og:title" content="Keelson: the underwriting workbench for SME lenders">
+<meta property="og:description" content="Underwriters start every application from a drafted memo with the checks done: statements categorised, affordability worked out, policy applied.">
+<meta property="og:image" content="https://guzh.uk/assets/rebuild/keelson-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Keelson's application workspace: balance chart, monthly inflows and outflows, and the affordability figures for an SME loan.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Keelson: the underwriting workbench for SME lenders">
+<meta name="twitter:description" content="Underwriters start every application from a drafted memo with the checks done: statements categorised, affordability worked out, policy applied.">
+<meta name="twitter:image" content="https://guzh.uk/assets/rebuild/keelson-og.png">
+<meta name="twitter:image:alt" content="Keelson's application workspace: balance chart, monthly inflows and outflows, and the affordability figures for an SME loan.">
+<meta name="theme-color" content="#3B2F8F">
+<link rel="icon" href="/assets/rebuild/keelson.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Keelson","applicationCategory":"BusinessApplication","description":"Underwriting workbench for SME lenders: bank statements categorised, affordability worked out, policy applied and a credit memo drafted.","url":"https://guzh.uk/rebuild/lending-intake/app/","creator":{"@type":"Organization","name":"Empatiq Limited","url":"https://guzh.uk/rebuild/"}}</script>
+<style>
+:root{
+  color-scheme:light;
+  --brand:#3B2F8F;--brand-2:#2A2170;--brand-soft:#EEECFA;--teal:#1F8A7E;--teal-soft:#E2F4F1;
+  --bg:#F7F7FB;--panel:#FFFFFF;--line:#E4E3EE;--line-2:#F0EFF6;
+  --ink:#1B1A2E;--ink-2:#4B4A63;--ink-3:#6D6C84;
+  --red:#B42318;--red-bg:#FDECEA;--amber:#8A5300;--amber-bg:#FDF3E1;--green:#1D6B3F;--green-bg:#E7F4EC;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:14px;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.num,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.app{display:grid;grid-template-rows:auto 1fr auto;min-height:100vh;min-height:100dvh}
+.top{display:flex;align-items:center;gap:22px;padding:0 20px;height:54px;background:#fff;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:var(--brand-2)}
+.brand svg{width:28px;height:28px}
+.tabs{display:flex;gap:2px;height:100%}
+.tabs span{display:flex;align-items:center;padding:0 12px;color:var(--ink-3);border-bottom:2px solid transparent;font-weight:500}
+.tabs span[aria-current="page"]{color:var(--brand);border-bottom-color:var(--brand)}
+.lender{margin-left:auto;color:var(--ink-3);font-size:13px;white-space:nowrap}
+.avatar{width:30px;height:30px;border-radius:8px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px}
+.main{display:grid;grid-template-columns:340px 1fr;min-height:0}
+.queue{background:var(--panel);border-right:1px solid var(--line);overflow:auto}
+.qhead{padding:16px 16px 10px;display:flex;align-items:baseline;justify-content:space-between}
+.qhead h2{margin:0;font-size:15px}
+.qhead span{font-size:12.5px;color:var(--ink-3)}
+.qitem{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 16px;border-top:1px solid var(--line-2);cursor:pointer;border-left:3px solid transparent;width:100%;text-align:left;background:none;border-right:0;border-bottom:0}
+.qitem:hover{background:#FBFBFE}
+.qitem[aria-current="true"]{background:var(--brand-soft);border-left-color:var(--brand)}
+.qitem b{font-weight:600}
+.qitem .amt{text-align:right;font-weight:500}
+.qitem .s{font-size:12.5px;color:var(--ink-3)}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--line-2);color:var(--ink-2);white-space:nowrap;justify-self:end}
+.pill.new{background:#E8EEFB;color:#1E4FB8}.pill.ok{background:var(--green-bg);color:var(--green)}.pill.ref{background:var(--amber-bg);color:var(--amber)}.pill.no{background:var(--red-bg);color:var(--red)}.pill.done{background:var(--line-2);color:var(--ink-3)}
+.work{overflow:auto;padding:20px 24px}
+.whead{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:14px}
+.whead h1{margin:0;font-size:21px;font-weight:600}
+.whead .s{color:var(--ink-3)}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:8px;padding:8px 14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn.ghost{background:#fff;color:var(--brand)}
+.btn.teal{background:var(--teal);border-color:var(--teal)}
+.btn.warn{background:#fff;color:var(--amber);border-color:#E4C27F}
+.btn.bad{background:#fff;color:var(--red);border-color:#F0B8B1}
+.btn:disabled{opacity:.5;cursor:default}
+.btn[aria-busy="true"]{opacity:1}
+.spin{width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:none;animation:s .7s linear infinite}
+.btn[aria-busy="true"] .spin{display:inline-block}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
+.ml{margin-left:auto}
+.subtabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.subtabs button{border:0;background:none;padding:9px 12px;color:var(--ink-3);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs button[aria-selected="true"]{color:var(--brand);border-bottom-color:var(--brand)}
+.subtabs button:disabled{opacity:.45;cursor:default}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card h3{margin:0 0 12px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:7px 10px;margin:0}
+.kv dt{color:var(--ink-3)}.kv dd{margin:0}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:14px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.kpi span{display:block;font-size:12px;color:var(--ink-3);margin-bottom:4px}
+.kpi b{font-size:22px;font-weight:600}
+.kpi.ok b{color:var(--green)}.kpi.ref b{color:var(--amber)}.kpi.no b{color:var(--red)}
+svg.chart{width:100%;height:auto;display:block}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--ink-3);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line-2)}
+th{color:var(--ink-3);font-weight:500;font-size:12px;position:sticky;top:0;background:#fff}
+td.r,th.r{text-align:right}
+.cat{font-size:11.5px;font-weight:600;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.c-rev{background:var(--teal-soft);color:#14675E}.c-sup{background:#EEF0F6;color:#3F4766}.c-pay{background:#F1ECFB;color:#5B3FA3}.c-tax{background:#FFF1DE;color:#8A5300}
+.c-debt{background:#FDE9E4;color:#9C3B22}.c-gam{background:var(--red-bg);color:var(--red)}.c-ret{background:var(--red-bg);color:var(--red)}.c-oth{background:var(--line-2);color:var(--ink-2)}
+.tx{max-height:420px;overflow:auto}
+.chk{display:grid;grid-template-columns:70px 1fr;gap:3px 12px;padding:10px 0;border-bottom:1px solid var(--line-2)}
+.chk:last-child{border-bottom:0}
+.chk .why{grid-column:2;color:var(--ink-3);font-size:13px}
+textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:10px;padding:14px;font:13px/1.55 "IBM Plex Mono",ui-monospace,Menlo,monospace;color:var(--ink);resize:vertical;background:#FCFCFE}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hint{color:var(--ink-3);text-align:center;padding:60px 20px}
+.toast{position:fixed;left:50%;bottom:44px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 16px;border-radius:10px;font-size:13.5px;opacity:0;transition:.25s;pointer-events:none;width:max-content;max-width:min(560px,calc(100% - 32px));z-index:9}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.status{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding:7px 20px;font-size:12px;color:var(--ink-3);background:#fff;border-top:1px solid var(--line)}
+.status a{color:var(--ink-2)}
+.status .r{margin-left:auto;display:flex;gap:14px}
+.back{display:none}
+@media (max-width:900px){
+  .tabs,.lender{display:none}
+  .main{grid-template-columns:1fr}
+  .work{display:none;padding:16px}
+  .app.open .work{display:block}
+  .app.open .queue{display:none}
+  .back{display:inline-flex}
+  .kv{grid-template-columns:120px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#3B2F8F"/><path d="M12 30 H52 L44 46 H20 Z" fill="none" stroke="#F3F0FF" stroke-width="3.6" stroke-linejoin="round"/><path d="M32 30 V14 L44 26" fill="none" stroke="#F3F0FF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 52 Q16 48 24 52 T40 52 T56 52" fill="none" stroke="#7FD1C7" stroke-width="3.2" stroke-linecap="round"/></svg>Keelson</div>
+    <nav class="tabs" aria-label="Sections"><span aria-current="page">Queue</span><span>Portfolio</span><span>Policy</span><span>Funder reports</span></nav>
+    <div class="lender">Brookmere Business Finance</div>
+    <div class="avatar" aria-label="Rachel Ibe, senior underwriter" title="Rachel Ibe, senior underwriter">RI</div>
+  </header>
+
+  <div class="main">
+    <aside class="queue" aria-label="Application queue">
+      <div class="qhead"><h2>Applications</h2><span id="qcount"></span></div>
+      <div id="queue"></div>
+    </aside>
+    <section class="work" id="work" aria-label="Application"></section>
+  </div>
+
+  <footer class="status">
+    <span>A product demo by Empatiq. <a href="/rebuild/lending-intake/">How it works</a></span>
+    <span class="r"><a href="https://guzh.uk">Made by Pavel Guzhikov</a><a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></span>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var RATE = 0.14;
+  var POLICY = { years: 2, variancePass: 15, varianceFail: 30, returnsPass: 1, returnsFail: 3, overdrawnPass: 5, overdrawnFail: 30, dscrPass: 1.25, dscrRefer: 1.0 };
+  var MONTHS = [["Aug", 31], ["Sep", 30], ["Oct", 31]];
+  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+  var APPS = [
+    { key: "harbour", name: "Harbour Joinery Ltd", broker: "Direct", received: "09:02", sector: "Construction trades",
+      app: { director: "Sarah Pell", years: 6.2, amount: 60000, term: 36, purpose: "A CNC router and a second van", turnover: 720000 },
+      reg: { status: "Active", incorporated: "Sep 2020", directors: ["Sarah Pell", "Mark Pell"], ccjs: 0, filings: "Up to date" },
+      opening: 18400, seed: 11,
+      lines: [["CUSTOMER PAYMENT", 61200, 9, "rev"], ["TIMBER SUPPLIES", 21800, 5, "sup"], ["HARDWARE TRADE", 8300, 4, "sup"], ["PAYROLL", 14100, 2, "pay"], ["HMRC VAT", 3500, 1, "tax"],
+              ["WORKSHOP RENT", 2500, 1, "oth"], ["FUNDCO REPAY", 1250, 1, "debt"], ["VAN LEASE", 620, 1, "oth"], ["UTILITIES", 480, 1, "oth"], ["CARD SPEND", 900, 6, "oth"]] },
+    { key: "northgate", name: "Northgate Coffee Roasters Ltd", broker: "Fairway Commercial (broker)", received: "08:41", sector: "Food and drink",
+      app: { director: "Imran Bhatti", years: 2.6, amount: 40000, term: 24, purpose: "A second roaster", turnover: 480000 },
+      reg: { status: "Active", incorporated: "Apr 2024", directors: ["Imran Bhatti"], ccjs: 0, filings: "Up to date" },
+      opening: 2100, seed: 23,
+      lines: [["CARD TAKINGS", 19800, 12, "rev"], ["WHOLESALE PAYMENT", 11300, 5, "rev"], ["GREEN COFFEE IMPORT", 9600, 3, "sup"], ["PACKAGING", 3300, 3, "sup"], ["PAYROLL", 9500, 2, "pay"],
+              ["UNIT RENT", 2200, 1, "oth"], ["QUICKCAP DAILY", 1600, 8, "debt"], ["HMRC TIME TO PAY", 900, 1, "tax"], ["UTILITIES", 700, 1, "oth"], ["CARD SPEND", 1000, 6, "oth"]],
+      extra: [["UNPAID DD RETURN", 1], ["UNPAID DD RETURN", 2]] },
+    { key: "brightline", name: "Brightline Events Ltd", broker: "Apex Finance Partners (broker)", received: "08:15", sector: "Events",
+      app: { director: "Jordan Hale", years: 1.4, amount: 75000, term: 36, purpose: "Working capital for the summer season", turnover: 900000 },
+      reg: { status: "Active", incorporated: "Jun 2025", directors: ["Casey Hale"], ccjs: 1, filings: "Accounts overdue" },
+      opening: -1800, seed: 37,
+      lines: [["CLIENT PAYMENT", 42000, 6, "rev"], ["EQUIPMENT HIRE", 16500, 4, "sup"], ["FREELANCE CREW", 14800, 6, "pay"], ["FASTFUND REPAY", 2100, 1, "debt"], ["VAN HIRE", 2600, 2, "oth"],
+              ["BETSTAR", 1450, 5, "gam"], ["FUEL", 1200, 6, "oth"], ["CARD SPEND", 2300, 8, "oth"]],
+      extra: [["UNPAID DD RETURN", 0], ["UNPAID DD RETURN", 1], ["UNPAID DD RETURN", 2], ["UNPAID DD RETURN", 2]] }
+  ];
+  var DONE = [["Kingsway Dental Ltd", 85000, "Fri", "Approved", "ok"], ["Merrow Print Ltd", 30000, "Fri", "Approved", "ok"], ["Oakfield Tyres Ltd", 55000, "Thu", "Declined", "no"]];
+  var CATS = { rev: ["Revenue", "c-rev"], sup: ["Suppliers", "c-sup"], pay: ["Payroll", "c-pay"], tax: ["Tax", "c-tax"], debt: ["Debt service", "c-debt"], gam: ["Gambling", "c-gam"], ret: ["Returned", "c-ret"], oth: ["Overheads", "c-oth"] };
+  var current = null, tab = "overview";
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function gbp(n) { return (n < 0 ? "-£" : "£") + Math.round(Math.abs(n)).toLocaleString("en-GB"); }
+  function k(n) { return (n < 0 ? "-£" : "£") + (Math.abs(n) / 1000).toFixed(Math.abs(n) >= 100000 ? 0 : 1) + "k"; }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, matchMedia("(prefers-reduced-motion: reduce)").matches ? 30 : ms); }); }
+  function toast(m) { var t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toast.h); toast.h = setTimeout(function () { t.classList.remove("on"); }, 4000); }
+
+  function statements(a) {
+    var r = rng(a.seed), tx = [];
+    MONTHS.forEach(function (m, mi) {
+      a.lines.forEach(function (l) {
+        var parts = [], left = l[1];
+        for (var i = 0; i < l[2]; i++) {
+          var share = i === l[2] - 1 ? left : Math.round(l[1] / l[2] * (0.7 + r() * 0.6));
+          share = Math.round(share * (0.94 + r() * 0.12)); left -= share; parts.push(Math.max(20, share));
+        }
+        parts.forEach(function (amt, pi) {
+          var day = l[0] === "PAYROLL" ? (parts.length === 1 ? 28 : 14 + 14 * (pi % 2)) : 1 + Math.floor(r() * (m[1] - 1));
+          tx.push({ m: mi, day: day, desc: l[0], amt: l[3] === "rev" ? amt : -amt, cat: l[3] });
+        });
+      });
+      (a.extra || []).filter(function (e) { return e[1] === mi; }).forEach(function (e) { tx.push({ m: mi, day: 6 + Math.floor(r() * 18), desc: e[0], amt: 0, cat: "ret" }); });
+    });
+    tx.sort(function (x, y) { return x.m - y.m || x.day - y.day; });
+    var bal = a.opening; tx.forEach(function (t) { bal += t.amt; t.bal = bal; });
+    return tx;
+  }
+
+  function analyse(a, tx) {
+    var n = 3, credits = 0, debits = 0, debt = 0, gambling = 0, ttp = 0, returns = 0, lowest = Infinity, last = {}, monthly = [[0, 0], [0, 0], [0, 0]];
+    tx.forEach(function (t) {
+      if (t.amt > 0) { credits += t.amt; monthly[t.m][0] += t.amt; } else { debits += -t.amt; monthly[t.m][1] += -t.amt; }
+      if (t.cat === "debt") debt += -t.amt;
+      if (t.cat === "gam") gambling++;
+      if (/TIME TO PAY/.test(t.desc)) ttp++;
+      if (t.cat === "ret") returns++;
+      lowest = Math.min(lowest, t.bal); last[t.m + "-" + t.day] = t.bal;
+    });
+    var daily = [], bal = a.opening, overdrawn = 0;
+    MONTHS.forEach(function (m, mi) { for (var d = 1; d <= m[1]; d++) { if (last[mi + "-" + d] !== undefined) bal = last[mi + "-" + d]; daily.push(bal); if (bal < 0) overdrawn++; } });
+    var c = credits / n, dd = debits / n, ds = debt / n, r = RATE / 12, pay = a.app.amount * r / (1 - Math.pow(1 + r, -a.app.term)), free = c - (dd - ds);
+    return { credits: c, debits: dd, debt: ds, pay: pay, free: free, dscr: free / (ds + pay), annual: c * 12, variance: (c * 12 - a.app.turnover) / a.app.turnover * 100,
+             gambling: gambling, ttp: ttp, returns: returns, overdrawn: overdrawn, lowest: lowest, closing: tx[tx.length - 1].bal, daily: daily, monthly: monthly };
+  }
+
+  function checks(a, f) {
+    var P = POLICY, out = [];
+    function add(n, s, w) { out.push({ name: n, state: s, why: w }); }
+    add("Company active, filings up to date", a.reg.status !== "Active" ? "fail" : a.reg.filings === "Up to date" ? "pass" : "refer", "Registry: " + a.reg.status + ". Filings: " + a.reg.filings.toLowerCase() + ".");
+    add("Applicant is a director", a.reg.directors.indexOf(a.app.director) >= 0 ? "pass" : "fail", "Application names " + a.app.director + "; registry lists " + a.reg.directors.join(" and ") + ".");
+    add("Trading " + P.years + " years or more", a.app.years >= P.years ? "pass" : "fail", a.app.years.toFixed(1) + " years trading.");
+    var v = Math.abs(f.variance);
+    add("Turnover matches statements", v <= P.variancePass ? "pass" : v <= P.varianceFail ? "refer" : "fail", "Stated " + gbp(a.app.turnover) + "; statements annualise to " + gbp(f.annual) + " (" + (f.variance >= 0 ? "+" : "") + f.variance.toFixed(1) + "%).");
+    add("Returned items", f.returns <= P.returnsPass ? "pass" : f.returns <= P.returnsFail ? "refer" : "fail", f.returns + " in three months.");
+    add("Gambling", f.gambling === 0 ? "pass" : "fail", f.gambling ? f.gambling + " payments to a betting operator." : "None found.");
+    add("Days overdrawn", f.overdrawn <= P.overdrawnPass ? "pass" : f.overdrawn <= P.overdrawnFail ? "refer" : "fail", f.overdrawn + " of 92 days; lowest " + gbp(f.lowest) + ".");
+    add("HMRC arrangement", f.ttp ? "refer" : "pass", f.ttp ? "Time to Pay instalments in " + f.ttp + " months." : "None seen.");
+    add("Debt service cover " + P.dscrPass + "x", f.dscr >= P.dscrPass ? "pass" : f.dscr >= P.dscrRefer ? "refer" : "fail", f.dscr.toFixed(2) + "x: free cash " + gbp(f.free) + " a month against debt " + gbp(f.debt) + " and the new payment " + gbp(f.pay) + ".");
+    add("County court judgments", a.reg.ccjs === 0 ? "pass" : "refer", a.reg.ccjs ? a.reg.ccjs + " recorded." : "None recorded.");
+    return out;
+  }
+  function verdict(list) {
+    if (list.some(function (c) { return c.state === "fail"; })) return ["Decline", "no"];
+    if (list.some(function (c) { return c.state === "refer"; })) return ["Refer", "ref"];
+    return ["Approve", "ok"];
+  }
+  function memo(a, f, list, v) {
+    var L = ["CREDIT MEMO", "", "Applicant   " + a.name, "Sector      " + a.sector, "Request     " + gbp(a.app.amount) + " over " + a.app.term + " months", "Purpose     " + a.app.purpose,
+      "Repayment   " + gbp(f.pay) + " a month at " + Math.round(RATE * 100) + "% a year", "Introducer  " + a.broker, "",
+      "TRADING (Aug to Oct 2026)", "Credits     " + gbp(f.credits) + " a month", "Debits      " + gbp(f.debits) + " a month", "Debt now    " + gbp(f.debt) + " a month",
+      "Free cash   " + gbp(f.free) + " a month before debt", "Cover       " + f.dscr.toFixed(2) + "x with the new loan", "Closing     " + gbp(f.closing), "", "POLICY"];
+    list.forEach(function (c) { L.push((c.state.toUpperCase() + "     ").slice(0, 7) + c.name + ". " + c.why); });
+    var asks = list.filter(function (c) { return c.state !== "pass"; });
+    if (asks.length) { L.push("", "FOR THE UNDERWRITER"); asks.forEach(function (c) { L.push("- " + c.name + ": " + c.why); }); }
+    L.push("", "RECOMMENDATION  " + v[0].toUpperCase(), "", "Prepared by Keelson for Rachel Ibe, senior underwriter.");
+    return L.join("\n");
+  }
+
+  function balanceChart(f) {
+    var W = 640, H = 200, P = 34, d = f.daily, min = Math.min(0, Math.min.apply(null, d)), max = Math.max.apply(null, d) * 1.1;
+    var x = function (i) { return P + i * (W - P - 8) / (d.length - 1); }, y = function (v) { return 10 + (max - v) * (H - 34) / (max - min || 1); };
+    var pts = d.map(function (v, i) { return x(i).toFixed(1) + "," + y(v).toFixed(1); }).join(" ");
+    var area = "M" + x(0) + "," + y(0) + " L" + pts.split(" ").join(" L") + " L" + x(d.length - 1) + "," + y(0) + " Z";
+    var s = '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Daily balance, August to October">';
+    [max, (max + min) / 2, min].forEach(function (v) { s += '<line x1="' + P + '" x2="' + (W - 8) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="#ECEBF3"/><text x="' + (P - 6) + '" y="' + (y(v) + 4) + '" font-size="10" text-anchor="end" fill="#6D6C84">' + k(v) + "</text>"; });
+    if (min < 0) s += '<line x1="' + P + '" x2="' + (W - 8) + '" y1="' + y(0) + '" y2="' + y(0) + '" stroke="#B42318" stroke-dasharray="4 3"/>';
+    s += '<path d="' + area + '" fill="#3B2F8F" opacity=".08"/><polyline points="' + pts + '" fill="none" stroke="#3B2F8F" stroke-width="2"/>';
+    [0, 31, 61].forEach(function (i, mi) { s += '<text x="' + x(i) + '" y="' + (H - 6) + '" font-size="10" fill="#6D6C84">' + MONTHS[mi][0] + "</text>"; });
+    return s + "</svg>";
+  }
+  function flowChart(f) {
+    var W = 320, H = 200, max = Math.max.apply(null, f.monthly.map(function (m) { return Math.max(m[0], m[1]); })) * 1.1, s = '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Monthly money in and out">';
+    f.monthly.forEach(function (m, i) {
+      var x0 = 30 + i * 96, hIn = m[0] / max * 150, hOut = m[1] / max * 150;
+      s += '<rect x="' + x0 + '" y="' + (170 - hIn) + '" width="30" height="' + hIn + '" rx="3" fill="#1F8A7E"/><rect x="' + (x0 + 34) + '" y="' + (170 - hOut) + '" width="30" height="' + hOut + '" rx="3" fill="#B9B4E0"/>';
+      s += '<text x="' + (x0 + 32) + '" y="190" font-size="11" text-anchor="middle" fill="#6D6C84">' + MONTHS[i][0] + '</text><text x="' + (x0 + 15) + '" y="' + (164 - hIn) + '" font-size="9.5" text-anchor="middle" fill="#14675E">' + k(m[0]) + "</text>";
+    });
+    return s + '<line x1="20" x2="310" y1="170" y2="170" stroke="#DAD8E8"/></svg><div class="legend"><span><i style="background:#1F8A7E"></i>Money in</span><span><i style="background:#B9B4E0"></i>Money out</span></div>';
+  }
+
+  function queue() {
+    $("queue").innerHTML = APPS.map(function (a) {
+      var st = a.decided ? '<span class="pill ' + a.decided[1] + '">' + a.decided[0] + "</span>" : a.result ? '<span class="pill ' + a.result[1] + '">Suggests ' + a.result[0].toLowerCase() + "</span>" : '<span class="pill new">New</span>';
+      return '<button class="qitem" type="button" data-key="' + a.key + '" aria-current="' + (current === a) + '"><b>' + esc(a.name) + '</b><span class="amt num">' + gbp(a.app.amount) +
+        '</span><span class="s">' + esc(a.broker) + ", " + a.received + "</span>" + st + "</button>";
+    }).join("") + DONE.map(function (d) {
+      return '<div class="qitem" aria-disabled="true" style="cursor:default"><b>' + esc(d[0]) + '</b><span class="amt num">' + gbp(d[1]) + '</span><span class="s">Decided ' + d[2] + '</span><span class="pill ' + d[4] + '">' + d[3] + "</span></div>";
+    }).join("");
+    $("qcount").textContent = APPS.filter(function (a) { return !a.decided; }).length + " to decide";
+  }
+
+  function work() {
+    var a = current;
+    if (!a) { $("work").innerHTML = '<p class="hint">Pick an application from the queue.</p>'; return; }
+    var r = a.result, h = '<button class="btn ghost back" id="back" type="button" style="margin-bottom:12px">Back to the queue</button>';
+    h += '<div class="whead"><div><h1>' + esc(a.name) + '</h1><div class="s">' + gbp(a.app.amount) + " over " + a.app.term + " months, " + esc(a.app.purpose.toLowerCase()) + "</div></div>";
+    h += r ? '<span class="pill ' + r[1] + '" style="font-size:13px;padding:4px 12px">Keelson suggests: ' + r[0] + "</span>" : '<button class="btn ml" id="analyse" type="button"><span class="spin" aria-hidden="true"></span><span>Analyse the pack</span></button>';
+    h += "</div>";
+    h += '<div class="subtabs" role="tablist">' + [["overview", "Overview"], ["statements", "Statements"], ["checks", "Policy checks"], ["memo", "Credit memo"]].map(function (t) {
+      return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (tab === t[0]) + '"' + (!r && t[0] !== "overview" ? " disabled" : "") + ">" + t[1] + "</button>";
+    }).join("") + "</div>";
+    if (tab === "overview" || !r) {
+      if (r) {
+        var f = a.f;
+        h += '<div class="kpis"><div class="kpi"><span>Credits a month</span><b class="num">' + gbp(f.credits) + '</b></div><div class="kpi"><span>Free cash before debt</span><b class="num">' + gbp(f.free) +
+          '</b></div><div class="kpi"><span>New payment</span><b class="num">' + gbp(f.pay) + '</b></div><div class="kpi ' + (f.dscr >= 1.25 ? "ok" : f.dscr >= 1 ? "ref" : "no") + '"><span>Debt service cover</span><b class="num">' + f.dscr.toFixed(2) + "x</b></div></div>";
+        h += '<div class="grid" style="grid-template-columns:2fr 1fr;margin-bottom:14px"><div class="card"><h3>Daily balance</h3>' + balanceChart(f) + '</div><div class="card"><h3>Money in and out</h3>' + flowChart(f) + "</div></div>";
+      }
+      h += '<div class="grid"><div class="card"><h3>Application</h3><dl class="kv"><dt>Director applying</dt><dd>' + esc(a.app.director) + "</dd><dt>Years trading</dt><dd>" + a.app.years.toFixed(1) +
+        "</dd><dt>Stated turnover</dt><dd class=\"num\">" + gbp(a.app.turnover) + "</dd><dt>Sector</dt><dd>" + esc(a.sector) + "</dd><dt>Introducer</dt><dd>" + esc(a.broker) + "</dd></dl></div>";
+      h += '<div class="card"><h3>Registry</h3><dl class="kv"><dt>Status</dt><dd>' + a.reg.status + "</dd><dt>Incorporated</dt><dd>" + a.reg.incorporated + "</dd><dt>Directors</dt><dd>" + esc(a.reg.directors.join(", ")) +
+        "</dd><dt>CCJs</dt><dd>" + a.reg.ccjs + "</dd><dt>Filings</dt><dd>" + a.reg.filings + "</dd></dl></div>";
+      h += '<div class="card"><h3>Documents received</h3><dl class="kv"><dt>Application form</dt><dd>PDF, 4 pages</dd><dt>Bank statements</dt><dd>3 months, ' + a.tx.length + " lines</dd><dt>Filed accounts</dt><dd>" + (a.reg.filings === "Up to date" ? "Latest year" : "Missing") + "</dd><dt>ID</dt><dd>Director passport</dd></dl></div></div>";
+    } else if (tab === "statements") {
+      h += '<div class="card"><h3>Transactions, categorised</h3><div class="tx"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th class="r">Amount</th><th class="r">Balance</th></tr></thead><tbody>' +
+        a.tx.map(function (t) { var c = CATS[t.cat]; return "<tr><td>" + t.day + " " + MONTHS[t.m][0] + "</td><td class=\"mono\">" + esc(t.desc) + '</td><td><span class="cat ' + c[1] + '">' + c[0] + '</span></td><td class="r num">' + (t.amt ? gbp(t.amt) : "returned") + '</td><td class="r num">' + gbp(t.bal) + "</td></tr>"; }).join("") +
+        "</tbody></table></div></div>";
+    } else if (tab === "checks") {
+      h += '<div class="card"><h3>Brookmere credit policy, v4</h3>' + a.checks.map(function (c) {
+        var cl = c.state === "pass" ? "ok" : c.state === "refer" ? "ref" : "no";
+        return '<div class="chk"><span class="pill ' + cl + '" style="justify-self:start">' + c.state + "</span><b>" + esc(c.name) + '</b><span class="why">' + esc(c.why) + "</span></div>";
+      }).join("") + "</div>";
+    } else if (tab === "memo") {
+      h += '<div class="card"><h3>Draft credit memo</h3><textarea id="memo" aria-label="Credit memo">' + esc(a.memo) + "</textarea>";
+      h += a.decided ? '<p style="margin:12px 0 0">Decision recorded: <span class="pill ' + a.decided[1] + '">' + a.decided[0] + "</span></p>" :
+        '<div class="actions"><button class="btn teal" type="button" data-decide="Approved|ok"><span class="spin" aria-hidden="true"></span><span>Approve</span></button><button class="btn warn" type="button" data-decide="Referred|ref"><span class="spin" aria-hidden="true"></span><span>Refer to credit committee</span></button><button class="btn bad" type="button" data-decide="Declined|no"><span class="spin" aria-hidden="true"></span><span>Decline</span></button></div>';
+      h += "</div>";
+    }
+    $("work").innerHTML = h;
+  }
+
+  function open(a) { current = a; if (!a.tx) a.tx = statements(a); tab = "overview"; $("app").classList.add("open"); queue(); work(); }
+
+  $("queue").addEventListener("click", function (e) { var b = e.target.closest("button.qitem"); if (b) open(APPS.filter(function (a) { return a.key === b.dataset.key; })[0]); });
+  $("work").addEventListener("click", async function (e) {
+    if (e.target.closest("#back")) { $("app").classList.remove("open"); return; }
+    var t = e.target.closest("[data-tab]"); if (t && !t.disabled) { tab = t.dataset.tab; work(); return; }
+    var an = e.target.closest("#analyse");
+    if (an) {
+      an.setAttribute("aria-busy", "true"); an.disabled = true;
+      var steps = ["Reading the application", "Pulling the registry record", "Categorising " + current.tx.length + " transactions", "Working out affordability", "Applying credit policy", "Drafting the memo"];
+      for (var i = 0; i < steps.length; i++) { an.lastElementChild.textContent = steps[i]; await wait(330); }
+      var a = current; a.f = analyse(a, a.tx); a.checks = checks(a, a.f); a.result = verdict(a.checks); a.memo = memo(a, a.f, a.checks, a.result);
+      queue(); work(); toast(a.tx.length + " statement lines read and " + a.checks.length + " policy checks run. Suggested: " + a.result[0] + ".");
+      return;
+    }
+    var d = e.target.closest("[data-decide]");
+    if (d) {
+      d.setAttribute("aria-busy", "true"); document.querySelectorAll("[data-decide]").forEach(function (b) { b.disabled = true; });
+      await wait(700);
+      current.memo = $("memo").value; current.decided = d.dataset.decide.split("|"); queue(); work();
+      toast(current.name + ": " + current.decided[0].toLowerCase() + ". Memo saved to the file.");
+    }
+  });
+
+  addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
+  queue();
+  if (matchMedia("(min-width: 901px)").matches) open(APPS[1]); else { $("work").innerHTML = ""; }
+  if (location.hash === "#ready") { open(APPS[1]); $("analyse").click(); }
+})();
+</script>
+</body>
+</html>
