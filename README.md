@@ -9,7 +9,7 @@ the page counter's Worker in `counter/` deploys on its own.
 | | |
 |---|---|
 | Canonical host | `https://guzh.uk/` |
-| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/`, `/goat-rodeo/race/`, `/goat-rodeo/privacy/`, `/rebuild/`, `/rebuild/block-requests/`, `/rebuild/lending-intake/`, and `404.html` for any address with no page |
+| Pages | `/`, `/weather/` (forwards to `https://alwaysweather.uk/`), `/weather/privacy/`, `/weather/support/`, `/weather/ideas/`, `/today/` (forwards to `https://alwaystoday.uk/`), `/today/privacy/`, `/today/support/`, `/today/terms/`, `/goat-rodeo/`, `/goat-rodeo/race/`, `/goat-rodeo/privacy/`, `/rebuild/`, `/rebuild/block-requests/`, `/rebuild/lending-intake/`, `/rebuild/legal-intake/`, `/rebuild/broker-submissions/`, and `404.html` for any address with no page |
 | Page weight | `/` ~38 KB HTML (~15 KB gzipped) + 24 KB portrait (WebP) + Google Fonts; every page + ~10 KB gzipped Cloudflare beacon |
 | Build | none |
 
@@ -730,4 +730,4 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 
 ## The /rebuild/ pages
 
-The re-engineering offer (Empatiq Limited) and two working demos, linked from cold outreach: `/rebuild/`, `/rebuild/block-requests/` (resident requests triaged) and `/rebuild/lending-intake/` (an SME loan pack to a draft credit memo). Generated: edit `tools/rebuild/` (bodies, `rebuild.css`, `rebuild.js`) and run `./tools/make-rebuild-pages.py`; the share cards come from `./tools/make-rebuild-og.py` into `assets/rebuild/`. The demos run in the browser on invented sample data and send nothing. No prices on these pages: they go in proposals, not in the first touch. The outreach itself lives in `~/dev/reengineering`.
+The re-engineering offer (Empatiq Limited) and two working demos, linked from cold outreach: `/rebuild/`, `/rebuild/block-requests/` (resident requests triaged) `/rebuild/lending-intake/` (an SME loan pack to a draft credit memo), `/rebuild/legal-intake/` (new matters across acquired law firms, one conflict index) and `/rebuild/broker-submissions/` (a renewal to a market submission). Generated: edit `tools/rebuild/` (bodies, `rebuild.css`, `rebuild.js`) and run `./tools/make-rebuild-pages.py`; the share cards come from `./tools/make-rebuild-og.py` into `assets/rebuild/`. The demos run in the browser on invented sample data and send nothing. No prices on these pages: they go in proposals, not in the first touch. The outreach itself lives in `~/dev/reengineering`.

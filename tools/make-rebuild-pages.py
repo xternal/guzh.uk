@@ -42,10 +42,29 @@ PAGES = [
         "image_alt": "An SME loan pack turned into checks and a draft credit memo with affordability figures.",
         "body": "lending-intake.html",
     },
+    {
+        "path": "rebuild/legal-intake/index.html", "url": "https://guzh.uk/rebuild/legal-intake/",
+        "nav": "legal", "title": "Demo: new matters from every acquired firm, one intake",
+        "description": "A working demo: new enquiries at three acquired law firms are typed, merged, conflict-checked "
+                       "against all three firms' old client lists at once, risk-rated for AML and given a draft client care letter.",
+        "image": "legal-intake-og.png",
+        "image_alt": "New legal matters from three acquired firms checked against one group conflict index.",
+        "body": "legal-intake.html",
+    },
+    {
+        "path": "rebuild/broker-submissions/index.html", "url": "https://guzh.uk/rebuild/broker-submissions/",
+        "nav": "insurance", "title": "Demo: a client's renewal information to a market-ready submission",
+        "description": "A working demo: a broker's renewal information is read, gaps found, the claims record scored, "
+                       "the panel's appetite checked, and a submission and a client chaser drafted.",
+        "image": "broker-submissions-og.png",
+        "image_alt": "A renewal turned into a submission: details found and missing, loss ratio, and the markets in appetite.",
+        "body": "broker-submissions.html",
+    },
 ]
 
-NAV = [("overview", "/rebuild/", "Overview"), ("block", "/rebuild/block-requests/", "Block requests"),
-       ("lending", "/rebuild/lending-intake/", "Lending intake")]
+NAV = [("overview", "/rebuild/", "Overview"), ("block", "/rebuild/block-requests/", "Property"),
+       ("lending", "/rebuild/lending-intake/", "Lending"), ("legal", "/rebuild/legal-intake/", "Legal"),
+       ("insurance", "/rebuild/broker-submissions/", "Insurance")]
 
 STYLE = (SRC / "rebuild.css").read_text(encoding="utf-8")
 SCRIPT = (SRC / "rebuild.js").read_text(encoding="utf-8")

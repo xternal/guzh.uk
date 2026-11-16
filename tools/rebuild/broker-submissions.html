@@ -1,0 +1,190 @@
+<p class="kicker">Demo · insurance brokers and MGAs</p>
+<h1>A client's renewal information to a market-ready submission</h1>
+<p class="lead">Renewal information arrives as an email, last year's schedule and a claims list, in a different shape for every client and every acquired book. Pick a client and press the button: the risk details are read, gaps found, the claims record scored, the panel's appetite checked, and a submission and a chaser to the client drafted.</p>
+<p class="note">Invented clients, insurers and appetite rules. In this demo the information is already text and the checks run in your browser; nothing leaves the page. The production build reads emails, PDFs and spreadsheets from your inbox and broking system, uses your real panel appetite, and a broker approves every submission before it goes.</p>
+
+<div class="tabsel" id="pick" role="group" aria-label="Client"></div>
+<ul class="pipe" id="pipe" aria-label="Steps">
+  <li>Read the information</li><li>Find the gaps</li><li>Score the claims</li><li>Match the panel</li><li>Draft the submission</li><li>Chase the client</li>
+</ul>
+<div class="row">
+  <button class="btn" id="run" type="button"><span class="spin" aria-hidden="true"></span><span>Prepare the submission</span></button>
+  <span class="small" id="status" role="status"></span>
+</div>
+
+<div class="grid">
+  <div class="card"><h3>What the client sent</h3><p class="muted" id="email" style="white-space:pre-line"></p></div>
+  <div class="card"><h3>Claims, last five years</h3><div id="claims"></div></div>
+</div>
+
+<div id="result" hidden>
+  <h2>Risk details</h2>
+  <div class="card" id="fields"></div>
+  <div class="stats" id="figures"></div>
+  <h2>Panel appetite</h2>
+  <div class="card" id="markets"></div>
+  <h2>Drafts for the broker</h2>
+  <div class="grid">
+    <div><h3>Submission to the markets</h3><pre class="memo" id="sub"></pre></div>
+    <div><h3>Chaser to the client</h3><pre class="memo" id="chase"></pre></div>
+  </div>
+</div>
+
+<h2>Before and after, with your numbers</h2>
+<p class="muted">Example inputs. Change them to your own: renewals and new business submissions a week, a handler's minutes on each today (rekeying, chasing, building the presentation, picking markets), and minutes to review the prepared version.</p>
+<form class="calc" id="calc" onsubmit="return false">
+  <label>Submissions a week <input name="count" type="number" min="0" value="80" inputmode="numeric"></label>
+  <label>Minutes each now <input name="before" type="number" min="0" step="1" value="90" inputmode="decimal"></label>
+  <label>Minutes each after <input name="after" type="number" min="0" step="1" value="30" inputmode="decimal"></label>
+</form>
+<div class="stats" id="calcOut"></div>
+<p class="small">The audit measures your real figures before anything is built, and the build is measured against them.</p>
+
+<h2>What the real build adds</h2>
+<div class="grid">
+  <div class="card"><h3>Acquired books</h3><p class="muted">Renewals from a newly bought broker prepared the group's way from its first month, before its broking system is migrated.</p></div>
+  <div class="card"><h3>Your panel, kept current</h3><p class="muted">Appetite guides and referral rules as data your placing team can update, with every market decision logged.</p></div>
+  <div class="card"><h3>Renewal timing</h3><p class="muted">Information requested 90 days out and chased on a schedule, so submissions reach the markets with time to negotiate.</p></div>
+</div>
+<div class="row"><a class="btn" href="mailto:pavel@guzh.uk?subject=Teardown%3A%20submissions%20and%20renewals">Book a free 45-minute teardown</a></div>
+
+<script>
+(function () {
+  var R = window.Rebuild;
+  var NEED = {
+    combined: [["trade", "Trade"], ["turnover", "Turnover"], ["wageroll", "Wage roll"], ["locations", "Premises"], ["buildings", "Buildings sum insured"],
+               ["contents", "Contents and stock sum insured"], ["bi", "Business interruption sum insured and indemnity period"], ["security", "Intruder alarm and security"],
+               ["flood", "Flood history and postcode check"], ["occupancy", "Occupancy of every building"]],
+    fleet: [["trade", "Trade"], ["turnover", "Turnover"], ["vehicles", "Vehicle schedule"], ["drivers", "Youngest driver and conviction declarations"],
+            ["olicence", "Operator licence"], ["telematics", "Telematics or cameras"], ["radius", "Operating radius"]]
+  };
+  var CLIENTS = [
+    { key: "pennine", name: "Pennine Bakehouse Ltd", blurb: "Food manufacturer, one site", cls: "combined", sector: "food manufacturing", premium: 38500, renew: "1 Feb 2027",
+      email: "Hi, renewal info attached. Turnover this year about £4.2m, wages £1.1m. Same single site in Halifax, buildings £2.5m, plant, contents and stock £1.08m, loss of profits £1.6m for 18 months. Red Care alarm, no sprinklers. Never flooded. Fully occupied, 46 staff.",
+      fields: { trade: "Bakery products manufacturer", turnover: "£4,200,000", wageroll: "£1,100,000", locations: "1, Halifax", buildings: "£2,500,000", contents: "£1,080,000",
+                bi: "£1,600,000, 18 months", security: "Monitored alarm (Red Care); no sprinklers", flood: "No flood history", occupancy: "Fully occupied" },
+      claims: [["2022", "Escape of water", 8200], ["2024", "Employer's liability: slip", 12400]] },
+    { key: "harbourside", name: "Harbourside Lettings Group Ltd", blurb: "Property owner, 12 buildings, 2 acquired books", cls: "combined", sector: "residential property owning", premium: 24000, renew: "15 Jan 2027",
+      email: "Renewal for the portfolio please. We've added the six flats from the Clifton book we bought in the summer, list attached, values for three of them to follow. 27 Dock Street has been empty since September while we refurbish. Rent roll about £1.3m.",
+      fields: { trade: "Residential property owner", turnover: "£1,300,000 rent roll", wageroll: "£210,000", locations: "12 buildings (6 added from the Clifton book)",
+                buildings: "9 of 12 valued; 3 Clifton flats missing", contents: "Landlord's contents £150,000", bi: "Loss of rent: 24 months, sum not given", security: null,
+                flood: null, occupancy: "27 Dock Street unoccupied since September (refurbishment)" },
+      gaps: { buildings: true, bi: true },
+      claims: [["2024", "Escape of water, 3 Quay Mews", 22000], ["2025", "Malicious damage, communal door", 6100]] },
+    { key: "ridgeway", name: "Ridgeway Haulage Ltd", blurb: "Haulier, 38 HGVs, heavy claims", cls: "fleet", sector: "general haulage", premium: 152000, renew: "1 Mar 2027",
+      email: "Fleet renewal. 38 HGVs and 12 trailers, schedule attached. National haulage, mostly M62 and M1. O-licence held, standard national. All tractors have forward and driver cameras. Youngest driver 23. Claims list from the insurer attached.",
+      fields: { trade: "General haulage", turnover: "£9,800,000", vehicles: "38 HGVs, 12 trailers", drivers: "Youngest 23; conviction declarations not sent",
+                olicence: "Standard national", telematics: "Forward and driver-facing cameras", radius: "National" },
+      gaps: { drivers: true },
+      claims: [["2024", "Rear-end collision, M62", 86000], ["2024", "Third-party injury", 142000], ["2024", "Reversing damage", 9000], ["2025", "Load shift, trailer", 31000],
+               ["2025", "Rear-end collision", 54000], ["2025", "Windscreen", 1200], ["2026", "Third-party vehicle", 47000], ["2026", "Reversing damage", 7800], ["2026", "Side-swipe, third-party car", 32000]] }
+  ];
+  /* The invented panel: who writes what */
+  var PANEL = [
+    { name: "Ashgrove Insurance", cls: "combined", trades: ["food manufacturing", "residential property owning"], maxLR: 50, unoccupied: false },
+    { name: "Wexcombe Mutual", cls: "combined", trades: ["food manufacturing"], maxLR: 60, unoccupied: false },
+    { name: "Pennant Specialty (MGA)", cls: "combined", trades: ["residential property owning"], maxLR: 70, unoccupied: true },
+    { name: "Kingsmere Insurance", cls: "fleet", maxFleet: 25, maxLR: 60, cameras: false },
+    { name: "Tollgate Fleet Underwriting (MGA)", cls: "fleet", minFleet: 10, maxLR: 95, cameras: true }
+  ];
+
+  function analyse(c) {
+    var need = NEED[c.cls], present = [], missing = [];
+    need.forEach(function (n) {
+      var v = c.fields[n[0]];
+      if (!v || (c.gaps && c.gaps[n[0]])) missing.push({ key: n[0], label: n[1], have: v || "" }); else present.push({ label: n[1], value: v });
+    });
+    var recent = c.claims.filter(function (x) { return +x[0] >= 2024; });
+    var incurred = recent.reduce(function (s, x) { return s + x[2]; }, 0);
+    var lr = incurred / (c.premium * 3) * 100;
+    var fleet = c.cls === "fleet" ? parseInt(c.fields.vehicles, 10) : 0;
+    var unocc = /unoccupied|empty/i.test(c.fields.occupancy || "");
+    var markets = PANEL.filter(function (p) { return p.cls === c.cls; }).map(function (p) {
+      var no = [];
+      if (p.trades && p.trades.indexOf(c.sector) < 0) no.push("does not write " + c.sector);
+      if (lr > p.maxLR) no.push("loss ratio " + R.num(lr) + "% is over its " + p.maxLR + "% limit");
+      if (unocc && !p.unoccupied) no.push("no unoccupied buildings");
+      if (p.maxFleet && fleet > p.maxFleet) no.push("fleets up to " + p.maxFleet + " vehicles");
+      if (p.minFleet && fleet < p.minFleet) no.push("fleets of " + p.minFleet + " or more");
+      if (p.cameras && !/camera|telematic/i.test(c.fields.telematics || "")) no.push("needs cameras or telematics");
+      return { p: p, fit: !no.length, why: no };
+    });
+    return { present: present, missing: missing, incurred: incurred, lr: lr, count: recent.length, markets: markets, unocc: unocc };
+  }
+
+  function submission(c, a) {
+    var L = ["SUBMISSION (DRAFT FOR BROKER REVIEW)", c.name + ": " + (c.cls === "fleet" ? "motor fleet" : "commercial combined") + ", renewal " + c.renew, ""];
+    a.present.forEach(function (f) { L.push(f.label + ": " + f.value); });
+    L.push("", "Claims 2024 to 2026: " + a.count + ", incurred " + R.gbp(a.incurred) + "; loss ratio " + R.num(a.lr) + "% on the expiring premium.");
+    c.claims.forEach(function (x) { L.push("  " + x[0] + "  " + x[1] + "  " + R.gbp(x[2])); });
+    if (a.unocc) L.push("", "Note: one building unoccupied during refurbishment; works schedule and security to follow.");
+    if (a.missing.length) L.push("", "To follow from the client: " + a.missing.map(function (m) { return m.label.toLowerCase(); }).join("; ") + ".");
+    var fits = a.markets.filter(function (m) { return m.fit; });
+    L.push("", "Approach: " + (fits.length ? fits.map(function (m) { return m.p.name; }).join(", ") : "no panel market fits; open market or specialist placement") + ".");
+    return L.join("\n");
+  }
+
+  function chaser(c, a) {
+    if (!a.missing.length) return "Nothing to chase: the information is complete. The submission can go to the markets today.";
+    var L = ["Subject: " + c.name + " renewal on " + c.renew + ": " + a.missing.length + " item" + (a.missing.length > 1 ? "s" : "") + " needed", "",
+             "Hello,", "", "Thank you for the renewal information. To present the best case to insurers we still need:"];
+    a.missing.forEach(function (m) { L.push("  - " + m.label + (m.have ? " (we have: " + m.have + ")" : "")); });
+    L.push("", "Could you send these by the end of next week? Insurers price gaps as risk, so complete information usually means better terms.", "", "Your account handler");
+    return L.join("\n");
+  }
+
+  var pick = document.getElementById("pick"), run = document.getElementById("run"), status = document.getElementById("status"),
+      pipe = document.querySelectorAll("#pipe li"), result = document.getElementById("result"), current = CLIENTS[0];
+
+  function show(c) {
+    current = c;
+    pick.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.key === c.key ? "true" : "false"); });
+    document.getElementById("email").textContent = c.email + "\n\nExpiring premium: " + R.gbp(c.premium) + ". Renewal: " + c.renew + ".";
+    document.getElementById("claims").innerHTML = '<table class="table"><thead><tr><th>Year</th><th>Claim</th><th class="num">Incurred</th></tr></thead><tbody>' +
+      c.claims.map(function (x) { return "<tr><td>" + x[0] + "</td><td>" + R.esc(x[1]) + '</td><td class="num">' + R.gbp(x[2]) + "</td></tr>"; }).join("") + "</tbody></table>";
+    result.hidden = true;
+    pipe.forEach(function (li) { li.className = ""; });
+    status.textContent = "";
+  }
+
+  pick.innerHTML = CLIENTS.map(function (c) {
+    return '<button type="button" data-key="' + c.key + '" aria-pressed="false">' + R.esc(c.name) + "<small>" + R.esc(c.blurb) + "</small></button>";
+  }).join("");
+  pick.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (b && !run.disabled) show(CLIENTS.filter(function (c) { return c.key === b.dataset.key; })[0]);
+  });
+
+  run.addEventListener("click", async function () {
+    var group = [run].concat([].slice.call(pick.querySelectorAll("button")));
+    R.busy(run, group, true);
+    result.hidden = true;
+    status.textContent = "Working…";
+    var t0 = performance.now();
+    for (var s = 0; s < pipe.length; s++) { pipe[s].className = "on"; await R.wait(260); pipe[s].className = "ok"; }
+    var c = current, a = analyse(c);
+    document.getElementById("fields").innerHTML =
+      a.present.map(function (f) { return '<div class="check"><span class="chip green">found</span><span>' + R.esc(f.label) + '</span><span class="why">' + R.esc(f.value) + "</span></div>"; }).join("") +
+      a.missing.map(function (m) { return '<div class="check"><span class="chip amber">missing</span><span>' + R.esc(m.label) + '</span><span class="why">' + R.esc(m.have || "Not in what the client sent.") + "</span></div>"; }).join("");
+    var fits = a.markets.filter(function (m) { return m.fit; }).length;
+    document.getElementById("figures").innerHTML =
+      '<div class="stat"><b>' + a.present.length + " of " + (a.present.length + a.missing.length) + '</b><span>details complete</span></div>' +
+      '<div class="stat"><b>' + a.count + '</b><span>claims in three years</span></div>' +
+      '<div class="stat"><b>' + R.num(a.lr) + '%</b><span>loss ratio on expiring premium</span></div>' +
+      '<div class="stat"><b>' + fits + " of " + a.markets.length + '</b><span>panel markets in appetite</span></div>';
+    document.getElementById("markets").innerHTML = a.markets.map(function (m) {
+      return '<div class="check"><span class="chip ' + (m.fit ? "green" : "red") + '">' + (m.fit ? "approach" : "out") + "</span><span>" + R.esc(m.p.name) +
+        '</span><span class="why">' + R.esc(m.fit ? "In appetite on trade, claims and size." : "Out of appetite: " + m.why.join("; ") + ".") + "</span></div>";
+    }).join("");
+    document.getElementById("sub").textContent = submission(c, a);
+    document.getElementById("chase").textContent = chaser(c, a);
+    result.hidden = false;
+    status.textContent = "Prepared in " + R.num((performance.now() - t0) / 1000, 1) + " seconds.";
+    R.busy(run, group, false);
+    result.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  });
+
+  show(CLIENTS[0]);
+  R.calc(document.getElementById("calc"), document.getElementById("calcOut"));
+})();
+</script>

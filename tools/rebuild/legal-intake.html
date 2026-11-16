@@ -1,0 +1,230 @@
+<p class="kicker">Demo · legal groups</p>
+<h1>New matters from every acquired firm, one intake</h1>
+<p class="lead">A legal group has bought three firms, and each still opens matters its own way. Press the button: every new enquiry is read, given a matter type and a team, checked for conflicts against all three firms' old client lists at once, risk-rated for anti-money-laundering checks, and given a draft client care letter. Duplicates sent to two firms are merged.</p>
+<p class="note">Invented firms, people and companies. In this demo the matching runs on plain rules in your browser and nothing leaves the page. The production build reads each firm's inbox and practice management system, uses a language model and your group risk policy, and a fee earner signs off every conflict and every new client.</p>
+
+<div class="grid">
+  <div class="card"><h3>The group</h3><p class="muted">Ashby &amp; Lowe (Leeds), Hollins Partners (Bristol) and Marsh Gate Law (London), each on its own case management system.</p></div>
+  <div class="card"><h3>One conflict index</h3><p class="muted"><span id="idxCount"></span> parties from the three legacy systems, matched by name after cleaning (Ltd and Limited, initials, punctuation).</p></div>
+</div>
+
+<ul class="pipe" id="pipe" aria-label="Steps">
+  <li>Read the enquiry</li><li>Matter type and team</li><li>Merge duplicates</li><li>Group conflict check</li><li>AML risk</li><li>Client care letter</li>
+</ul>
+<div class="row">
+  <button class="btn" id="run" type="button"><span class="spin" aria-hidden="true"></span><span>Open the new matters</span></button>
+  <button class="btn ghost" id="reset" type="button">Start again</button>
+  <span class="small" id="status" role="status"></span>
+</div>
+<div class="stats" id="stats" hidden></div>
+<div class="inbox" id="inbox"></div>
+
+<h2>Before and after, with your numbers</h2>
+<p class="muted">Example inputs. Change them to your own: new matters a week across the group, minutes of intake admin each today (keying, conflict search in each system, ID requests, the letter), and minutes to check the prepared version.</p>
+<form class="calc" id="calc" onsubmit="return false">
+  <label>New matters a week <input name="count" type="number" min="0" value="150" inputmode="numeric"></label>
+  <label>Minutes each now <input name="before" type="number" min="0" step="1" value="40" inputmode="decimal"></label>
+  <label>Minutes each after <input name="after" type="number" min="0" step="1" value="10" inputmode="decimal"></label>
+</form>
+<div class="stats" id="calcOut"></div>
+<p class="small">The audit measures your real figures before anything is built, and the build is measured against them.</p>
+
+<h2>What the real build adds</h2>
+<div class="grid">
+  <div class="card"><h3>Before the systems merge</h3><p class="muted">A newly acquired firm joins the group conflict index in its first week, from an export of its old system, long before its data migration.</p></div>
+  <div class="card"><h3>Your risk policy</h3><p class="muted">Your firm-wide risk assessment as rules the compliance team can read and change, with every check and override logged for the COLP and MLRO.</p></div>
+  <div class="card"><h3>ID and funds</h3><p class="muted">Electronic ID, sanctions and PEP screening through the provider you already use, and source of funds requests sent and chased automatically.</p></div>
+</div>
+<div class="row"><a class="btn" href="mailto:pavel@guzh.uk?subject=Teardown%3A%20matter%20intake">Book a free 45-minute teardown</a></div>
+
+<script>
+(function () {
+  var R = window.Rebuild;
+  var FIRMS = { AL: "Ashby & Lowe", HP: "Hollins Partners", MG: "Marsh Gate Law" };
+  /* The three legacy systems, as exported: [name, role, firm, matter, status] */
+  var INDEX = [
+    ["Kestrel Logistics Limited", "client", "HP", "HP-2291 commercial contracts", "open"],
+    ["Michael J. Brennan", "client", "AL", "AL-0874 will and lasting power of attorney", "closed 2023"],
+    ["Albion Estates LLP", "opponent", "MG", "MG-1180 lease dispute", "closed 2025"],
+    ["Harrow & Vale Developments Ltd", "client", "MG", "MG-1422 site acquisition", "open"],
+    ["S. Patel", "client", "AL", "AL-1102 remortgage", "closed 2024"],
+    ["Fernhill Bakery Limited", "client", "HP", "HP-2410 employment advice", "closed 2026"],
+    ["Okoye, Grace", "client", "AL", "AL-0651 will", "closed 2019"],
+    ["Brightwater Plumbing", "client", "HP", "HP-2533 debt recovery", "open"],
+    ["Linden Care Homes Ltd", "opponent", "MG", "MG-1390 personal injury", "open"],
+    ["T. Nakamura", "client", "MG", "MG-1201 residential purchase", "closed 2025"]
+  ];
+  var PEP = ["Viktor Sorel"]; /* the demo watchlist */
+  var INBOX = [
+    { firm: "AL", from: "Emma Clarke", via: "web form", time: "Mon 08:02",
+      text: "We're buying 14 Wren Close, Harrogate for £385,000 from Mr R. Doyle. Part of the deposit is a £60,000 gift from my parents. Can you act for us? Completion hoped for January." },
+    { firm: "HP", from: "Daniel Shaw", via: "email", time: "Mon 08:20",
+      text: "I was dismissed last week by Kestrel Logistics Ltd after raising a safety complaint. I'd like advice on an unfair dismissal and whistleblowing claim." },
+    { firm: "MG", from: "Fernhill Bakery Ltd", via: "email", time: "Mon 08:41",
+      text: "We are taking a new 10-year lease on a unit at Canal Yard from Albion Estates LLP and need the lease reviewed. Director: Ruth Osei." },
+    { firm: "AL", from: "Laura Brennan", via: "phone note", time: "Mon 09:05",
+      text: "Wants advice on divorce and finances from her husband Michael Brennan. Two children. Family home in Leeds in joint names." },
+    { firm: "HP", from: "Peter Okoye", via: "email", time: "Mon 09:30",
+      text: "My mother Grace Okoye died last month. I am the executor of her will and need help with probate. The estate includes her house and savings." },
+    { firm: "MG", from: "Northwind Analytics Ltd", via: "email", time: "Mon 09:48",
+      text: "We are selling the company to a private buyer, Sorel Capital Partners, whose principal is Viktor Sorel. Heads of terms agreed. Need a share sale team. Director: Hannah Reid." },
+    { firm: "HP", from: "Brightwater Plumbing Ltd", via: "email", time: "Mon 10:02",
+      text: "Another customer won't pay: J & K Builders owe us £8,400 on three invoices, now 90 days overdue. Please start recovery as before." },
+    { firm: "MG", from: "Emma Clarke", via: "email", time: "Mon 10:15",
+      text: "Hi, I sent this to your Harrogate colleagues too. We're buying 14 Wren Close, Harrogate with a gift from my parents for part of the deposit. Who will act?" }
+  ];
+  var TYPES = [
+    { key: "conv", label: "Residential conveyancing", team: "Property", words: ["buying", "purchase", "completion", "remortgage", "selling my"], docs: ["Photo ID and proof of address", "Mortgage offer", "Source of funds for the deposit"] },
+    { key: "emp", label: "Employment", team: "Employment", words: ["dismiss", "tribunal", "whistleblow", "redundan", "grievance"], docs: ["Photo ID and proof of address", "Contract of employment", "Dismissal letter"] },
+    { key: "lease", label: "Commercial property", team: "Commercial property", words: ["lease", "landlord", "unit", "premises"], docs: ["Company ID: register extract and director ID", "Heads of terms"] },
+    { key: "fam", label: "Family", team: "Family", words: ["divorce", "separation", "children", "finances from"], docs: ["Photo ID and proof of address", "Marriage certificate"] },
+    { key: "prob", label: "Probate", team: "Private client", words: ["probate", "executor", "estate", "died"], docs: ["Executor's photo ID", "Death certificate", "The original will"] },
+    { key: "corp", label: "Corporate: share sale", team: "Corporate", words: ["share sale", "selling the company", "heads of terms", "acquisition"], docs: ["Company ID: register extract and director ID", "Heads of terms", "Cap table"] },
+    { key: "debt", label: "Debt recovery", team: "Commercial litigation", words: ["won't pay", "owe", "invoices", "overdue", "recovery"], docs: ["Company ID: register extract and director ID", "Unpaid invoices", "Terms of business"] }
+  ];
+
+  function norm(s) {
+    return s.toLowerCase().replace(/&/g, " and ").replace(/\b(limited|ltd|llp|plc|mr|mrs|ms|dr)\b/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+  }
+  /* "Michael J. Brennan" matches "Michael Brennan"; "Okoye, Grace" matches "Grace Okoye"; "S. Patel" needs more than an initial. */
+  function same(a, b) {
+    var x = norm(a).split(" ").filter(function (w) { return w.length > 1; }), y = norm(b).split(" ").filter(function (w) { return w.length > 1; });
+    if (x.length < 2 || y.length < 2) return false;
+    var hit = x.filter(function (w) { return y.indexOf(w) >= 0; }).length;
+    return hit >= 2 || (hit === Math.min(x.length, y.length) && hit >= 2);
+  }
+  function parties(e) {
+    var names = [e.from];
+    var re = /([A-Z][a-z]+(?:\s(?:[A-Z]\.|[A-Z][a-z]+|&|[A-Z]))*\s(?:Ltd|Limited|LLP|Partners|Builders|Plumbing))|((?:Mr|Mrs|Ms)?\s?[A-Z][a-z]+\s[A-Z][a-z]+)/g, m;
+    while ((m = re.exec(e.text))) {
+      var n = (m[1] || m[2]).trim();
+      if (/\b(Close|Road|Street|Lane|Mews|Yard|Way|Avenue)$/.test(n)) continue;
+      if (!/^(Can|Need|Please|Part|Director|Family|Two|Heads|Canal|We|Hi|Who|My|The|Another)\b/.test(n) && names.indexOf(n) < 0) names.push(n);
+    }
+    var amp = e.text.match(/\b([A-Z] & [A-Z] [A-Z][a-z]+)/);
+    if (amp && names.indexOf(amp[1]) < 0) names.push(amp[1]);
+    var mr = e.text.match(/\b(?:Mr|Mrs|Ms)\.? ([A-Z]\. [A-Z][a-z]+)/);
+    if (mr && names.indexOf(mr[1]) < 0) names.push(mr[1]);
+    var d = e.text.match(/Director:\s*([A-Z][a-z]+ [A-Z][a-z]+)/);
+    if (d && names.indexOf(d[1]) < 0) names.push(d[1]);
+    return names;
+  }
+
+  function assess(e, seen) {
+    var t = e.text.toLowerCase(), r = {};
+    var scored = TYPES.map(function (k) { return { k: k, n: k.words.filter(function (w) { return t.indexOf(w) >= 0; }).length }; })
+      .filter(function (x) { return x.n; }).sort(function (a, b) { return b.n - a.n; });
+    r.type = scored.length ? scored[0].k : null;
+    r.parties = parties(e);
+    r.company = /\b(Ltd|Limited|LLP)\b/.test(e.from);
+    var key = norm(e.from) + "|" + (r.type ? r.type.key : "");
+    r.dup = seen[key] || null;
+    if (!r.dup) seen[key] = e;
+    r.hits = [];
+    r.parties.forEach(function (p) {
+      INDEX.forEach(function (x) {
+        if (same(p, x[0])) r.hits.push({ party: p, rec: x, isClient: norm(p) === norm(e.from) || same(p, e.from) });
+      });
+    });
+    /* A conflict is acting against someone the group acts or acted for. The enquirer as a past client is good news;
+       a past opponent is just history; the late client in a probate matter means the group may hold the will. */
+    r.conflicts = r.hits.filter(function (h) { return !h.isClient && h.rec[1] === "client" && !(r.type && r.type.key === "prob"); });
+    r.known = r.hits.filter(function (h) { return h.isClient; });
+    r.notes = r.hits.filter(function (h) { return !h.isClient && r.conflicts.indexOf(h) < 0; }).map(function (h) {
+      return h.rec[1] === "opponent" ? h.party + " was an opponent of " + FIRMS[h.rec[2]] + " on " + h.rec[3] + " (" + h.rec[4] + "): no conflict in acting against them again."
+        : h.party + " was a client of " + FIRMS[h.rec[2]] + " on " + h.rec[3] + " (" + h.rec[4] + "): the original will may be held there. Ask for the deeds packet.";
+    });
+    r.pep = r.parties.filter(function (p) { return PEP.some(function (w) { return same(p, w); }); });
+    r.funds = /gift|loan from|cash|crypto/.test(t);
+    r.risk = r.pep.length ? "Enhanced due diligence" : r.funds && r.type && r.type.key === "conv" ? "Standard, plus source of funds" : "Standard";
+    r.docs = (r.type ? r.type.docs.slice() : ["Photo ID and proof of address"]);
+    if (r.funds && r.docs.indexOf("Source of funds for the deposit") < 0) r.docs.push("Source of funds");
+    if (/gift/.test(t)) r.docs.push("Gifted deposit letter and the donors' ID and bank statements");
+    if (r.pep.length) r.docs.push("Source of wealth for " + r.pep.join(", ") + ", and MLRO sign-off");
+    r.letter = letter(e, r);
+    return r;
+  }
+
+  function letter(e, r) {
+    var who = r.company ? e.from : "Dear " + e.from.split(" ")[0];
+    var lines = [r.company ? "Dear " + e.from : who + ",", "",
+      "Thank you for asking " + FIRMS[e.firm] + " to help with your " + (r.type ? r.type.label.toLowerCase() : "matter") + ".",
+      "Your matter will be handled by our " + (r.type ? r.type.team : "") + " team. Before we can start, please send:"];
+    r.docs.forEach(function (d) { lines.push("  - " + d); });
+    lines.push("", "We will confirm the scope of our work and our estimate of costs in writing once we have these.", "", FIRMS[e.firm]);
+    return lines.join("\n");
+  }
+
+  function tags(r) {
+    if (r.dup) return '<span class="chip">Duplicate of the ' + R.esc(FIRMS[r.dup.firm]) + " enquiry at " + R.esc(r.dup.time) + ": merged</span>";
+    var h = '<span class="chip ink">' + R.esc(r.type ? r.type.label : "Unclear: a person reads it") + "</span>";
+    h += '<span class="chip">→ ' + R.esc(r.type ? r.type.team + " team" : "Supervisor") + "</span>";
+    h += r.conflicts.length ? '<span class="chip red">Possible conflict</span>' : '<span class="chip green">No conflict in the group</span>';
+    h += '<span class="chip ' + (r.risk === "Standard" ? "green" : r.pep.length ? "red" : "amber") + '">AML: ' + R.esc(r.risk) + "</span>";
+    if (r.notes.length) h += '<span class="chip">' + R.esc(r.type && r.type.key === "prob" ? "Will may be held in the group" : "Known opponent") + "</span>";
+    if (r.known.length) h += '<span class="chip">Returning client of ' + R.esc(FIRMS[r.known[0].rec[2]]) + "</span>";
+    return h;
+  }
+
+  function details(r) {
+    if (r.dup) return "";
+    var h = '<details><summary>Conflict search and documents</summary><pre>';
+    h += "Parties searched: " + R.esc(r.parties.join("; ")) + "\n";
+    if (r.conflicts.length) r.conflicts.forEach(function (c) {
+      h += "\nMATCH: " + R.esc(c.party) + " = " + R.esc(c.rec[0]) + ", " + c.rec[1] + " of " + R.esc(FIRMS[c.rec[2]]) + " on " + R.esc(c.rec[3]) + " (" + c.rec[4] + "). Refer to the risk team before acting.";
+    });
+    else h += "\nNo match in the " + INDEX.length + " parties held by the three firms.";
+    r.notes.forEach(function (n) { h += "\nNote: " + R.esc(n); });
+    r.known.forEach(function (k) { h += "\nKnown client: " + R.esc(k.rec[0]) + " (" + R.esc(FIRMS[k.rec[2]]) + ", " + R.esc(k.rec[3]) + ")."; });
+    if (r.pep.length) h += "\n\nWATCHLIST: " + R.esc(r.pep.join(", ")) + " appears on the screening list. Enhanced due diligence and MLRO approval needed.";
+    h += "</pre></details><details><summary>Draft client care letter</summary><pre>" + R.esc(r.letter) + "</pre></details>";
+    return h;
+  }
+
+  function card(e, i) {
+    return '<article class="mail pending" id="m' + i + '"><div class="meta"><span>' + R.esc(e.from) + "</span><span>" + R.esc(FIRMS[e.firm]) + ", " + R.esc(e.via) + "</span><span>" + R.esc(e.time) +
+      '</span></div><p class="text">' + R.esc(e.text) + '</p><div class="tags"></div></article>';
+  }
+
+  var inbox = document.getElementById("inbox"), stats = document.getElementById("stats"), run = document.getElementById("run"),
+      reset = document.getElementById("reset"), status = document.getElementById("status"), pipe = document.querySelectorAll("#pipe li");
+  document.getElementById("idxCount").textContent = INDEX.length;
+
+  function draw() {
+    inbox.innerHTML = INBOX.map(card).join("");
+    stats.hidden = true;
+    status.textContent = INBOX.length + " new enquiries across three firms";
+    pipe.forEach(function (li) { li.className = ""; });
+  }
+
+  run.addEventListener("click", async function () {
+    draw();
+    R.busy(run, [run, reset], true);
+    status.textContent = "Working…";
+    var seen = {}, c = { open: 0, dup: 0, conflict: 0, edd: 0 }, t0 = performance.now();
+    for (var s = 0; s < pipe.length; s++) { pipe[s].className = "on"; await R.wait(120); pipe[s].className = "ok"; }
+    for (var i = 0; i < INBOX.length; i++) {
+      var r = assess(INBOX[i], seen), el = document.getElementById("m" + i);
+      if (r.dup) c.dup++; else c.open++;
+      if (!r.dup && r.conflicts.length) c.conflict++;
+      if (!r.dup && r.risk !== "Standard") c.edd++;
+      el.classList.remove("pending"); el.classList.add("done");
+      el.querySelector(".tags").innerHTML = tags(r);
+      el.insertAdjacentHTML("beforeend", details(r));
+      await R.wait(160);
+    }
+    stats.innerHTML =
+      '<div class="stat"><b>' + c.open + '</b><span>matters prepared</span></div>' +
+      '<div class="stat"><b>' + c.dup + '</b><span>duplicate merged</span></div>' +
+      '<div class="stat"><b>' + c.conflict + '</b><span>possible conflicts for the risk team</span></div>' +
+      '<div class="stat"><b>' + c.edd + '</b><span>need extra AML checks</span></div>' +
+      '<div class="stat"><b>' + INDEX.length * INBOX.length + '</b><span>party comparisons</span></div>';
+    stats.hidden = false;
+    status.textContent = "Done in " + R.num((performance.now() - t0) / 1000, 1) + " seconds.";
+    R.busy(run, [run, reset], false);
+  });
+  reset.addEventListener("click", draw);
+  draw();
+  R.calc(document.getElementById("calc"), document.getElementById("calcOut"));
+})();
+</script>
