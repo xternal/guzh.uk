@@ -42,7 +42,12 @@
     },
     done: function (status) {
       var self = this; this.box.classList.remove("working"); this.st.textContent = status || "done, waiting for you";
-      clearTimeout(this.fold); this.fold = setTimeout(function () { self.setMin(true); }, 7000);
+      clearTimeout(this.fold); this.fold = setTimeout(function () { self.setMin(true); }, 9000);
+      if (!this.offered) {
+        this.offered = true;
+        var li = el("li", "ag-go ag-cta", '<i>✦</i><span>Want this on your own process? <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book a free 45-minute teardown</a></span>');
+        this.list.appendChild(li); this.list.scrollTop = this.list.scrollHeight;
+      }
     },
     /* A one-off note: opens the panel, then folds it again */
     note: function (text, kind) { var self = this; this.start("working"); return this.say(text, kind).then(function () { self.done("waiting for you"); }); }
