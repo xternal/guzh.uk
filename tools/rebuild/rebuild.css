@@ -83,6 +83,7 @@ main{max-width:1040px;margin:0 auto;padding:32px 16px 48px}
 h1{font-size:clamp(30px,5vw,46px);line-height:1.1;font-weight:600;letter-spacing:-.02em;margin:8px 0 14px;max-width:22ch}
 h2{font-size:24px;line-height:1.2;font-weight:600;margin:48px 0 12px;letter-spacing:-.01em}
 h3{font-size:17px;font-weight:600;margin:0 0 6px}
+.claim{font-size:clamp(19px,2.4vw,23px);line-height:1.4;font-weight:600;max-width:52ch;margin:0 0 14px;padding-left:14px;border-left:4px solid var(--accent)}
 .lead{font-size:19px;color:var(--ink-2);max-width:62ch;margin:0 0 18px}
 .kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0}
 p{max-width:68ch}
@@ -166,5 +167,6 @@ label{font-size:14px;color:var(--ink-2)}
 @media (max-width:640px){
   .home{display:none}
   main{padding-top:20px}
-  .lead{font-size:17px}
+  .claim{font-size:clamp(19px,2.4vw,23px);line-height:1.4;font-weight:600;max-width:52ch;margin:0 0 14px;padding-left:14px;border-left:4px solid var(--accent)}
+.lead{font-size:17px}
 }
