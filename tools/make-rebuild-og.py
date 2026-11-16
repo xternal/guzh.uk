@@ -29,7 +29,7 @@ def frame(kicker, title_lines, inner):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" font-family="{FONT}">'
             f'<rect width="1200" height="630" fill="{BG}"/>'
             f'<text x="64" y="84" font-size="22" letter-spacing="2" fill="{INK3}">{kicker}</text>{t}{inner}'
-            f'<text x="64" y="590" font-size="22" fill="{INK2}">guzh.uk/rebuild · Pavel Guzhikov</text>'
+            f'<text x="64" y="590" font-size="22" fill="{INK2}">Pavel Guzhikov, guzh.uk/rebuild</text>'
             f'<path d="M1080 590 h40 v-24 h40" fill="none" stroke="{ACC}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def mail(y, subj, chips):
@@ -42,32 +42,34 @@ def mail(y, subj, chips):
     return s
 
 cards = {
-    "block-requests-og.png": frame("DEMO · BLOCK MANAGEMENT", ["Residents' requests,", "triaged in seconds"],
+    "block-requests-og.png": frame("DEMO: BLOCK MANAGEMENT", ["Residents' requests,", "triaged in seconds"],
         mail(290, "Water pouring through ceiling", [("Emergency", RED, RBG), ("Leak or water", BG, INK), ("Albion Wharf, Flat 22", INK2, "#39322B"), ("→ Plumber on call", INK2, "#39322B")]) +
         mail(386, "Re: Lift out again", [("24 hours", AMB, ABG), ("Lift", BG, INK), ("Marlowe Court, Flat 31", INK2, "#39322B"), ("→ Added to J-1042", INK2, "#39322B")]) +
         ""),
-    "lending-intake-og.png": frame("DEMO · SME LENDING", ["A loan pack to a", "draft credit memo"],
+    "lending-intake-og.png": frame("DEMO: SME LENDING", ["A loan pack to a", "draft credit memo"],
         f'<rect x="64" y="290" width="1072" height="250" rx="16" fill="{LIFT}"/>'
-        f'<text x="92" y="334" font-size="22" font-weight="600" fill="{INK}">Northgate Coffee Roasters Ltd · £40,000 over 24 months</text>' +
+        f'<text x="92" y="334" font-size="22" font-weight="600" fill="{INK}">Northgate Coffee Roasters Ltd: £40,000 over 24 months</text>' +
         "".join(f'{chip(92, 356 + i * 44, s, fg, bg)[0]}<text x="{92 + 16 + len(s) * 11.0 + 18:.0f}" y="{379 + i * 44}" font-size="20" fill="{INK2}">{t}</text>'
                 for i, (s, fg, bg, t) in enumerate([("pass", GRN, GBG, "Applicant is a director"), ("refer", AMB, ABG, "Statements annualise 22% below stated turnover"),
                                                      ("refer", AMB, ABG, "Debt service cover 1.16x against 1.25x policy"), ("draft", BG, ACC, "Credit memo written for the underwriter")]))),
-    "rebuild-og.png": frame("EMPATIQ · PROCESS RE-ENGINEERING", ["The same back-office work,", "with fewer people"],
+    "rebuild-og.png": frame("EMPATIQ: PROCESS RE-ENGINEERING", ["The same back-office work,", "with fewer people"],
         f'<text x="64" y="330" font-size="30" fill="{INK2}">No more copying, keying and chasing by hand.</text>'
         f'<text x="64" y="376" font-size="30" fill="{INK2}">Live in 4 to 6 weeks. Fixed price. Hours counted.</text>' +
         row(64, 420, [("Teardown, free", BG, ACC), ("Audit, 2 weeks", INK2, "#39322B"),
                       ("Build, 4 to 6 weeks", INK2, "#39322B"), ("Run and improve", INK2, "#39322B")])),
-    "legal-intake-og.png": frame("DEMO · LEGAL GROUPS", ["New matters from every", "acquired firm, one intake"],
+    "legal-intake-og.png": frame("DEMO: LEGAL GROUPS", ["New matters from every", "acquired firm, one intake"],
         mail(290, "Daniel Shaw: unfair dismissal claim", [("Possible conflict", RED, RBG), ("Employment", BG, INK), ("Kestrel Logistics is a Hollins Partners client", INK2, "#39322B")]) +
         mail(386, "Northwind Analytics Ltd: share sale", [("AML: enhanced", AMB, ABG), ("Corporate", BG, INK), ("No conflict across 3 firms", GRN, GBG)])),
-    "broker-submissions-og.png": frame("DEMO · INSURANCE BROKERS", ["Renewal information to a", "market-ready submission"],
+    "broker-submissions-og.png": frame("DEMO: INSURANCE BROKERS", ["Renewal information to a", "market-ready submission"],
         f'<rect x="64" y="290" width="1072" height="250" rx="16" fill="{LIFT}"/>'
-        f'<text x="92" y="334" font-size="22" font-weight="600" fill="{INK}">Harbourside Lettings Group Ltd · renewal 15 Jan 2027</text>' +
+        f'<text x="92" y="334" font-size="22" font-weight="600" fill="{INK}">Harbourside Lettings Group Ltd: renewal on 15 Jan 2027</text>' +
         "".join(f'{chip(92, 356 + i * 44, s, fg, bg)[0]}<text x="{92 + 16 + len(s) * 11.0 + 18:.0f}" y="{379 + i * 44}" font-size="20" fill="{INK2}">{t}</text>'
                 for i, (s, fg, bg, t) in enumerate([("missing", AMB, ABG, "Values for 3 flats from the acquired Clifton book"), ("39%", INK2, "#39322B", "Loss ratio on the expiring premium"),
                                                      ("out", RED, RBG, "Ashgrove Insurance: no unoccupied buildings"), ("approach", GRN, GBG, "Pennant Specialty (MGA)")]))),
 }
 for name, svg in cards.items():
+    if "\u2014" in svg or "\u00b7" in svg:
+        raise SystemExit(f"{name}: em dash or middle dot in the card text")
     with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False) as f:
         f.write(svg)
     subprocess.run(["rsvg-convert", "-w", "1200", "-h", "630", "-o", str(OUT / name), f.name], check=True)

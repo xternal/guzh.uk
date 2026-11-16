@@ -119,7 +119,7 @@ try {{ var t = localStorage.getItem("theme"); if (t === "light" || t === "dark")
 </main>
 <footer class="foot">
   <p>Empatiq Limited. Write to <a href="mailto:pavel@guzh.uk?subject=Teardown">pavel@guzh.uk</a> for a free 45-minute teardown of one process.</p>
-  <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> · <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
+  <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
 </footer>
 </body>
 </html>
@@ -158,6 +158,9 @@ def main():
             title=html.escape(p["title"]), description=html.escape(p["description"]), url=p["url"],
             image=p["image"], image_alt=html.escape(p["image_alt"]), jsonld=jsonld(p), style=STYLE,
             nav=nav(p["nav"]), body=body.rstrip(), script=SCRIPT)
+        bad = sorted({c for c in page if c in "\u2014\u00b7"})
+        if bad:
+            raise SystemExit(f"{p['path']}: contains {bad}; no em dashes or middle dots anywhere (Pavel's rule)")
         out = SITE / p["path"]
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page, encoding="utf-8")

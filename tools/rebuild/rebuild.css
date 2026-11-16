@@ -163,6 +163,7 @@ label{font-size:14px;color:var(--ink-2)}
 
 .foot{max-width:1040px;margin:0 auto;padding:24px 16px 40px;border-top:1px solid var(--rule-soft);font-size:14px;color:var(--ink-3)}
 .foot p{margin:.3em 0}
+.foot .credit{display:flex;flex-wrap:wrap;gap:6px 18px}
 .foot a{color:var(--ink-2)}
 @media (max-width:640px){
   .home{display:none}

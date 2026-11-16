@@ -199,6 +199,7 @@ label{font-size:14px;color:var(--ink-2)}
 
 .foot{max-width:1040px;margin:0 auto;padding:24px 16px 40px;border-top:1px solid var(--rule-soft);font-size:14px;color:var(--ink-3)}
 .foot p{margin:.3em 0}
+.foot .credit{display:flex;flex-wrap:wrap;gap:6px 18px}
 .foot a{color:var(--ink-2)}
 @media (max-width:640px){
   .home{display:none}
@@ -289,11 +290,11 @@ window.Rebuild = {
 };
 </script>
 <main id="main">
-<p class="kicker">Demo · SME lending</p>
+<p class="kicker">Demo: SME lending</p>
 <h1>A loan pack to a draft credit memo</h1>
 <p class="claim">Your underwriters stop keying bank statements and start every application from a drafted memo with the checks already done. When the facility grows, the same team decides more loans.</p>
 <p class="lead">When a new facility lifts origination, the bottleneck moves to document intake and affordability review. Pick an applicant and press the button: the application and three months of bank statements are read, checked against a lending policy, and written up as a draft memo. The underwriter starts from the decision, not the data entry.</p>
-<p class="note">Invented applicants, statements and policy. In this demo the pack is already text and the checks run in your browser; nothing leaves the page. The production build reads PDFs and scans, pulls the registry and bureau data, applies your credit policy, and every decision stays with the underwriter.</p>
+<p class="note">In production it reads PDFs and scans, pulls registry and bureau data and applies your credit policy. Every decision stays with the underwriter.</p>
 
 <div class="tabsel" id="pick" role="group" aria-label="Applicant"></div>
 <ul class="pipe" id="pipe" aria-label="Steps">
@@ -448,9 +449,9 @@ window.Rebuild = {
   function memo(a, f, list, v) {
     var lines = [];
     lines.push("CREDIT MEMO (DRAFT FOR UNDERWRITER REVIEW)");
-    lines.push("Applicant: " + a.name + " (" + a.reg.number + "), " + a.app.sector.toLowerCase());
+    lines.push("Applicant: " + a.name + ", " + a.app.sector.toLowerCase());
     lines.push("Request: " + R.gbp(a.app.amount) + " over " + a.app.term + " months for " + a.app.purpose.toLowerCase() + ".");
-    lines.push("Indicative repayment: " + R.gbp(f.pay) + " a month at the demo rate of " + Math.round(RATE * 100) + "% a year.");
+    lines.push("Indicative repayment: " + R.gbp(f.pay) + " a month at " + Math.round(RATE * 100) + "% a year.");
     lines.push("");
     lines.push("Trading: average credits " + R.gbp(f.credits) + " and debits " + R.gbp(f.debits) + " a month over three months; closing balance " + R.gbp(f.closing) + ".");
     lines.push("Existing debt service " + R.gbp(f.debt) + " a month. Debt service cover with the new loan " + R.num(f.dscr, 2) + "x.");
@@ -480,7 +481,7 @@ window.Rebuild = {
     pick.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.key === a.key ? "true" : "false"); });
     document.getElementById("app").innerHTML = kv([["Business", a.name], ["Director applying", a.app.director], ["Years trading", R.num(a.app.years, 1)],
       ["Amount", R.gbp(a.app.amount)], ["Term", a.app.term + " months"], ["Purpose", a.app.purpose], ["Stated turnover", R.gbp(a.app.turnover) + " a year"]]);
-    document.getElementById("reg").innerHTML = kv([["Number", a.reg.number], ["Status", a.reg.status], ["Incorporated", a.reg.incorporated],
+    document.getElementById("reg").innerHTML = kv([["Status", a.reg.status], ["Incorporated", a.reg.incorporated],
       ["Directors", a.reg.directors.join(", ")], ["CCJs", String(a.reg.ccjs)], ["Filings", a.reg.filings]]);
     var tx = statements(a);
     document.getElementById("txCount").textContent = tx.length;
@@ -534,7 +535,7 @@ window.Rebuild = {
 </main>
 <footer class="foot">
   <p>Empatiq Limited. Write to <a href="mailto:pavel@guzh.uk?subject=Teardown">pavel@guzh.uk</a> for a free 45-minute teardown of one process.</p>
-  <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> · <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
+  <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
 </footer>
 </body>
 </html>

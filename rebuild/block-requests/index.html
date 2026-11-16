@@ -199,6 +199,7 @@ label{font-size:14px;color:var(--ink-2)}
 
 .foot{max-width:1040px;margin:0 auto;padding:24px 16px 40px;border-top:1px solid var(--rule-soft);font-size:14px;color:var(--ink-3)}
 .foot p{margin:.3em 0}
+.foot .credit{display:flex;flex-wrap:wrap;gap:6px 18px}
 .foot a{color:var(--ink-2)}
 @media (max-width:640px){
   .home{display:none}
@@ -289,11 +290,11 @@ window.Rebuild = {
 };
 </script>
 <main id="main">
-<p class="kicker">Demo · block management</p>
+<p class="kicker">Demo: block management</p>
 <h1>Residents' requests, triaged in seconds</h1>
 <p class="claim">Your team stops reading, sorting and forwarding every resident email by hand. Each one is routed and answered as it arrives, emergencies first, so the same team can run more blocks.</p>
 <p class="lead">A block manager's shared inbox on a Monday morning. Press the button: each email is sorted by kind and urgency, matched to its block and flat, routed to the right contractor or team, and answered. Chasers are linked to the job already open, so nobody books the same plumber twice.</p>
-<p class="note">Invented sample data. In this demo the sorting runs on plain rules in your browser and nothing leaves the page. The production build reads the real inbox, uses a language model with your block list and contractor rota, and a person approves anything it is unsure of.</p>
+<p class="note">In production it reads your real inbox with your block list and contractor rota, and a person approves anything it is unsure of.</p>
 
 <ul class="pipe" id="pipe" aria-label="Steps">
   <li>Read</li><li>Sort and score urgency</li><li>Match block and flat</li><li>Link chasers</li><li>Route</li><li>Answer</li>
@@ -307,7 +308,7 @@ window.Rebuild = {
 <div class="inbox" id="inbox"></div>
 
 <h2>Try one of your own</h2>
-<p class="muted">Paste or write a resident's email. Use one of the sample blocks (Marlowe Court, Kestrel House, The Foundry, Albion Wharf) to see it matched.</p>
+<p class="muted">Paste or write a resident's email. Use one of these blocks (Marlowe Court, Kestrel House, The Foundry, Albion Wharf) to see it matched.</p>
 <textarea id="own" aria-label="A resident's email">Hi, water is coming through the ceiling of Flat 14 at Kestrel House from the flat above, it's getting worse and near the light fitting. Please send someone today.</textarea>
 <div class="row"><button class="btn" id="one" type="button"><span class="spin" aria-hidden="true"></span><span>Triage it</span></button></div>
 <div id="oneOut"></div>
@@ -491,7 +492,7 @@ window.Rebuild = {
 </main>
 <footer class="foot">
   <p>Empatiq Limited. Write to <a href="mailto:pavel@guzh.uk?subject=Teardown">pavel@guzh.uk</a> for a free 45-minute teardown of one process.</p>
-  <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> · <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
+  <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
 </footer>
 </body>
 </html>

@@ -1,8 +1,8 @@
-<p class="kicker">Demo · insurance brokers and MGAs</p>
+<p class="kicker">Demo: insurance brokers and MGAs</p>
 <h1>A client's renewal information to a market-ready submission</h1>
 <p class="claim">Your handlers stop rekeying renewals and chasing missing details by hand. Every submission reaches insurers complete, and only the ones that will quote, so the same team places more business.</p>
 <p class="lead">Renewal information arrives as an email, last year's schedule and a claims list, in a different shape for every client and every acquired book. Pick a client and press the button: the risk details are read, gaps found, the claims record scored, the panel's appetite checked, and a submission and a chaser to the client drafted.</p>
-<p class="note">Invented clients, insurers and appetite rules. In this demo the information is already text and the checks run in your browser; nothing leaves the page. The production build reads emails, PDFs and spreadsheets from your inbox and broking system, uses your real panel appetite, and a broker approves every submission before it goes.</p>
+<p class="note">In production it reads emails, PDFs and spreadsheets from your inbox and broking system and uses your real panel appetite. A broker approves every submission before it goes.</p>
 
 <div class="tabsel" id="pick" role="group" aria-label="Client"></div>
 <ul class="pipe" id="pipe" aria-label="Steps">
@@ -80,7 +80,7 @@
       claims: [["2024", "Rear-end collision, M62", 86000], ["2024", "Third-party injury", 142000], ["2024", "Reversing damage", 9000], ["2025", "Load shift, trailer", 31000],
                ["2025", "Rear-end collision", 54000], ["2025", "Windscreen", 1200], ["2026", "Third-party vehicle", 47000], ["2026", "Reversing damage", 7800], ["2026", "Side-swipe, third-party car", 32000]] }
   ];
-  /* The invented panel: who writes what */
+  /* The panel: who writes what */
   var PANEL = [
     { name: "Ashgrove Insurance", cls: "combined", trades: ["food manufacturing", "residential property owning"], maxLR: 50, unoccupied: false },
     { name: "Wexcombe Mutual", cls: "combined", trades: ["food manufacturing"], maxLR: 60, unoccupied: false },
