@@ -16,6 +16,13 @@ def chip(x, y, text, fg, bg):
     return (f'<rect x="{x}" y="{y}" width="{w:.0f}" height="34" rx="17" fill="{bg}"/>'
             f'<text x="{x + 16}" y="{y + 23}" font-size="18" fill="{fg}" font-weight="500">{text}</text>'), x + w + 10
 
+def row(x, y, items):
+    out = ""
+    for text, fg, bg in items:
+        c, x = chip(x, y, text, fg, bg)
+        out += c
+    return out
+
 def frame(kicker, title_lines, inner):
     t = "".join(f'<text x="64" y="{150 + i * 62}" font-size="54" font-weight="600" fill="{INK}">{l}</text>'
                 for i, l in enumerate(title_lines))
@@ -45,11 +52,11 @@ cards = {
         "".join(f'{chip(92, 356 + i * 44, s, fg, bg)[0]}<text x="{92 + 16 + len(s) * 11.0 + 18:.0f}" y="{379 + i * 44}" font-size="20" fill="{INK2}">{t}</text>'
                 for i, (s, fg, bg, t) in enumerate([("pass", GRN, GBG, "Applicant is a director"), ("refer", AMB, ABG, "Statements annualise 22% below stated turnover"),
                                                      ("refer", AMB, ABG, "Debt service cover 1.16x against 1.25x policy"), ("draft", BG, ACC, "Credit memo written for the underwriter")]))),
-    "rebuild-og.png": frame("EMPATIQ · PROCESS RE-ENGINEERING", ["One back-office process,", "rebuilt as software"],
-        f'<text x="64" y="330" font-size="30" fill="{INK2}">Mapped end to end. Shipped in 4 to 6 weeks.</text>'
-        f'<text x="64" y="376" font-size="30" fill="{INK2}">Fixed price. Hours measured before and after.</text>' +
-        chip(64, 420, "Teardown, free", BG, ACC)[0] + chip(250, 420, "Audit, 2 weeks", INK2, "#39322B")[0] +
-        chip(426, 420, "Build, 4 to 6 weeks", INK2, "#39322B")[0] + chip(654, 420, "Run and improve", INK2, "#39322B")[0]),
+    "rebuild-og.png": frame("EMPATIQ · PROCESS RE-ENGINEERING", ["The same back-office work,", "with fewer people"],
+        f'<text x="64" y="330" font-size="30" fill="{INK2}">No more copying, keying and chasing by hand.</text>'
+        f'<text x="64" y="376" font-size="30" fill="{INK2}">Live in 4 to 6 weeks. Fixed price. Hours counted.</text>' +
+        row(64, 420, [("Teardown, free", BG, ACC), ("Audit, 2 weeks", INK2, "#39322B"),
+                      ("Build, 4 to 6 weeks", INK2, "#39322B"), ("Run and improve", INK2, "#39322B")])),
     "legal-intake-og.png": frame("DEMO · LEGAL GROUPS", ["New matters from every", "acquired firm, one intake"],
         mail(290, "Daniel Shaw: unfair dismissal claim", [("Possible conflict", RED, RBG), ("Employment", BG, INK), ("Kestrel Logistics is a Hollins Partners client", INK2, "#39322B")]) +
         mail(386, "Northwind Analytics Ltd: share sale", [("AML: enhanced", AMB, ABG), ("Corporate", BG, INK), ("No conflict across 3 firms", GRN, GBG)])),

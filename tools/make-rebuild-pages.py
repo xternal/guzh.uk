@@ -16,9 +16,8 @@ SRC = SITE / "tools" / "rebuild"
 PAGES = [
     {
         "path": "rebuild/index.html", "url": "https://guzh.uk/rebuild/", "nav": "overview",
-        "title": "Rebuild one back-office process, in weeks",
-        "description": "Pavel Guzhikov maps one back-office process end to end and ships it rebuilt as working "
-                       "software in 4 to 6 weeks, at a fixed price, with a measured before and after.",
+        "title": "The same back-office work, with fewer people",
+        "description": "Your team stops copying, checking and chasing by hand in one process it runs every day. The same people handle more work, without new hires and with fewer mistakes, and you see the hours saved, counted before and after.",
         "image": "rebuild-og.png",
         "image_alt": "One back-office process, rebuilt as working software in 4 to 6 weeks.",
         "body": "index.html",
@@ -26,9 +25,7 @@ PAGES = [
     {
         "path": "rebuild/block-requests/index.html", "url": "https://guzh.uk/rebuild/block-requests/",
         "nav": "block", "title": "Demo: block-management requests, triaged in seconds",
-        "description": "A working demo: residents' emails to a block manager are sorted by kind and urgency, "
-                       "matched to the block and flat, routed to the right contractor and answered, "
-                       "with chasers linked to the open job.",
+        "description": "Your team stops reading, sorting and forwarding every resident email by hand. Each one is routed and answered as it arrives, emergencies first, so the same team can run more blocks.",
         "image": "block-requests-og.png",
         "image_alt": "A block manager's inbox triaged: each request tagged by kind, urgency, block and contractor.",
         "body": "block-requests.html",
@@ -36,8 +33,7 @@ PAGES = [
     {
         "path": "rebuild/lending-intake/index.html", "url": "https://guzh.uk/rebuild/lending-intake/",
         "nav": "lending", "title": "Demo: an SME loan pack to a draft credit memo",
-        "description": "A working demo: an SME loan application and three months of bank statements are read, "
-                       "checked against lending policy and turned into a draft credit memo for the underwriter.",
+        "description": "Your underwriters stop keying bank statements and start every application from a drafted memo with the checks already done. When the facility grows, the same team decides more loans.",
         "image": "lending-intake-og.png",
         "image_alt": "An SME loan pack turned into checks and a draft credit memo with affordability figures.",
         "body": "lending-intake.html",
@@ -45,8 +41,7 @@ PAGES = [
     {
         "path": "rebuild/legal-intake/index.html", "url": "https://guzh.uk/rebuild/legal-intake/",
         "nav": "legal", "title": "Demo: new matters from every acquired firm, one intake",
-        "description": "A working demo: new enquiries at three acquired law firms are typed, merged, conflict-checked "
-                       "against all three firms' old client lists at once, risk-rated for AML and given a draft client care letter.",
+        "description": "Your teams stop searching each acquired firm’s old system for conflicts. Every new matter at every firm you buy is checked against the whole group before work starts, from the first week.",
         "image": "legal-intake-og.png",
         "image_alt": "New legal matters from three acquired firms checked against one group conflict index.",
         "body": "legal-intake.html",
@@ -54,8 +49,7 @@ PAGES = [
     {
         "path": "rebuild/broker-submissions/index.html", "url": "https://guzh.uk/rebuild/broker-submissions/",
         "nav": "insurance", "title": "Demo: a client's renewal information to a market-ready submission",
-        "description": "A working demo: a broker's renewal information is read, gaps found, the claims record scored, "
-                       "the panel's appetite checked, and a submission and a client chaser drafted.",
+        "description": "Your handlers stop rekeying renewals and chasing missing details by hand. Every submission reaches insurers complete, and only the ones that will quote, so the same team places more business.",
         "image": "broker-submissions-og.png",
         "image_alt": "A renewal turned into a submission: details found and missing, loss ratio, and the markets in appetite.",
         "body": "broker-submissions.html",
