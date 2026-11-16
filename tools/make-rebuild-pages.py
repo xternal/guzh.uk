@@ -54,8 +54,19 @@ PAGES = [
         "image_alt": "A renewal turned into a submission: details found and missing, loss ratio, and the markets in appetite.",
         "body": "broker-submissions.html",
     },
+    {
+        "path": "defence/index.html", "url": "https://guzh.uk/defence/", "nav": "defence", "navset": "defence",
+        "title": "Defence tech: you build the thing that flies, I build the company that delivers it",
+        "description": "For UK defence and dual-use startups after a raise or a first contract: Pavel Guzhikov takes on delivery, product feedback, hiring and paperwork, so your engineers stay on the product.",
+        "image": "defence-og.png",
+        "image_alt": "You build the thing that flies. I'll build the company that delivers it: delivery, product, scale, paperwork.",
+        "body": "defence.html",
+        "footer": 'Pavel Guzhikov. <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book 30 minutes</a>, or write to <a href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>.',
+    },
 ]
 
+NAVSETS = {"defence": [("defence", "/defence/", "Defence tech"), ("overview", "/rebuild/", "Back-office rebuild")]}
+FOOTER = 'Empatiq Limited. <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book a free 30-minute teardown of one process</a>, or write to <a href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>.'
 NAV = [("overview", "/rebuild/", "Overview"), ("block", "/rebuild/block-requests/", "Property"),
        ("lending", "/rebuild/lending-intake/", "Lending"), ("legal", "/rebuild/legal-intake/", "Legal"),
        ("insurance", "/rebuild/broker-submissions/", "Insurance")]
@@ -105,7 +116,7 @@ try {{ var t = localStorage.getItem("theme"); if (t === "light" || t === "dark")
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top">
   <a class="home" href="/">Pavel Guzhikov</a>
-  <nav class="tabs" aria-label="Rebuild">
+  <nav class="tabs" aria-label="{navlabel}">
 {nav}
   </nav>
   <button class="theme" type="button" aria-label="Switch light or dark">
@@ -118,7 +129,7 @@ try {{ var t = localStorage.getItem("theme"); if (t === "light" || t === "dark")
 {body}
 </main>
 <footer class="foot">
-  <p>Empatiq Limited. <a href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book a free 30-minute teardown of one process</a>, or write to <a href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>.</p>
+  <p>{footer}</p>
   <p class="credit"><a href="https://guzh.uk">Made by Pavel Guzhikov</a> <a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></p>
 </footer>
 </body>
@@ -134,18 +145,22 @@ def jsonld(p):
         "name": p["title"],
         "description": p["description"],
         "url": p["url"],
-        "provider": {"@type": "Organization", "name": "Empatiq Limited", "url": "https://guzh.uk/",
-                     "founder": {"@type": "Person", "name": "Pavel Guzhikov", "url": "https://guzh.uk/"}},
+        "provider": ({"@type": "Person", "name": "Pavel Guzhikov", "url": "https://guzh.uk/"} if p["nav"] == "defence" else
+                     {"@type": "Organization", "name": "Empatiq Limited", "url": "https://guzh.uk/",
+                      "founder": {"@type": "Person", "name": "Pavel Guzhikov", "url": "https://guzh.uk/"}}),
         "areaServed": "GB",
     }
+    if p["nav"] == "defence":
+        data["@type"] = "Service"
+        data["serviceType"] = "Delivery, product and scale-up partner for defence and dual-use technology companies"
     if p["nav"] == "overview":
         data["serviceType"] = "Back-office process re-engineering and software build"
     return json.dumps(data, ensure_ascii=False)
 
 
-def nav(current):
+def nav(current, navset=None):
     out = []
-    for key, href, label in NAV:
+    for key, href, label in NAVSETS.get(navset, NAV):
         cur = ' aria-current="page"' if key == current else ""
         out.append(f'    <a href="{href}"{cur}>{label}</a>')
     return "\n".join(out)
@@ -157,7 +172,8 @@ def main():
         page = HEAD.format(
             title=html.escape(p["title"]), description=html.escape(p["description"]), url=p["url"],
             image=p["image"], image_alt=html.escape(p["image_alt"]), jsonld=jsonld(p), style=STYLE,
-            nav=nav(p["nav"]), body=body.rstrip(), script=SCRIPT)
+            nav=nav(p["nav"], p.get("navset")), body=body.rstrip(), script=SCRIPT,
+            footer=p.get("footer", FOOTER), navlabel="Defence" if p.get("navset") else "Rebuild")
         bad = sorted({c for c in page if c in "\u2014\u00b7"})
         if bad:
             raise SystemExit(f"{p['path']}: contains {bad}; no em dashes or middle dots anywhere (Pavel's rule)")
