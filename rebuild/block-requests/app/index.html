@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hallkeeper: resident requests for block managers | Pavel Guzhikov</title>
+<meta name="description" content="Every resident email sorted, routed and answered as it arrives, emergencies first, with chasers linked to the open job. A working product demo for block management and lettings groups.">
+<link rel="canonical" href="https://guzh.uk/rebuild/block-requests/app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guzh.uk/rebuild/block-requests/app/">
+<meta property="og:site_name" content="Pavel Guzhikov">
+<meta property="og:title" content="Hallkeeper: resident requests for block managers">
+<meta property="og:description" content="Every resident email sorted, routed and answered as it arrives, emergencies first, with chasers linked to the open job.">
+<meta property="og:image" content="https://guzh.uk/assets/rebuild/hallkeeper-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hallkeeper's request queue: emergencies first, each request tagged with its block, flat, contractor and response deadline.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hallkeeper: resident requests for block managers">
+<meta name="twitter:description" content="Every resident email sorted, routed and answered as it arrives, emergencies first, with chasers linked to the open job.">
+<meta name="twitter:image" content="https://guzh.uk/assets/rebuild/hallkeeper-og.png">
+<meta name="twitter:image:alt" content="Hallkeeper's request queue: emergencies first, each request tagged with its block, flat, contractor and response deadline.">
+<meta name="theme-color" content="#0F5C4D">
+<link rel="icon" href="/assets/rebuild/hallkeeper.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hallkeeper","applicationCategory":"BusinessApplication","description":"Resident request triage for block management: every email sorted, routed and answered as it arrives, emergencies first.","url":"https://guzh.uk/rebuild/block-requests/app/","creator":{"@type":"Organization","name":"Empatiq Limited","url":"https://guzh.uk/rebuild/"}}</script>
+<style>
+:root{
+  color-scheme:light;
+  --brand:#0F5C4D;--brand-2:#0B4A3E;--brand-soft:#E3F0EC;--gold:#F2B544;
+  --bg:#F5F6F4;--panel:#FFFFFF;--line:#E3E6E2;--line-2:#EEF0ED;
+  --ink:#16201D;--ink-2:#4A5753;--ink-3:#6B7773;
+  --red:#B42318;--red-bg:#FDECEA;--amber:#8A5300;--amber-bg:#FDF3E1;--green:#1D6B3F;--green-bg:#E7F4EC;--blue:#1E4FB8;--blue-bg:#E8EEFB;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:14px;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.app{display:grid;grid-template-rows:56px 1fr auto;height:100vh;height:100dvh}
+.top{display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--brand);color:#F4F1E8}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;letter-spacing:-.01em;white-space:nowrap}
+.brand svg{width:28px;height:28px}
+.org{color:#CFE3DC;font-size:13px;white-space:nowrap}
+.search{flex:1;max-width:420px;margin-left:12px}
+.search input{width:100%;border:0;border-radius:8px;padding:8px 12px;background:rgba(255,255,255,.12);color:#fff;font:inherit}
+.search input::placeholder{color:#BFD8D0}
+.clock{margin-left:auto;font-size:13px;color:#CFE3DC;white-space:nowrap}
+.me{display:flex;align-items:center;gap:8px;font-size:13px;white-space:nowrap}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--brand-2);display:grid;place-items:center;font-weight:700;font-size:12px}
+.main{display:grid;grid-template-columns:220px minmax(360px,1fr) minmax(380px,460px);min-height:0}
+.side{background:var(--panel);border-right:1px solid var(--line);padding:14px 10px;overflow:auto}
+.side h4{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:14px 8px 6px;font-weight:600}
+.side button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;background:none;padding:7px 8px;border-radius:7px;color:var(--ink-2);text-align:left}
+.side button:hover{background:var(--line-2)}
+.side button[aria-current="true"]{background:var(--brand-soft);color:var(--brand-2);font-weight:600}
+.count{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.count.hot{background:var(--red);color:#fff;border-radius:999px;padding:1px 7px}
+.list{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--panel)}
+.bar h2{font-size:16px;margin:0;font-weight:600}
+.bar .sub{color:var(--ink-3);font-size:13px}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:8px;padding:8px 12px;font-weight:600;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn.ghost{background:#fff;color:var(--brand)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn[aria-busy="true"]{opacity:1}
+.spin{width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:none;animation:s .7s linear infinite}
+.btn[aria-busy="true"] .spin{display:inline-block}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
+.ml{margin-left:auto}
+.rows{overflow:auto;flex:1}
+.row{display:grid;grid-template-columns:10px 1fr auto;gap:4px 10px;padding:11px 14px;border-bottom:1px solid var(--line-2);background:var(--panel);cursor:pointer;border-left:3px solid transparent}
+.row:hover{background:#FAFBFA}
+.row[aria-selected="true"]{background:var(--brand-soft);border-left-color:var(--brand)}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:5px;background:#C9CFCC}
+.dot.e{background:var(--red)}.dot.h{background:#E09B1A}.dot.n{background:#4E9A6F}.dot.r{background:var(--blue)}
+.who{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who .new{display:inline-block;font-size:10.5px;font-weight:700;color:var(--blue);background:var(--blue-bg);border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+.subj{grid-column:2;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.when{font-size:12px;color:var(--ink-3);text-align:right;white-space:nowrap}
+.tags{grid-column:2/4;display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.tag{font-size:11.5px;font-weight:500;padding:2px 7px;border-radius:5px;background:var(--line-2);color:var(--ink-2);white-space:nowrap}
+.tag.e{background:var(--red-bg);color:var(--red)}.tag.h{background:var(--amber-bg);color:var(--amber)}.tag.n{background:var(--green-bg);color:var(--green)}.tag.r{background:var(--blue-bg);color:var(--blue)}
+.tag.cat{background:#EAF1EF;color:var(--brand-2)}
+.row.flash{animation:f 1s ease}
+@keyframes f{from{background:#FFF7E0}to{background:var(--panel)}}
+.detail{overflow:auto;background:var(--bg);padding:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.card h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px;font-weight:600}
+.dhead h1{font-size:18px;margin:0 0 4px;font-weight:600;line-height:1.3}
+.dhead .meta{color:var(--ink-3);font-size:13px}
+.mailbody{white-space:pre-line;line-height:1.55;color:var(--ink)}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:7px 10px;font-size:13.5px}
+.kv dt{color:var(--ink-3)}
+.kv dd{margin:0}
+.why{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.disp{display:flex;align-items:center;gap:12px}
+.disp .co{flex:1}
+.disp .co b{display:block}
+.disp .co span{color:var(--ink-3);font-size:12.5px}
+textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;line-height:1.5;resize:vertical;color:var(--ink)}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.log{list-style:none;margin:0;padding:0;font-size:13px}
+.log li{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line-2)}
+.log li:last-child{border-bottom:0}
+.log time{color:var(--ink-3);font-variant-numeric:tabular-nums}
+.empty{color:var(--ink-3);text-align:center;margin-top:30vh}
+.toast{position:fixed;left:50%;bottom:44px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 16px;border-radius:10px;font-size:13.5px;opacity:0;transition:.25s;pointer-events:none;width:max-content;max-width:min(560px,calc(100% - 32px));z-index:9}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.status{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;padding:7px 16px;font-size:12px;color:var(--ink-3);background:var(--panel);border-top:1px solid var(--line)}
+.status a{color:var(--ink-2)}
+.status .r{margin-left:auto;display:flex;gap:14px}
+.back{display:none}
+@media (max-width:1100px){.main{grid-template-columns:190px 1fr 380px}}
+@media (max-width:900px){
+  .main{grid-template-columns:1fr}
+  .side,.org,.search,.clock,.me span{display:none}
+  .detail{display:none;position:fixed;inset:56px 0 0 0;z-index:5}
+  .app.open .detail{display:block}
+  .back{display:inline-flex}
+  .status .r a:first-child{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="12" width="28" height="40" rx="2" fill="none" stroke="#F4F1E8" stroke-width="3.4"/><g fill="#F4F1E8" opacity=".55"><rect x="23" y="18" width="7" height="6"/><rect x="34" y="18" width="7" height="6"/><rect x="23" y="29" width="7" height="6"/><rect x="23" y="40" width="7" height="6"/><rect x="34" y="40" width="7" height="6"/></g><rect x="34" y="29" width="7" height="6" fill="#F2B544"/></svg>Hallkeeper</div>
+    <div class="org">Northside Residential</div>
+    <div class="search"><input id="q" type="search" placeholder="Search requests, residents, blocks" aria-label="Search"></div>
+    <div class="clock" id="clock">Mon 16 Nov, 09:12</div>
+    <div class="me"><div class="avatar" aria-hidden="true">SM</div><span>Sam Morley, property manager</span></div>
+  </header>
+
+  <div class="main">
+    <nav class="side" aria-label="Views">
+      <h4>Requests</h4>
+      <div id="views"></div>
+      <h4>Blocks</h4>
+      <div id="blocks"></div>
+    </nav>
+
+    <section class="list" aria-label="Requests">
+      <div class="bar">
+        <div><h2 id="viewTitle">Inbox</h2><div class="sub" id="viewSub"></div></div>
+        <button class="btn ml" id="triage" type="button"><span class="spin" aria-hidden="true"></span><span id="triageLabel">Triage new</span></button>
+      </div>
+      <div class="rows" id="rows" role="listbox" aria-label="Requests"></div>
+    </section>
+
+    <section class="detail" id="detail" aria-label="Request"></section>
+  </div>
+
+  <footer class="status">
+    <span>A product demo by Empatiq. <a href="/rebuild/block-requests/">How it works</a></span>
+    <span class="r"><a href="https://guzh.uk">Made by Pavel Guzhikov</a><a href="https://ko-fi.com/pavelg" target="_blank" rel="noopener noreferrer">Buy me a matcha 🍵</a></span>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var BLOCKS = [["Marlowe Court", 48], ["Kestrel House", 36], ["The Foundry", 22], ["Albion Wharf", 64]];
+  var KINDS = [
+    { key: "leak", label: "Leak or water", words: ["leak", "water", "dripping", "ceiling", "flood", "burst"], sla: 24,
+      emergency: ["pouring", "electric", "light switch", "light fitting", "flood", "burst", "getting worse", "coming into"],
+      who: "AquaFix Plumbing", note: "On call, about 90 minutes away", reply: "We have sent our on-call plumber to {where}. If water is near anything electrical, keep the power off at the consumer unit." },
+    { key: "lift", label: "Lift", words: ["lift", "elevator"], sla: 24, emergency: ["stuck", "trapped"],
+      who: "Liftcare Services", note: "24-hour call-out under the maintenance contract", reply: "We have reported the lift fault at {block} to our lift engineers and will update you when they are on site." },
+    { key: "fire", label: "Fire safety", words: ["fire door", "fire alarm", "smoke", "extinguisher", "fire exit"], sla: 24, emergency: ["alarm going off", "smoke"],
+      who: "Sentinel Fire Safety", note: "Fire door inspections, next day", reply: "Thank you for reporting this. A fire door must close on its own, so we will inspect {block} within 24 hours." },
+    { key: "access", label: "Door entry and fobs", words: ["fob", "door entry", "intercom", "gate", "lock"], sla: 120, emergency: ["won't close", "insecure", "broken lock"],
+      who: "Entrypoint Access", note: "Fobs cut and coded within 5 working days", reply: "We have ordered a replacement fob for {where}. You will get a note when it is ready to collect." },
+    { key: "money", label: "Service charge", words: ["service charge", "invoice", "ground rent", "budget", "arrears"], sla: 240, emergency: [],
+      who: "Accounts team", note: "Internal", reply: "Our accounts team will send you the budget breakdown for {block} within 10 working days." },
+    { key: "insurance", label: "Insurance claim", words: ["insurance", "claim", "excess"], sla: 120, emergency: [],
+      who: "Insurance team", note: "Internal", reply: "Our insurance team will send you the claim form and the policy excess for {block}. Please keep photos of the damage." },
+    { key: "sale", label: "Sale pack", words: ["lpe1", "management pack", "ews1", "cladding", "selling"], sla: 240, emergency: [],
+      who: "Sales packs team", note: "Internal", reply: "Our sales packs team will reply with the turnaround and fee for the LPE1 pack and the building safety documents for {block}." },
+    { key: "bins", label: "Bins and cleaning", words: ["bin", "rubbish", "cleaning", "bulky", "bags"], sla: 120, emergency: [],
+      who: "Cleanline Facilities", note: "Weekly contract, extra visits on request", reply: "We have asked our cleaners to clear the bin store at {block} and to check the collection schedule." },
+    { key: "noise", label: "Noise and neighbours", words: ["noise", "music", "neighbour", "party", "smoking"], sla: 120, emergency: [],
+      who: "Property manager", note: "Internal", reply: "Thank you for telling us. The property manager will write to the flat concerned under the lease and keep you informed." },
+    { key: "parking", label: "Parking", words: ["parking", "parked", "bay", "car park"], sla: 240, emergency: [],
+      who: "Property manager", note: "Internal", reply: "We will put a notice on the vehicle in your bay at {block} and check the permits." }
+  ];
+  var CHASE = ["still", "again", "chasing", "any update", "no one has", "re:"];
+
+  /* Open jobs already in the system before this morning */
+  var T = [
+    { id: "J-1031", from: "Building inspection", subj: "Communal lighting out, stairwell B", text: "Stairwell B lighting failed on floors 2 to 4. Electrician booked.", time: "Fri 15:40", block: "Kestrel House", flat: null, kind: "fire", urg: "h", state: "contractor", log: [["Fri 15:40", "Raised from the weekly inspection"], ["Fri 16:05", "Electrician booked for Mon 13:00"]] },
+    { id: "J-1034", from: "Nadia F.", subj: "Damp patch in bedroom", text: "There is a damp patch spreading on my bedroom wall in Flat 40, Albion Wharf.", time: "Thu 11:20", block: "Albion Wharf", flat: "40", kind: "leak", urg: "n", state: "resident", log: [["Thu 11:20", "Request received"], ["Thu 14:02", "Surveyor visited, asked resident for access dates"]] },
+    { id: "J-1037", from: "Grounds team", subj: "Gate motor faulty", text: "Car park gate at Marlowe Court sticks open in the afternoons.", time: "Fri 09:05", block: "Marlowe Court", flat: null, kind: "access", urg: "n", state: "contractor", log: [["Fri 09:05", "Reported by the grounds team"], ["Fri 10:30", "Entrypoint Access booked for Tue"]] }
+  ];
+  var NEW = [
+    ["Aisha K.", "Sun 23:41", "Water pouring through ceiling!!", "Water is pouring through the bathroom ceiling in Flat 22, Albion Wharf. It's coming from the flat above and it's near the light switch. I've turned the electrics off. Please help."],
+    ["Tom R.", "07:05", "Lift out again", "The lift at Marlowe Court is out of order again this morning. My mum is on the 6th floor and can't do the stairs. Flat 31."],
+    ["J. Okafor", "07:30", "Service charge query", "Could you explain why the service charge for Flat 4, The Foundry has gone up by so much this year? I'd like to see the budget breakdown."],
+    ["Priya S.", "07:52", "Fob not working", "My key fob for the main door at Kestrel House stopped working on Saturday. Flat 9. Can I get a new one?"],
+    ["Mark D.", "08:01", "Still no one about the leak", "Chasing again about the leak at Albion Wharf. My neighbour in Flat 22 reported it last night and still no one has come. It's now coming into Flat 12 below."],
+    ["Helen W.", "08:10", "Fire door wedged open", "Someone keeps wedging the fire door open on the 3rd floor corridor at Marlowe Court with a chair. Flat 18."],
+    ["Daniel P.", "08:14", "Selling my flat: management pack", "I'm selling Flat 7, Kestrel House. My solicitor needs the LPE1 management pack and the EWS1 form. How long will it take?"],
+    ["Grace L.", "08:20", "Bins overflowing", "The bin store at The Foundry hasn't been emptied and there are bags all over the floor. Foxes have got into them. Flat 2."],
+    ["Sam T.", "08:33", "Noise from upstairs", "There has been loud music from the flat above me at Albion Wharf every night until 2am. Flat 5. I've asked them to stop."],
+    ["Olu A.", "08:40", "Insurance claim for the leak", "Following the leak at Albion Wharf, I need to make a claim on the building insurance for my damaged ceiling and carpet in Flat 12. What's the excess and who do I send photos to?"],
+    ["Ben H.", "08:47", "Someone in my parking bay", "There's a car I don't recognise parked in my allocated bay at Marlowe Court again. Bay 14, Flat 26."],
+    ["Chloe M.", "08:58", "Lift: someone stuck", "URGENT someone is stuck in the lift at Kestrel House right now, the alarm button isn't answering. I'm in Flat 3."],
+    ["R. Fenwick", "09:04", "Hello", "Hi, I'm a new owner at The Foundry, Flat 11, and wanted to introduce myself and ask who I should contact about things."],
+    ["Tom R.", "09:10", "Re: Lift out again", "Any update on the lift at Marlowe Court? Still not working. Flat 31."]
+  ].map(function (m, i) { return { id: "N-" + (i + 1), from: m[0], time: m[1], subj: m[2], text: m[3], state: "new", log: [[m[1], "Email received"]] }; });
+  T.forEach(function (t) { t.job = t.id; });
+  T = NEW.concat(T);
+
+  var URG = { e: ["Emergency", "e", 0], h: ["24 hours", "h", 1], n: ["5 working days", "n", 2], r: ["Needs a person", "r", 3] };
+  var STATE = { "new": "New", triaged: "To dispatch", contractor: "With contractor", resident: "Waiting on resident", replied: "Answered", merged: "Merged" };
+  var VIEWS = [["inbox", "Inbox"], ["e", "Emergencies"], ["contractor", "With contractor"], ["resident", "Waiting on resident"], ["review", "Needs a person"], ["done", "Answered"]];
+  var view = "inbox", block = null, selected = null, jobSeq = 1040;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, matchMedia("(prefers-reduced-motion: reduce)").matches ? 30 : ms); }); }
+  function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toast.h); toast.h = setTimeout(function () { t.classList.remove("on"); }, 4200); }
+  var clock = 9 * 60 + 12; /* the app's own Monday morning; each action moves it on a minute */
+  function now() { clock += 1; $("clock").textContent = "Mon 16 Nov, " + hm(clock); return hm(clock); }
+  function hm(m) { return ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + (m % 60)).slice(-2); }
+  function kindOf(k) { return KINDS.filter(function (x) { return x.key === k; })[0]; }
+
+  function triageOne(t) {
+    var s = (t.subj + " " + t.text).toLowerCase();
+    var sc = KINDS.map(function (k) { return { k: k, n: k.words.filter(function (w) { return s.indexOf(w) >= 0; }).length }; })
+      .filter(function (x) { return x.n; }).sort(function (a, b) { return b.n - a.n; });
+    t.block = BLOCKS.map(function (b) { return b[0]; }).filter(function (b) { return s.indexOf(b.toLowerCase()) >= 0; })[0] || null;
+    t.flat = (t.text.match(/\bFlat\s+(\d+[A-Z]?)/i) || [])[1] || null;
+    if (!sc.length) { t.kind = null; t.urg = "r"; t.why = "No request type recognised. A person should read it."; t.state = "triaged"; return; }
+    var k = sc[0].k, hit = k.emergency.filter(function (w) { return s.indexOf(w) >= 0; });
+    t.kind = k.key;
+    t.urg = hit.length ? "e" : k.sla <= 24 ? "h" : "n";
+    t.why = (hit.length ? "Emergency because the email says \"" + hit[0] + "\". " : "") + "Matched on " + k.words.filter(function (w) { return s.indexOf(w) >= 0; }).map(function (w) { return "\"" + w + "\""; }).join(", ") + ".";
+    if (!t.block || (sc.length > 1 && sc[1].n === sc[0].n)) t.urg = t.urg === "e" ? "e" : "r";
+    var chase = CHASE.some(function (w) { return s.indexOf(w) >= 0; });
+    var job = chase && T.filter(function (o) { return o !== t && o.job && o.block === t.block && o.kind === t.kind && o.state !== "merged"; })[0];
+    if (job) {
+      t.state = "merged"; t.mergedInto = job.job; t.mergedId = job.id;
+      job.log.push([t.time, "Chaser from " + t.from + " added" + (t.urg === "e" ? ", marked as spreading" : "")]);
+      job.chasers = (job.chasers || 0) + 1;
+      if (t.urg === "e") job.urg = "e";
+      return;
+    }
+    t.job = "J-" + (++jobSeq);
+    t.state = "triaged";
+    var where = (t.flat ? "Flat " + t.flat + ", " : "") + (t.block || "your building");
+    t.draft = "Dear " + t.from.split(" ")[0] + ",\n\n" + k.reply.replace("{where}", where).replace("{block}", t.block || "your building") +
+      "\n\nYour reference is " + t.job + ".\n\nSam Morley\nNorthside Residential";
+    t.log.push([t.time, "Triaged: " + k.label + ", " + URG[t.urg][0].toLowerCase() + (t.block ? ", " + t.block : "")]);
+  }
+
+  function visible() {
+    var q = $("q").value.trim().toLowerCase();
+    return T.filter(function (t) {
+      if (t.state === "merged") return false;
+      if (block && t.block !== block) return false;
+      if (q && (t.from + " " + t.subj + " " + t.text + " " + (t.block || "") + " " + (t.job || t.id)).toLowerCase().indexOf(q) < 0) return false;
+      if (view === "e") return t.urg === "e";
+      if (view === "contractor") return t.state === "contractor";
+      if (view === "resident") return t.state === "resident";
+      if (view === "review") return t.urg === "r";
+      if (view === "done") return t.state === "replied";
+      return t.state !== "replied";
+    }).sort(function (a, b) {
+      var ua = a.urg ? URG[a.urg][2] : 4, ub = b.urg ? URG[b.urg][2] : 4;
+      return (a.state === "new") - (b.state === "new") || ua - ub;
+    });
+  }
+
+  function slaTag(t) {
+    if (!t.urg || t.state === "replied") return "";
+    var txt = t.urg === "e" ? "Respond now" : t.urg === "h" ? "Due today 17:00" : t.urg === "n" ? "Due Fri 20 Nov" : "Read today";
+    return '<span class="tag ' + t.urg + '">' + txt + "</span>";
+  }
+
+  function rowHTML(t) {
+    var k = t.kind && kindOf(t.kind);
+    var tags = t.state === "new" ? "" : '<div class="tags">' + slaTag(t) + (k ? '<span class="tag cat">' + esc(k.label) + "</span>" : "") +
+      (t.block ? '<span class="tag">' + esc(t.block + (t.flat ? ", Flat " + t.flat : "")) + "</span>" : "") +
+      '<span class="tag">' + esc(STATE[t.state]) + "</span>" + (t.chasers ? '<span class="tag r">+' + t.chasers + " chaser</span>" : "") + "</div>";
+    return '<div class="row" role="option" tabindex="0" data-id="' + t.id + '" aria-selected="' + (selected === t.id) + '">' +
+      '<span class="dot ' + (t.state === "new" ? "" : t.urg || "") + '"></span><span class="who">' + esc(t.from) + (t.state === "new" ? '<span class="new">NEW</span>' : "") +
+      '</span><span class="when">' + esc(t.job || t.id.replace("N-", "#")) + "  " + esc(t.time) + '</span><span class="subj">' + esc(t.subj) + "</span>" + tags + "</div>";
+  }
+
+  function render() {
+    var v = visible();
+    $("rows").innerHTML = v.length ? v.map(rowHTML).join("") : '<p class="empty">Nothing here.</p>';
+    var fresh = T.filter(function (t) { return t.state === "new"; }).length;
+    $("triageLabel").textContent = fresh ? "Triage " + fresh + " new" : "All triaged";
+    $("triage").disabled = !fresh || $("triage").getAttribute("aria-busy") === "true";
+    $("viewTitle").textContent = (block ? block + ": " : "") + VIEWS.filter(function (x) { return x[0] === view; })[0][1];
+    $("viewSub").textContent = v.length + " request" + (v.length === 1 ? "" : "s");
+    var counts = {
+      inbox: T.filter(function (t) { return t.state !== "merged" && t.state !== "replied"; }).length,
+      e: T.filter(function (t) { return t.urg === "e" && t.state !== "merged" && t.state !== "replied"; }).length,
+      contractor: T.filter(function (t) { return t.state === "contractor"; }).length,
+      resident: T.filter(function (t) { return t.state === "resident"; }).length,
+      review: T.filter(function (t) { return t.urg === "r" && t.state !== "replied" && t.state !== "merged"; }).length,
+      done: T.filter(function (t) { return t.state === "replied"; }).length
+    };
+    $("views").innerHTML = VIEWS.map(function (x) {
+      return '<button type="button" data-view="' + x[0] + '" aria-current="' + (view === x[0] && !block) + '">' + x[1] +
+        '<span class="count' + (x[0] === "e" && counts.e ? " hot" : "") + '">' + counts[x[0]] + "</span></button>";
+    }).join("");
+    $("blocks").innerHTML = BLOCKS.map(function (b) {
+      var n = T.filter(function (t) { return t.block === b[0] && t.state !== "merged" && t.state !== "replied"; }).length;
+      return '<button type="button" data-block="' + esc(b[0]) + '" aria-current="' + (block === b[0]) + '">' + esc(b[0]) + '<span class="count">' + n + " open</span></button>";
+    }).join("");
+    renderDetail();
+  }
+
+  function renderDetail() {
+    var t = T.filter(function (x) { return x.id === selected; })[0];
+    if (!t) { $("detail").innerHTML = '<p class="empty">Select a request.</p>'; return; }
+    var k = t.kind && kindOf(t.kind);
+    var h = '<button class="btn ghost back" type="button" id="back">Back</button>';
+    h += '<div class="card dhead"><h1>' + esc(t.subj) + '</h1><div class="meta">' + esc(t.from) + ", " + esc(t.time) + (t.job ? ", " + t.job : "") + "</div></div>";
+    h += '<div class="card"><h3>Email</h3><div class="mailbody">' + esc(t.text) + "</div></div>";
+    if (t.state === "new") {
+      h += '<div class="card"><h3>Triage</h3><p class="why">Not triaged yet. Press "Triage" to sort the new requests.</p></div>';
+    } else {
+      h += '<div class="card"><h3>Triage</h3><dl class="kv"><dt>Type</dt><dd>' + esc(k ? k.label : "Unclear") + "</dd><dt>Urgency</dt><dd>" + (t.urg ? '<span class="tag ' + t.urg + '">' + URG[t.urg][0] + "</span>" : "") +
+        "</dd><dt>Block</dt><dd>" + esc(t.block || "Not found in the email") + "</dd><dt>Flat</dt><dd>" + esc(t.flat || "Not given") + "</dd><dt>Status</dt><dd>" + esc(STATE[t.state]) + "</dd></dl>" +
+        (t.why ? '<p class="why">' + esc(t.why) + "</p>" : "") + "</div>";
+      if (k && t.state !== "replied") {
+        var booked = t.state === "contractor";
+        h += '<div class="card"><h3>Dispatch</h3><div class="disp"><div class="co"><b>' + esc(k.who) + "</b><span>" + esc(k.note) + "</span></div>" +
+          '<button class="btn' + (booked ? " ghost" : "") + '" type="button" id="dispatch"' + (booked ? " disabled" : "") + '><span class="spin" aria-hidden="true"></span><span>' + (booked ? "Booked" : k.note === "Internal" ? "Assign" : "Send job") + "</span></button></div></div>";
+      }
+      if (t.draft && t.state !== "replied") {
+        h += '<div class="card"><h3>Reply to ' + esc(t.from) + '</h3><textarea id="draft" aria-label="Reply">' + esc(t.draft) + '</textarea><div class="actions"><button class="btn" type="button" id="send"><span class="spin" aria-hidden="true"></span><span>Send reply</span></button></div></div>';
+      }
+    }
+    h += '<div class="card"><h3>Activity</h3><ul class="log">' + t.log.map(function (l) { return "<li><time>" + esc(l[0]) + "</time><span>" + esc(l[1]) + "</span></li>"; }).join("") + "</ul></div>";
+    $("detail").innerHTML = h;
+  }
+
+  async function act(btn, ms, fn) {
+    btn.setAttribute("aria-busy", "true"); btn.disabled = true;
+    await wait(ms);
+    fn(); render();
+  }
+
+  $("rows").addEventListener("click", function (e) {
+    var r = e.target.closest(".row"); if (!r) return;
+    selected = r.dataset.id; $("app").classList.add("open"); render();
+  });
+  $("rows").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { var r = e.target.closest(".row"); if (r) { selected = r.dataset.id; $("app").classList.add("open"); render(); } }
+  });
+  $("views").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) { view = b.dataset.view; block = null; render(); } });
+  $("blocks").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) { block = b.dataset.block; view = "inbox"; render(); } });
+  $("q").addEventListener("input", render);
+  $("detail").addEventListener("click", function (e) {
+    var t = T.filter(function (x) { return x.id === selected; })[0];
+    if (e.target.closest("#back")) { $("app").classList.remove("open"); return; }
+    var d = e.target.closest("#dispatch");
+    if (d && t) act(d, 700, function () { var k = kindOf(t.kind); t.state = "contractor"; t.log.push([now(), (k.note === "Internal" ? "Assigned to " : "Job sent to ") + k.who]); toast(t.job + " sent to " + k.who + "."); });
+    var s = e.target.closest("#send");
+    if (s && t) act(s, 700, function () { t.draft = $("draft").value; t.state = t.state === "contractor" ? "contractor" : "replied"; t.replied = true; t.log.push([now(), "Reply sent to " + t.from]); toast("Reply sent to " + t.from + "."); if (t.state === "contractor") { t.draft = null; } });
+  });
+
+  $("triage").addEventListener("click", async function () {
+    var b = this, fresh = T.filter(function (t) { return t.state === "new"; }), t0 = performance.now();
+    b.setAttribute("aria-busy", "true"); b.disabled = true; $("triageLabel").textContent = "Triaging";
+    for (var i = 0; i < fresh.length; i++) {
+      triageOne(fresh[i]);
+      render();
+      var el = document.querySelector('.row[data-id="' + (fresh[i].state === "merged" ? fresh[i].mergedId : fresh[i].id) + '"]');
+      if (el) el.classList.add("flash");
+      await wait(170);
+    }
+    var em = fresh.filter(function (t) { return t.urg === "e" && t.state !== "merged"; }).length,
+        mg = fresh.filter(function (t) { return t.state === "merged"; }).length,
+        rv = fresh.filter(function (t) { return t.urg === "r"; }).length;
+    b.setAttribute("aria-busy", "false");
+    if (!selected) selected = visible()[0] && visible()[0].id;
+    render();
+    toast(fresh.length + " emails triaged in " + ((performance.now() - t0) / 1000).toFixed(1) + " s: " + em + " emergencies first, " + mg + " chasers merged into open jobs, " + rv + " for a person to read.");
+  });
+
+  addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
+  selected = "N-1";
+  render();
+  /* #triaged opens the app with this morning's emails already sorted (used for the share image) */
+  if (location.hash === "#triaged") $("triage").click();
+})();
+</script>
+</body>
+</html>
