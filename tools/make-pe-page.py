@@ -55,7 +55,7 @@ HOW = """<h2>How we start</h2>
 </ol>"""
 
 WHO = """<h2>Who I am</h2>
-<p>Pavel Guzhikov, London. Twenty years of building companies, as founder and as the person who makes them run. I was on the founding team at Uzum, Uzbekistan's first unicorn: lending, payments, cards and a marketplace, millions of users and 1,000+ people in two years, in a market with no digital infrastructure. Before that I built fintech products with more than 100 banks, and founded and sold two companies. I like businesses where a good product meets messy operations: that is where precise management pays back fastest.</p>"""
+<p>Pavel Guzhikov, London. Twenty years of building companies, as founder and as the person who makes them run. I've rebuilt a company's processes from zero in a new country, brought teams from different cultures together into one, and taken a business from loss to profit in six months. I was on the founding team at Uzum, Uzbekistan's first unicorn: lending, payments, cards and a marketplace for millions of users, in a market with no digital infrastructure. Before that I built fintech products with more than 100 banks, and founded and sold two companies. I like businesses where a good product meets messy operations: that is where precise management pays back fastest.</p>"""
 
 FAQ = """<h2>Questions</h2>
 <dl class="faq">
@@ -64,7 +64,7 @@ FAQ = """<h2>Questions</h2>
   <dt>Which companies?</dt>
   <dd>British brands from about 20 to a few hundred people, usually in the first year after an investment or during a buy-and-build.</dd>
   <dt>Why someone from fintech?</dt>
-  <dd>Because the arithmetic of growth is the same everywhere: too much to do, too few people, and processes built for ten carrying a hundred. I have run it at 1,000+ people in two years.</dd>
+  <dd>Because the arithmetic of growth is the same everywhere: too much to do, too few people, and processes built for ten carrying a hundred. I have rebuilt a company from zero in a new country and taken one from loss to profit in six months.</dd>
   <dt>Who do I report to?</dt>
   <dd>We agree that at the start: usually the operating partner, with management as my day-to-day team.</dd>
 </dl>"""
@@ -72,7 +72,7 @@ FAQ = """<h2>Questions</h2>
 PAGE = {
     "path": "pe/index.html", "url": "https://guzh.uk/pe/", "slug": "pe",
     "title": "I make the 100-day plan happen in the British brands you buy",
-    "description": "For private equity owners of British brands: precise management and execution inside the company you have just bought, hands-on beside management and measured weekly. Pavel Guzhikov: 1,000+ people in two years at Uzum.",
+    "description": "For private equity owners of British brands: precise management and execution inside the company you have just bought, hands-on beside management and measured weekly. Pavel Guzhikov: took a business from loss to profit in six months.",
     "image_alt": "I make the 100-day plan happen. Hands-on, beside management, measured weekly. For private equity owners of British brands.",
     "hero": f"""<div>
   <p class="kicker">For private equity owners of British brands</p>
