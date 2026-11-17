@@ -25,7 +25,7 @@ def card(title, sub, facts):
             f'<text x="64" y="84" font-size="22" letter-spacing="2" fill="{INK3}">FOR PRIVATE EQUITY OWNERS OF BRITISH BRANDS</text>{t}{s}{f}'
             f'<text x="64" y="594" font-size="22" fill="{INK2}">Pavel Guzhikov, guzh.uk/pe</text></svg>')
 
-FACTS = [("6 months", "from loss to profit"), ("From zero", "processes in a new country"), ("One team", "from different cultures")]
+FACTS = [("Zero to sale", "built, scaled, profitable, sold"), ("A unicorn", "founding team at Uzum"), ("Hands-on", "tech, product and business")]
 cards = {
     "pe-og.png": card(["I make the 100-day plan happen."],
                       ["Hands-on, beside management, measured weekly.", "In the British brands you buy."], FACTS),
