@@ -7,7 +7,7 @@ Data safety form and the Apple privacy label:
     store/privacy-policy.md  -> weather/privacy/index.html
     store/support-page.md    -> weather/support/index.html
 
-Each page file is an ordinary hand-written shell — head, masthead, footer, all the CSS — with one
+Each page file is an ordinary hand-written shell: head, masthead, footer, all the CSS: with one
 generated region (so the masthead's and footer's links to https://alwaysweather.uk/, the app's own
 page since 18 Oct 2026, are never touched by a re-render):
 
@@ -33,7 +33,7 @@ ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
 APP = pathlib.Path(ARGS[0] if ARGS else "~/dev/always_weather").expanduser()
 SITE = pathlib.Path(__file__).resolve().parent.parent
 
-# The documents are read from what is merged — not from whatever the app repo happens to have
+# The documents are read from what is merged: not from whatever the app repo happens to have
 # checked out (it usually sits on a feature branch), and not from a local main that may be behind.
 # Fetch that repo first. Pass --ref=<branch> to preview copy that has not merged yet, or
 # --ref=worktree to take the files as they are on disk.
@@ -70,7 +70,9 @@ PAGES = [
 
 
 def smarten(text: str) -> str:
-    """Straight quotes to typographic ones. Presentation only — no word is changed."""
+    """Straight quotes to typographic ones. Presentation only: no word is changed. A spaced dash becomes a colon."""
+    text = re.sub(r"(Legal basis:\*\*\s*[a-z ]+?)[ \t]+—[ \t]+([^\n]+?)\.$", r"\1 (\2).", text, flags=re.M)
+    text = re.sub(r"[ \t]+—[ \t]+", ": ", text)
     text = re.sub(r'"([^"]*)"', "“\\1”", text)
     return text.replace("'", "’")
 
@@ -124,7 +126,7 @@ def render(markdown: str) -> str:
             blocks.append(f"    <ul>\n{items}\n    </ul>")
         else:
             # Both documents hard-wrap prose at ~95 characters, so a short line that is not the
-            # last one is a break the author meant — the address block on the support page.
+            # last one is a break the author meant: the address block on the support page.
             text = buf[0]
             for prev, line in zip(buf, buf[1:]):
                 text += ("<br>" if len(prev) < 70 else " ") + line
@@ -190,17 +192,17 @@ def main() -> int:
             text = re.sub(pattern, replacement.replace("\\", "\\\\"), text)
         left = re.findall(r"\[[^\]]+\]\s*(?!\()", text)
         if left:
-            print(f"{source}: unresolved placeholder {left[0].strip()} — add it to "
+            print(f"{source}: unresolved placeholder {left[0].strip()}: add it to "
                   f"SUBSTITUTIONS in {pathlib.Path(__file__).name}, or wait for the real text",
                   file=sys.stderr)
             return 1
 
         page = dst.read_text(encoding="utf-8")
-        begin = f"<!-- BEGIN generated from {source} — edit that file, then re-run tools/make-weather-pages.py -->"
+        begin = f"<!-- BEGIN generated from {source}: edit that file, then re-run tools/make-weather-pages.py -->"
         end = "<!-- END generated -->"
         i, j = page.find(begin), page.find(end)
         if i == -1 or j == -1:
-            print(f"{target}: no generated region — expected {begin}", file=sys.stderr)
+            print(f"{target}: no generated region: expected {begin}", file=sys.stderr)
             return 1
 
         page = page[:i] + begin + "\n" + render(text) + "\n    " + page[j:]

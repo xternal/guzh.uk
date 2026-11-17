@@ -45,7 +45,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <script>
-/* Pin the reader's explicit choice before first paint — anything later is a flash of the wrong
+/* Pin the reader's explicit choice before first paint: anything later is a flash of the wrong
    theme. Unlike the home page, Auto on the Always Weather pages is simply prefers-color-scheme:
    the sun table is 7 KB and belongs to that page. A pinned choice is shared (same origin, same
    "theme" key), so Light or Dark chosen anywhere on guzh.uk follows the reader here. */
@@ -75,7 +75,7 @@
   --grain-blend:multiply;
 }
 
-/* Dark, declared twice on purpose and deliberately kept identical — the same rule the home page
+/* Dark, declared twice on purpose and deliberately kept identical: the same rule the home page
    follows: once for a reader whose OS asks for dark and who has not overridden it, once for an
    explicit choice from the switcher. Edit both or the switcher and the OS start to disagree.
    Dark is dark brown, as on the home page; tools/check-colours.py checks the two match. */

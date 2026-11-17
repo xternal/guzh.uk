@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate assets/today/* — the icon, the screenshots and the OG card for /today/.
+# Regenerate assets/today/*: the icon, the screenshots and the OG card for /today/.
 #
 # Like tools/make-weather-assets.sh, nothing is hand-made here. The mark is the Always Today logo
 # (docs/logo/cut-reflect.svg in the app repo: a half-sun with the tick cut out of it, on a horizon,
@@ -17,8 +17,8 @@ APP="${1:-$HOME/dev/always-today}"
 SHOTS="$APP/app/build/screenshots"
 LOGO="$APP/docs/logo/cut-reflect.svg"
 
-[ -f "$LOGO" ] || { echo "No logo at $LOGO — pass the Always Today repo path." >&2; exit 1; }
-[ -d "$SHOTS" ] || { echo "No screenshots at $SHOTS — run the ScreensTest in the app repo first." >&2; exit 1; }
+[ -f "$LOGO" ] || { echo "No logo at $LOGO: pass the Always Today repo path." >&2; exit 1; }
+[ -d "$SHOTS" ] || { echo "No screenshots at $SHOTS: run the ScreensTest in the app repo first." >&2; exit 1; }
 
 mkdir -p assets/today
 

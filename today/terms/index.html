@@ -47,7 +47,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <script>
-/* Pin the reader's explicit choice before first paint — see /weather/index.html for why Auto
+/* Pin the reader's explicit choice before first paint: see /weather/index.html for why Auto
    here means prefers-color-scheme rather than the home page's sun. The same on every app page. */
 (function(){
   try {
@@ -75,7 +75,7 @@
   --grain-blend:multiply;
 }
 
-/* Dark, declared twice on purpose and deliberately kept identical — see /weather/index.html. */
+/* Dark, declared twice on purpose and deliberately kept identical: see /weather/index.html. */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
@@ -279,8 +279,8 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
   </header>
 
   <main class="policy">
-    <!-- BEGIN generated from store/terms.md — edit that file, then re-run tools/make-today-pages.py -->
-    <h1>Terms of use — Always Today</h1>
+    <!-- BEGIN generated from store/terms.md: edit that file, then re-run tools/make-today-pages.py -->
+    <h1>Terms of use: Always Today</h1>
     <p class="updated">Last updated: 19 October 2026</p>
     <h2>About these terms</h2>
     <p>These terms are an agreement between you and Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”), which makes Always Today. They apply when you use the Always Today apps, create an account or buy a plan. Please read them with the <a href="/today/privacy/">privacy policy</a> and the refund policy on the <a href="/today/support/">help page</a>. Questions: apps@guzh.uk.</p>
@@ -368,7 +368,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* Auto / Light / Dark — the same switcher as /weather/ and /today/, sharing the "theme" key. */
+/* Auto / Light / Dark: the same switcher as /weather/ and /today/, sharing the "theme" key. */
 (function(){
   var root = document.documentElement,
       btns = [].slice.call(document.querySelectorAll(".mode-btn")),

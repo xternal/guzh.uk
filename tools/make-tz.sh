@@ -20,7 +20,7 @@ from collections import defaultdict
 
 TAB = pathlib.Path("/usr/share/zoneinfo/zone.tab")
 if not TAB.exists():
-    raise SystemExit("no %s — install tzdata" % TAB)
+    raise SystemExit("no %s: install tzdata" % TAB)
 
 def parse(c):
     # ISO 6709, either +DDMM+DDDMM or +DDMMSS+DDDMMSS
@@ -66,7 +66,7 @@ if missing:
 for a, c in ALIAS.items():
     zones[a] = zones[c]
 
-# "Region:City lat lon,City lat lon|Region:..." — the region prefix repeats
+# "Region:City lat lon,City lat lon|Region:...": the region prefix repeats
 # hundreds of times, so hoisting it out is most of the saving.
 grouped = defaultdict(list)
 for z, (la, lo) in sorted(zones.items()):

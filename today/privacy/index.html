@@ -47,7 +47,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <script>
-/* Pin the reader's explicit choice before first paint — see /weather/index.html for why Auto
+/* Pin the reader's explicit choice before first paint: see /weather/index.html for why Auto
    here means prefers-color-scheme rather than the home page's sun. The same on every app page. */
 (function(){
   try {
@@ -75,7 +75,7 @@
   --grain-blend:multiply;
 }
 
-/* Dark, declared twice on purpose and deliberately kept identical — see /weather/index.html. */
+/* Dark, declared twice on purpose and deliberately kept identical: see /weather/index.html. */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
@@ -279,8 +279,8 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
   </header>
 
   <main class="policy">
-    <!-- BEGIN generated from store/privacy.md — edit that file, then re-run tools/make-today-pages.py -->
-    <h1>Privacy policy — Always Today</h1>
+    <!-- BEGIN generated from store/privacy.md: edit that file, then re-run tools/make-today-pages.py -->
+    <h1>Privacy policy: Always Today</h1>
     <p class="updated">Last updated: 20 October 2026</p>
     <p>Always Today is made by Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”). We are the controller of the personal data described here. Contact: apps@guzh.uk or +44 7776 912598.</p>
     <h2>The short version</h2>
@@ -306,19 +306,19 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
     <p>Only if you sign in to sync. Our server runs on Cloudflare. This is everything it stores about you.</p>
     <h3>Your account</h3>
     <p>Your email address, the date the account was created, and which plan it has. There are no passwords: you sign in with a link we email you, which works for 15 minutes, once. While a sign-in is waiting, the server keeps your email address, the name of the device signing in and a short code; it deletes the request within about a day after it expires.</p>
-    <p class="basis"><strong>Legal basis:</strong> contract — the account and the sync you asked for.</p>
+    <p class="basis"><strong>Legal basis:</strong> contract (the account and the sync you asked for).</p>
     <h3>Your devices</h3>
     <p>For each signed-in device: its name (your phone’s maker and model, or your computer’s network name), when it signed in and when it last synced, and a scrambled copy of its sign-in key. The key itself is never stored, so a copy of our database can’t sign anyone in.</p>
-    <p class="basis"><strong>Legal basis:</strong> contract — keeping your devices in sync, and letting you see and sign them out.</p>
+    <p class="basis"><strong>Legal basis:</strong> contract (keeping your devices in sync, and letting you see and sign them out).</p>
     <h3>Your changes</h3>
     <p>Every addition and edit to your lists, each with the time it was made and which of your devices made it. That is what sync is: your devices send their changes to the server and fetch the ones they haven’t seen. Without end-to-end encryption, a change includes what you wrote. We never read, analyse or sell your lists or use them for anything but passing them between your devices. They travel over HTTPS, and Cloudflare stores them encrypted at rest.</p>
-    <p class="basis"><strong>Legal basis:</strong> contract — sync.</p>
+    <p class="basis"><strong>Legal basis:</strong> contract (sync).</p>
     <h3>Keeping the service safe</h3>
     <p>To stop abuse, the server counts sign-in attempts per IP address for one minute; nothing is kept after that. Cloudflare, our hosting provider, keeps technical logs of each request (the time, the address asked for, the result and network details including your IP address) for up to 7 days, to deliver and protect the service and so we can find faults.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — keeping the service running and secure.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (keeping the service running and secure).</p>
     <h3>Sign-in emails</h3>
     <p>Sign-in links are delivered by Resend (Plus Five Five, Inc.), which receives your email address and the link to send.</p>
-    <p class="basis"><strong>Legal basis:</strong> contract — signing you in.</p>
+    <p class="basis"><strong>Legal basis:</strong> contract (signing you in).</p>
     <h2>End-to-end encryption</h2>
     <p>End-to-end encryption is optional and off until you turn it on. With it on, each change is encrypted on your device, with a key protected by your passphrase, before it is sent. The server then stores only data it can’t read: titles, notes, dates, tags, list names and even which item a change belongs to are hidden.</p>
     <p>Sync still needs a few things in the open: that your account exists, its email address and devices, how many changes you make and when, roughly how large each change is, and the locked envelope that holds your key, which only your passphrase or your recovery key can open. If you lose both your passphrase and your recovery key, we can’t recover your synced lists for you.</p>
@@ -330,10 +330,10 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
       <li><strong>On iPhone and iPad,</strong> plans are sold by Apple through the App Store, under <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple’s privacy policy</a>. The app tells Apple only your account’s internal reference, never your email; Apple tells our server the purchase’s reference, product, status and dates.</li>
     </ul>
     <p>For each purchase our server keeps the store, the store’s reference for it, the product, its status and when it renews or ends, so every device knows that sync is included.</p>
-    <p class="basis"><strong>Legal basis:</strong> contract — the plan you bought.</p>
+    <p class="basis"><strong>Legal basis:</strong> contract (the plan you bought).</p>
     <h2>The free trial, and deleting an account</h2>
     <p>Each email address gets one free trial. If you delete your account, we keep a scrambled, one-way copy of your email address, with the date your free trial ends, for two years, only so that the same email can’t start another free trial; it can’t be turned back into your address.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — one free trial per person.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (one free trial per person).</p>
     <h2>What we never collect</h2>
     <ul>
       <li>No analytics, usage statistics or crash reports from the app.</li>
@@ -392,7 +392,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* Auto / Light / Dark — the same switcher as /weather/ and /today/, sharing the "theme" key. */
+/* Auto / Light / Dark: the same switcher as /weather/ and /today/, sharing the "theme" key. */
 (function(){
   var root = document.documentElement,
       btns = [].slice.call(document.querySelectorAll(".mode-btn")),

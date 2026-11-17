@@ -46,7 +46,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <script>
-/* Pin the reader's explicit choice before first paint — see /weather/index.html for why Auto
+/* Pin the reader's explicit choice before first paint: see /weather/index.html for why Auto
    here means prefers-color-scheme rather than the home page's sun. */
 (function(){
   try {
@@ -74,7 +74,7 @@
   --grain-blend:multiply;
 }
 
-/* Dark, declared twice on purpose and deliberately kept identical — see /weather/index.html. */
+/* Dark, declared twice on purpose and deliberately kept identical: see /weather/index.html. */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
@@ -278,8 +278,8 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
   </header>
 
   <main class="policy">
-    <!-- BEGIN generated from store/privacy-policy.md — edit that file, then re-run tools/make-weather-pages.py -->
-    <h1>Privacy policy — Always Weather</h1>
+    <!-- BEGIN generated from store/privacy-policy.md: edit that file, then re-run tools/make-weather-pages.py -->
+    <h1>Privacy policy: Always Weather</h1>
     <p class="updated">Last updated: 20 October 2026</p>
     <p>Always Weather is made by Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”). We are the controller of the little personal data the app handles. Contact: apps@guzh.uk or +44 7776 912598.</p>
     <h2>The short version</h2>
@@ -294,32 +294,32 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
     <h3>Forecasts</h3>
     <p>To show a forecast, the app sends our server the latitude and longitude of the place you’re looking at, rounded to two decimal places (roughly a 1 km square), together with the app version. This is either a place you saved or searched for, or your current location if you allowed it.</p>
     <p>Our server runs on Cloudflare. It gets the forecast for that rounded point from the national weather service for the place, or the one you chose in Settings: the Met Office for the UK and Ireland, Deutscher Wetterdienst (DWD) for Germany, the US National Weather Service (NWS) for the US, and MET Norway, the Norwegian Meteorological Institute, everywhere else and for the days a regional forecast doesn’t reach. MET Norway and the NWS receive the rounded point from our server, never from your device, with nothing that identifies you. The Met Office forecasts come from files our server copies in advance, and DWD’s from the file for the nearest weather station, so your point isn’t sent to either. Our server keeps a copy of the forecast for that point for a few hours so the next person nearby gets it quickly. That copy isn’t linked to you or your device. Our server doesn’t record coordinates or IP addresses in its logs. To stop abuse, it counts requests per IP address for one minute; nothing is kept after that. Cloudflare processes IP addresses to deliver and protect the service, as our hosting provider.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing you the forecast you asked for.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (showing you the forecast you asked for).</p>
     <h3>Weather warnings</h3>
     <p>To show official weather warnings, the app sends our server the same rounded point. For a place in the US, our server asks the NWS for the warnings at that rounded point, from our server and with nothing that identifies you. For the UK, Ireland, Germany and Norway it downloads each service’s whole list of warnings and finds the ones for the point itself, so the point isn’t sent to the Met Office, Met Éireann, DWD or MET Norway. Our server fetches the Met Office’s list every minute on its own schedule, so looking at a UK place doesn’t make it contact the Met Office. Warnings are kept in the app’s memory only, never stored on your device or in a backup.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing you warnings for the place you’re looking at.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (showing you warnings for the place you’re looking at).</p>
     <h3>Rain, snow and warning alerts</h3>
     <p>Alerts are off unless you turn them on in Settings → Alerts; on Android 13 and later, and on an iPhone or a Mac, the app then asks for permission to send notifications. While alerts are on, the app checks the forecast, and the warnings if you chose them, for the one place you picked: wherever you are, a saved place, or where the app last found you while it was open. Unless you choose Wherever you are, it never asks for your location in the background. If you do, on Android or an iPhone, and give the app permission to use your location all the time (you can take it back in your phone’s settings), it finds where your phone is as it checks; an iPhone tells it when you have moved a few hundred metres. As always, the location is rounded to about a kilometre before it leaves your phone, and the app keeps only the latest place, on your phone: never a history of where you have been. On a Mac or a Windows PC, which check only while the app is open, it finds your location just before each check, with the permission you already gave it. The checks run in the background, every 15 minutes to every hour, and send our server the same requests, with the same rounded point, as described under Forecasts and Weather warnings above; each one is listed in Settings → What left this phone. Your phone decides from that forecast whether to tell you: there is no push service, and our server keeps no list of devices and isn’t told whether alerts are on. Your alert settings, and a note of what has already been announced (times, kinds and levels, never a place), are stored only on your phone and never included in a backup, so a new phone asks again. Turning alerts off stops the checks.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — the alerts you asked for.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (the alerts you asked for).</p>
     <h3>The name of your current location</h3>
     <p>When you use your current location, the app sends the same rounded point to our server to find the nearest town or district, so it can show “Hammersmith” instead of “Current location”. Our server looks it up in its own copy of the GeoNames place list, so the point isn’t passed to anyone else, and it isn’t stored or written to our logs. The app keeps the name on your phone for that roughly 1 km square, so it asks only once per square. It keeps the names of the last 50 squares you used and forgets older ones.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing where the forecast is for.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (showing where the forecast is for).</p>
     <h3>Place search</h3>
     <p>When you search for a place, the text you type is sent to our server to find matching places. It isn’t stored.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — answering your search.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (answering your search).</p>
     <h3>The rain map</h3>
     <p>When you open the rain map, the app downloads the latest rain radar from our server: a list of the last two hours’ pictures, then the pieces of them around the place you’re looking at, and more pieces wherever you move the map. These requests carry no location: everyone downloads the same pictures, and the app works out the rain where you are on your device. The pieces it asks for show roughly which part of Europe or North America you’re looking at, in squares about 250 km across, as any map’s would;<br>
       our server doesn’t record which pieces you asked for. The pictures are kept in the app’s memory only while the map is open, never stored on your device or in a backup. In Europe the radar comes from EUMETNET OPERA and the hourly forecast after it from Deutscher Wetterdienst; in the US and Canada, from NOAA (with Environment and Climate Change Canada’s radars) and NOAA’s HRRR. Our server fetches them all on its own schedule, so opening the map doesn’t make it contact any of them.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — showing you the rain map you asked for.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (showing you the rain map you asked for).</p>
     <h3>Crash reports</h3>
     <p>If the app crashes, it sends a report to Sentry (Functional Software, Inc.), which stores it for us in the European Union. A report says what went wrong in the code, and carries the app version, your phone model and its operating system version. It carries no location, no name, no email address and no identifier for you or your device, and Sentry is set not to store IP addresses. Reports are kept for up to 90 days. Crash reporting is on when you install the app; to stop it, turn off Settings → Crash reports, and the app sends nothing further.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — finding and fixing faults.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (finding and fixing faults).</p>
     <h3>Feedback emails</h3>
     <p>“Send feedback” opens your own email app with a message to apps@guzh.uk that already contains the app version, your operating system version and phone model; you can see and change all of it before sending. If you send it, we receive your email address and whatever you write. We use it only to reply and to improve the app, and delete it within 12 months or sooner if you ask.</p>
-    <p class="basis"><strong>Legal basis:</strong> legitimate interests — answering you.</p>
+    <p class="basis"><strong>Legal basis:</strong> legitimate interests (answering you).</p>
     <h3>Ideas you send</h3>
     <p>“Suggest an idea”, on our website (guzh.uk/weather/ideas) and in the apps from version 1.0.5, sends our server your words, the email address if you choose to give one, where you sent it from (the website, or which app: Android, iPhone, Mac, Windows or a watch) and the app version. Our server passes it straight on, by email, to apps@guzh.uk, the same inbox as “Send feedback”, and keeps no copy: the idea isn’t stored and isn’t written to our logs. The email carries nothing else: no location, no IP address, no device details. If you give your address, our reply goes to it; without one, we can’t reply. To stop abuse, our server counts ideas per IP address for one minute; nothing is kept after that. Cloudflare, our hosting provider, delivers the email. We keep it in our mailbox while we consider the idea; ask us at apps@guzh.uk and we’ll delete it.</p>
-    <p class="basis"><strong>Legal basis:</strong> consent — you choose to send it, and you can ask us to delete it at any time.</p>
+    <p class="basis"><strong>Legal basis:</strong> consent (you choose to send it, and you can ask us to delete it at any time).</p>
     <h2>What stays on your phone</h2>
     <p>Saved places, your settings (Look, units, time format, theme), the last forecasts and the names of the places where you’ve used your current location are stored only on your device. If you use your phone’s own backup (Google or iCloud), your settings and saved places are included in it, under your account, which we can’t access, so they come back on a new phone. Your current location, those names and the forecasts are never included in a backup or copied to a new phone. When you save your current location as a place, the app keeps only the point rounded to about a kilometre and its name. Uninstalling the app deletes all of this from the phone (on Android, so does clearing the app’s storage); a backup is kept by Google or Apple under their own rules.</p>
     <p>On Android, Settings → What left this phone lists every request the app made in the last 7 days (the latest 500 at most),<br>
@@ -384,7 +384,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* Auto / Light / Dark — the same switcher as /weather/, sharing the "theme" key. */
+/* Auto / Light / Dark: the same switcher as /weather/, sharing the "theme" key. */
 (function(){
   var root = document.documentElement,
       btns = [].slice.call(document.querySelectorAll(".mode-btn")),

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate assets/goat-rodeo/* — the icon, the OG card and the screenshots for /goat-rodeo/ and
+# Regenerate assets/goat-rodeo/*: the icon, the OG card and the screenshots for /goat-rodeo/ and
 # /goat-rodeo/privacy/.
 #
 # Like tools/make-weather-assets.sh, nothing is hand-made here. Both come from the game's own Google
@@ -20,7 +20,7 @@ cd "$(dirname "$0")/.."
 APP="${1:-$HOME/dev/goat-rodeo}"
 IMAGES="$APP/store/google-play/images"
 
-[ -f "$IMAGES/icon.svg" ] || { echo "No icon at $IMAGES/icon.svg — pass the Goat Rodeo repo path." >&2; exit 1; }
+[ -f "$IMAGES/icon.svg" ] || { echo "No icon at $IMAGES/icon.svg: pass the Goat Rodeo repo path." >&2; exit 1; }
 [ -f "$IMAGES/featureGraphic.png" ] || { echo "No feature graphic at $IMAGES/featureGraphic.png." >&2; exit 1; }
 
 mkdir -p assets/goat-rodeo
