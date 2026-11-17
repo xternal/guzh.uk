@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate assets/og.png — the 1200x630 link-preview card.
+# Regenerate assets/og.png: the 1200x630 link-preview card.
 #
 # Run this whenever the headline, the lead line, the portrait treatment or favicon.svg changes,
 # or the card will quietly disagree with the page. Requires ImageMagick (brew install imagemagick)

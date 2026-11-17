@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate assets/weather/* — the app icon, the screenshots and the OG card for /weather/.
+# Regenerate assets/weather/*: the app icon, the screenshots and the OG card for /weather/.
 #
 # The images are never hand-made here: they come from the Always Weather repo, which draws them
 # from the real app (store/README.md there explains how). This script only resizes them for the
@@ -15,14 +15,14 @@ APP="${1:-$HOME/dev/always_weather}"
 SHOTS="$APP/store/google-play/metadata/android/en-GB/images/phoneScreenshots"
 ICON="$APP/store/google-play/metadata/android/en-GB/images/icon.png"
 
-[ -d "$SHOTS" ] || { echo "No store screenshots at $SHOTS — pass the Always Weather repo path." >&2; exit 1; }
+[ -d "$SHOTS" ] || { echo "No store screenshots at $SHOTS: pass the Always Weather repo path." >&2; exit 1; }
 
 mkdir -p assets/weather
 
 # The icon, as drawn by the launcher's adaptive icon. 512x512, full square: the page rounds it.
 cp "$ICON" assets/weather/icon.png
 
-# Store screenshots carry their own caption, drawn in the Look's typeface — that is the artefact
+# Store screenshots carry their own caption, drawn in the Look's typeface: that is the artefact
 # the stores get, so the page shows exactly it rather than a second, hand-made crop. 600px wide is
 # 2x the column they sit in.
 shot() { magick "$SHOTS/$1.png" -resize 600x1067 -quality 82 "assets/weather/$2.webp"; }

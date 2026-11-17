@@ -26,7 +26,7 @@ weather/
   support/index.html    the support page the App Store requires       } see below
   ideas/index.html      "Suggest an idea": a form that sends an idea to the app's own server
 today/
-  index.html            Always Today — forwards to alwaystoday.uk (moved 20 Oct 2026), as /weather/ does
+  index.html            Always Today: forwards to alwaystoday.uk (moved 20 Oct 2026), as /weather/ does
   privacy/index.html    the privacy policy (Stripe and Google Play need one)  } generated bodies,
   support/index.html    help, contact and the refund policy                   } see "The Always
   terms/index.html      the terms of service (Stripe needs them)              } Today pages"
@@ -54,21 +54,21 @@ assets/
   goat-rodeo/           the game's icon (SVG and PNG), OG card and screenshots (WebP, 1280 and 640)
 robots.txt
 sitemap.xml             the ten pages (not /weather/, which forwards), each with a
-                        <lastmod> date — when a page's copy changes, set its date to that day. Google ignores changefreq and
+                        <lastmod> date: when a page's copy changes, set its date to that day. Google ignores changefreq and
                         priority, and stops trusting lastmod once the dates go stale
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
-                        search tools (llmstxt.org) — hand-written from the copy on /,
+                        search tools (llmstxt.org): hand-written from the copy on /,
                         alwaysweather.uk and /today/, so update it when that copy changes
 tools/make-og.sh        regenerates assets/og.png: run it if the headline, the lead line, the
                         portrait treatment or favicon.svg changes
 tools/make-tz.sh        regenerates the packed timezone->coordinates table inside index.html
-                        — run it when tzdb adds or renames zones
+                        run it when tzdb adds or renames zones
 tools/make-weather-assets.sh
                         regenerates assets/weather/* from the Always Weather repo's store
-                        assets — run it whenever those change
+                        assets: run it whenever those change
 tools/make-weather-pages.py
                         re-renders the policy and support page bodies from the Always Weather
-                        repo's store/*.md — run it whenever that copy changes
+                        repo's store/*.md: run it whenever that copy changes
 tools/make-today-assets.sh, tools/make-today-pages.py
                         the same two jobs for Always Today, from its repo's logo, screenshots
                         and store/*.md
@@ -76,7 +76,7 @@ tools/make-goat-rodeo-assets.sh, tools/make-goat-rodeo-pages.py
                         the same two jobs for Goat Rodeo, from its repo's Play artwork and
                         store/privacy-policy.md
 tools/make-writing.py   copies the three newest Substack posts into the "Writing" block on /
-                        — run daily by .github/workflows/writing.yml, see below
+                        run daily by .github/workflows/writing.yml, see below
 .github/workflows/writing.yml
                         runs make-writing.py once a day and commits the result if it changed
 tools/publish-writing.sh
@@ -86,7 +86,7 @@ tools/check-colours.py  checks contrast and the dark palette on every page, see 
                         touches a page
 tools/serve.py          the local preview, served the way GitHub Pages does: no folder
                         listings, and 404.html for an address with no page
-_headers                cache + security headers — used by Netlify and Cloudflare Pages,
+_headers                cache + security headers: used by Netlify and Cloudflare Pages,
                         ignored by GitHub Pages (which cannot set custom headers)
 counter/                guzh.uk's own page counter, a Cloudflare Worker at
                         https://guzh-uk-views.xternal.workers.dev, see "Visitor numbers"
@@ -97,13 +97,13 @@ counter/                guzh.uk's own page counter, a Cloudflare Worker at
   wrangler.jsonc        `cd counter && wrangler deploy` publishes it
 ```
 
-The original Claude Design handoff — spec, prototype and the old 1 MB React snapshot — is **not** in
+The original Claude Design handoff (spec, prototype and the old 1 MB React snapshot) is **not** in
 this repo. It stayed in the Google Drive `_git_` folder as `guzh.uk-handoff/`, which this repo used
 to sit beside. It is reference material, it does not belong on the website, and on a free GitHub
 plan Pages requires a public repo, where anything committed is publicly browsable whether or not it
-is served. It is not itself a git repo, so Drive is the only copy — leave it there.
+is served. It is not itself a git repo, so Drive is the only copy: leave it there.
 
-## Writing — the Substack posts on `/`
+## Writing: the Substack posts on `/`
 
 The home page's **"Writing"** block shows the three newest posts from
 `guzhikov.substack.com`, as plain HTML in the page's own type. Substack's own embed was ruled out:
@@ -148,7 +148,7 @@ year-long cookies and loads Sentry and a dozen Substack scripts, which would bre
 - GitHub turns scheduled workflows off after 60 days without a commit in the repo. A quiet spell
   of that length means re-enabling it on the Actions tab.
 
-## The app pages — `/weather/privacy/`, `/weather/support/` and `/weather/ideas/`
+## The app pages: `/weather/privacy/`, `/weather/support/` and `/weather/ideas/`
 
 **Always Weather's own page is https://alwaysweather.uk/ since 18 Oct 2026**, the paid weather
 app for iPhone, Mac, Android, Windows and Linux (`~/dev/always_weather`). That page is built and
@@ -165,15 +165,15 @@ menu of each Always Weather page, the ideas page's "Back to Always Weather", and
 
 The pages that stay here are the ones the App Store, Google Play, the Microsoft Store and the apps
 themselves link to; don't move them. `/weather/privacy/` is the privacy policy, which is the URL both
-Google Play and App Store Connect require before an app can be submitted — it must be a public
+Google Play and App Store Connect require before an app can be submitted: it must be a public
 web page, not a PDF, reachable without a login. `/weather/support/` is the help and contact page,
 the support URL the App Store requires.
 
 - **The copy is not written here, and the two documents are not even retyped here.** The bodies
   of `/weather/privacy/` and `/weather/support/` are *generated* from `store/privacy-policy.md`
   and `store/support-page.md` in the app repo, word for word, into the region marked
-  `<!-- BEGIN generated … -->` in each page. Everything outside that region — head, masthead,
-  styling, footer — is hand-written and safe to edit.
+  `<!-- BEGIN generated … -->` in each page. Everything outside that region: head, masthead,
+  styling, footer: is hand-written and safe to edit.
 
   ```bash
   ./tools/make-weather-pages.py ~/dev/always_weather          # from main, the default
@@ -187,7 +187,7 @@ the support URL the App Store requires.
 
   The script refuses to publish anything still `[bracketed]` in the source. Where a bracket is
   waiting on a decision, `SUBSTITUTIONS` at the top of the script says what the page prints
-  instead — today only the publication date, the retarget of the documents' `./privacy` link
+  instead: today only the publication date, the retarget of the documents' `./privacy` link
   to `/weather/privacy/`, and of the support page's link to `https://guzh.uk/weather/#linux` to
   `https://alwaysweather.uk/#linux` (until `store/support-page.md` links there itself). It reads `origin/main` by default, so fetch that repo first; `--ref=`
   takes any other branch.
@@ -207,7 +207,7 @@ the support URL the App Store requires.
   documents and credited, with its licence link, in the footer of the app's page (alwaysweather.uk
   now), next to the sentence saying the app is independent of them. Keep both in that footer: the
   licence requires the credit, and their terms require that it read as a source, never an
-  endorsement — so no logo, no "Yr" or NRK naming. The store screenshots carry the same line,
+  endorsement: so no logo, no "Yr" or NRK naming. The store screenshots carry the same line,
   drawn into the images by the app repo, so page, pictures and store listing all agree.
   (Open-Meteo was picked first and dropped: its free tier is non-commercial use only and this is a
   paid app. It stays the planned upgrade once the app pays for itself.)
@@ -218,7 +218,7 @@ the support URL the App Store requires.
   Notes below give.
 - The home page reaches these pages from the **"Things you can open"** row above its contact
   block (Uzum, Agent Hands, Ruminator.xyz, LedgerGov.UK, BoroughBook.UK, offyougo, tCalendar,
-  Always Weather, Always Today, Goat Rodeo) — the only link to
+  Always Weather, Always Today, Goat Rodeo): the only link to
   the two apps from guzh.uk itself. Always Weather's goes to `https://alwaysweather.uk/` and, like
   the other projects on their own domains, opens in a new tab; Always Today's goes to `https://alwaystoday.uk/`. Ruminator.xyz sits beside Agent Hands, both paid products in
   the making. Pavel announced it on LinkedIn on 13 October and wants AI assistants to recommend
@@ -246,7 +246,7 @@ the support URL the App Store requires.
   also `about` the app, `https://alwaysweather.uk/#app`, the `SoftwareApplication` there), and say
   only what their `<head>` already says, so regenerating a body can't leave them out of date.
 
-## The Always Today pages — `/today/`, `/today/privacy/`, `/today/support/` and `/today/terms/`
+## The Always Today pages: `/today/`, `/today/privacy/`, `/today/support/` and `/today/terms/`
 
 `/today/` forwards to **https://alwaystoday.uk/** since 20 October 2026 (canonical link, zero-second refresh and a script that keeps the `#section`, as `/weather/` does since 18 October); the legal pages stay here because the stores, Stripe and the apps link to them. It was the public page for **Always Today**, a calm to-do list for iPhone, iPad, Android phones
 and Googlebooks, Windows, Mac and the Linux terminal (`~/dev/always-today`; on the Linux machine
@@ -301,7 +301,7 @@ dispute policy, all public: that is what these four pages are for (sources in th
   ledger, the "£24" figure, the first question, the JSON-LD `offers` and the OG card (redraw it), plus
   `store/support.md` and `store/terms.md`.
 
-## The Goat Rodeo pages — `/goat-rodeo/` and `/goat-rodeo/privacy/`
+## The Goat Rodeo pages: `/goat-rodeo/` and `/goat-rodeo/privacy/`
 
 **Goat Rodeo** is a party platformer for iPhone, iPad and Android (`~/dev/goat-rodeo`, app ID
 `com.empatiq.goatrodeo` on both), published on the App Store and Google Play by Empatiq Limited:
@@ -355,7 +355,7 @@ play counts (from 0.5.0; see the policy).
   phone screenshots, so the page, its link preview and the store listing agree. Re-run it when any of
   those change.
 
-### Race links — `/goat-rodeo/race/` and the two files in `/.well-known/`
+### Race links: `/goat-rodeo/race/` and the two files in `/.well-known/`
 
 From the game's 0.7.0, "Challenge a friend" on the results screen shares a link like
 `https://guzh.uk/goat-rodeo/race/#z…`: everything after `#` is the race itself (the level, the items
@@ -391,7 +391,7 @@ on it and each runner's button presses; the format is `raceBytes` in the game's 
   Play" there and here (until 21 October 2026, 17:21 BST, the iPhone and iPad app was "in testing for
   the App Store"). Change them together, on launch day too.
 
-## The 404 page — `404.html`
+## The 404 page: `404.html`
 
 GitHub Pages serves `404.html` from the repo root, with a 404 status, for every address on guzh.uk
 that has no page; without it, readers got GitHub's own grey "File not found". It is served at the
@@ -414,7 +414,7 @@ broken address itself, so every link and asset in it starts with `/` or `https:/
   motion. The first joke is also in the HTML, for a reader without JavaScript. Add or cut lines in
   `JOKES`; keep them short, and keep them off " · " and long dashes like the rest of the copy.
 
-## Suggest an idea — `/weather/ideas/`
+## Suggest an idea: `/weather/ideas/`
 
 A hand-written page (nothing on it is generated) with one form: the idea (3 to 2,000 characters,
 with a count once 200 are left), an optional email "if you'd like an answer", and a hidden
@@ -460,7 +460,7 @@ interface, so an unfinished draft is readable by anything on the same wifi.
 
 It used to live on a Google Drive `CloudStorage` mount, and the in-editor preview could not work
 there: the sandbox the editor spawns dev servers under has no read access to that mount. The symptom
-is `PermissionError: [Errno 1] Operation not permitted` somewhere that looks unrelated —
+is `PermissionError: [Errno 1] Operation not permitted` somewhere that looks unrelated:
 `os.getcwd()`, or the import machinery scanning `sys.path`.
 
 It was never a configuration problem, and the obvious workarounds make it worse rather than better:
@@ -474,11 +474,11 @@ It was never a configuration problem, and the obvious workarounds make it worse 
 This is why the repo now lives at `~/dev/guzh.uk` rather than in Google Drive, and why the in-editor
 preview works again. If you ever move it back onto a Drive mount, expect all of the above to return.
 
-## Deploy — GitHub Pages (simplest)
+## Deploy: GitHub Pages (simplest)
 
 Best choice if `guzh.uk` is the only domain that needs to serve the page.
 
-1. Push this repo to GitHub. On a free plan the repo must be **public** — GitHub Pages only works on
+1. Push this repo to GitHub. On a free plan the repo must be **public**: GitHub Pages only works on
    private repos with Pro or above.
 2. **Settings → Pages → Source: Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
    You get `<username>.github.io/<repo>` within a minute.
@@ -497,22 +497,22 @@ Best choice if `guzh.uk` is the only domain that needs to serve the page.
 5. Wait for the certificate, then tick **Enforce HTTPS**.
 
 GitHub creates the redirect between `guzh.uk` and `www.guzh.uk` automatically once both are
-configured — you do not need to do anything else for the `www` variant.
+configured: you do not need to do anything else for the `www` variant.
 
 Limits are irrelevant here: 1 GB site, 100 GB/month soft bandwidth, 10 builds/hour soft.
 
 ### The one catch: one custom domain per repo
 
 A repo's `CNAME` file holds a single domain. If you own other domains that should land on this page,
-pick one of these — no second host required for the first option:
+pick one of these: no second host required for the first option:
 
 - **Registrar URL forwarding (easiest).** Most registrars (Porkbun, Namecheap, Gandi, GoDaddy) offer
   free forwarding. Point each spare domain at `https://guzh.uk` with a 301. Nothing to deploy.
 - **A second repo per domain** containing only a redirect stub. Works, but it is a hop through HTML
-  and it is not a real 301 — only worth it if forwarding is unavailable.
+  and it is not a real 301: only worth it if forwarding is unavailable.
 - **Move to Netlify** (below), which handles many domains on one site.
 
-## Alternative — Netlify
+## Alternative: Netlify
 
 Worth it if you have several domains and want them all on one site, or if you want the repo private.
 
@@ -520,7 +520,7 @@ Worth it if you have several domains and want them all on one site, or if you wa
    publish directory `/`. Free tier deploys private repos.
 2. **Domain management** → add `guzh.uk` and set it as the **primary domain**; add the others as
    **domain aliases**. Netlify redirects apex ↔ `www` automatically.
-3. For the other domains, do not rely on the automatic behaviour — make the 301 explicit by adding a
+3. For the other domains, do not rely on the automatic behaviour: make the 301 explicit by adding a
    `_redirects` file at the root, one line per domain:
 
    ```
@@ -528,9 +528,9 @@ Worth it if you have several domains and want them all on one site, or if you wa
    ```
 
    Netlify's `_redirects` **does** match hostnames, so this works there. (This is the syntax the
-   original `DEPLOY.md` gave — it is Netlify's, not Cloudflare's. See below.)
+   original `DEPLOY.md` gave: it is Netlify's, not Cloudflare's. See below.)
 
-## Alternative — Cloudflare Pages
+## Alternative: Cloudflare Pages
 
 Fine, but the most setup of the three. Workers & Pages → Create → Pages → Connect to Git; framework
 preset None, build command empty, output directory `/`. Add each domain under Custom domains.
@@ -549,13 +549,13 @@ Free plan: 10 redirect rules per zone.
 ## Where this differs from the design handoff
 
 The handoff README and the design prototype disagreed in two places. Both have since been settled by
-Pavel directly, so the live page is now the authority — not either source document. Recorded here
+Pavel directly, so the live page is now the authority: not either source document. Recorded here
 because both disagreements will otherwise look like mistakes to anyone reading the handoff later.
 
-1. **Portrait treatment — warm, not greyscale.** The handoff README specified
+1. **Portrait treatment: warm, not greyscale.** The handoff README specified
    `grayscale(1) contrast(1.04)`; the prototype's default was `warm`. The page uses **warm**
    (`saturate(1.02) contrast(1.02) brightness(1.03)`), and `assets/og.png` is generated in colour to
-   match. If you change the filter, change it in both places — `.portrait img` in `index.html` and
+   match. If you change the filter, change it in both places: `.portrait img` in `index.html` and
    the `-modulate` line in `tools/make-og.sh`, which carries the equivalent for each treatment.
 
 2. **The body copy has moved past both sources.** It now reads: "Margin, growth and retention are
@@ -567,13 +567,13 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 
 - **Copyright year updates itself.** The markup ships `© <span id="year">2026</span>`, and one line
   of script below it overwrites the span with the current year. If scripting is off the 2026 in the
-  HTML still renders, so it degrades to exactly what it was before — worth bumping that fallback if
+  HTML still renders, so it degrades to exactly what it was before: worth bumping that fallback if
   you happen to edit the file in a later year.
 
   A scheduled GitHub Action was the obvious alternative and does not work here: GitHub disables
   scheduled workflows after 60 days without repository activity in a public repo, so a once-a-year
   cron on a quiet site repo would be switched off long before it ever fired.
-- **Fonts** load from Google Fonts (Geist 400/500) — one family, everything. A display serif was
+- **Fonts** load from Google Fonts (Geist 400/500): one family, everything. A display serif was
   tried across the headline, stat figures, block headings and the closing line, and taken back out:
   it read as someone else's page. Geist also renders the OG card, so page and link preview agree.
   Self-host the two weights if you want to remove the third-party request.
@@ -634,11 +634,11 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   resolution order is: an explicit choice, else the sun where the reader is, else
   `prefers-color-scheme`. A choice pins `data-theme` on `<html>`; Auto clears it and recomputes.
 
-  The dark palette is therefore declared twice — once under the media query as
+  The dark palette is therefore declared twice: once under the media query as
   `:root:not([data-theme="light"])`, once as `:root[data-theme="dark"]`. **The two blocks must stay
   identical**; edit one and the switcher and the OS start to disagree.
 
-  Everything resolves in an inline script in `<head>`, *before* first paint — anything later is a
+  Everything resolves in an inline script in `<head>`, *before* first paint: anything later is a
   flash of the wrong theme on every load. Every `localStorage` access is wrapped in try/catch,
   because a private window can throw on the accessor itself. With JavaScript off nothing is pinned
   and the media query alone governs.
@@ -659,7 +659,7 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   touching a colour.
 - **Following the sun** needs a latitude and longitude. They come from the IANA timezone
   (`Intl.DateTimeFormat().resolvedOptions().timeZone`) against a packed table built by
-  `tools/make-tz.sh` — *not* from the geolocation API. No permission prompt, no network call,
+  `tools/make-tz.sh`: *not* from the geolocation API. No permission prompt, no network call,
   nothing about the reader leaves the page. The price is city-level precision, which is well inside
   what sunrise timing needs. An unknown zone returns no coordinates and the page falls back to
   `prefers-color-scheme`, so the feature degrades instead of guessing.
@@ -671,7 +671,7 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   stretch with no transition at all still gets picked up; it also re-syncs on `visibilitychange`,
   since a timer that fired while the machine was asleep cannot be trusted.
 
-  This is the bulk of the page weight — the zone table alone is ~7 KB raw, ~4 KB gzipped. Trimming
+  This is the bulk of the page weight: the zone table alone is ~7 KB raw, ~4 KB gzipped. Trimming
   the table to the most-populated zones would roughly halve it, at the cost of everyone else falling
   back to the OS setting.
 - **Contrast** is set by measurement, not by eye, and every text token clears WCAG AA at the size
@@ -686,13 +686,13 @@ because both disagreements will otherwise look like mistakes to anyone reading t
 
   On the lighter `--paper-lift` in the top corners the weakest pair is dark `--ink-3`, at 5.3:1.
 
-  `--ink-3` was #8B857A (3.2:1) in light and #78736A (3.9:1) in dark — both below AA, and both
+  `--ink-3` was #8B857A (3.2:1) in light and #78736A (3.9:1) in dark: both below AA, and both
   setting the 11.5px block eyebrows, which is where it hurt most. They became #6C675F and #8F8A80,
   picked along the original hue line so the warmth survives; with the dark brown, the dark one is
   now #A59A88.
 
   The tertiary text is necessarily closer to the body copy than it was. The hierarchy now leans on
-  type rather than colour alone — 11.5px, uppercase, letter-spaced — which is the more robust place
+  type rather than colour alone (11.5px, uppercase, letter-spaced), which is the more robust place
   for it anyway.
 - **Texture** is two fixed, pointer-events-none layers on `body`: warm radial lifts in the top
   corners, and a `feTurbulence` grain as an inline SVG data URI (multiply in light, screen in dark).
@@ -705,16 +705,16 @@ because both disagreements will otherwise look like mistakes to anyone reading t
   pre-seed, seed, Series A, unicorn on paper, down round, exit and the earn-out, a second company,
   a regulator in every room, sovereign infrastructure, and out the other side at ten thousand.
 
-  Clicking fast compounds, and the cap rises with the company — 8 early, 40 once it is large. That
+  Clicking fast compounds, and the cap rises with the company: 8 early, 40 once it is large. That
   ramp is what keeps ten thousand a ninety-second session instead of a three-minute grind; the
   multiplier decays 1.1s after you stop. Past ten thousand there is nothing left to be promoted to,
   so every 2,500 draws a line at random from a pool of two dozen. The draw is remembered per step
   in `localStorage`, so reloading mid-step does not reshuffle the line under the reader.
 
-  If a real shared count is ever wanted it needs a backend — a Cloudflare Worker with KV is about
+  If a real shared count is ever wanted it needs a backend: a Cloudflare Worker with KV is about
   twenty-five lines and a free tier, at the cost of a cross-origin call the page does not make
   today, and rate limiting, because people are people.
-- **OG image** is generated, not photographed — `assets/og.png`, 1200x630. Re-check link previews
+- **OG image** is generated, not photographed: `assets/og.png`, 1200x630. Re-check link previews
   (Slack, WhatsApp, LinkedIn) after the first deploy; scrapers cache aggressively.
 - **The mark** is a single line that runs flat, steps up once and holds: zero to one, which the
   page's lead line says has been done four times. It replaced a "PG" wordmark on 13 Oct 2026, under

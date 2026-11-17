@@ -73,17 +73,17 @@ def main() -> int:
             text = re.sub(pattern, replacement.replace("\\", "\\\\"), text)
         left = re.findall(r"\[[^\]]+\]\s*(?!\()", text)
         if left:
-            print(f"{source}: unresolved placeholder {left[0].strip()} — add it to "
+            print(f"{source}: unresolved placeholder {left[0].strip()}: add it to "
                   f"SUBSTITUTIONS in {pathlib.Path(__file__).name}, or wait for the real text",
                   file=sys.stderr)
             return 1
 
         page = dst.read_text(encoding="utf-8")
-        begin = f"<!-- BEGIN generated from {source} — edit that file, then re-run tools/make-goat-rodeo-pages.py -->"
+        begin = f"<!-- BEGIN generated from {source}: edit that file, then re-run tools/make-goat-rodeo-pages.py -->"
         end = "<!-- END generated -->"
         i, j = page.find(begin), page.find(end)
         if i == -1 or j == -1:
-            print(f"{target}: no generated region — expected {begin}", file=sys.stderr)
+            print(f"{target}: no generated region: expected {begin}", file=sys.stderr)
             return 1
 
         page = page[:i] + begin + "\n" + weather.render(text) + "\n    " + page[j:]
