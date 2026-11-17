@@ -4,7 +4,7 @@
     ./tools/make-defence-pages.py
 
   /defence/        delivery partner: what I take off your plate after a raise or a contract
-  /defence/brief/  proof: zero to 1,000+ people in two years, and what I am building now
+  /defence/brief/  proof: loss to profit in six months, and what I am building now
   /defence/route/  the offer: two weeks, one bottleneck, fixed and running
 
 Each email in the outreach links one of them (the CRM records which), so replies and bookings can be tied
@@ -95,9 +95,9 @@ PAGE_JS = r"""
 """
 
 FACTS = """<div class="facts">
-  <div class="fact"><b>0 to 1,000+</b><span>people in two years, founding team at Uzum, Uzbekistan's first unicorn</span></div>
-  <div class="fact"><b>4 from zero</b><span>companies built, two of them sold</span></div>
-  <div class="fact"><b>2005 to 2022</b><span>from a mobile messenger to national payment infrastructure</span></div>
+  <div class="fact"><b>6 months</b><span>from loss to profit, by fixing how the business runs</span></div>
+  <div class="fact"><b>From zero</b><span>processes rebuilt in a new country, with no infrastructure to lean on</span></div>
+  <div class="fact"><b>One team</b><span>out of people from different countries and cultures</span></div>
 </div>"""
 
 PLANS = [
@@ -170,7 +170,7 @@ HOW = """<h2>How we start</h2>
 </ol>"""
 
 WHO = """<h2>Who I am</h2>
-<p>Pavel Guzhikov, London. Twenty years of building companies, as founder and as the person who makes them run. I was on the founding team at Uzum, Uzbekistan's first unicorn: lending, payments, cards and a marketplace, millions of users and 1,000+ people in two years, in a market with no digital infrastructure. Before that I built fintech products with more than 100 banks, and founded and sold two companies. I am most interested now in problems where the technology is hard, the deployment is political and the stakes are national: defence and dual-use, sovereign infrastructure, public systems.</p>"""
+<p>Pavel Guzhikov, London. Twenty years of building companies, as founder and as the person who makes them run. I've rebuilt a company's processes from zero in a new country, brought teams from different cultures together into one, and taken a business from loss to profit in six months. I was on the founding team at Uzum, Uzbekistan's first unicorn: lending, payments, cards and a marketplace for millions of users, in a market with no digital infrastructure. Before that I built fintech products with more than 100 banks, and founded and sold two companies. I am most interested now in problems where the technology is hard, the deployment is political and the stakes are national: defence and dual-use, sovereign infrastructure, public systems.</p>"""
 
 FAQ = """<h2>Questions</h2>
 <dl class="faq">
@@ -200,7 +200,7 @@ PAGES = [
     {   # A: delivery partner
         "path": "defence/index.html", "url": "https://guzh.uk/defence/", "slug": "delivery",
         "title": "I help UK defence startups turn a raise or a contract into delivery",
-        "description": "Hiring, suppliers, production and paperwork, taken on hands-on from day one so your engineers stay on the product. Pavel Guzhikov: founding team at Uzum, 1,000+ people in two years.",
+        "description": "Hiring, suppliers, production and paperwork, taken on hands-on from day one so your engineers stay on the product. Pavel Guzhikov: took a business from loss to profit in six months.",
         "image_alt": "I help UK defence startups turn a raise or a contract into delivery: hiring, suppliers, production, paperwork.",
         "hero": f"""<div>
   <p class="kicker">Defence and dual-use, UK</p>
@@ -215,13 +215,13 @@ PAGES = [
     },
     {   # B: proof
         "path": "defence/brief/index.html", "url": "https://guzh.uk/defence/brief/", "slug": "proof",
-        "title": "From zero to 1,000+ people in two years. Now for defence startups",
-        "description": "Pavel Guzhikov scaled Uzum from zero to 1,000+ people in two years and still ships his own code. He now helps UK defence and dual-use startups deliver after a raise or a contract.",
-        "image_alt": "From zero to 1,000+ people in two years. Now I do it for defence startups.",
+        "title": "From loss to profit in six months. Now for defence startups",
+        "description": "Pavel Guzhikov has taken a business from loss to profit in six months and rebuilt a company's processes from zero in a new country, and still ships his own code. He now helps UK defence and dual-use startups deliver after a raise or a contract.",
+        "image_alt": "From loss to profit in six months. Now I do it for defence startups.",
         "hero": f"""<div>
   <p class="kicker">Defence and dual-use, UK</p>
-  <h1>I've taken a company from zero to 1,000+ people in two years. Now I do it for defence startups.</h1>
-  <p class="sub">After a raise or a contract, the hard part is everything around the product. I've run that part at scale, and I still write the software myself.</p>
+  <h1>I've taken a business from loss to profit in six months. Now I do it for defence startups.</h1>
+  <p class="sub">After a raise or a contract, the hard part is everything around the product. I've run that part in a new country with a mixed team, and I still write the software myself.</p>
   {buttons()}
   {FACTS}
 </div>""",

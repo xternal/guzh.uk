@@ -25,12 +25,12 @@ def card(title, sub, facts):
             f'<text x="64" y="84" font-size="22" letter-spacing="2" fill="{INK3}">DEFENCE AND DUAL-USE, UK</text>{t}{s}{f}'
             f'<text x="64" y="594" font-size="22" fill="{INK2}">Pavel Guzhikov, guzh.uk/defence</text></svg>')
 
-FACTS = [("0 to 1,000+", "people in two years at Uzum"), ("4 from zero", "companies built, two sold"), ("2005 to 2022", "messenger to national payments")]
+FACTS = [("6 months", "from loss to profit"), ("From zero", "processes in a new country"), ("One team", "from different cultures")]
 cards = {
     "delivery-og.png": card(["I help defence startups turn a", "raise or a contract into delivery."],
                             ["Hiring, suppliers, production, paperwork. Hands-on."], FACTS),
-    "proof-og.png": card(["Zero to 1,000+ people in two years.", "Now for defence startups."],
-                         ["I've run the part around the product at scale."], FACTS),
+    "proof-og.png": card(["From loss to profit in six months.", "Now for defence startups."],
+                         ["I run the part around the product, hands-on."], FACTS),
     "twoweeks-og.png": card(["Two weeks. One bottleneck.", "Fixed and running."],
                             ["Hiring, a contract, production or trials: pick one."], FACTS),
 }
