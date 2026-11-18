@@ -281,7 +281,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
   <main class="policy">
     <!-- BEGIN generated from store/privacy.md: edit that file, then re-run tools/make-today-pages.py -->
     <h1>Privacy policy: Always Today</h1>
-    <p class="updated">Last updated: 20 October 2026</p>
+    <p class="updated">Last updated: 18 November 2026</p>
     <p>Always Today is made by Empatiq Limited, 66 Paul Street, London EC2A 4NA, United Kingdom, registered in England and Wales, company number 13746700 (“we”). We are the controller of the personal data described here. Contact: apps@guzh.uk or +44 7776 912598.</p>
     <h2>The short version</h2>
     <ul>
@@ -289,6 +289,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
       <li>If you sign in to sync, our server keeps your email address, a name for each of your devices and the changes you make, so it can pass them between your devices. If you turn on end-to-end encryption, those changes are encrypted on your device and we can’t read them.</li>
       <li>No ads, no analytics, no tracking. We never sell or share your data for advertising.</li>
       <li>When you buy a plan, Stripe (on the web), Google Play (on Android) or the App Store (on iPhone and iPad) sells it and handles the payment. We never see your card.</li>
+      <li>An agent sees only a to-do you give it, one at a time. If you give one to our built-in Assistant, our server sends that to-do to Anthropic, which runs the AI model, and nothing else of yours.</li>
       <li>You can export everything at any time, and delete your account from the app.</li>
     </ul>
     <h2>On your device</h2>
@@ -296,7 +297,7 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
     <p>Some features stay on your device and never reach us:</p>
     <ul>
       <li><strong>Reminders</strong> are scheduled by your device itself. On iPhone, if iOS allows it (Background App Refresh), the app also syncs for a few seconds now and then while it’s closed, so a to-do done on another device stops reminding you; that is the same sync as when the app is open.</li>
-      <li><strong>The calendar in Today</strong> reads your phone’s own calendars on Android and iPhone. On a computer, if you give it a calendar file or a calendar’s address, the app reads the file or fetches that address directly. Fetching is off until you turn it on, and the address is never sent to us.</li>
+      <li><strong>The calendar in Today</strong> reads your device’s own calendars on Android, iPhone and Mac, on the device itself: your events never reach us. On a computer, if you give it a calendar file or a calendar’s address instead, the app reads the file or fetches that address directly. Fetching is off until you turn it on, and the address is never sent to us.</li>
       <li><strong>Speak</strong> (Android) listens through your phone’s microphone only while its sheet is open, and only once you’ve allowed it. Your phone’s own speech recognition turns what you say into text, on the phone itself where it can (Android 12 and later, with your language downloaded); otherwise your phone’s speech service, usually Google’s, may handle the audio under its own privacy terms. We never receive any audio, only the to-dos it makes, as if you had typed them.</li>
       <li><strong>Speak</strong> (iPhone and iPad) listens through the microphone only while its sheet is open, and only once you’ve allowed speech recognition and the microphone. Apple’s speech recognition turns what you say into text, on the iPhone itself where your language is available there; otherwise Apple’s speech service handles the audio, under Apple’s privacy terms. We never receive any audio, only the to-dos it makes, as if you had typed them.</li>
       <li><strong>Import and export</strong> read and write files on your device.</li>
@@ -322,14 +323,24 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
     <h2>End-to-end encryption</h2>
     <p>End-to-end encryption is optional and off until you turn it on. With it on, each change is encrypted on your device, with a key protected by your passphrase, before it is sent. The server then stores only data it can’t read: titles, notes, dates, tags, list names and even which item a change belongs to are hidden.</p>
     <p>Sync still needs a few things in the open: that your account exists, its email address and devices, how many changes you make and when, roughly how large each change is, and the locked envelope that holds your key, which only your passphrase or your recovery key can open. If you lose both your passphrase and your recovery key, we can’t recover your synced lists for you.</p>
+    <h2>Agents and the Assistant</h2>
+    <p>The app can work with AI agents, only when you ask it to. Each one sees only what you give it.</p>
+    <ul>
+      <li><strong>Our built-in Assistant.</strong> When you press Give to Assistant, your device seals that one to-do (its title, notes and checklist, any note you add when you send it back, its earlier answer, and your device’s time zone and language, so it can answer for where you are) so that only our server’s Assistant can open it. Our server opens it and sends it to Anthropic, PBC, which runs the Claude AI model, with web search, to work out an answer. The answer comes back sealed to your devices, and the server then clears the to-do it was given. Anthropic handles it as our processor, under its <a href="https://www.anthropic.com/legal/commercial-terms" rel="noopener">commercial terms</a>, which don’t let it train its models on it, and keeps it only for the limited time its commercial data retention policy sets. Nothing else of yours goes to Anthropic: not your other to-dos, not your email. For each task our server keeps a record with no content: when it ran, which model, how long the answer was in tokens and what it cost, so it can count your free tasks each month and keep the costs in check.</li>
+      <li><strong>Your own AI app, such as Claude or ChatGPT,</strong> connected in Settings, Agents. Your AI app signs in with your email; our server keeps a name for each one you connect, when you connected it, and a scrambled copy of its key. It can suggest to-dos, which reach your Inbox sealed, and work on a to-do you give it, which is sealed so that only that app can open it. What you give it is then handled by the company behind that app, under its own privacy terms, which you agreed with them. You can disconnect it at any time; it stops at once.</li>
+      <li><strong>Claude Code on your computer.</strong> On a computer where you have installed Claude Code, giving a to-do to your own Claude starts it there, on your computer. The to-do goes from your computer to Anthropic under your own Claude account and its terms, not through our server.</li>
+      <li><strong>An agent on your computer</strong> (in Settings, Agents) talks to the app on that computer directly, and can read and search your lists there. Nothing goes through our server.</li>
+    </ul>
+    <p>The Assistant is free for a few tasks a month and then needs its own subscription, sold as plans are (below). Hand-offs to agents and their answers are sealed the same way whether or not you use end-to-end encryption.</p>
+    <p class="basis"><strong>Legal basis:</strong> contract (the work you asked an agent to do).</p>
     <h2>Payments</h2>
-    <p>Sync is a paid plan after a free trial. We never see or store your card or bank details.</p>
+    <p>Sync is a paid plan after a free trial, and the Assistant has its own subscription after its free tasks. We never see or store your card or bank details.</p>
     <ul>
       <li><strong>On the web (Windows, Mac and Linux),</strong> plans are sold by Stripe through its Managed Payments service, shown at checkout as Onelink. Stripe is the seller and handles your payment details, tax and receipts as a controller in its own right, under the <a href="https://stripe.com/privacy" rel="noopener">Stripe privacy policy</a> and the <a href="https://link.com/privacy" rel="noopener">Link privacy policy</a>. To open the checkout, our server sends Stripe your account’s internal reference (a random code), the plan, and your account’s email address so the checkout is filled in for you. Stripe then tells us when the purchase is made, renews, is refunded or disputed, or ends.</li>
       <li><strong>On Android,</strong> plans are sold by Google through Google Play, under the <a href="https://policies.google.com/privacy" rel="noopener">Google privacy policy</a>. The app tells Google only your account’s internal reference, never your email; Google tells our server the purchase’s reference, product, status and dates. Google’s billing library inside the Android app also sends Google its own logs of how the purchase screens are used, as part of how Google Play handles payments.</li>
       <li><strong>On iPhone and iPad,</strong> plans are sold by Apple through the App Store, under <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple’s privacy policy</a>. The app tells Apple only your account’s internal reference, never your email; Apple tells our server the purchase’s reference, product, status and dates.</li>
     </ul>
-    <p>For each purchase our server keeps the store, the store’s reference for it, the product, its status and when it renews or ends, so every device knows that sync is included.</p>
+    <p>For each purchase our server keeps the store, the store’s reference for it, the product, its status and when it renews or ends, so every device knows what’s included.</p>
     <p class="basis"><strong>Legal basis:</strong> contract (the plan you bought).</p>
     <h2>The free trial, and deleting an account</h2>
     <p>Each email address gets one free trial. If you delete your account, we keep a scrambled, one-way copy of your email address, with the date your free trial ends, for two years, only so that the same email can’t start another free trial; it can’t be turned back into your address.</p>
@@ -338,18 +349,19 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
     <ul>
       <li>No analytics, usage statistics or crash reports from the app.</li>
       <li>No advertising, no advertising identifiers, no tracking across apps or websites.</li>
-      <li>No third-party code in the apps apart from Google’s billing library on Android. The apps connect only to our sync server, to Google Play for purchases on Android, to the App Store for purchases on iPhone and iPad, and to a calendar address if you add one.</li>
+      <li>No third-party code in the apps apart from Google’s billing library on Android. The apps connect only to our sync server, to Google Play for purchases on Android, to the App Store for purchases on iPhone and iPad, to a calendar address if you add one, and, on the Mac if you choose to install updates yourself, to our releases on GitHub. Claude Code, when you have it on your computer and give it a to-do, connects to Anthropic itself, under your own account.</li>
       <li>No contacts, location or photos. The microphone only for Speak, while you use it (see above); we never receive any audio.</li>
     </ul>
     <h2>Who else handles your data</h2>
     <ul>
       <li><strong>Cloudflare, Inc.</strong> runs our server and stores what it keeps.</li>
       <li><strong>Resend (Plus Five Five, Inc.)</strong> delivers sign-in emails.</li>
+      <li><strong>Anthropic, PBC</strong> runs the AI model for the built-in Assistant, only for the to-dos you give it.</li>
       <li><strong>Stripe, Google and Apple</strong> sell plans and handle the payments, as described above, under their own privacy policies.</li>
     </ul>
-    <p>Cloudflare and Resend work only on our instructions, under data processing terms. We share nothing else with anyone, unless the law requires it, for example a court order, and then only what is required.</p>
+    <p>Cloudflare, Resend and Anthropic work only on our instructions, under data processing terms. We share nothing else with anyone, unless the law requires it, for example a court order, and then only what is required.</p>
     <h2>Where your data is kept</h2>
-    <p>The server stores your account and your changes with Cloudflare in the European Union. Cloudflare answers each request from the location nearest to you, and Cloudflare and Resend are based in the United States, so some data passes through or is handled outside the UK. Where it is, it is protected by the safeguards UK law requires, such as the UK’s adequacy regulations, including the UK Extension to the EU-US Data Privacy Framework, or the UK’s international data transfer agreement.</p>
+    <p>The server stores your account and your changes with Cloudflare in the European Union. Cloudflare answers each request from the location nearest to you, and Cloudflare, Resend and Anthropic are based in the United States, so some data passes through or is handled outside the UK. Where it is, it is protected by the safeguards UK law requires, such as the UK’s adequacy regulations, including the UK Extension to the EU-US Data Privacy Framework, or the UK’s international data transfer agreement.</p>
     <h2>How long we keep it</h2>
     <ul>
       <li><strong>Your account, devices, changes and plan:</strong> for as long as you keep the account. Deleting the account deletes them at once.</li>
@@ -358,6 +370,8 @@ pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:norm
       <li><strong>Request logs at Cloudflare:</strong> up to 7 days.</li>
       <li><strong>The scrambled copy of your email after deleting an account:</strong> two years.</li>
       <li><strong>Purchase records:</strong> after you delete your account, a purchase’s store reference, product, status and dates are kept with no link to you or your email, so a refund or a dispute can still be handled and a store purchase can be restored to a new account. Stripe, Google and Apple keep their own records of the sale, as sellers must.</li>
+      <li><strong>A to-do given to the Assistant:</strong> on our server only until its answer has reached your devices, or you take it back. Given to your own AI app: sealed on our server until that app has answered or you take it back.</li>
+      <li><strong>The Assistant’s task records (no content):</strong> as long as you keep the account; after you delete it they stay with no link to you, for our accounts.</li>
       <li><strong>Emails you send us:</strong> as long as we need to answer you, and no more than two years after the conversation ends, or sooner if you ask.</li>
     </ul>
     <h2>Deleting your account</h2>
