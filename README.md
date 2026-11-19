@@ -52,10 +52,23 @@ assets/
                         page's screenshots, which nothing here shows any more)
   today/                the same for Always Today: icon (SVG and PNG), screenshots, OG card
   goat-rodeo/           the game's icon (SVG and PNG), OG card and screenshots (WebP, 1280 and 640)
-robots.txt
-sitemap.xml             the ten pages (not /weather/, which forwards), each with a
-                        <lastmod> date: when a page's copy changes, set its date to that day. Google ignores changefreq and
-                        priority, and stops trusting lastmod once the dates go stale
+robots.txt              allows everything, and names each search and AI crawler (Googlebot,
+                        Bingbot, GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot,
+                        Claude-User, PerplexityBot, Perplexity-User, Google-Extended,
+                        Applebot-Extended) so none has to rely on the catch-all; the SEO check
+                        fails if one goes missing
+sitemap.xml             every page (not /weather/ or /today/, which forward), each with a
+                        <lastmod> date: when a page's copy changes, set its date to that day, then
+                        run tools/seo.py. Google ignores changefreq and priority, and stops
+                        trusting lastmod once the dates go stale
+<32 hex>.txt            the IndexNow key (see tools/indexnow.py): public by design, leave it be
+tools/seo.py            writes each page's dateModified and BreadcrumbList (JSON-LD, a block of
+                        its own before </head>) from sitemap.xml, and wraps "Last updated: …" in
+                        <time>; `--check` is the SEO check on every pull request
+tools/indexnow.py       tells Bing (and so ChatGPT and Copilot search) and the other IndexNow
+                        engines which pages changed, once Pages has built them; run by
+                        .github/workflows/indexnow.yml after each push to main, and by the
+                        daily Writing run for the home page
 llms.txt                plain-text summary of who Pavel is and what each page is, for AI
                         search tools (llmstxt.org): hand-written from the copy on /,
                         alwaysweather.uk and /today/, so update it when that copy changes

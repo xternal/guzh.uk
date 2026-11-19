@@ -1,0 +1,34 @@
+# After a push to main changes a page, waits for GitHub Pages to publish it and then tells the
+# IndexNow engines (Bing, which feeds ChatGPT and Copilot search, plus Yandex, Seznam and Naver)
+# which pages changed (tools/indexnow.py). The daily Writing run pings the home page itself, since
+# a push made with a workflow's own token starts no other workflow.
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.html"
+      - sitemap.xml
+      - robots.txt
+
+permissions:
+  contents: read
+  pages: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ping the changed pages once Pages has built them
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/indexnow.py --wait "${{ github.sha }}" --changed "${{ github.event.before }}"

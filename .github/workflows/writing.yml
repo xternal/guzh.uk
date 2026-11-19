@@ -34,6 +34,10 @@ jobs:
       - name: Copy the newest posts from Substack
         run: python3 tools/make-writing.py
 
+      # Moves the home page's dateModified (JSON-LD) to the <lastmod> the step above just set.
+      - name: Keep the home page's dateModified in step
+        run: python3 tools/seo.py
+
       - name: Show what changed
         run: git diff --stat
 
@@ -53,3 +57,6 @@ jobs:
           # A push made with this workflow's token may not start a Pages build by itself, so ask
           # for one.
           gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent
+          # This push starts no IndexNow run of its own (see indexnow.yml), so tell Bing here,
+          # once Pages has built it.
+          python3 tools/indexnow.py --wait "$(git rev-parse HEAD)" https://guzh.uk/ || true

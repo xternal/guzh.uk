@@ -22,30 +22,233 @@
 <meta name="twitter:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
 <meta name="twitter:image" content="https://guzh.uk/assets/og.png">
 
-<!-- sameAs is the machine-readable twin of the "Elsewhere" links in the footer:
-     it is how search engines and AI answers tie those profiles to this page.
-     Add or remove a profile in both places. -->
+<!-- What search engines and AI answers read about this page and Pavel. Person.sameAs is the
+     machine-readable twin of the "Elsewhere" links in the footer: it is how they tie those
+     profiles to this page, so add or remove a profile in both places. The ItemList is the twin of
+     "Things you can open" below (all but Uzum, which is not his to describe): keep the two in step.
+     The page's dateModified sits in the block that tools/seo.py writes, further down the head. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "url": "https://guzh.uk/",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "Pavel Guzhikov",
-    "url": "https://guzh.uk/",
-    "image": "https://guzh.uk/assets/pavel-web.png",
-    "email": "mailto:pavel@guzh.uk",
-    "description": "Builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum.",
-    "homeLocation": {"@type": "Place", "name": "London, United Kingdom"},
-    "sameAs": [
-      "https://www.linkedin.com/in/pavelguzhikov/",
-      "https://github.com/xternal",
-      "https://guzhikov.substack.com/",
-      "https://www.facebook.com/pavel.guzhikov/",
-      "https://instagram.com/xternal"
-    ]
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://guzh.uk/#website",
+      "url": "https://guzh.uk/",
+      "name": "Pavel Guzhikov",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://guzh.uk/#pavel"
+      },
+      "about": {
+        "@id": "https://guzh.uk/#pavel"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://guzh.uk/",
+      "url": "https://guzh.uk/",
+      "name": "Pavel Guzhikov: I build and run companies",
+      "isPartOf": {
+        "@id": "https://guzh.uk/#website"
+      },
+      "mainEntity": {
+        "@id": "https://guzh.uk/#pavel"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://guzh.uk/#pavel",
+      "name": "Pavel Guzhikov",
+      "url": "https://guzh.uk/",
+      "image": "https://guzh.uk/assets/pavel-web.png",
+      "email": "mailto:pavel@guzh.uk",
+      "jobTitle": "Founder and operator",
+      "description": "Builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum.",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "London, United Kingdom"
+      },
+      "worksFor": {
+        "@id": "https://guzh.uk/#empatiq"
+      },
+      "knowsAbout": [
+        "Fintech",
+        "Payments",
+        "Lending",
+        "Marketplaces",
+        "Company building",
+        "Back-office process re-engineering",
+        "Public-sector technology",
+        "Defence and dual-use technology",
+        "Artificial intelligence"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/pavelguzhikov/",
+        "https://github.com/xternal",
+        "https://guzhikov.substack.com/",
+        "https://www.facebook.com/pavel.guzhikov/",
+        "https://instagram.com/xternal"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://guzh.uk/#empatiq",
+      "name": "Empatiq Limited",
+      "url": "https://guzh.uk/rebuild/",
+      "founder": {
+        "@id": "https://guzh.uk/#pavel"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "London",
+        "addressCountry": "GB"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://guzh.uk/#projects",
+      "name": "Things you can open: projects by Pavel Guzhikov",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "WebApplication",
+            "name": "Agent Hands",
+            "url": "https://agenthands.cc/",
+            "applicationCategory": "BusinessApplication",
+            "description": "Lets any AI hire a person nearby for a real-world task. The money is locked before anyone sees the task and paid in USDC once the proof is accepted.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "Web"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "WebApplication",
+            "name": "Ruminator.xyz",
+            "url": "https://ruminator.xyz/",
+            "applicationCategory": "NewsApplication",
+            "description": "Understand Russia through its local press: dozens of regional outlets read every day, what each reports and how it frames it, every claim checked word for word against the source. Invite-only.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "Web"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "WebApplication",
+            "name": "LedgerGov.UK",
+            "url": "https://ledgergov.uk/",
+            "applicationCategory": "ReferenceApplication",
+            "description": "An open P&L of the UK state: where public money comes from, where it goes, and what every political promise would cost, each number linked to its official source.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "Web"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "WebApplication",
+            "name": "BoroughBook.UK",
+            "url": "https://boroughbook.uk/",
+            "applicationCategory": "ReferenceApplication",
+            "description": "Where your council tax goes in Hammersmith & Fulham: the council's budget, both parties' pledges and every payment over £500.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "Web"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "WebApplication",
+            "name": "offyougo",
+            "url": "https://offyougo.uk/",
+            "applicationCategory": "TravelApplication",
+            "description": "A free UK trip guide: all 15 UK national parks and the scenic areas, about 65,000 places ranked for who is coming, when, and what they are into. No sign-up, no ads.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "Web"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "WebApplication",
+            "name": "tCalendar",
+            "url": "https://t.me/tcalendar_bot/app",
+            "applicationCategory": "ProductivityApplication",
+            "description": "A calendar that lives inside Telegram: two-way Google sync, and plain messages become events.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "Telegram"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Always Weather",
+            "url": "https://alwaysweather.uk/",
+            "applicationCategory": "WeatherApplication",
+            "description": "A calm weather app: drag your thumb through the hours to see when the rain starts and stops. Ten days ahead, no subscription, no ads, no account, no tracking.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "iOS, watchOS, macOS, Android, Wear OS, Windows, Linux"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Always Today",
+            "url": "https://alwaystoday.uk/",
+            "applicationCategory": "ProductivityApplication",
+            "description": "A calm, local-first to-do list that answers one question every morning: what am I doing today? Works offline, with optional end-to-end encrypted sync.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "macOS, Linux"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "VideoGame",
+            "name": "Goat Rodeo",
+            "url": "https://guzh.uk/goat-rodeo/",
+            "applicationCategory": "GameApplication",
+            "description": "A party platformer for one phone and up to four friends: build the trap course together, then race through it. Five levels free, no ads.",
+            "creator": {
+              "@id": "https://guzh.uk/#pavel"
+            },
+            "operatingSystem": "iOS, iPadOS, Android"
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 
@@ -495,6 +698,9 @@ img{max-width:100%}
   .wrap{padding:0}
 }
 </style>
+<!-- BEGIN tools/seo.py: dateModified and breadcrumbs from sitemap.xml; run it, don't edit this -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "@id": "https://guzh.uk/", "url": "https://guzh.uk/", "dateModified": "2026-11-19"}</script>
+<!-- END tools/seo.py -->
 </head>
 
 <body>
