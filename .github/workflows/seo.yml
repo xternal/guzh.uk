@@ -1,0 +1,51 @@
+# Checks on every pull request that touches a page that each page in sitemap.xml still carries the
+# dateModified and breadcrumbs tools/seo.py writes (a generator that rewrites a page drops them),
+# that every JSON-LD block on every page is valid JSON, and that robots.txt still names each
+# search and AI crawler.
+name: SEO
+
+on:
+  pull_request:
+    paths:
+      - "**.html"
+      - sitemap.xml
+      - robots.txt
+      - tools/seo.py
+      - .github/workflows/seo.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: dateModified and breadcrumbs are up to date
+        run: python3 tools/seo.py --check
+
+      - name: Every JSON-LD block parses
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, re, sys
+          bad = []
+          for f in pathlib.Path(".").rglob("*.html"):
+              if f.parts[0] in (".git", "tools"):
+                  continue
+              for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', f.read_text(encoding="utf-8"), re.S):
+                  try:
+                      json.loads(m)
+                  except ValueError as e:
+                      bad.append(f"{f}: {e}")
+          print("\n".join(bad) or "All JSON-LD parses")
+          sys.exit(1 if bad else 0)
+          PY
+
+      - name: robots.txt names every crawler
+        run: |
+          for bot in Googlebot Bingbot GPTBot OAI-SearchBot ChatGPT-User ClaudeBot Claude-SearchBot \
+                     Claude-User PerplexityBot Perplexity-User Google-Extended Applebot-Extended; do
+            grep -qx "User-agent: $bot" robots.txt || { echo "robots.txt is missing $bot"; exit 1; }
+          done
+          echo "All crawlers named"
