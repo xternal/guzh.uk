@@ -30,7 +30,7 @@ PAGES = ["index.html", "weather/index.html", "weather/privacy/index.html", "weat
          "weather/ideas/index.html", "today/index.html", "today/privacy/index.html", "today/support/index.html",
          "today/terms/index.html", "goat-rodeo/index.html", "goat-rodeo/race/index.html", "goat-rodeo/privacy/index.html", "404.html",
          "rebuild/index.html", "rebuild/block-requests/index.html", "rebuild/lending-intake/index.html",
-         "rebuild/legal-intake/index.html", "rebuild/broker-submissions/index.html", "defence/index.html", "defence/brief/index.html", "defence/route/index.html", "pe/index.html"]
+         "rebuild/legal-intake/index.html", "rebuild/broker-submissions/index.html", "defence/index.html", "defence/brief/index.html", "defence/route/index.html", "pe/index.html", "exit/index.html"]
 DARK_BROWN = "#241F1A"
 TEXT = ["ink", "ink-2", "ink-3", "accent"]
 BACKGROUNDS = ["paper", "paper-lift"]
