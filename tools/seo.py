@@ -44,6 +44,7 @@ NAMES = {
     "/goat-rodeo/privacy/": "Privacy policy",
     "/rebuild/": "Rebuild one back-office process",
     "/pe/": "For private equity owners",
+    "/dd/": "For investors: due diligence",
     "/exit/": "For owners who will sell",
     "/defence/": "Defence tech",
     "/defence/brief/": "The proof",
