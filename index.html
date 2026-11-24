@@ -4,28 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Pavel Guzhikov: I build and run companies</title>
-<meta name="description" content="Pavel Guzhikov, builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
+<title>Pavel Guzhikov: operating partner for fast-growing and hard-tech companies</title>
+<meta name="description" content="Pavel Guzhikov, operating partner for fast-growing and hard-tech companies. He works like an owner, not an employee: takes the number that matters and answers for it, as interim CEO, COO or CPO. Two exits, founding team at Uzum. London.">
 <link rel="canonical" href="https://guzh.uk/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guzh.uk/">
 <meta property="og:site_name" content="Pavel Guzhikov">
-<meta property="og:title" content="Pavel Guzhikov: I build and run companies">
-<meta property="og:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
+<meta property="og:title" content="Pavel Guzhikov: operating partner for fast-growing and hard-tech companies">
+<meta property="og:description" content="I work like an owner, not an employee: I take the number that matters and answer for it. Interim CEO, COO or CPO. London.">
 <meta property="og:image" content="https://guzh.uk/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Pavel Guzhikov: I build and run companies.">
+<meta property="og:image:alt" content="Pavel Guzhikov: operating partner for fast-growing and hard-tech companies.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pavel Guzhikov: I build and run companies">
-<meta name="twitter:description" content="Zero to one, four times. Two exits. One unicorn. Founding team at Uzum. London-based.">
+<meta name="twitter:title" content="Pavel Guzhikov: operating partner for fast-growing and hard-tech companies">
+<meta name="twitter:description" content="I work like an owner, not an employee: I take the number that matters and answer for it. Interim CEO, COO or CPO. London.">
 <meta name="twitter:image" content="https://guzh.uk/assets/og.png">
 
 <!-- What search engines and AI answers read about this page and Pavel. Person.sameAs is the
      machine-readable twin of the "Elsewhere" links in the footer: it is how they tie those
      profiles to this page, so add or remove a profile in both places. The ItemList is the twin of
-     "Things you can open" below (all but Uzum, which is not his to describe): keep the two in step.
+     "Built on the side, by hand" below: keep the two in step.
      The page's dateModified sits in the block that tools/seo.py writes, further down the head. -->
 <script type="application/ld+json">
 {
@@ -48,7 +48,7 @@
       "@type": "ProfilePage",
       "@id": "https://guzh.uk/",
       "url": "https://guzh.uk/",
-      "name": "Pavel Guzhikov: I build and run companies",
+      "name": "Pavel Guzhikov: operating partner for fast-growing and hard-tech companies",
       "isPartOf": {
         "@id": "https://guzh.uk/#website"
       },
@@ -64,8 +64,8 @@
       "url": "https://guzh.uk/",
       "image": "https://guzh.uk/assets/pavel-web.png",
       "email": "mailto:pavel@guzh.uk",
-      "jobTitle": "Founder and operator",
-      "description": "Builder and operator. Zero to one, four times. Two exits. One unicorn. Founding team at Uzum.",
+      "jobTitle": "Operating partner",
+      "description": "Operating partner for fast-growing and hard-tech companies: works like an owner, takes the number that matters and answers for it, as interim CEO, COO or CPO. Two exits; founding team at Uzum, Uzbekistan's first unicorn.",
       "homeLocation": {
         "@type": "Place",
         "name": "London, United Kingdom"
@@ -109,7 +109,7 @@
     {
       "@type": "ItemList",
       "@id": "https://guzh.uk/#projects",
-      "name": "Things you can open: projects by Pavel Guzhikov",
+      "name": "Built on the side: projects by Pavel Guzhikov",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -506,6 +506,17 @@ img{max-width:100%}
   font-size:20px;line-height:1.5;letter-spacing:-.005em;
   color:var(--ink);text-wrap:pretty;
 }
+.kicker{
+  margin:0;font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.hero-cta{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;font-size:16.5px}
+.cta-primary{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:3px;
+  background:var(--accent);color:var(--paper,#fff);font-weight:500;letter-spacing:-.005em;
+  transition:opacity 160ms ease;
+}
+.cta-primary:hover{opacity:.88}
 .body-copy{margin:0;max-width:58ch;font-size:16.5px;line-height:1.72;color:var(--ink-2);text-wrap:pretty}
 
 .portrait{margin:0;position:relative}
@@ -597,7 +608,8 @@ img{max-width:100%}
 }
 .project > a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .project p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-2);max-width:30ch;text-wrap:pretty}
-/* a link inside a description, like Agent Hands' "pitch" */
+.projects:not(.writing) .project-list{row-gap:18px}
+/* a link inside a description */
 .project p a{border-bottom:1px solid var(--underline);transition:color 160ms ease,border-color 160ms ease}
 .project p a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 
@@ -683,11 +695,13 @@ img{max-width:100%}
   /* one column: headline, then the face, then the argument */
   .hero{display:flex;flex-direction:column;gap:0}
   .hero-text{display:contents}
+  .kicker{order:0;margin-bottom:14px}
   .hero h1{order:1;margin-bottom:30px}
   .portrait{order:2;max-width:190px;margin-bottom:34px}
   .lead{order:3;margin-bottom:28px}
   .body-copy{order:4;margin-bottom:22px}
   .body-copy:last-of-type{margin-bottom:0}
+  .hero-cta{order:5;margin-top:28px}
   .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:88px}
   .stat{padding:0 20px}
   .stat:nth-child(odd){padding-left:0;border-left:0}
@@ -712,7 +726,7 @@ img{max-width:100%}
 }
 </style>
 <!-- BEGIN tools/seo.py: dateModified and breadcrumbs from sitemap.xml; run it, don't edit this -->
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "@id": "https://guzh.uk/", "url": "https://guzh.uk/", "dateModified": "2026-11-19"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "@id": "https://guzh.uk/", "url": "https://guzh.uk/", "dateModified": "2026-11-24"}</script>
 <!-- END tools/seo.py -->
 </head>
 
@@ -752,15 +766,20 @@ img{max-width:100%}
   <main>
     <section class="hero">
       <div class="hero-text">
-        <h1>I build and run companies.</h1>
+        <p class="kicker">Your company is growing faster than the way it runs</p>
 
-        <p class="lead">Zero to one, four times. Two exits. One unicorn. Still an unfulfilled desire to build things that matter.</p>
+        <h1>Operating partner for fast&#8209;growing and hard&#8209;tech companies.</h1>
 
-        <p class="body-copy">Zero-to-one, then scale. Day-one startups to heritage brands. Margin, growth and retention are the only&nbsp;scoreboard I care about. Public value is now on the same line.</p>
+        <p class="lead">I work like an owner, not an employee. We agree on the one or two numbers that matter, I take them as mine, and I answer for them. I&rsquo;m happy to have skin in the game.</p>
 
-        <p class="body-copy">I can hold the product argument, the go-to-market argument and the technical one at the same time, which is what building in a market with no incumbents forces on you. I go to the warehouse and the call centre before I look at the dashboard, because the dashboard is downstream of things nobody wrote down.</p>
+        <p class="body-copy">Which seat that is depends on what&rsquo;s broken: operations, product or go&#8209;to&#8209;market. I come in as interim CEO, COO or CPO, two or three days a week or full&nbsp;time, and I fix processes, hire, or rebuild the back office with AI, whatever the number needs.</p>
 
-        <p class="body-copy">Twenty years of building, and still in the trenches: a mobile messenger in 2005, national payment infrastructure in 2022, and whatever is hard next.</p>
+        <p class="body-copy">I read the code and I read the P&amp;L. I go to the warehouse and the call centre before I look at the dashboard, because the dashboard is downstream of things nobody wrote down.</p>
+
+        <p class="hero-cta">
+          <a class="cta-primary" href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book 30 minutes</a>
+          <a class="link-accent" href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>
+        </p>
       </div>
 
       <figure class="portrait">
@@ -784,85 +803,81 @@ img{max-width:100%}
       </figure>
     </section>
 
-    <section class="numbers" aria-label="Track record">
+    <section class="numbers" aria-label="Proof, seat by seat">
       <div class="stat">
-        <div class="stat-figure">20<span class="stat-unit"> yrs</span></div>
-        <div class="stat-label">building, most of it hands-on inside the thing being built</div>
+        <div class="stat-figure">150K&#8202;&rarr;&#8202;900K</div>
+        <div class="stat-label">Product. Monthly actives of a digital bank in twelve months, while retention improved</div>
       </div>
       <div class="stat">
-        <div class="stat-figure">4</div>
-        <div class="stat-label">companies founded from zero, two of them acquired</div>
+        <div class="stat-figure">35%</div>
+        <div class="stat-label">Pricing. Month-on-month revenue growth, held for two years by one pricing and product engine</div>
       </div>
       <div class="stat">
-        <div class="stat-figure">1</div>
-        <div class="stat-label">unicorn, built where the infrastructure did not exist yet</div>
+        <div class="stat-figure">6<span class="stat-unit"> months</span></div>
+        <div class="stat-label">Go-to-market. A new jobs marketplace taken to half the scale of the incumbent</div>
       </div>
       <div class="stat">
-        <div class="stat-figure">500+</div>
-        <div class="stat-label">people hired personally over the last ten years</div>
+        <div class="stat-figure">2</div>
+        <div class="stat-label">Exits. Companies I founded from zero and sold, so I know the chair you sit in</div>
       </div>
     </section>
 
     <section class="blocks">
       <article class="block">
-        <div class="block-index">01 Uzum</div>
-        <h2>The unicorn</h2>
-        <p>Founding team at Uzbekistan’s first unicorn: fintech, lending, marketplace, payments, cards, and the data culture underneath them. Millions of users in two years, built from nothing in a market with no digital infrastructure and a regulator in every room.</p>
+        <div class="block-index">01 How I work</div>
+        <h2>One number, owned</h2>
+        <p>We start with the one or two numbers that would change the business: margin, cash, retention, time to launch. I take them as mine, report on them every week, and do whatever moves them, hands-on. When the job is done, it runs without me.</p>
       </article>
       <article class="block">
-        <div class="block-index">02 Before that</div>
-        <h2>Four from zero</h2>
-        <p>Founded and sold Worki, Russia’s fastest-growing jobs marketplace (acquired by Mail.Ru Group, 2019). Co-founded Dengi Vpered, earned-wage access backed by Target Global (sold). Fintech products with 100+ banks. A multi-channel mobile messenger in 2005, three years before the category had a name.</p>
+        <div class="block-index">02 Who I am</div>
+        <h2>Been in that chair</h2>
+        <p>Founding team at Uzum, Uzbekistan&rsquo;s first unicorn, where I built Uzum Bank from zero. Before that I founded and sold Worki (to Mail.Ru Group, 2019), co-founded Dengi Vpered, earned-wage access backed by Target Global (sold), and built fintech products with 100+ banks. Twenty years, most of it hands-on.</p>
       </article>
       <article class="block">
-        <div class="block-index">03 Now</div>
-        <h2>Hard and consequential</h2>
-        <p>London-based. Most interested in problems where the technology is genuinely hard, the deployment is political and the blast radius is national: sovereign infrastructure, public systems, defence and dual-use, AI in the public interest.</p>
+        <div class="block-index">03 Where I lean</div>
+        <h2>The hardest problems</h2>
+        <p>Most drawn to problems where the technology is genuinely hard, the deployment is political and the blast radius is national: sovereign infrastructure, defence and dual-use, public systems, applied AI.</p>
       </article>
     </section>
 
     <section class="projects" aria-labelledby="projects-label">
-      <h2 class="projects-label" id="projects-label">Things you can open</h2>
+      <h2 class="projects-label" id="projects-label">Built on the side, by hand</h2>
       <ul class="project-list">
         <li class="project">
-          <a href="https://uzum.com" target="_blank" rel="noopener noreferrer">Uzum</a>
-          <p>Marketplace, fintech and payments, built from zero in a market that had none.</p>
-        </li>
-        <li class="project">
           <a href="https://agenthands.cc/" target="_blank" rel="noopener noreferrer">Agent Hands</a>
-          <p>Any AI can hire a person nearby for a real-world task, paid in USDC once the proof is accepted. Read the <a href="https://agenthands.cc/pitch/" target="_blank" rel="noopener noreferrer">pitch</a>.</p>
+          <p>Any AI can hire a person nearby for a real-world task.</p>
         </li>
         <li class="project">
           <a href="https://ruminator.xyz/" target="_blank" rel="noopener noreferrer">Ruminator.xyz</a>
-          <p>Understand Russia through its local press: dozens of regional outlets read every day, every claim checked word for word. Invite-only.</p>
+          <p>Russia through its regional press, every claim checked.</p>
         </li>
         <li class="project">
           <a href="https://ledgergov.uk/" target="_blank" rel="noopener noreferrer">LedgerGov.UK</a>
-          <p>An open P&amp;L of the UK state: where public money comes from, where it goes, and what every promise would cost.</p>
+          <p>An open P&amp;L of the UK state and its promises.</p>
         </li>
         <li class="project">
           <a href="https://boroughbook.uk/" target="_blank" rel="noopener noreferrer">BoroughBook.UK</a>
-          <p>Where your council tax goes in Hammersmith &amp; Fulham: the budget, every pledge, every payment over £500.</p>
+          <p>Where council tax goes in Hammersmith &amp; Fulham.</p>
         </li>
         <li class="project">
           <a href="https://offyougo.uk/" target="_blank" rel="noopener noreferrer">offyougo</a>
-          <p>Where to go in the UK: every national park and scenic area, 65,000 places ranked for who is coming, when, and what you are into. Free, no sign-up, no ads.</p>
+          <p>UK national parks, ranked for who is coming and when.</p>
         </li>
         <li class="project">
           <a href="https://t.me/tcalendar_bot/app" target="_blank" rel="noopener noreferrer">tCalendar</a>
-          <p>A calendar that lives inside Telegram: two-way Google sync, and plain messages become events.</p>
+          <p>A calendar that lives inside Telegram.</p>
         </li>
         <li class="project">
           <a href="https://alwaysweather.uk/" target="_blank" rel="noopener noreferrer">Always Weather</a>
-          <p>A calm weather app for iPhone, Mac, Android and Windows. Drag your thumb through the hours. No ads, no account.</p>
+          <p>A calm weather app you drag through the hours.</p>
         </li>
         <li class="project">
           <a href="https://alwaystoday.uk/">Always Today</a>
-          <p>A calm to-do list for Mac and the Linux terminal, out now. The Android and Googlebook app is in review at Google Play and out in a few days; iPhone, iPad and Windows are coming soon. Works offline, syncs when you want it.</p>
+          <p>A calm, local-first to-do list on every platform.</p>
         </li>
         <li class="project">
           <a href="/goat-rodeo/">Goat Rodeo</a>
-          <p>A party game for one phone and up to four friends: build the trap course together, then race through it. On the App Store and Google Play; five levels free, no ads.</p>
+          <p>A party game for one phone and four friends.</p>
         </li>
       </ul>
     </section>
@@ -897,7 +912,7 @@ img{max-width:100%}
 
   <footer class="contact">
     <div class="contact-left">
-      <div class="contact-line">Open to the right thing. Write to me.</div>
+      <div class="contact-line">Thirty minutes is usually enough to know. <a class="link-accent" href="https://calendar.app.google/RG3g5WzxB3y9tXu39" target="_blank" rel="noopener noreferrer">Book a call</a> or write to me.</div>
       <a class="contact-email" href="mailto:pavel@guzh.uk">pavel@guzh.uk</a>
     </div>
     <div class="contact-right">

@@ -47,14 +47,15 @@ magick -size 1200x630 xc:'#F1EFE9' \
   "$TMP/mark.png" -geometry +66+505 -composite \
   -font "$FONT" -gravity NorthWest \
   -fill '#171613' -stroke '#171613' -strokewidth 0.55 -pointsize 56 \
-  -annotate +72+112 'I build and run' \
-  -annotate +72+178 'companies.' \
+  -annotate +72+96 'Operating partner for' \
+  -annotate +72+160 'fast-growing and' \
+  -annotate +72+224 'hard-tech companies.' \
   -stroke none \
-  -gravity None -fill '#1F3BC4' -draw 'rectangle 72,268 136,271' \
+  -gravity None -fill '#1F3BC4' -draw 'rectangle 72,318 136,321' \
   -gravity NorthWest \
   -fill '#544F46' -pointsize 21 \
-  -annotate +72+310 'Zero to one, four times. Two exits. One unicorn.' \
-  -annotate +72+344 'Still an unfulfilled desire to build things that matter.' \
+  -annotate +72+352 'I work like an owner, not an employee:' \
+  -annotate +72+386 'I take the number that matters and answer for it.' \
   -fill '#8B857A' -pointsize 19 \
   -annotate +119+520 'Pavel Guzhikov, London, guzh.uk' \
   assets/og.png
