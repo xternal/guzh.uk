@@ -506,10 +506,6 @@ img{max-width:100%}
   font-size:20px;line-height:1.5;letter-spacing:-.005em;
   color:var(--ink);text-wrap:pretty;
 }
-.kicker{
-  margin:0;font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);
-}
 .hero-cta{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;font-size:16.5px}
 .cta-primary{
   display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:3px;
@@ -560,24 +556,16 @@ img{max-width:100%}
   .like-btn[data-beat="true"] svg{animation:beat 300ms ease}
 }
 
-/* ---------- numbers ---------- */
-.numbers{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  column-gap:0;row-gap:36px;
-  margin-top:112px;padding-top:30px;
-  border-top:1px solid var(--rule);
+/* ---------- what I go deep into ---------- */
+.care{margin-top:112px;padding-top:22px;border-top:1px solid var(--rule)}
+.care-intro{margin:0 0 30px;max-width:58ch;font-size:18px;line-height:1.55;color:var(--ink);text-wrap:pretty}
+.care-list{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;row-gap:28px;
+  margin:0;padding:0;list-style:none;
 }
-.stat{
-  display:flex;flex-direction:column;gap:9px;
-  padding:0 28px;border-left:1px solid var(--rule-soft);
-}
-.stat:first-child{padding-left:0;border-left:0}
-.stat-figure{
-  font-weight:500;
-  font-size:32px;line-height:1.1;letter-spacing:-.035em;white-space:nowrap;
-}
-.stat-unit{font-size:19px;color:var(--ink-3)}
-.stat-label{font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:26ch;text-wrap:pretty}
+.care-item{display:flex;flex-direction:column;gap:7px}
+.care-item h3{margin:0;font-weight:500;font-size:17px;line-height:1.4;letter-spacing:-.015em}
+.care-item p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-2);max-width:32ch;text-wrap:pretty}
 
 /* ---------- three blocks ---------- */
 .blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;margin-top:104px}
@@ -671,7 +659,7 @@ img{max-width:100%}
      counts an element towards LCP only once it is visible, so fading it in from 0 put LCP at the
      end of the animation. Everything below still rises and fades. */
   @keyframes lift{from{transform:translateY(14px)}to{transform:none}}
-  .masthead,.hero h1,.lead,.body-copy,.portrait,.numbers,.blocks,.projects,.contact{
+  .masthead,.hero h1,.lead,.body-copy,.portrait,.care,.blocks,.projects,.contact{
     animation:rise 620ms cubic-bezier(.22,.68,.28,1) both;
   }
   .hero h1,.lead,.body-copy,.portrait{animation-name:lift}
@@ -682,7 +670,7 @@ img{max-width:100%}
   .hero-text .body-copy:nth-of-type(1){animation-delay:220ms}
   .hero-text .body-copy:nth-of-type(2){animation-delay:270ms}
   .hero-text .body-copy:nth-of-type(3){animation-delay:320ms}
-  .numbers{animation-delay:370ms}
+  .care{animation-delay:370ms}
   .blocks{animation-delay:420ms}
   .projects{animation-delay:470ms}
   .contact{animation-delay:520ms}
@@ -695,16 +683,14 @@ img{max-width:100%}
   /* one column: headline, then the face, then the argument */
   .hero{display:flex;flex-direction:column;gap:0}
   .hero-text{display:contents}
-  .kicker{order:0;margin-bottom:14px}
   .hero h1{order:1;margin-bottom:30px}
   .portrait{order:2;max-width:190px;margin-bottom:34px}
   .lead{order:3;margin-bottom:28px}
   .body-copy{order:4;margin-bottom:22px}
   .body-copy:last-of-type{margin-bottom:0}
   .hero-cta{order:5;margin-top:28px}
-  .numbers{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:88px}
-  .stat{padding:0 20px}
-  .stat:nth-child(odd){padding-left:0;border-left:0}
+  .care{margin-top:88px}
+  .care-list{grid-template-columns:minmax(0,1fr);row-gap:22px}
   .blocks{grid-template-columns:minmax(0,1fr);row-gap:32px;margin-top:80px}
   .projects{margin-top:72px}
   .project-list{grid-template-columns:minmax(0,1fr);row-gap:22px}
@@ -766,8 +752,6 @@ img{max-width:100%}
   <main>
     <section class="hero">
       <div class="hero-text">
-        <p class="kicker">Your company is growing faster than the way it runs</p>
-
         <h1>Operating partner for fast&#8209;growing and hard&#8209;tech companies.</h1>
 
         <p class="lead">I work like an owner, not an employee. We agree on the one or two numbers that matter, I take them as mine, and I answer for them. I&rsquo;m happy to have skin in the game.</p>
@@ -803,23 +787,31 @@ img{max-width:100%}
       </figure>
     </section>
 
-    <section class="numbers" aria-label="Proof, seat by seat">
-      <div class="stat">
-        <div class="stat-figure">150K&#8202;&rarr;&#8202;900K</div>
-        <div class="stat-label">Product. Monthly actives of a digital bank in twelve months, while retention improved</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">35%</div>
-        <div class="stat-label">Pricing. Month-on-month revenue growth, held for two years by one pricing and product engine</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">6<span class="stat-unit"> months</span></div>
-        <div class="stat-label">Go-to-market. A new jobs marketplace taken to half the scale of the incumbent</div>
-      </div>
-      <div class="stat">
-        <div class="stat-figure">2</div>
-        <div class="stat-label">Exits. Companies I founded from zero and sold, so I know the chair you sit in</div>
-      </div>
+    <section class="care" aria-labelledby="care-label">
+      <h2 class="projects-label" id="care-label">What I go deep into</h2>
+      <p class="care-intro">I&rsquo;ve been the founder four times, so I don&rsquo;t stay in one lane. Whatever decides the number, I go into it myself, down to the detail.</p>
+      <ul class="care-list">
+        <li class="care-item">
+          <h3>Support</h3>
+          <p>Because it is our face. I read the tickets myself and fix what made people write.</p>
+        </li>
+        <li class="care-item">
+          <h3>Marketing and go-to-market</h3>
+          <p>Because that is growth: pricing, channels, the first hundred customers in a new market.</p>
+        </li>
+        <li class="care-item">
+          <h3>Product, retention, cohorts</h3>
+          <p>Because that is the base. A digital bank grew from 150K to 900K monthly actives in a year while retention improved.</p>
+        </li>
+        <li class="care-item">
+          <h3>Operational transparency</h3>
+          <p>Numbers everyone can see, and teams that talk to each other directly rather than up and down the chart.</p>
+        </li>
+        <li class="care-item">
+          <h3>Strong, self-running teams</h3>
+          <p>People who own their part and don&rsquo;t need me in the room. That is how I know the job is done.</p>
+        </li>
+      </ul>
     </section>
 
     <section class="blocks">
